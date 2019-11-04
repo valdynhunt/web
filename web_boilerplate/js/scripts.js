@@ -1,0 +1,2 @@
+// Diagnostic
+console.log('OK');
