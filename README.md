@@ -7,11 +7,19 @@ Front-End Web Development
 
 ## Wireframes and Mockups
 
-### Wireframe: Login & Dashboard
+### Wireframes
 
 ![Login Wireframe](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/WireFrame%20-%20Login.jpg)
 
-![Dashboard Wireframe](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/Wireframe%20-%20Dashboard.jpg)
+![Dashboard Wireframe (Generic Layout)](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/Wireframe%20-%20Dashboard%20(Generic).jpg)
+
+![Wireframe - Dashboard](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/Wirefram%20-%20Dashboard.jpg)
+
+![Wireframe - Locations](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/Wireframe%20-%20Dashboard%20-%20Locations.jpg)
+
+![Wireframe - Users](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/Wireframe%20-%20Dashboard%20-%20Users.jpg)
+
+![Wireframe - Mapping](https://github.com/javanada/web/blob/master/wireframes%20and%20mockup/WireFrame%20-%20Mapping.jpg)
 
 ### Mockups: Login, Forgot Password, Reset Password
 
