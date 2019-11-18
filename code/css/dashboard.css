@@ -57,7 +57,7 @@ header div.header-upper div.username-area {
     align-items: center;
 }
 
-header div.header-upper div.username-area h4 {
+header div.header-upper div.username-area h6 {
     color: var(--tertiary-color);
     padding-right: 0.4em;
 }
