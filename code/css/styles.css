@@ -1,0 +1,71 @@
+/**** VARIABLES (Color Palette) ****/
+:root {
+    --primary-color: #0B3C5D;
+    --secondary-color: #328CC1;
+    --tertiary-color: #D9B310;
+    --accent1-color: #1D2731;
+    /* --accent2-color: #000000; */
+  }
+  
+  
+  /***** HTML & Body *****/
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  
+  HTML {
+    min-height: 100%;
+  }
+  
+  body {
+    height: 100%;
+    background-image: url(../img/background.jpg);
+    background-color: #FFFFFF;
+    background-blend-mode: multiply;
+    background-size: cover;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /***** Atomic Elements *****/
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  
+  h1 {
+    font-size: 3.375em;
+  }
+  
+  h2 {
+    font-size: 2.813em;
+  }
+  
+  h3 {
+    font-size: 2.25em;
+  }
+  
+  h4 {
+    font-size: 1.875em;
+  }
+  
+  h5 {
+    font-size: 1.5em;
+  }
+  
+  h6 {
+    font-size: 1.25em;
+  }
+  
+  p {
+    font: 1.0em 'Libre Baskerville', serif;
+  }
+  
+  a, a:link, a:visited, a:hover {
+    text-decoration: none;
+    color: var(--quaternary-color);
+  }
