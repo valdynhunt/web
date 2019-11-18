@@ -5,17 +5,38 @@ html body {
 /***** Container *****/
 div#container {
     height: 100vh;
+    background: var(--secondary-color);
 
     display: grid;
     grid-template-rows: 2fr 7fr 1fr;
     grid-template-columns: 1fr 7fr;
+    gap: 0;
+}
+
+
+/***** Section: Title & Logo *****/
+section.logo-area {
+    grid-row: 1;
+    grid-column: 1;
+    padding: 1.0em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section.logo-area img {
+    width: 75px;
+    padding-top: 1.0em;
 }
 
 
 /***** Header *****/
 header {
     grid-row: 1;
-    grid-column: 1 / span 2;
+    grid-column: 2;
+    background: #CCCCCC;
 
     display: grid;
     grid-template-rows: repeat(2, 1fr);
@@ -32,10 +53,6 @@ header div.logo-area {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-header div.logo-area img {
-    width: 75px;
 }
 
 header div.header-upper {
@@ -63,11 +80,7 @@ header div.header-upper div.username-area h6 {
 }
 
 header div.header-upper img {
-    width: 30px;
-}
-
-header div.header-upper input[type=button] {
-    
+    width: 25px;
 }
 
 header div.header-lower {
@@ -91,21 +104,36 @@ header div.header-lower input[type=button] {
 nav {
     grid-row: 2;
     grid-column: 1;
-    padding: 1.0em;
 
     display: grid;
     grid-template-rows: repeat(3, 1fr) 4fr;
+    /* grid-template-columns: 1fr 2fr; */
+    gap: 0;
+    justify-items: stretch;
+    align-items: center;
+}
+
+nav div.nav-area {
+    padding: 1.0em 0;
+
+    display: grid;
     grid-template-columns: 1fr 2fr;
+    gap: 0 0.8em;
     justify-items: center;
     align-items: center;
 }
 
-nav img {
+nav div.nav-area img {
+    justify-self: end;
     width: 30px;
 }
 
-nav h6 {
+nav div.nav-area h6 {
     justify-self: start;
+}
+
+.highlight {
+    background: white;
 }
 
   
@@ -114,7 +142,27 @@ main {
   grid-row: 2 / span 2;
   grid-column: 2 / span 2;
   padding: 1.0em;
-  border: 1px solid red;
+  background: #FFFFFF;
+
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.8em;
+}
+
+main section.location {
+    border: 2px solid var(--accent1-color);
+
+}
+
+main section.location h4 {
+    background: #CCCCCC;
+    color: var(--accent1-color);
+    border-bottom: 2px solid var(--accent1-color);
+}
+
+main section.location img {
+    width: 100%;
 }
 
 
@@ -123,15 +171,18 @@ footer {
     grid-row: 3;
     grid-column: 1;
     padding: 1.0em;
+    background: var(--secondary-color);
 
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 2fr;
+    gap: 0 0.8em;
     justify-items: center;
     align-items: center;
 }
 
 footer img {
+    justify-self: end;
     width: 30px;
 }
 
