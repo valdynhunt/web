@@ -66,3 +66,9 @@ a, a:link, a:visited, a:hover {
   text-decoration: none;
   color: var(--quaternary-color);
 }
+
+a:hover {
+  font-weight: bold;
+  color: var(--tertiary-color);
+  text-shadow: 2px 2px 2px var(--accent1-color);
+}

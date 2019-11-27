@@ -15,18 +15,18 @@ class ForgotPassword extends React.Component {
                         <h3>indoor</h3>
                         <h3>navigation</h3>
                         <h3>system</h3>
-                        <img src="./img/location-icon.png" alt="Location Icon" title="Location Icon"/>               
+                        <img src="./img/icons/location-icon.png" alt="Location Icon" title="Location Icon"/>               
                     </section>
 
                     <section className="input-box-area2">
                         <h2>forgot password</h2>
-                        <img id="lg-login-icon" src="./img/Login-Icon.png" alt="Login Icon" title="Login Icon"/>
+                        <img id="lg-login-icon" src="./img/icons/Login-Icon.png" alt="Login Icon" title="Login Icon"/>
                         <div className="login-area">
-                            <img className="login-icons" src="./img/username-icon.png" alt="username-icon" />
+                            <img className="login-icons" src="./img/icons/username-icon.png" alt="username-icon" />
                             <input type="email" id="email" placeholder="email" />
                         </div>
                         <input type="button" className="button" value="send" />
-                        <p className="link-signin">I remember my password!</p>
+                        <p className="link-signin"><a href="/">I remember my password!</a></p>
                     </section>
 
                 </main>

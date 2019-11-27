@@ -15,10 +15,19 @@ class App extends React.Component {
 
   onLogin = (user) => {
 
+    console.log('username: ' + user.username);
+
     // will need to authenticate with Cognito before setting state
     this.setState(
       {
-        admin: user
+        admin: {
+          username: user.username,
+          password: user.password,
+          email: 'jcampbell18@eagles.ewu.edu',
+          first_name: 'Jason',
+          last_name: 'Campbell',
+          role: 'Admin',
+        },
       }
     );
 
@@ -29,12 +38,12 @@ class App extends React.Component {
     if (!this.state.admin) {
       return <Login onLogin={this.onLogin} />;
     }
-console.log(this.state.admin);
+
     return (
 
       <div className="container-loggIn">
         <Logo />
-        <Header />
+        <Header profile={this.state.admin} />
         <Nav />
         <Main />
         <Footer />
