@@ -1,0 +1,97 @@
+/***** Container *****/
+div.container-notLoggedIn {
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/***** Main *****/
+main.main-notLoggedIn {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+section {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/***** Section.Login-Box *****/
+section.input-box-area2 {
+    background: var(--secondary-color);
+    grid-column: 2;
+}
+
+section.input-box-area2 h2 {
+    color: var(--tertiary-color);
+    text-shadow:  1px  1px 1px var(--accent1-color),
+                    -1px -1px 1px var(--accent1-color),
+                    -1px  1px 1px var(--accent1-color),
+                    1px -1px 1px var(--accent1-color);
+    text-align: center;
+}
+
+section.input-box-area2 img#lg-login-icon {
+    margin: 1.2em 0 1.0em 0;
+}
+
+section.input-box-area2 div.login-area {
+    background: white;
+    border: 1px solid var(--accent1-color);
+    padding: 0.3em;
+    margin: 1em 0;
+    display: flex;
+    align-items: center;
+}
+
+section.input-box-area2 div.login-area img.login-icons {
+    width: 16px;
+}
+
+section.input-box-area2 div.login-area input {
+    margin: 0 0 0 0.2em;
+    padding: 0.2em 0.3em;
+    color: var(--accent1-color);
+    background: white;
+    border: 0px;
+}
+
+section.input-box-area2 p {
+    padding: 0.4em 0;
+    font-weight: bolder;
+}
+
+section.input-box-area2 input.button {
+    background: var(--tertiary-color);
+    color: var(--primary-color);
+    border: 1px solid var(--accent1-color);
+    border-radius: 18px;
+    padding: 0.6em 2.0em;
+    font-weight: bold;
+    margin-top: 1.0em;
+}
+
+/***** Section.Title-Box *****/
+section.title-box-right2 {
+    /* background: var(--primary-color); */
+    background: #0B3C5DF0;
+    border-radius: 18px 0 0 18px;
+    grid-column: 1;
+}
+
+section.title-box-right2 h3 {
+    color: white;
+    text-align: center;
+}
+
+section.title-box-right2 svg {
+    fill: white;
+}
+
+p.link-signin {
+    margin-top: 1em;
+}

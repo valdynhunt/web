@@ -1,0 +1,15 @@
+section.logo-area {
+    grid-row: 1;
+    grid-column: 1;
+    padding: 1.0em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section.logo-area img {
+    width: 75px;
+    padding-top: 1.0em;
+}
