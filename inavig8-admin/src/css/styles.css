@@ -20,7 +20,7 @@ html {
 
 html body {
   height: 100%;
-  background-image: url(../background.jpg);
+  background-image: url(../img/background.jpg);
   background-color: #FFFFFF;
   background-blend-mode: multiply;
   background-size: cover;
