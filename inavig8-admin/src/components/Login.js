@@ -6,20 +6,18 @@ class Login extends React.Component {
     usernameRef = React.createRef();
     passwordRef = React.createRef();
 
-    handleSubmit = (e) => {
+    onSubmit = (e) => {
 
         e.preventDefault();
-
-        console.log('USERNAME: ' + this.usernameRef.current.value);
-        console.log('PASSWORD: ' + this.passwordRef.current.value);
 
         const user = {
             username: this.usernameRef.current.value,
             password: this.passwordRef.current.value,
         }
 
-        //this.props.userLogin(user);
+        this.props.onLogin(user);
 
+        // reset form
         e.currentTarget.reset();
     }
 
@@ -34,7 +32,7 @@ class Login extends React.Component {
                     <section className="login-box1">
                         <h2>sign in to iNavig8</h2>
                         <img id="lg-login-icon" src="./img/Login-Icon.png" alt="Login Icon" title="Login Icon"/>
-                        <form className="" onSubmit={this.handleSubmit}>
+                        <form className="" onSubmit={this.onSubmit}>
                             <div className="login-area">
                                 <img className="login-icons" src="./img/username-icon.png" alt="username-icon" />
                                 <input type="text" id="username" name="username" placeholder="username" ref={this.usernameRef} />

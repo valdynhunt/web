@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../components/header';
+import Header from '../components/header0';
 import Graphics from '../components/graphics'
 import Data from '../components/data'
-import Footer from '../components/footer';
+import Footer from '../components/footer0';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col } from 'react-bootstrap';
 

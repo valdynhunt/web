@@ -10,31 +10,26 @@ import Login from './Login';
 class App extends React.Component {
 
   state = {
-    admin: {},
+    admin: null,
   }
 
-  userLogin = (user) => {
-    const admin = {
-      ...this.state.admin
-    };
+  onLogin = (user) => {
 
-    admin[`user(Date.now())`] = user;
-
+    // will need to authenticate with Cognito before setting state
     this.setState(
       {
-        admin
+        admin: user
       }
-    )
-  }
+    );
 
-  
+  }
 
   render() {
 
-    if (!this.state.username) {
-      return <Login userLogin={this.props.userLogin} />;
+    if (!this.state.admin) {
+      return <Login onLogin={this.onLogin} />;
     }
-
+console.log(this.state.admin);
     return (
 
       <div className="container-loggIn">

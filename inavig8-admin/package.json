@@ -16,6 +16,7 @@
     "react-dom": "^16.10.1",
     "react-konva": "^16.10.1-0",
     "react-scripts": "3.2.0",
+    "reactjs-popup": "^1.5.0",
     "typescript": "^3.7.2",
     "use-image": "^1.0.5"
   },

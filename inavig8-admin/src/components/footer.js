@@ -1,22 +1,21 @@
-import React from 'react'
-
-
+import React from 'react';
+import './Footer.css';
 
 class Footer extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {}
-  }
+    render() {
 
-  render() {
-    return (
-      <div className="footer">
-        <p>Footer component is here!</p>
-      </div>
-    )
-  }
-  
+        return (
+
+            <footer>
+                <img src="./img/icons/logout-icon.png" alt="Logout" title="Logout" />
+                <h6>Logout</h6>
+            </footer>
+
+        );
+
+    }
+
 }
-  
+
 export default Footer;
