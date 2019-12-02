@@ -15,8 +15,6 @@ class App extends React.Component {
 
   onLogin = (user) => {
 
-    console.log('username: ' + user.username);
-
     // will need to authenticate with Cognito before setting state
     this.setState(
       {
@@ -44,8 +42,8 @@ class App extends React.Component {
       <div className="container-loggIn">
         <Logo />
         <Header profile={this.state.admin} />
-        <Nav />
-        <Main />
+        <Nav highlight="dashboard" />
+        <Main page="dashboard" />
         <Footer />
       </div>
 

@@ -12,8 +12,8 @@ main.main-login {
     grid-template-columns: 2fr 1fr;
 }
   
-section {
-    padding: 1em;
+main.main-login section {
+    padding: 1.0em;
     display: flex;
     flex-direction: column;
     justify-content: center;

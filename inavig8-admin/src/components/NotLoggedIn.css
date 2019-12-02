@@ -12,7 +12,7 @@ main.main-notLoggedIn {
     grid-template-columns: 1fr 2fr;
 }
 
-section {
+main.main-notLoggedIn section {
     padding: 1em;
     display: flex;
     flex-direction: column;
