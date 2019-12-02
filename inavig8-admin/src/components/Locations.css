@@ -1,0 +1,81 @@
+main.locations-container {
+    padding: 1.0em;
+    background: #FFFFFF;
+    
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8em;
+    align-items: start;
+    justify-items: start;
+}
+
+main.locations-container h4 {
+    background: #CCCCCC;
+    color: var(--accent1-color);
+    border-bottom: 2px solid var(--accent1-color);
+    margin-bottom: 0.6em;
+    text-align: center;
+}
+
+section.locations-list {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+
+    width: 100%;
+}
+
+main.locations-container ul {
+    list-style: none;
+    padding-left: 0.6em;
+}
+
+main.locations-container section.locations-list ul li,
+main.locations-container section.location-details ul li {
+    margin-bottom: 0.4em;
+}
+
+main.locations-container section.locations-list ul li,
+main.locations-container section.locations-list ul li ul li,
+main.locations-container section.locations-list ul li ul li ul li {
+    font-size: 1.25em;
+}
+
+main.locations-container section.location-view {
+    grid-row: 1;
+    grid-column: 2;
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-items: center;
+}
+
+main.locations-container section.location-view img {
+    width: 250px;
+    align-self: center;
+}
+
+main.locations-container section.location-details {
+    grid-row: 2;
+    grid-column: 2;
+
+    width: 100%;
+}
+
+main.locations-container section.location-details ul.location-detail {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-items: flex-start;
+}
+
+main.locations-container section.location-details ul.location-detail li {
+    padding: 0.4em 0;
+}
+
+main.locations-container section.location-details ul.location-detail li:nth-child(1) {
+    font-weight: bold;
+    padding-right: 0.6em;
+}

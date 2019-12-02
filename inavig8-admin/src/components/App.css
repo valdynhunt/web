@@ -1,0 +1,15 @@
+html body {
+  background: white;
+  background-image: none;
+}
+
+/***** Container *****/
+div.container-loggIn {
+  height: 100vh;
+  background: var(--secondary-color);
+
+  display: grid;
+  grid-template-rows: 2fr 7fr 1fr;
+  grid-template-columns: 1fr 7fr;
+  gap: 0;
+}
