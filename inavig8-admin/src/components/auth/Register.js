@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './Register.css';
+
 
 import Auth from '@aws-amplify/auth';
 import Amplify from '@aws-amplify/core';
@@ -28,7 +30,7 @@ Amplify.configure({
 // You can get the current config object
 const currentConfig = Auth.configure();
 
-class Register extends Component {
+class Register extends Component {//
   state = {
     username: "",
     email: "",
@@ -96,89 +98,159 @@ class Register extends Component {
       [event.target.id]: event.target.value
     });
     document.getElementById(event.target.id).classList.remove("is-danger");
-  }
+  }//
 
   render() {
     return (
-      <section className="section auth">
-        <div className="container">
-          <h1>Register</h1>
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="field">
-              <p className="control">
-                <input 
-                  className="input" 
-                  type="text"
-                  id="username"
-                  aria-describedby="userNameHelp"
-                  placeholder="Enter username"
-                  value={this.state.username}
-                  onChange={this.onInputChange}
-                />
-              </p>
+      <div className="container-login">
+
+                <main className="main-login">
+
+                    <section className="login-box1">
+                        <h2>register with iNavig8</h2>
+                        <img id="lg-login-icon" src="./img/icons/Login-Icon.png" alt="Login Icon" title="Login Icon"/>
+                        <form className=""  onSubmit={this.handleSubmit}>
+                            <div className="login-area">
+                                <img className="login-icons" src="./img/icons/username-icon.png" alt="username-icon" />
+                                <input 
+                                  type="text"
+                                  id="username"
+                                  aria-describedby="userNameHelp"
+                                  placeholder="username"
+                                  value={this.state.username}
+                                  onChange={this.onInputChange}
+                                />
+                            </div>
+                            <div className="login-area">
+                                <img className="login-icons" src="./img/icons/username-icon.png" alt="username-icon" />
+                                <input 
+                                  type="email"
+                                  id="email"
+                                  aria-describedby="emailHelp"
+                                  placeholder="Enter email"
+                                  value={this.state.email}
+                                  onChange={this.onInputChange}
+                                />
+                            </div>
+                            <div className="login-area">
+                                <img className="login-icons" src="./img/icons/password-icon.png" alt="password-icon" />
+                                <input 
+                                  type="password"
+                                  id="password"
+                                  placeholder="password"
+                                  value={this.state.password}
+                                  onChange={this.onInputChange}
+                                />
+                            </div>
+                            <div className="login-area">
+                                <img className="login-icons" src="./img/icons/password-icon.png" alt="password-icon" />
+                                <input 
+                                  type="password"
+                                  id="confirmpassword"
+                                  placeholder="confirm password"
+                                  value={this.state.confirmpassword}
+                                  onChange={this.onInputChange}
+                                />
+                            </div>
+                            <p><a href="/login">I know my login</a></p>
+                            <input type="submit" className="button" value="sign in" />
+                        </form>
+                    </section>
+
+                    <section className="title-box1">
+                        <h3>indoor</h3>
+                        <h3>navigation</h3>
+                        <h3>system</h3>
+                        <img src="./img/icons/location-icon.png" alt="Location Icon" title="Location Icon"/>               
+                    </section>
+                    
+                </main>
+
             </div>
-            <div className="field">
-              <p className="control has-icons-left has-icons-right">
-                <input 
-                  className="input" 
-                  type="email"
-                  id="email"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  value={this.state.email}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-envelope"></i>
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control has-icons-left">
-                <input 
-                  className="input" 
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control has-icons-left">
-                <input 
-                  className="input" 
-                  type="password"
-                  id="confirmpassword"
-                  placeholder="Confirm password"
-                  value={this.state.confirmpassword}
-                  onChange={this.onInputChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <a href="/forgotpassword">Forgot password?</a>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <button className="button is-success">
-                  Register
-                </button>
-              </p>
-            </div>
-          </form>
-        </div>
-      </section>
+
+
+
+
+      // <section className="section auth">
+      //   <div className="container">
+      //     <h1>Register</h1>
+
+      //     <form onSubmit={this.handleSubmit}>
+      //       <div className="field">
+      //         <p className="control">
+      //           <input 
+      //             className="input" 
+      //             type="text"
+      //             id="username"
+      //             aria-describedby="userNameHelp"
+      //             placeholder="Enter username"
+      //             value={this.state.username}
+      //             onChange={this.onInputChange}
+      //           />
+      //         </p>
+      //       </div>
+            // <div className="field">
+            //   <p className="control has-icons-left has-icons-right">
+            //     <input 
+            //       className="input" 
+            //       type="email"
+            //       id="email"
+            //       aria-describedby="emailHelp"
+            //       placeholder="Enter email"
+            //       value={this.state.email}
+            //       onChange={this.onInputChange}
+            //     />
+            //     <span className="icon is-small is-left">
+            //       <i className="fas fa-envelope"></i>
+            //     </span>
+            //   </p>
+            // </div>
+            // <div className="field">
+            //   <p className="control has-icons-left">
+            //     <input 
+            //       className="input" 
+            //       type="password"
+            //       id="password"
+            //       placeholder="Password"
+            //       value={this.state.password}
+            //       onChange={this.onInputChange}
+            //     />
+            //     <span className="icon is-small is-left">
+            //       <i className="fas fa-lock"></i>
+            //     </span>
+            //   </p>
+            // </div>
+            // <div className="field">
+            //   <p className="control has-icons-left">
+            //     <input 
+            //       className="input" 
+            //       type="password"
+            //       id="confirmpassword"
+            //       placeholder="Confirm password"
+            //       value={this.state.confirmpassword}
+            //       onChange={this.onInputChange}
+            //     />
+            //     <span className="icon is-small is-left">
+            //       <i className="fas fa-lock"></i>
+            //     </span>
+            //   </p>
+            // </div>
+      //       <div className="field">
+      //         <p className="control">
+      //           <a href="/forgotpassword">Forgot password?</a>
+      //         </p>
+      //       </div>
+      //       <div className="field">
+      //         <p className="control">
+      //           <button className="button is-success">
+      //             Register
+      //           </button>
+      //         </p>
+      //       </div>
+      //     </form>
+      //   </div>
+      // </section>
     );
   }
 }
