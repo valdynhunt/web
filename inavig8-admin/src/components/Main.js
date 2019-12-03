@@ -10,8 +10,8 @@ class Main extends React.Component {
 
         return (
 
-            // <Dashboard />
-            <Locations />
+             <Dashboard />
+            //<Locations />
             // <Users />
 
         )

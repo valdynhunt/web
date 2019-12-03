@@ -9,14 +9,25 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
-        //fetch('https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/locations') // david
+
+        let headers = {
+            'Content-Type': 'application/json',
+            'x-api-key': 'Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav',
+        };
+
+        //fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
+        fetch('https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/locations', 
+        {
+            method: "GET",
+            headers,
+        }) // david
             .then(response => {
                 return response.json();
             }).then(result => {
+                console.log(result);
                 this.setState(
                     {
-                        locations: result
+                        locations: result.body.data
                     }
                 );
             });
@@ -35,7 +46,7 @@ class Dashboard extends React.Component {
                         details={this.state.locations[key]} 
                     />
                 ))}
-                <section className="location-list">
+                {/* <section className="location-list">
                     <h4>Location: Lorem Ipsum 2</h4>
                     <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
                 </section>
@@ -54,7 +65,7 @@ class Dashboard extends React.Component {
                 <section className="location-list">
                     <h4>Location: Lorem Ipsum 6</h4>
                     <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
-                </section>
+                </section> */}
             </main>
 
         )
