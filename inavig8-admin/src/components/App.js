@@ -7,10 +7,16 @@ import Footer from './Footer';
 import './App.css';
 import Login from './Login';
 
+import Auth from '@aws-amplify/auth';
+
+
 class App extends React.Component {
 
+  // state = {
+  //   admin: null
+  // }
   state = {
-    admin: null,
+    admin: JSON.parse(localStorage.getItem('admin')) || []
   }
 
   onLogin = (user) => {
@@ -21,33 +27,59 @@ class App extends React.Component {
         admin: {
           username: user.username,
           password: user.password,
-          email: 'jcampbell18@eagles.ewu.edu',
-          first_name: 'Jason',
-          last_name: 'Campbell',
+          email: user.attributes.email,
+          first_name: user.attributes.name.split(" ").length == 2 ? user.attributes.name.split(" ")[0] : "",
+          last_name: user.attributes.name.split(" ").length == 2 ? user.attributes.name.split(" ")[1] : "",
           role: 'Admin',
         },
       }
-    );
+    ,() => {
+    localStorage.setItem('admin', JSON.stringify(this.state.admin))
+  });
 
   }
 
   render() {
 
-    if (!this.state.admin) {
+    Auth.currentSession()
+    .then(data => {
+      // this.setState(data);
+      console.log(data);
+      var s = {
+        admin: {
+          username: data.accessToken.payload.username,
+          password: "",
+          email: data.idToken.payload.email,
+          first_name: "firstname",
+          last_name: "lastname",
+          role: "Admin"
+        }
+      };
+      // this.setState(s);
+
+  
+
+    })
+    .catch(err => console.log(err));
+
+    console.log("this.state.admin.length: ", this.state.admin.length);
+    if (!this.state.admin || this.state.admin.length == 0) {
       return <Login onLogin={this.onLogin} />;
+    } else {
+      return (
+
+        <div className="container-loggIn">
+          <Logo />
+          <Header profile={this.state.admin} />
+          <Nav highlight="dashboard" />
+          <Main page="dashboard" />
+          <Footer />
+        </div>
+
+      )
     }
 
-    return (
-
-      <div className="container-loggIn">
-        <Logo />
-        <Header profile={this.state.admin} />
-        <Nav highlight="dashboard" />
-        <Main page="dashboard" />
-        <Footer />
-      </div>
-
-    )
+    
 
 }
 
