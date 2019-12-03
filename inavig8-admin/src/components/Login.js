@@ -80,8 +80,8 @@ class Login extends React.Component {
                                 <input type="password" id="password" name="password" placeholder="password" ref={this.passwordRef} />
                             </div>
                             <p><a href="/forgot">forgot password?</a></p>
+                            <p><a href="/register">create an account</a></p>
                             <input type="submit" className="button" value="sign in" />
-                            <a href = "/register" >register</a>
                         </form>
                     </section>
 

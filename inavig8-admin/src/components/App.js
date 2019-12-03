@@ -16,7 +16,8 @@ class App extends React.Component {
   //   admin: null
   // }
   state = {
-    admin: JSON.parse(localStorage.getItem('admin')) || []
+    admin: JSON.parse(localStorage.getItem('admin')) || [],
+    nav: 'dashboard',
   }
 
   onLogin = (user) => {
@@ -33,9 +34,19 @@ class App extends React.Component {
           role: 'Admin',
         },
       }
-    ,() => {
-    localStorage.setItem('admin', JSON.stringify(this.state.admin))
-  });
+      ,() => {
+      localStorage.setItem('admin', JSON.stringify(this.state.admin))
+    });
+
+  }
+
+  onNavSelection = (nav) => {
+
+    this.setState (
+      {
+        nav
+      }
+    );
 
   }
 
@@ -71,8 +82,8 @@ class App extends React.Component {
         <div className="container-loggIn">
           <Logo />
           <Header profile={this.state.admin} />
-          <Nav highlight="dashboard" />
-          <Main page="dashboard" />
+          <Nav onNavSelection={this.onNavSelection} highlight={this.state.nav} />
+          <Main page={this.state.nav} />
           <Footer />
         </div>
 

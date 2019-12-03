@@ -46,26 +46,6 @@ class Dashboard extends React.Component {
                         details={this.state.locations[key]} 
                     />
                 ))}
-                {/* <section className="location-list">
-                    <h4>Location: Lorem Ipsum 2</h4>
-                    <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
-                </section>
-                <section className="location-list">
-                    <h4>Location: Lorem Ipsum 3</h4>
-                    <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
-                </section>
-                <section className="location-list">
-                    <h4>Location: Lorem Ipsum 4</h4>
-                    <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
-                </section>
-                <section className="location-list">
-                    <h4>Location: Lorem Ipsum 5</h4>
-                    <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
-                </section>
-                <section className="location-list">
-                    <h4>Location: Lorem Ipsum 6</h4>
-                    <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
-                </section> */}
             </main>
 
         )
