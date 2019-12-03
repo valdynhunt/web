@@ -8,9 +8,9 @@ class Main extends React.Component {
 
     render() {
 
-        if (this.page == 'locations') {
+        if (this.props.page == 'Locations') {
             return <Locations />
-        } else if (this.page === 'users') {
+        } else if (this.props.page === 'Users') {
             return <Users />
         } else {
             return <Dashboard />
