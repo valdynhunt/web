@@ -17,7 +17,7 @@ class App extends React.Component {
   // }
   state = {
     admin: JSON.parse(localStorage.getItem('admin')) || [],
-    nav: 'dashboard',
+    nav: 'Dashboard',
   }
 
   onLogin = (user) => {

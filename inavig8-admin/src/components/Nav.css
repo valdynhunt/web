@@ -37,3 +37,7 @@ nav div.nav-area h6 {
 .highlight {
     background: white;
 }
+
+.no-highlight {
+    background: var(--secondary-color);
+}
