@@ -23,6 +23,7 @@ nav div.nav-area {
 
 nav div.nav-area:hover {
     background: var(--tertiary-color);
+    text-shadow: none;
 }
 
 nav div.nav-area img {
@@ -36,4 +37,8 @@ nav div.nav-area h6 {
 
 .highlight {
     background: white;
+}
+
+.no-highlight {
+    background: var(--secondary-color);
 }
