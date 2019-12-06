@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './Login';
-import ForgotPassword from './ForgotPassword';
-import ResetPassword from './ResetPassword';
+import Login from './auth/Login';
+import ForgotPassword from './auth/ForgotPassword';
+import ResetPassword from './auth/ResetPassword';
 import Register from './auth/Register';
 import App from './App';
 
