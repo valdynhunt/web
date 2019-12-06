@@ -10,8 +10,8 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
 
-        let accessToken = localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-            JSON.parse(localStorage.getItem("admin")).username + ".idToken");
+        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+            JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = {
             'Content-Type': 'application/json',
