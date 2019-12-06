@@ -78,7 +78,7 @@ class Register extends Component {//
           name: "first last"
         }
       });
-      this.props.history.push("/welcome");
+      this.props.history.push("/");
       console.log(signUpResponse);
     } catch (error) {
       let err = null;

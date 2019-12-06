@@ -10,9 +10,13 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
 
+        let accessToken = localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+            JSON.parse(localStorage.getItem("admin")).username + ".idToken");
+
         let headers = {
             'Content-Type': 'application/json',
             'x-api-key': 'Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav',
+            'Authorization': accessToken
         };
 
         //fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
