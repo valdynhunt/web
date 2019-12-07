@@ -4,6 +4,7 @@ import Login from './auth/Login';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
 import Register from './auth/Register';
+import Design from './Design'
 import App from './App';
 
 const Router = () => (
@@ -14,6 +15,8 @@ const Router = () => (
             <Route path="/forgot" component={ForgotPassword} />
             <Route path="/reset" component={ResetPassword} />
             <Route path="/register" component={Register} />
+            <Route path="/design" component={Design} />
+
             <Route component={Login} />
         </Switch>
     </BrowserRouter>
