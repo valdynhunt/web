@@ -9,7 +9,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 
 class Design extends Component {
-    
+    // team 5 rules
     constructor() {
         super()
         this.state = {}
