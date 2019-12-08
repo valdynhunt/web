@@ -37,21 +37,21 @@ class Nav extends React.Component {
         return (
 
             <nav>
-                <a href="#" onClick={this.onDashboard}>
+                <a href="/#" onClick={this.onDashboard}>
                     <div id="highlight-dashboard" className={`nav-area ${this.props.highlight === 'Dashboard' ? 'highlight' : 'no-highlight'}`}>
                         <img src="./img/icons/dashboard-icon.png" alt="Dashboard" title="Dashboard" />
                         <h6>Dashboard</h6>
                         <input type="hidden" name="nav" value="Dashboard" ref={this.navButtonRef} />
                     </div>
                 </a>
-                <a href="#" onClick={this.onLocations}>
+                <a href="/#" onClick={this.onLocations}>
                     <div id="highlight-locations" className={`nav-area ${this.props.highlight === 'Locations' ? 'highlight' : 'no-highlight'}`}>
                         <img src="./img/icons/locations-icon.png" alt="Locations" title="Locations" />
                         <h6>Locations</h6>
                         <input type="hidden" name="nav" value="Locations" ref={this.navButtonRef} />
                     </div>
                 </a>
-                <a href="#" onClick={this.onUsers}>
+                <a href="/#" onClick={this.onUsers}>
                     <div id="highlight-users" className={`nav-area ${this.props.highlight === 'Users' ? 'highlight' : 'no-highlight'}`}>
                         <img src="./img/icons/users-icon.png" alt="Users" title="Users" />
                         <h6>Users</h6>
