@@ -27,7 +27,7 @@ class Header extends React.Component {
                         >
                             {close => (
                                 <div className="profile-modal">
-                                    <a className="profile-modal-close" onClick={close}>&times;</a>
+                                    <a href="/#" className="profile-modal-close" onClick={close}>&times;</a>
                                     <h3>Profile</h3>
                                     <div className="layout-profile">
                                         <section className="profile-col-left">
