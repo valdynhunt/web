@@ -14,8 +14,8 @@ class Footer extends React.Component {
 
         return (
 
-            <footer>
-                <img onClick = {this.logout} src="./img/icons/logout-icon.png" alt="Logout" title="Logout" />
+            <footer onClick = {this.logout}>
+                <img src="./img/icons/logout-icon.png" alt="Logout" title="Logout" />
                 <h6>Logout</h6>
             </footer>
 

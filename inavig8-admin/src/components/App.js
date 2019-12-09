@@ -12,9 +12,6 @@ import Auth from '@aws-amplify/auth';
 
 class App extends React.Component {
 
-  // state = {
-  //   admin: null
-  // }
   state = {
     admin: JSON.parse(localStorage.getItem('admin')) || [],
     nav: 'Dashboard',
@@ -29,8 +26,8 @@ class App extends React.Component {
           username: user.username,
           password: user.password,
           email: user.attributes.email,
-          first_name: user.attributes.name.split(" ").length == 2 ? user.attributes.name.split(" ")[0] : "",
-          last_name: user.attributes.name.split(" ").length == 2 ? user.attributes.name.split(" ")[1] : "",
+          first_name: user.attributes.name.split(" ").length === 2 ? user.attributes.name.split(" ")[0] : "",
+          last_name: user.attributes.name.split(" ").length === 2 ? user.attributes.name.split(" ")[1] : "",
           role: 'Admin',
         },
       }
@@ -74,7 +71,7 @@ class App extends React.Component {
     .catch(err => console.log(err));
 
     console.log("this.state.admin.length: ", this.state.admin.length);
-    if (!this.state.admin || this.state.admin.length == 0) {
+    if (!this.state.admin || this.state.admin.length === 0) {
       return <Login onLogin={this.onLogin} />;
     } else {
       return (
