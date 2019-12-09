@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Konva from 'konva';
 import { Stage, Layer, Image, Rect, Text, Circle } from 'react-konva';
 import useImage from 'use-image';
-
+import MapBackground from './MapBackground'
 
 
 const LionImage = () => {
@@ -22,10 +22,10 @@ let newRectangle = (pointerPosition) => ({
   // key: target.ref + 1
 });
 
-const MapBackground = () => {
-  const [image] = useImage('./EWU-CEB.png');
-  return <Image x={150} y={0} scaleX={0.9} scaleY={0.9} image={image} />;
-};
+// const MapBackground = () => {
+//   const [image] = useImage('./EWU-CEB.png');
+//   return <Image x={150} y={0} scaleX={0.9} scaleY={0.9} image={image} />;
+// };
 
 const stageWidth = 1000;
 const stageHeight = 700;

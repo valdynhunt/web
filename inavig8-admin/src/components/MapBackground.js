@@ -9,10 +9,17 @@ const LionImage = () => {
           image={image} />;
   };
 
+const FooBackground = () => {
+const [image] = useImage('./EWU-CEB.png');
+return <Image x={150} y={0} scaleX={0.9} scaleY={0.9}                
+        image={image} />;
+};
+
+
 class MapBackground extends React.Component {
 
     state = {
-        location: {canvas_image: "https://konvajs.org/assets/lion.png"},
+        // location: {canvas_image: "https://konvajs.org/assets/lion.png"},
     }
 
     // let [image] = useImage(this.location.image); 
@@ -25,7 +32,6 @@ class MapBackground extends React.Component {
         let headers = {
             'Content-Type': 'application/json',
             'x-api-key': 'Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav',
-            'Access-Control-Allow-Headers': 'access-control-allow-origin',
             'Authorization': accessToken
         };
 
@@ -38,13 +44,13 @@ class MapBackground extends React.Component {
             .then(response => {
                 return response.json();
             }).then(result => {
-                // console.log("foo", result);
+                console.log("foo", result);
                 this.setState(
                     {
                         location: result.body.data
                     }
                 );
-                console.log("foo", this.state);
+                console.log("foo", this.state.location[0].canvas_image);
             });
 
     }
@@ -54,12 +60,15 @@ class MapBackground extends React.Component {
         return (
             // <div>
 
-            
+            //   
+            <FooBackground />
+                
+
                 // <Image x={10} y={90} scaleX={0.7} scaleY={0.7}                
                 // image={this.state.location.canvas_image} />
                 /* <Image x={150} y={0} scaleX={0.9} scaleY={0.9} image={useImage(this.location.image)} />; */
             // </div>
-            <LionImage />
+            // <LionImage />
 
         )
 
