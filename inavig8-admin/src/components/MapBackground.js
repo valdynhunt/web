@@ -1,28 +1,25 @@
 import React from 'react';
-import './Dashboard.css';
+// import './Dashboard.css';
 import useImage from 'use-image';
 import { Image } from 'react-konva';
 
-const LionImage = () => {
-    const [image] = useImage('https://konvajs.org/assets/lion.png');
-    return <Image x={10} y={90} scaleX={0.4} scaleY={0.4}                
-          image={image} />;
-  };
 
-const FooBackground = () => {
-const [image] = useImage('./EWU-CEB.png');
-return <Image x={150} y={0} scaleX={0.9} scaleY={0.9}                
-        image={image} />;
-};
+
+function Background(obj) {
+    const [image] = useImage(obj.img);
+    return <Image x={150} y={0} scaleX={0.9} scaleY={0.9}                
+            image={image} />;
+    };
 
 
 class MapBackground extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            location: []
+        }
+      }
 
-    state = {
-        // location: {canvas_image: "https://konvajs.org/assets/lion.png"},
-    }
-
-    // let [image] = useImage(this.location.image); 
 
     componentDidMount() {
 
@@ -44,36 +41,33 @@ class MapBackground extends React.Component {
             .then(response => {
                 return response.json();
             }).then(result => {
-                console.log("foo", result);
+
                 this.setState(
                     {
                         location: result.body.data
                     }
                 );
-                console.log("foo", this.state.location[0].canvas_image);
+                // console.log("foo2", this.state.location[0].canvas_image);
+
             });
+            
 
     }
 
     render() {
-        
-        return (
-            // <div>
 
-            //   
-            <FooBackground />
-                
+        if (this.state.location.length >= 1) {
+            let background_image = this.state.location[0].canvas_image;
 
-                // <Image x={10} y={90} scaleX={0.7} scaleY={0.7}                
-                // image={this.state.location.canvas_image} />
-                /* <Image x={150} y={0} scaleX={0.9} scaleY={0.9} image={useImage(this.location.image)} />; */
-            // </div>
-            // <LionImage />
+            return (
 
-        )
-
+                <Background img={ background_image }/>
+            
+            )
+        } else {
+            return null
+        }
     }
-
 }
 
 export default MapBackground;

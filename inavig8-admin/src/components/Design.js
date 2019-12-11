@@ -5,7 +5,7 @@ import Data from './Data'
 import Footer from './Footer0';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import './Design.css';
 
 
 class Design extends Component {
