@@ -40,6 +40,8 @@ class Dashboard extends React.Component {
 
     render() {
 
+        console.log('location details: ', this.state.locations[0]);
+
         return (
 
             <main className="dashboard-container">

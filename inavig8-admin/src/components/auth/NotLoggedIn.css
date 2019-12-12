@@ -4,6 +4,11 @@ div.container-notLoggedIn {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    background-image: url(../../img/background.jpg);
+    background-color: #FFFFFF;
+    background-blend-mode: multiply;
+    background-size: cover;
 }
 
 /***** Main *****/

@@ -4,8 +4,8 @@ import Header from './Header';
 import Nav from './Nav';
 import Main from './Main';
 import Footer from './Footer';
-import './App.css';
 import Login from './auth/Login';
+import './App.css';
 
 import Auth from '@aws-amplify/auth';
 
@@ -19,7 +19,6 @@ class App extends React.Component {
 
   onLogin = (user) => {
 
-    // will need to authenticate with Cognito before setting state
     this.setState(
       {
         admin: {

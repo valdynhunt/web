@@ -19,7 +19,7 @@ class Header extends React.Component {
       <div className="header">
         <Navbar bg="light" variant="light" >
 
-          <Navbar.Brand href="#index">
+          <Navbar.Brand href="/">
             <img
               alt=""
               src="/logo.png"

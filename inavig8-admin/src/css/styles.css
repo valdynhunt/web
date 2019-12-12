@@ -18,12 +18,8 @@ html {
   min-height: 100%;
 }
 
-html body {
+body {
   height: 100%;
-  background-image: url(../img/background.jpg);
-  background-color: #FFFFFF;
-  background-blend-mode: multiply;
-  background-size: cover;
 }
 
 

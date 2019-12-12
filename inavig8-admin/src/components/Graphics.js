@@ -83,7 +83,7 @@ class Graphics extends Component {
       shadowOffsetY: 0
     });
   };
-
+//
   render() {
     return (
       <div className="graphics">
@@ -92,7 +92,7 @@ class Graphics extends Component {
           height={stageHeight} 
           ref="stage">
           <Layer >
-            <MapBackground />
+            <MapBackground location_id={this.props.location_id} />
             {/* <ToolBar /> */}
 
 

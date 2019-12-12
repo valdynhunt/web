@@ -13,7 +13,7 @@ class Design extends Component {
     constructor() {
         super()
         this.state = {}
-      }
+    }
 
     render() {
         return (
@@ -21,7 +21,7 @@ class Design extends Component {
         <Container fluid="true" className="main">
             <Row><Col sm={12}><Header className="header" /></Col></Row>
             <Row>
-            <Col sm={9}><Graphics className="graphics" /></Col>
+            <Col sm={9}><Graphics location_id={this.props.match.params.location_id} className="graphics" /></Col>
             <Col sm={3}><Data className="data" /></Col>
             </Row>
             <Row><Col sm={12}><Footer className="footer" /></Col></Row>
