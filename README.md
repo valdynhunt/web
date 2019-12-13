@@ -7,6 +7,8 @@ Front-End Web Development
 
 ![ReactJS Flowsheet v1.0](https://github.com/javanada/web/blob/master/flowsheet/ReactJS%20-%20Web%20UML.jpg)
 
+![ReactJS Mapping Flowsheet v1.0](https://github.com/javanada/web/blob/master/flowsheet/mapping.jpg)
+
 ## Wireframes and Mockups
 
 ### Wireframes
