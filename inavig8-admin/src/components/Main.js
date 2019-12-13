@@ -9,11 +9,11 @@ class Main extends React.Component {
     render() {
 
         if (this.props.page === 'Locations') {
-            return <Locations />
+            return <Locations  locations={this.props.locations} />
         } else if (this.props.page === 'Users') {
             return <Users />
         } else {
-            return <Dashboard />
+            return <Dashboard locations={this.props.locations} />
         }
         
     }

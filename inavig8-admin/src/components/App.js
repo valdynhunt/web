@@ -15,7 +15,39 @@ class App extends React.Component {
   state = {
     admin: JSON.parse(localStorage.getItem('admin')) || [],
     nav: 'Dashboard',
+    locations: {}, //from Dashboard
   }
+
+  //from Dashboard.js
+  componentDidMount() {
+
+    let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+        JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+    let headers = {
+        'Content-Type': 'application/json',
+        'x-api-key': 'Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav',
+        'Authorization': accessToken
+    };
+
+    //fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
+    fetch('https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/locations', 
+    {
+        method: "GET",
+        headers,
+    }) // david
+        .then(response => {
+            return response.json();
+        }).then(result => {
+            console.log(result);
+            this.setState(
+                {
+                    locations: result.body.data
+                }
+            );
+        });
+
+}
 
   onLogin = (user) => {
 
@@ -62,7 +94,7 @@ class App extends React.Component {
           role: "Admin"
         }
       };
-      // this.setState(s);
+      // this.setState(s);//
 
   
 
@@ -79,7 +111,7 @@ class App extends React.Component {
           <Logo />
           <Header profile={this.state.admin} />
           <Nav onNavSelection={this.onNavSelection} highlight={this.state.nav} />
-          <Main page={this.state.nav} />
+          <Main page={this.state.nav} locations={this.state.locations}/>
           <Footer />
         </div>
 

@@ -4,52 +4,16 @@ import Location from './Location';
 
 class Dashboard extends React.Component {
 
-    state = {
-        locations: {},
-    }
-
-    componentDidMount() {
-
-        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-            JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
-
-        let headers = {
-            'Content-Type': 'application/json',
-            'x-api-key': 'Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav',
-            'Authorization': accessToken
-        };
-
-        //fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
-        fetch('https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/locations', 
-        {
-            method: "GET",
-            headers,
-        }) // david
-            .then(response => {
-                return response.json();
-            }).then(result => {
-                console.log(result);
-                this.setState(
-                    {
-                        locations: result.body.data
-                    }
-                );
-            });
-
-    }
-
     render() {
-
-        console.log('location details: ', this.state.locations[0]);
 
         return (
 
             <main className="dashboard-container">
-                {Object.keys(this.state.locations).map(key => (
+                {Object.keys(this.props.locations).map(key => (
                     <Location
                         key={key}
                         id={key}
-                        details={this.state.locations[key]} 
+                        details={this.props.locations[key]} 
                     />
                 ))}
             </main>
