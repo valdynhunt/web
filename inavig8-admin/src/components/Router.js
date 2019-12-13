@@ -15,6 +15,7 @@ const Router = () => (
             <Route path="/forgot" component={ForgotPassword} />
             <Route path="/reset" component={ResetPassword} />
             <Route path="/register" component={Register} />
+            <Route path="/design/:location_id" component={Design} />
             <Route path="/design" component={Design} />
 
             <Route component={Login} />

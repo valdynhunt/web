@@ -3,6 +3,7 @@ footer {
     grid-column: 1;
     padding: 1.0em;
     background: var(--secondary-color);
+    cursor: pointer;
 
     display: grid;
     grid-template-rows: 1fr;
@@ -10,6 +11,11 @@ footer {
     gap: 0 0.8em;
     justify-items: center;
     align-items: center;
+}
+
+footer:hover {
+    background: var(--tertiary-color);
+    text-shadow: none;
 }
 
 footer img {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Location from './Location';
 import './Locations.css';
 
 class Locations extends React.Component {
@@ -8,7 +9,7 @@ class Locations extends React.Component {
         return (
 
             <main className="locations-container">
-                <section className="locations-list">
+                {/* <section className="locations-list">//
                     <h4>Locations List</h4>
                     <ul>
                         <li>&#187; lorem ipsum dolor sit amet
@@ -23,7 +24,14 @@ class Locations extends React.Component {
                         </li>
                         <li>&#187; lorem ipsum dolor sit amet</li>
                     </ul>
-                </section>
+                </section> */}
+                {Object.keys(this.props.locations).map(key => (
+                    <Location
+                        key={key}
+                        id={key}
+                        details={this.props.locations[key]} 
+                    />
+                ))}
                 <section className="location-view">
                     <h4>Locations View</h4>
                     <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />

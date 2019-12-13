@@ -32,8 +32,11 @@ class MapBackground extends React.Component {
             'Authorization': accessToken
         };
 
-        //fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
-        fetch('https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/location/1', 
+        //const url = 'https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations'   // naji
+        
+        const url = 'https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/location/' + this.props.location_id;
+
+        fetch(url, 
         {
             method: "GET",
             headers,

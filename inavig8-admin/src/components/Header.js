@@ -31,26 +31,40 @@ class Header extends React.Component {
                                     <h3>Profile</h3>
                                     <div className="layout-profile">
                                         <section className="profile-col-left">
-                                            <label className="profile-bold" htmlFor="first_name">First Name:&nbsp;
-                                                <input type="text" name="first_name" id="first_name" value={first_name} readOnly="readonly" />
+                                            <label className="profile-bold" htmlFor="first_name">First Name:</label>
+                                            <input type="text" className="profile-input" name="first_name" id="first_name" value={first_name} readOnly="readonly" />
+                                            <label className="profile-bold" htmlFor="last_name">Last Name:</label>
+                                            <input type="text" className="profile-input" name="last_name" id="last_name" value={last_name} readOnly="readonly" />
+                                            <label className="profile-bold" htmlFor="email">Email:</label>
+                                            <input type="email" className="profile-input" name="email" id="email" value={email} readOnly="readonly" />
+                                            
+                                            {/* <label className="profile-bold" htmlFor="first_name">First Name:&nbsp;
+                                                <input type="text" className="profile-input" name="first_name" id="first_name" value={first_name} readOnly="readonly" />
                                             </label>
                                             <label className="profile-bold" htmlFor="last_name">Last Name:&nbsp;
-                                                <input type="text" name="last_name" id="last_name" value={last_name} readOnly="readonly" />
+                                                <input type="text" className="profile-input" name="last_name" id="last_name" value={last_name} readOnly="readonly" />
                                             </label>
                                             <label className="profile-bold" htmlFor="email">Email:&nbsp;
-                                                <input type="email" name="email" id="email" value={email} readOnly="readonly" />
-                                            </label>
+                                                <input type="email" className="profile-input" name="email" id="email" value={email} readOnly="readonly" />
+                                            </label> */}
                                         </section>
                                         <section className="profile-col-right">
-                                            <label className="profile-bold" htmlFor="username">Username:&nbsp;
-                                                <input type="text" name="username" id="username" value={username} readOnly="readonly" />
+                                            <label className="profile-bold" htmlFor="username">Username:</label>
+                                            <input type="text" className="profile-input" name="username" id="username" value={username} readOnly="readonly" />
+                                            <label className="profile-bold" htmlFor="password">Password:</label>
+                                            <input type="password" className="profile-input" name="password" id="password" value={password} readOnly="readonly" />
+                                            <label className="profile-bold" htmlFor="role">Role:</label>
+                                            <input type="text" className="profile-input" name="role" id="role" value={role} readOnly="readonly" />
+                                            
+                                            {/* <label className="profile-bold" htmlFor="username">Username:&nbsp;
+                                                <input type="text" className="profile-input" name="username" id="username" value={username} readOnly="readonly" />
                                             </label>
                                             <label className="profile-bold" htmlFor="password">Password:&nbsp;
-                                            <input type="password" name="password" id="password" value={password} readOnly="readonly" />
+                                            <input type="password" className="profile-input" name="password" id="password" value={password} readOnly="readonly" />
                                             </label>
                                             <label className="profile-bold" htmlFor="role">Role:&nbsp;
-                                            <input type="text" name="role" id="role" value={role} readOnly="readonly" />
-                                            </label>
+                                            <input type="text" className="profile-input" name="role" id="role" value={role} readOnly="readonly" />
+                                            </label> */}
                                         </section>
                                     </div>
                                     <div className="profile-buttons">

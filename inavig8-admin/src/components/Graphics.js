@@ -243,7 +243,7 @@ class Graphics extends Component {
           height={STAGE_HEIGHT} 
           ref="stage">
           <Layer >
-            <MapBackground />
+            <MapBackground location_id={this.props.location_id} />
             {/* <ToolBar /> */}
 
 
