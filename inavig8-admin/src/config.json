@@ -1,6 +1,11 @@
 {
 "api": { 
-    "invokeUrl": ""
+    "invokeUrl": "https://6ifyh4p4z2.execute-api.us-west-2.amazonaws.com/dev",
+    "headers": { 
+    	"Content-Type":"application/json", 
+    	"x-api-key": "Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav",
+    	"Authorization": ""
+    }
   },
   "cognito": {
     "REGION": "us-west-2",
