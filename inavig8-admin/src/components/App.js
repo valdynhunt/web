@@ -6,6 +6,7 @@ import Main from './Main';
 import Footer from './Footer';
 import Login from './auth/Login';
 import './App.css';
+import config from '../config.json';
 
 import Auth from '@aws-amplify/auth';
 
@@ -24,14 +25,9 @@ class App extends React.Component {
     let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
         JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
-    let headers = {
-        'Content-Type': 'application/json',
-        'x-api-key': 'Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav',
-        'Authorization': accessToken
-    };
-
-    //fetch('https://7g8edlnlmd.execute-api.us-east-2.amazonaws.com/dev/locations')   // naji
-    fetch('https://t1o352i3j3.execute-api.us-west-2.amazonaws.com/dev/locations', 
+    let headers = config.api.headers;
+    
+    fetch(config.api.invokeUrl + '/locations', 
     {
         method: "GET",
         headers,

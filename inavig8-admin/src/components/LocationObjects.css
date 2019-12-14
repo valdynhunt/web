@@ -1,0 +1,13 @@
+section.location-list {
+    border: 2px solid var(--accent1-color);
+}
+
+section.location-list h4 {
+    background: #CCCCCC;
+    color: var(--accent1-color);
+    border-bottom: 2px solid var(--accent1-color);
+}
+
+section.location-list img {
+    width: 100%;
+}
