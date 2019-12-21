@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
 import Konva from 'konva';
-import { Stage, Layer, Image, Rect, Text, Circle } from 'react-konva';
+import { Stage, Layer, Image, Rect, Text, Circle, Star } from 'react-konva';
 import useImage from 'use-image';
 import MapBackground from './MapBackground'
+import config from '../config.json';
+import ModalSetGrid from './ModalSetGrid';
+// import DoorClosed from './icons/DoorClosed';
 
-const STAGE_WIDTH = 1000;
-const STAGE_HEIGHT = 700;
+
+const STAGE_WIDTH = window.innerWidth;
+const STAGE_HEIGHT = window.innerHeight;
 const TOOLBAR_WIDTH = 120;
 const TOOLBAR_HEIGHT = 650;
 const TOOLBAR_X = 10;
@@ -17,24 +22,26 @@ const CIRC_RADIUS = 10;
 const SHADOW_OFFSET = 4;
 const FONT_SIZE = 20;
 
-const COFFEE = '\uf0f4';
-const UTENSILS = '\uf2e7';
-const RESTROOM = '\uf7bd'; 
-const HEARTBEAT = '\uf21e';
-const RECYCLE = '\uf1b8';
-const FIRE_EXTINGUISHER = '\uf134';
-const HAND_PAPER = '\uf256';
-const MAP_MARKER = '\uf041';
-const DOOR_CLOSED = '\uf52a';
-const DOOR_OPEN = '\uf52b';
-const IMAGE = '\uf03e';
-const SQUARE = '\uf0c8';
-const PENCIL_ALT = '\uf303';
-const DRAW_POLYGON = '\uf5ee';
-const REDO = '\uf2f9';
-const UNDO = '\uf2ea';
-const PLUS = '\uf067';
-const MINUS = '\uf068';
+const COFFEE_SRC = '/img/icons/coffee.png';
+const UTENSILS_SRC = '/img/icons/utensils.png';
+const RESTROOM_SRC = '/img/icons/restroom.png'; //
+const MALE_SRC = '/img/icons/male.png'; //
+const FEMALE_SRC = '/img/icons/female.png'; //
+const HEARTBEAT_SRC = '/img/icons/heartbeat.png';
+const RECYCLE_SRC = '/img/icons/recycle.png';
+const FIRE_EXTINGUISHER_SRC = '/img/icons/fire-extinguisher.png';
+const HAND_PAPER_SRC = '/img/icons/hand-paper.png';
+const MAP_MARKER_SRC = '/img/icons/map-marker.png';
+const DOOR_CLOSED_SRC = '/img/icons/door-closed.png';
+const DOOR_OPEN_SRC = '/img/icons/door-open.png';
+const IMAGE_SRC = '/img/icons/image-regular.png';
+const SQUARE_SRC = '/img/icons/square.png';
+const PENCIL_ALT_SRC = '/img/icons/pencil-alt.png';
+const DRAW_POLYGON_SRC = '/img/icons/draw-polygon.png'; //
+const REDO_SRC = '/img/icons/redo-alt.png';
+const UNDO_SRC = '/img/icons/undo-alt.png';
+const PLUS_SRC = '/img/icons/plus.png';
+const MINUS_SRC = '/img/icons/minus.png';
 
 const X = [25, 60, 90]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
@@ -42,29 +49,423 @@ const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 6
 let origX = 0;
 let origY = 0;
 
+var stage;
+var mousePos;
+var tooltipLayer = new Konva.Layer();
+var tooltip = new Konva.Text({
+  text: '',
+  fontFamily: 'Calibri',
+  fontSize: 18,
+  padding: 5,
+  textFill: 'white',
+  fill: 'black',
+  alpha: 0.75,
+  visible: false
+})
 
-const LionImage0 = () => {
-  const [image] = useImage('https://konvajs.org/assets/lion.png');
-  return <Image x={X[0]} y={Y[2]} scaleX={0.2} scaleY={0.2}                
+const handleClick = e => { 
+  // open sidebar with focus - show delete or edit buttons
+  console.log("clicked obj ", e.target)
+};
+
+const FireExtinguisher = () => {
+  const [image] = useImage(FIRE_EXTINGUISHER_SRC);
+  const handleFireExtinguisherClick = (e) => {
+    console.log('fire extinguisher clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[9]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleFireExtinguisherClick}
         image={image} />;
 };
 
-const LionImage = () => {
-  const [image] = useImage('https://konvajs.org/assets/lion.png');
-  return <Image x={X[0]} y={Y[2]} scaleX={0.2} scaleY={0.2} draggable              
+const MapMarker = () => {
+  const [image] = useImage(MAP_MARKER_SRC);
+  const handleMapMarkerClick = (e) => {
+    console.log('map marker clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[10]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleMapMarkerClick}
+        image={image} />;
+};
+
+const ImageRegular = () => {
+  const [image] = useImage(IMAGE_SRC);
+  const handleImageRegularClick = (e) => {
+    console.log('image regular clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[11]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleImageRegularClick}
+        image={image} />;
+};
+
+const Square = () => {
+  const [image] = useImage(SQUARE_SRC);
+  const handleSquareClick = (e) => {
+    console.log('square clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[12]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleSquareClick}
+        image={image} />;
+};
+
+const Pencil = () => {
+  const [image] = useImage(PENCIL_ALT_SRC);
+  const handlePencilClick = (e) => {
+    console.log('pencil clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[13]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          onClick={handlePencilClick}
+        image={image} />;
+};
+
+const Redo = () => {
+  const [image] = useImage(REDO_SRC);
+  const handleRedoClick = e => { 
+    // open sidebar with focus - show delete or edit buttons
+    console.log("rotate cw ", e.target)
+  };
+  return <Image 
+          x={X[0]} 
+          y={Y[14]} 
+          scaleX={0.04} 
+          scaleY={0.04}            
+          onClick={handleRedoClick}
+        image={image} />;
+};
+
+const Undo = () => {
+  const [image] = useImage(UNDO_SRC);
+  const handleUndoClick = e => { 
+    // open sidebar with focus - show delete or edit buttons
+    console.log("rotate ccw ", e.target)
+  };
+  return <Image 
+          x={X[1]} 
+          y={Y[14]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          onClick={handleUndoClick}
+        image={image} />;
+};
+
+const Plus = () => {
+  const [image] = useImage(PLUS_SRC);
+  const handlePlusClick = e => { 
+    // open sidebar with focus - show delete or edit buttons
+    console.log("zoom in ", e.target)
+  };
+  return <Image 
+          x={X[0]} 
+          y={Y[15]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          onClick={handlePlusClick}
+        image={image} />;
+};
+
+const Minus = () => {
+  const [image] = useImage(MINUS_SRC);
+  const handleMinusClick = e => { 
+    // open sidebar with focus - show delete or edit buttons
+    console.log("zoom out ", e.target)
+  };
+  return <Image 
+          x={X[1]} 
+          y={Y[15]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          onClick={handleMinusClick}
+        image={image} />;
+};
+
+const HandPaper = () => {
+  const [image] = useImage(HAND_PAPER_SRC);
+  const handleHandPaperClick = e => { 
+    // open sidebar with focus - show delete or edit buttons
+    console.log("pan mode ", e.target)
+  };
+  return <Image 
+          x={X[2]} 
+          y={Y[15]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          onClick={handleHandPaperClick}
+        image={image} />;
+};
+
+const Heartbeat = (props) => {
+  const [image] = useImage(HEARTBEAT_SRC);
+  const handleHeartbeatClick = (e) => {
+    console.log('heartbeat clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[7]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleHeartbeatClick}
         image={image} />;
 };
 
 
-let newCirc = (t, pointerPosition) => ({
 
+const Recycle = () => {
+  const [image] = useImage(RECYCLE_SRC);
+  const handleRecycleClick = (e) => {
+    console.log('recycle clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[8]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleRecycleClick}
+        image={image} />;
+};
+
+const Utensils = () => {
+  const [image] = useImage(UTENSILS_SRC);
+  const handleUtensilsClick = (e) => {
+    console.log('utensils clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[5]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleUtensilsClick}
+        image={image} />;
+};
+
+const Coffee = () => {
+  const [image] = useImage(COFFEE_SRC);
+  const handleCoffeeClick = (e) => {
+    console.log('coffee clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[4]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleCoffeeClick}
+        image={image} />;
+};
+
+const DoorOpen = () => {
+  const [image] = useImage(DOOR_OPEN_SRC);
+  const handleDoorOpenClick = (e) => {
+    console.log('door open clicked');
+  }
+  return <Image 
+          x={X[2]} 
+          y={Y[14]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleDoorOpenClick}
+        image={image} />;
+};
+
+const DoorClosed = () => {
+  const [image] = useImage(DOOR_OPEN_SRC);
+  const handleDoorClosedClick = (e) => {
+    console.log('door closed clicked');
+  }
+  return <Image 
+          x={X[2]} 
+          y={Y[14]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={handleDragImageStart}
+          // onDragEnd={handleDragImageEnd}
+          onClick={handleDoorClosedClick}
+        image={image} />;
+};
+
+const DrawPolygon = () => {
+  const [image] = useImage(DRAW_POLYGON_SRC);
+  const handleDrawPolygonClick = (e) => {
+    console.log('draw polygon clicked');
+  }
+  return <Image 
+          x={X[1]} 
+          y={Y[13]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          onClick={handleDrawPolygonClick}
+        image={image} />;
+};
+
+const Restroom = () => {
+  const [image] = useImage(RESTROOM_SRC);
+  const handleRestroomClick = (e) => {
+    console.log('restroom clicked');
+  }
+  return <Image 
+          x={X[0]} 
+          y={Y[2]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleRestroomClick}
+        image={image} />;
+};
+
+const Male = () => {
+  const [image] = useImage(MALE_SRC);
+  const handleMaleClick = (e) => {
+    console.log('male clicked');
+  }
+  return <Image 
+          x={X[1]} 
+          y={Y[2]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleMaleClick}
+        image={image} />;
+};
+
+const Female = () => {
+  const [image] = useImage(FEMALE_SRC);
+  const handleFemaleClick = (e) => {
+    console.log('female clicked');
+  }
+  return <Image 
+          x={X[2]} 
+          y={Y[2]} 
+          scaleX={0.04} 
+          scaleY={0.04} 
+          draggable              
+          // onDragStart={this.handleDragImageStart}
+          // onDragEnd={this.handleDragImageEnd}
+          onClick={handleFemaleClick}
+        image={image} />;
+};
+
+
+// let newCirc = (t, pointerPosition) => ({
+
+//   x: pointerPosition.x - t.attrs.radius,
+//   y: pointerPosition.y - t.attrs.radius,
+//   radius: t.attrs.radius,
+//   fill: t.attrs.fill,
+//   stroke: t.attrs.stroke
+//   // name: 
+//   // key: target.ref + 1
+// });
+
+let newImage = (t, pointerPosition) => ({
+  // fetch new location_id?
+  location_id: 7,  // fetch it
+  key: 7, // location_id
+
+  // pop up modal to input short_name and description
+  short_name: "fooImage",
+  description: "foo2Image",
+  long_name: "fooeyImage",
+  active: "true", // can we just make this a default on the creation of new objects?
+  
+  // x and y are pixel ref
   x: pointerPosition.x - t.attrs.radius,
   y: pointerPosition.y - t.attrs.radius,
+
+  // x_coordinate and y_coordinate are relative coords
+  x_coordinate: 2,
+  y_coordinate: 3,
+  
+  object_type_id: 1,
+  
+  // lat and long are only set for primary or secondary objects - does each floor need them?
+  latitude: 0,
+  longitude: 0,
+
+  image: t.attrs.image,
+  fill: t.attrs.fill,
+  stroke: t.attrs.stroke
+
+});
+
+let newCirc = (t, pointerPosition) => ({
+  // fetch new location_id?
+  location_id: 7,  // fetch it
+  key: 7, // location_id
+
+  // pop up modal to input short_name and description
+  short_name: "foo",
+  description: "foo2",
+  long_name: "fooey",
+  active: "true", // can we just make this a default on the creation of new objects?
+  
+  // x and y are pixel ref
+  x: pointerPosition.x,
+  y: pointerPosition.y,
+
+  // x_coordinate and y_coordinate are relative coords
+  x_coordinate: 2,
+  y_coordinate: 3,
+  
+  object_type_id: 1,
+  
+  // lat and long are only set for primary or secondary objects - does each floor need them?
+  latitude: 0,
+  longitude: 0,
+
   radius: t.attrs.radius,
   fill: t.attrs.fill,
   stroke: t.attrs.stroke
-  // name: 
-  // key: target.ref + 1
+
 });
 
 
@@ -100,11 +501,98 @@ class Graphics extends Component {
   constructor() {
     super()
     this.state = {
+      objects: [],
+      canvasImage: [],
       canvasRect: [],
       canvasCirc: [],
       canvasText: []
     }
   }
+
+  componentDidMount() {
+
+		let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+		let headers = config.api.headers;
+    
+    const url2 = config.api.invokeUrl + '/objects/location/' + this.props.location_id;
+		fetch(url2, 
+		{
+			method: "GET",
+			headers,
+		}).then(response => {
+			return response.json();
+		}).then(result => {
+			this.setState(
+				{
+					objects: result.body.data
+				}
+			);
+      console.log("objects... ", result.body.data);
+
+    });
+    
+    
+  }
+
+
+
+  // display_init_modal = () => {
+  //   // console.log("displaying model now...");
+  //   var Modal = ReactBootstrap.Modal;
+
+
+  // }
+
+  // set_location_config = () => {
+  //   console.log("checking if primary and secondary are set...");
+  //   // if primary and secondary and grid not set, then show modal to input
+  //   const foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
+  //   const foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
+
+  //   console.log("foundPrimary: ", foundPrimary);
+  //   console.log("foundSecondary: ", foundSecondary);
+
+  //   if (!foundPrimary || !foundSecondary) {
+  //     // show model to set them and set grid
+  //     display_init_modal();
+  //   }
+  // }
+
+  handleClick = e => { 
+    // open sidebar with focus - show delete or edit buttons
+    console.log("clicked obj ", e.target)
+  };
+
+  handleMouseMove = e => { 
+    stage = e.target.getStage();
+    mousePos = stage.getPointerPosition();
+
+    tooltip.position({
+      x: mousePos.x + 5,
+      y: mousePos.y + 5
+    });
+
+    tooltip.text(e.target.attrs.text);
+    tooltip.show();
+    tooltipLayer.add(tooltip);
+    stage.add(tooltipLayer);
+
+    // console.log("get stage ", e.target.getStage);
+    // e.target.getStage().batchdraw();
+    tooltipLayer.batchDraw();
+    console.log("mouse move ", e.target)
+  };
+
+
+  handleMouseOut = e => { 
+
+
+    tooltip.hide();
+    e.target.getStage().draw();
+    console.log("mouse out ", e.target)
+  };
 
   handleDragTextStart = e => {
     origX = e.target.attrs.x;
@@ -143,6 +631,53 @@ class Graphics extends Component {
 
   }; // end handleDragTextEnd
 
+  handleDragImageStart = e => {
+    origX = e.target.attrs.x;
+    origY = e.target.attrs.y;
+    e.target.setAttrs({
+      shadowOffset: {
+        x: SHADOW_OFFSET,
+        y: SHADOW_OFFSET
+      }
+      // scaleX: 1.1,
+      // scaleY: 1.1
+    });
+  };  // end handleDragImageStart
+
+  handleDragImageEnd = e => {
+
+    const stage = e.target.getStage();
+    const pointerPosition = stage.getPointerPosition();
+
+    console.table({x: pointerPosition.x, y: pointerPosition.y});
+
+    console.log("new - canvasImage length before add is ", this.state.canvasImage.length);
+    console.log("target is: ", e.target);
+    console.log("target color is: ", e.target.attrs.fill);
+
+    // call to get new location_id?? and feed in to ...newCirc(location_id, e.target, pointerPosition) ??
+
+    this.setState(prevState => ({
+      canvasImage: [...prevState.canvasImage, { ...newImage(e.target, pointerPosition) }]
+    }));
+
+    // put draggable back to original location
+    e.target.position({ 
+      x: origX,
+      y: origY
+    });
+
+    e.target.to({
+      duration: 0.2,
+      easing: Konva.Easings.ElasticEaseOut,
+      shadowOffsetX: 0,
+      shadowOffsetY: 0
+    });
+
+    e.target.getStage().draw();
+
+  }; // end handleDragImageEnd
+
   handleDragCircStart = e => {
     origX = e.target.attrs.x;
     origY = e.target.attrs.y;
@@ -166,6 +701,8 @@ class Graphics extends Component {
     console.log("new - canvasCirc length before add is ", this.state.canvasCirc.length);
     console.log("target is: ", e.target);
     console.log("target color is: ", e.target.attrs.fill);
+
+    // call to get new location_id?? and feed in to ...newCirc(location_id, e.target, pointerPosition) ??
 
     this.setState(prevState => ({
       canvasCirc: [...prevState.canvasCirc, { ...newCirc(e.target, pointerPosition) }]
@@ -236,16 +773,21 @@ class Graphics extends Component {
   }; // end handleDragRectEnd
 
   render() {
+
     return (
       <div className="graphics">
+        
         <Stage 
           width={STAGE_WIDTH} 
           height={STAGE_HEIGHT} 
           ref="stage">
-          <Layer >
+          <Layer name="background">
+            {/* <ModalSetGrid objects ={this.state.objects}/> */}
             <MapBackground location_id={this.props.location_id} />
             {/* <ToolBar /> */}
 
+          </Layer>
+          <Layer name="main">
 
               <Rect
                 x={TOOLBAR_X}
@@ -256,8 +798,43 @@ class Graphics extends Component {
                 stroke="lightgrey"
               />
 
-              <LionImage0 />
-              <LionImage />
+
+              <Restroom />
+              <Restroom />
+              <Male />
+              <Male />
+              <Female />
+              <Female />
+
+              <FireExtinguisher />
+              <FireExtinguisher />
+              <MapMarker />
+              <MapMarker />
+              <ImageRegular />
+              <ImageRegular />
+              <Square />
+              <Square />
+              <Pencil />
+              <Redo />
+              <Undo />
+              <Plus />
+              <Minus />
+              <HandPaper />
+              <Heartbeat />
+              <Heartbeat />
+              <Recycle />
+              <Recycle />
+              <Utensils />
+              <Utensils />
+              <Coffee />
+              <Coffee />
+
+              <DoorOpen />
+              <DoorOpen />
+              <DoorClosed />
+              <DoorClosed />
+              <DrawPolygon />
+
 
               <Circle x={X[0] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} radius={CIRC_RADIUS} fill="red" shadowBlur={1} />
               <Circle 
@@ -368,7 +945,7 @@ class Graphics extends Component {
                 shadowBlur={1}
               />
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[4]}
                 fontFamily="FontAwesome"
@@ -388,9 +965,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[5]}
                 fontFamily="FontAwesome"
@@ -410,9 +987,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[6]}
                 fontFamily="FontAwesome"
@@ -432,9 +1009,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[7]}
                 fontFamily="FontAwesome"
@@ -454,9 +1031,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[8]}
                 fontFamily="FontAwesome"
@@ -476,9 +1053,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[9]}
                 fontFamily="FontAwesome"
@@ -498,11 +1075,11 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
 
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[10]}
                 fontFamily="FontAwesome"
@@ -522,9 +1099,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[11]}
                 fontFamily="FontAwesome"
@@ -544,9 +1121,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[12]}
                 fontFamily="FontAwesome"
@@ -566,8 +1143,8 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
-
+              /> */}
+{/* 
               <Text
                 x={X[0]}
                 y={Y[13]}
@@ -575,8 +1152,8 @@ class Graphics extends Component {
                 text={PENCIL_ALT}
                 fontSize={FONT_SIZE}
                 fill="black"
-              />
-
+              /> */}
+{/* 
               <Text
                 x={X[1]}
                 y={Y[13]}
@@ -584,9 +1161,9 @@ class Graphics extends Component {
                 text={DRAW_POLYGON}
                 fontSize={FONT_SIZE}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[14]}
                 fontFamily="FontAwesome"
@@ -602,9 +1179,9 @@ class Graphics extends Component {
                 text={UNDO}
                 fontSize={FONT_SIZE}
                 fill="black"
-              />
+              /> */}
 
-<Text
+{/* <Text
                 x={X[2]}
                 y={Y[14]}
                 fontFamily="FontAwesome"
@@ -624,9 +1201,9 @@ class Graphics extends Component {
                 onDragStart={this.handleDragTextStart}
                 onDragEnd={this.handleDragTextEnd}
                 fill="black"
-              />
+              /> */}
 
-              <Text
+              {/* <Text
                 x={X[0]}
                 y={Y[15]}
                 fontFamily="FontAwesome"
@@ -651,11 +1228,23 @@ class Graphics extends Component {
                 text={HAND_PAPER}
                 fontSize={FONT_SIZE}
                 fill="black"
+              /> */}
+
+
+              {this.state.canvasImage.map(  ({ x, y, scaleX, scaleY, image }, key) => ( // maps over this.state.canvas objects
+
+              <Image
+                key={key}
+                x={x} y={y} 
+                scaleX={scaleX} scaleY={scaleY} 
+                draggable              
+                onDragStart={this.handleDragImageStart}
+                onDragEnd={this.handleDragImageEnd}
+                onClick={this.handleClick}
+              image={image}
+                
               />
-
-
-
-            
+              ))}
 
 
               {this.state.canvasRect.map(  ({ x, y, height, width, fill, stroke }, key) => ( // maps over this.state.canvas objects
@@ -678,24 +1267,43 @@ class Graphics extends Component {
                     />
               ))}
 
-              {this.state.canvasCirc.map(  ({ x, y, radius, fill, stroke }, key) => ( // maps over this.state.canvas objects
 
-              <Circle
-                key={key}
-                x={x}
-                y={y}
-                radius={radius}
+{/* location_id, key, short_name, description, long_name, active, x, y, x_coordinate, y_coordinate, object_type_id, latitude, longitude, radius, fill, stroke */}
+{this.state.canvasCirc.map(  ({ 
+location_id, short_name, description, long_name, 
+active, x, y, x_coordinate, y_coordinate, object_type_id, 
+latitude, longitude, radius, fill, stroke }) => ( // maps over this.state.canvas objects
 
-                stroke={stroke}
-                draggable
-                fill={fill}
+<Circle
+  key={location_id}
+  location_id = {location_id}
+  short_name = {short_name}
+  descrioption = {description}
+  long_name = {long_name}
+  active = {active}
+  
+  x={x}
+  y={y}
+  x_coordinate = {x_coordinate}
+  y_coordinate = {y_coordinate}
+  
+  object_type_id = {object_type_id}
+  latitude = {latitude} 
+  longitude = {longitude}
 
-                shadowOffset={{ x: 1, y: 1 }}
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                onClick={this.handleClick}
-              />
-              ))}
+  radius={radius}
+  stroke={stroke}
+  draggable
+  fill={fill}
+
+  shadowOffset={{ x: 1, y: 1 }}
+  onDragStart={this.handleDragCircStart}
+  onDragEnd={this.handleDragCircEnd}
+  onClick={this.handleClick}
+  onMouseMove={this.handleMouseMove}
+  onMouseOut={this.handleMouseOut}
+/>
+))}
 
 
               {this.state.canvasText.map(  ({ x, y, fontFamily, fontSize, text, fill }, key) => ( // maps over this.state.canvas objects
@@ -717,6 +1325,28 @@ class Graphics extends Component {
                 onClick={this.handleClick}
               />
               ))}
+
+              {this.state.objects.map((key) => (
+
+              <Star
+                key={key}
+                x={key.image_x}
+                y={window.innerHeight - key.image_y}
+                numPoints={5}
+                innerRadius={5}
+                outerRadius={10}
+                fill="#89b717"
+                opacity={0.8}
+                draggable
+                rotation={Math.random() * 180}
+                shadowColor="black"
+                shadowBlur={10}
+                shadowOpacity={0.6}
+                onDragStart={this.handleDragStart}
+                onDragEnd={this.handleDragEnd}
+                />
+              ))}
+
 
           </Layer>
         </Stage>
