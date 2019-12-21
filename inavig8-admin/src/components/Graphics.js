@@ -7,7 +7,6 @@ import useImage from 'use-image';
 import MapBackground from './MapBackground'
 import config from '../config.json';
 import ModalSetGrid from './ModalSetGrid';
-// import DoorClosed from './icons/DoorClosed';
 
 
 const STAGE_WIDTH = window.innerWidth;
@@ -68,7 +67,7 @@ const handleClick = e => {
   console.log("clicked obj ", e.target)
 };
 
-const FireExtinguisher = () => {
+const FireExtinguisher = (props) => {
   const [image] = useImage(FIRE_EXTINGUISHER_SRC);
   const handleFireExtinguisherClick = (e) => {
     console.log('fire extinguisher clicked');
@@ -79,13 +78,13 @@ const FireExtinguisher = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleFireExtinguisherClick}
         image={image} />;
 };
 
-const MapMarker = () => {
+const MapMarker = (props) => {
   const [image] = useImage(MAP_MARKER_SRC);
   const handleMapMarkerClick = (e) => {
     console.log('map marker clicked');
@@ -96,13 +95,13 @@ const MapMarker = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleMapMarkerClick}
         image={image} />;
 };
 
-const ImageRegular = () => {
+const ImageRegular = (props) => {
   const [image] = useImage(IMAGE_SRC);
   const handleImageRegularClick = (e) => {
     console.log('image regular clicked');
@@ -113,13 +112,13 @@ const ImageRegular = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleImageRegularClick}
         image={image} />;
 };
 
-const Square = () => {
+const Square = (props) => {
   const [image] = useImage(SQUARE_SRC);
   const handleSquareClick = (e) => {
     console.log('square clicked');
@@ -130,8 +129,8 @@ const Square = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleSquareClick}
         image={image} />;
 };
@@ -236,15 +235,15 @@ const Heartbeat = (props) => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleHeartbeatClick}
         image={image} />;
 };
 
 
 
-const Recycle = () => {
+const Recycle = (props) => {
   const [image] = useImage(RECYCLE_SRC);
   const handleRecycleClick = (e) => {
     console.log('recycle clicked');
@@ -255,13 +254,13 @@ const Recycle = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleRecycleClick}
         image={image} />;
 };
 
-const Utensils = () => {
+const Utensils = (props) => {
   const [image] = useImage(UTENSILS_SRC);
   const handleUtensilsClick = (e) => {
     console.log('utensils clicked');
@@ -272,13 +271,13 @@ const Utensils = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleUtensilsClick}
         image={image} />;
 };
 
-const Coffee = () => {
+const Coffee = (props) => {
   const [image] = useImage(COFFEE_SRC);
   const handleCoffeeClick = (e) => {
     console.log('coffee clicked');
@@ -289,13 +288,13 @@ const Coffee = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleCoffeeClick}
         image={image} />;
 };
 
-const DoorOpen = () => {
+const DoorOpen = (props) => {
   const [image] = useImage(DOOR_OPEN_SRC);
   const handleDoorOpenClick = (e) => {
     console.log('door open clicked');
@@ -306,13 +305,13 @@ const DoorOpen = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleDoorOpenClick}
         image={image} />;
 };
 
-const DoorClosed = () => {
+const DoorClosed = (props) => {
   const [image] = useImage(DOOR_OPEN_SRC);
   const handleDoorClosedClick = (e) => {
     console.log('door closed clicked');
@@ -323,13 +322,13 @@ const DoorClosed = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={handleDragImageStart}
-          // onDragEnd={handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleDoorClosedClick}
         image={image} />;
 };
 
-const DrawPolygon = () => {
+const DrawPolygon = (props) => {
   const [image] = useImage(DRAW_POLYGON_SRC);
   const handleDrawPolygonClick = (e) => {
     console.log('draw polygon clicked');
@@ -343,24 +342,25 @@ const DrawPolygon = () => {
         image={image} />;
 };
 
-const Restroom = () => {
+const Restroom = (props) => {
   const [image] = useImage(RESTROOM_SRC);
   const handleRestroomClick = (e) => {
     console.log('restroom clicked');
   }
+
   return <Image 
           x={X[0]} 
           y={Y[2]} 
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleRestroomClick}
         image={image} />;
 };
 
-const Male = () => {
+const Male = (props) => {
   const [image] = useImage(MALE_SRC);
   const handleMaleClick = (e) => {
     console.log('male clicked');
@@ -371,13 +371,13 @@ const Male = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleMaleClick}
         image={image} />;
 };
 
-const Female = () => {
+const Female = (props) => {
   const [image] = useImage(FEMALE_SRC);
   const handleFemaleClick = (e) => {
     console.log('female clicked');
@@ -388,23 +388,12 @@ const Female = () => {
           scaleX={0.04} 
           scaleY={0.04} 
           draggable              
-          // onDragStart={this.handleDragImageStart}
-          // onDragEnd={this.handleDragImageEnd}
+          onDragStart={props.handleDragImageStart}
+          onDragEnd={props.handleDragImageEnd}
           onClick={handleFemaleClick}
         image={image} />;
 };
 
-
-// let newCirc = (t, pointerPosition) => ({
-
-//   x: pointerPosition.x - t.attrs.radius,
-//   y: pointerPosition.y - t.attrs.radius,
-//   radius: t.attrs.radius,
-//   fill: t.attrs.fill,
-//   stroke: t.attrs.stroke
-//   // name: 
-//   // key: target.ref + 1
-// });
 
 let newImage = (t, pointerPosition) => ({
   // fetch new location_id?
@@ -418,8 +407,10 @@ let newImage = (t, pointerPosition) => ({
   active: "true", // can we just make this a default on the creation of new objects?
   
   // x and y are pixel ref
-  x: pointerPosition.x - t.attrs.radius,
-  y: pointerPosition.y - t.attrs.radius,
+  x: pointerPosition.x,
+  y: pointerPosition.y,
+  scaleX: t.attrs.scaleX,
+  scaleY: t.attrs.scaleY,
 
   // x_coordinate and y_coordinate are relative coords
   x_coordinate: 2,
@@ -432,8 +423,6 @@ let newImage = (t, pointerPosition) => ({
   longitude: 0,
 
   image: t.attrs.image,
-  fill: t.attrs.fill,
-  stroke: t.attrs.stroke
 
 });
 
@@ -507,6 +496,8 @@ class Graphics extends Component {
       canvasCirc: [],
       canvasText: []
     }
+    this.handleDragImageStart = this.handleDragImageStart.bind(this)
+    this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
   }
 
   componentDidMount() {
@@ -632,20 +623,22 @@ class Graphics extends Component {
   }; // end handleDragTextEnd
 
   handleDragImageStart = e => {
+    console.log("drag image start e: ", e);
     origX = e.target.attrs.x;
     origY = e.target.attrs.y;
     e.target.setAttrs({
       shadowOffset: {
         x: SHADOW_OFFSET,
         y: SHADOW_OFFSET
-      }
-      // scaleX: 1.1,
-      // scaleY: 1.1
+      },
+      scaleX: 0.04,
+      scaleY: 0.04
     });
   };  // end handleDragImageStart
 
   handleDragImageEnd = e => {
-
+    console.log("drag image end e: ", e);
+    console.log(origX, " ", origY);
     const stage = e.target.getStage();
     const pointerPosition = stage.getPointerPosition();
 
@@ -653,7 +646,7 @@ class Graphics extends Component {
 
     console.log("new - canvasImage length before add is ", this.state.canvasImage.length);
     console.log("target is: ", e.target);
-    console.log("target color is: ", e.target.attrs.fill);
+    // console.log("target color is: ", e.target.attrs.fill);
 
     // call to get new location_id?? and feed in to ...newCirc(location_id, e.target, pointerPosition) ??
 
@@ -800,20 +793,20 @@ class Graphics extends Component {
 
 
               <Restroom />
-              <Restroom />
+              <Restroom handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Male />
-              <Male />
+              <Male handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Female />
-              <Female />
+              <Female handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
 
               <FireExtinguisher />
-              <FireExtinguisher />
+              <FireExtinguisher handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <MapMarker />
-              <MapMarker />
+              <MapMarker handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <ImageRegular />
-              <ImageRegular />
+              <ImageRegular handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Square />
-              <Square />
+              <Square handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Pencil />
               <Redo />
               <Undo />
@@ -821,18 +814,18 @@ class Graphics extends Component {
               <Minus />
               <HandPaper />
               <Heartbeat />
-              <Heartbeat />
+              <Heartbeat handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Recycle />
-              <Recycle />
+              <Recycle handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Utensils />
-              <Utensils />
+              <Utensils handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <Coffee />
-              <Coffee />
+              <Coffee handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
 
               <DoorOpen />
-              <DoorOpen />
+              <DoorOpen handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <DoorClosed />
-              <DoorClosed />
+              <DoorClosed handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
               <DrawPolygon />
 
 
