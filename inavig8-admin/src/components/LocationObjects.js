@@ -29,6 +29,7 @@ class LocationObjects extends React.Component {
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
 		let headers = config.api.headers;
+		
 		const url = config.api.invokeUrl + '/location/' + this.props.match.params.location_id;
 		fetch(url, 
 		{
