@@ -2,12 +2,12 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const MALE_SRC = '/img/icons/male.png'; 
+const SQUARE_SRC = '/img/icons/square.png'; 
 
-const Male = (props) => {
-    const [image] = useImage(MALE_SRC);
-    const handleMaleClick = (e) => {
-      console.log('male clicked');
+const Square = (props) => {
+    const [image] = useImage(SQUARE_SRC);
+    const handleSquareClick = (e) => {
+      console.log('square clicked');
     }
     return <Image 
             x={props.x} 
@@ -17,9 +17,9 @@ const Male = (props) => {
             // draggable              
             // onDragStart={props.handleDragImageStart}
             // onDragEnd={props.handleDragImageEnd}
-            onClick={handleMaleClick}
+            onClick={handleSquareClick}
           image={image} />;
   };
 
 
-  export default Male;
+  export default Square;

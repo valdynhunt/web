@@ -2,12 +2,13 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const MALE_SRC = '/img/icons/male.png'; 
+const MAP_MARKER_SRC = '/img/icons/map-marker.png';
 
-const Male = (props) => {
-    const [image] = useImage(MALE_SRC);
+
+const MapMarker = (props) => {
+    const [image] = useImage(MAP_MARKER_SRC);
     const handleMaleClick = (e) => {
-      console.log('male clicked');
+      console.log('map marker clicked');
     }
     return <Image 
             x={props.x} 
@@ -17,9 +18,9 @@ const Male = (props) => {
             // draggable              
             // onDragStart={props.handleDragImageStart}
             // onDragEnd={props.handleDragImageEnd}
-            onClick={handleMaleClick}
+            onClick={handleMapMarkerClick}
           image={image} />;
   };
 
 
-  export default Male;
+  export default MapMarker;
