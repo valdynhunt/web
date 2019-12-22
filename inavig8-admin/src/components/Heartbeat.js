@@ -2,12 +2,12 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const MALE_SRC = '/img/icons/male.png'; 
+const HEARTBEAT_SRC = '/img/icons/heartbeat.png'; 
 
-const Male = (props) => {
-    const [image] = useImage(MALE_SRC);
-    const handleMaleClick = (e) => {
-      console.log('male clicked');
+const Heartbeat = (props) => {
+    const [image] = useImage(HEARTBEAT_SRC);
+    const handleHeartbeatClick = (e) => {
+      console.log('heartbeat clicked');
     }
     return <Image 
             x={props.x} 
@@ -17,9 +17,9 @@ const Male = (props) => {
             // draggable              
             // onDragStart={props.handleDragImageStart}
             // onDragEnd={props.handleDragImageEnd}
-            onClick={handleMaleClick}
+            onClick={handleHeartbeatClick}
           image={image} />;
   };
 
 
-  export default Male;
+  export default Heartbeat;
