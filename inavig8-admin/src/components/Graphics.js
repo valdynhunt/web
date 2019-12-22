@@ -24,6 +24,16 @@ import RenderMapMarker from './RenderMapMarker';
 import RenderSquare from './RenderSquare';
 import RenderDoorOpen from './RenderDoorOpen';
 import RenderDoorClosed from './RenderDoorClosed';
+import RenderSquareRed from './RenderSquareRed';
+import RenderSquareGrey from './RenderSquareGrey';
+import RenderSquareGreen from './RenderSquareGreen';
+import RenderCircleRedSm from './RenderCircleRedSm';
+import RenderCircleGreySm from './RenderCircleGreySm';
+import RenderCircleGreenSm from './RenderCircleGreenSm';
+import RenderCircleRedLg from './RenderCircleRedLg';
+import RenderCircleGreyLg from './RenderCircleGreyLg';
+import RenderCircleGreenLg from './RenderCircleGreenLg';
+
 
 const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
@@ -1174,6 +1184,15 @@ class Graphics extends Component {
             <RenderSquare objects={this.state.objects}/>
             <RenderDoorOpen objects={this.state.objects}/>
             <RenderDoorClosed objects={this.state.objects}/>
+            <RenderSquareRed objects={this.state.objects}/>
+            <RenderSquareGrey objects={this.state.objects}/>
+            <RenderSquareGreen objects={this.state.objects}/>
+            <RenderCircleRedLg objects={this.state.objects}/>
+            <RenderCircleGreyLg objects={this.state.objects}/>
+            <RenderCircleGreenLg objects={this.state.objects}/>
+            <RenderCircleRedSm objects={this.state.objects}/>
+            <RenderCircleGreySm objects={this.state.objects}/>
+            <RenderCircleGreenSm objects={this.state.objects}/>
 
           </Layer>
         </Stage>
