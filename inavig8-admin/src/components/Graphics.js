@@ -50,9 +50,9 @@ const FONT_SIZE = 20;
 
 const COFFEE_SRC = '/img/icons/coffee.png';
 const UTENSILS_SRC = '/img/icons/utensils.png';
-const RESTROOM_SRC = '/img/icons/restroom.png'; //
-const MALE_SRC = '/img/icons/male.png'; //
-const FEMALE_SRC = '/img/icons/female.png'; //
+const RESTROOM_SRC = '/img/icons/restroom.png';
+const MALE_SRC = '/img/icons/male.png'; 
+const FEMALE_SRC = '/img/icons/female.png'; 
 const HEARTBEAT_SRC = '/img/icons/heartbeat.png';
 const RECYCLE_SRC = '/img/icons/recycle.png';
 const FIRE_EXTINGUISHER_SRC = '/img/icons/fire-extinguisher.png';

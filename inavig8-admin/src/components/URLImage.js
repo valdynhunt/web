@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import { Stage, Layer, Image } from 'react-konva';
-import useImage from 'use-image';
+
 
 class URLImage extends React.Component {
   constructor(props){
