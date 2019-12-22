@@ -2,13 +2,12 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
+const UNDO_SRC = '/img/icons/undo-alt.png';
 
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
-
-const DoorOpen = (props) => {
-    const [image] = useImage(DOOR_OPEN_SRC);
-    const handleDoorOpenClick = (e) => {
-      console.log('door open clicked');
+const Undo = (props) => {
+    const [image] = useImage(UNDO_SRC);
+    const handleUndoClick = (e) => {
+      console.log('undo clicked');
     }
     return <Image 
             x={props.x} 
@@ -18,9 +17,9 @@ const DoorOpen = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onClick={handleDoorOpenClick}
+            onClick={handleUndoClick}
           image={image} />;
   };
 
 
-  export default DoorOpen;
+  export default Undo;

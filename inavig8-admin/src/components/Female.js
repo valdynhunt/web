@@ -7,16 +7,16 @@ const FEMALE_SRC = '/img/icons/female.png';
 const Female = (props) => {
     const [image] = useImage(FEMALE_SRC);
     const handleFemaleClick = (e) => {
-      console.log('male clicked');
+      console.log('female clicked');
     }
     return <Image 
             x={props.x} 
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
-            // draggable              
-            // onDragStart={props.handleDragImageStart}
-            // onDragEnd={props.handleDragImageEnd}
+            draggable              
+            onDragStart={props.handleDragImageStart}
+            onDragEnd={props.handleDragImageEnd}
             onClick={handleFemaleClick}
           image={image} />;
   };

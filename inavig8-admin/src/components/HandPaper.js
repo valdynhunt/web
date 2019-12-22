@@ -2,13 +2,12 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
+const HAND_PAPER_SRC = '/img/icons/hand-paper.png';
 
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
-
-const DoorOpen = (props) => {
-    const [image] = useImage(DOOR_OPEN_SRC);
-    const handleDoorOpenClick = (e) => {
-      console.log('door open clicked');
+const HandPaper = (props) => {
+    const [image] = useImage(HAND_PAPER_SRC);
+    const handleHandPaperClick = (e) => {
+      console.log('pan mode clicked', e.target);
     }
     return <Image 
             x={props.x} 
@@ -18,9 +17,9 @@ const DoorOpen = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onClick={handleDoorOpenClick}
+            onClick={handleHandPaperClick}
           image={image} />;
   };
 
 
-  export default DoorOpen;
+  export default HandPaper;

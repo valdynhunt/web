@@ -14,9 +14,9 @@ const Square = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
-            // draggable              
-            // onDragStart={props.handleDragImageStart}
-            // onDragEnd={props.handleDragImageEnd}
+            draggable              
+            onDragStart={props.handleDragImageStart}
+            onDragEnd={props.handleDragImageEnd}
             onClick={handleSquareClick}
           image={image} />;
   };

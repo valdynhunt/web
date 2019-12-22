@@ -2,13 +2,12 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
+const DRAW_POLYGON_SRC = '/img/icons/draw-polygon.png';
 
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
-
-const DoorOpen = (props) => {
-    const [image] = useImage(DOOR_OPEN_SRC);
-    const handleDoorOpenClick = (e) => {
-      console.log('door open clicked');
+const DrawPolygon = (props) => {
+    const [image] = useImage(DRAW_POLYGON_SRC);
+    const handleDrawPolygonClick = (e) => {
+      console.log('draw polygon clicked');
     }
     return <Image 
             x={props.x} 
@@ -18,9 +17,9 @@ const DoorOpen = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onClick={handleDoorOpenClick}
+            onClick={handleDrawPolygonClick}
           image={image} />;
   };
 
 
-  export default DoorOpen;
+  export default DrawPolygon;

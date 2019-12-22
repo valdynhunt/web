@@ -2,13 +2,12 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
+const IMAGE_REGULAR_SRC = '/img/icons/image-regular.png'; 
 
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
-
-const DoorOpen = (props) => {
-    const [image] = useImage(DOOR_OPEN_SRC);
-    const handleDoorOpenClick = (e) => {
-      console.log('door open clicked');
+const ImageRegular = (props) => {
+    const [image] = useImage(IMAGE_REGULAR_SRC);
+    const handleImageRegularClick = (e) => {
+      console.log('image regular clicked');
     }
     return <Image 
             x={props.x} 
@@ -18,9 +17,9 @@ const DoorOpen = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onClick={handleDoorOpenClick}
+            onClick={handleImageRegularClick}
           image={image} />;
   };
 
 
-  export default DoorOpen;
+  export default ImageRegular;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Coffee from './Coffee';
+import Utensils from './Utensils';
 
 
 function RenderUtensils(props) {

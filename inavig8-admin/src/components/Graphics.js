@@ -34,6 +34,41 @@ import RenderCircleRedLg from './RenderCircleRedLg';
 import RenderCircleGreyLg from './RenderCircleGreyLg';
 import RenderCircleGreenLg from './RenderCircleGreenLg';
 
+// import CircleRedSm from './CircleRedSm';
+// import CircleGreySm from './CircleGreySm';
+// import CircleGreenSm from './CircleGreenSm';
+
+// import CircleRedLg from './CircleRedLg';
+// import CircleGreyLg from './CircleGreyLg';
+// import CircleGreenLg from './CircleGreenLg';
+
+// import SquareRed from './SquareRed';
+// import SquareGrey from './SquareGrey';
+// import SquareGreen from './SquareGreen';
+
+import Restroom from './Restroom';
+import Male from './Male';
+import Female from './Female';
+import Coffee from './Coffee';
+import Utensils from './Utensils';
+import DoorOpen from './DoorOpen';
+import DoorClosed from './DoorClosed';
+import Stairs from './Stairs';
+import Elevator from './Elevator';
+import Heartbeat from './Heartbeat';
+import Recycle from './Recycle';
+import FireExtinguisher from './FireExtinguisher';
+import MapMarker from './MapMarker';
+import ImageRegular from './ImageRegular';
+
+import Square from './Square';
+import Pencil from './Pencil';
+import Redo from './Redo';
+import Undo from './Undo';
+import Plus from './Plus';
+import Minus from './Minus';
+import HandPaper from './HandPaper';
+import DrawPolygon from './DrawPolygon';
 
 const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
@@ -47,31 +82,6 @@ const CIRC_RADIUS = 7;
 const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
 const FONT_SIZE = 20;
-
-const COFFEE_SRC = '/img/icons/coffee.png';
-const UTENSILS_SRC = '/img/icons/utensils.png';
-const RESTROOM_SRC = '/img/icons/restroom.png';
-const MALE_SRC = '/img/icons/male.png'; 
-const FEMALE_SRC = '/img/icons/female.png'; 
-const HEARTBEAT_SRC = '/img/icons/heartbeat.png';
-const RECYCLE_SRC = '/img/icons/recycle.png';
-const FIRE_EXTINGUISHER_SRC = '/img/icons/fire-extinguisher.png';
-const HAND_PAPER_SRC = '/img/icons/hand-paper.png';
-const MAP_MARKER_SRC = '/img/icons/map-marker.png';
-const DOOR_CLOSED_SRC = '/img/icons/door-closed.png';
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
-const IMAGE_SRC = '/img/icons/image-regular.png';
-const SQUARE_SRC = '/img/icons/square.png';
-{/* <div>Stairs and Elevator Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
-const STAIRS_SRC = '/img/icons/stairs.png';
-const ELEVATOR_SRC = '/img/icons/elevator.png';
-
-const PENCIL_ALT_SRC = '/img/icons/pencil-alt.png';
-const DRAW_POLYGON_SRC = '/img/icons/draw-polygon.png'; //
-const REDO_SRC = '/img/icons/redo-alt.png';
-const UNDO_SRC = '/img/icons/undo-alt.png';
-const PLUS_SRC = '/img/icons/plus.png';
-const MINUS_SRC = '/img/icons/minus.png';
 
 const X = [25, 60, 95]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
@@ -96,368 +106,6 @@ var tooltip = new Konva.Text({
 const handleClick = e => { 
   // open sidebar with focus - show delete or edit buttons
   console.log("clicked obj ", e.target)
-};
-
-const FireExtinguisher = (props) => {
-  const [image] = useImage(FIRE_EXTINGUISHER_SRC);
-  const handleFireExtinguisherClick = (e) => {
-    console.log('fire extinguisher clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[9]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleFireExtinguisherClick}
-        image={image} />;
-};
-
-const MapMarker = (props) => {
-  const [image] = useImage(MAP_MARKER_SRC);
-  const handleMapMarkerClick = (e) => {
-    console.log('map marker clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[10]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleMapMarkerClick}
-        image={image} />;
-};
-
-const ImageRegular = (props) => {
-  const [image] = useImage(IMAGE_SRC);
-  const handleImageRegularClick = (e) => {
-    console.log('image regular clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[11]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleImageRegularClick}
-        image={image} />;
-};
-
-const Square = (props) => {
-  const [image] = useImage(SQUARE_SRC);
-  const handleSquareClick = (e) => {
-    console.log('square clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[12]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleSquareClick}
-        image={image} />;
-};
-
-const Pencil = () => {
-  const [image] = useImage(PENCIL_ALT_SRC);
-  const handlePencilClick = (e) => {
-    console.log('pencil clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[13]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handlePencilClick}
-        image={image} />;
-};
-
-const Redo = () => {
-  const [image] = useImage(REDO_SRC);
-  const handleRedoClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("rotate cw ", e.target)
-  };
-  return <Image 
-          x={X[0]} 
-          y={Y[14]} 
-          scaleX={0.04} 
-          scaleY={0.04}            
-          onClick={handleRedoClick}
-        image={image} />;
-};
-
-const Undo = () => {
-  const [image] = useImage(UNDO_SRC);
-  const handleUndoClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("rotate ccw ", e.target)
-  };
-  return <Image 
-          x={X[1]} 
-          y={Y[14]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleUndoClick}
-        image={image} />;
-};
-
-const Plus = () => {
-  const [image] = useImage(PLUS_SRC);
-  const handlePlusClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("zoom in ", e.target)
-  };
-  return <Image 
-          x={X[0]} 
-          y={Y[15]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handlePlusClick}
-        image={image} />;
-};
-
-const Minus = () => {
-  const [image] = useImage(MINUS_SRC);
-  const handleMinusClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("zoom out ", e.target)
-  };
-  return <Image 
-          x={X[1]} 
-          y={Y[15]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleMinusClick}
-        image={image} />;
-};
-
-const HandPaper = () => {
-  const [image] = useImage(HAND_PAPER_SRC);
-  const handleHandPaperClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("pan mode ", e.target)
-  };
-  return <Image 
-          x={X[2]} 
-          y={Y[15]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleHandPaperClick}
-        image={image} />;
-};
-
-const Heartbeat = (props) => {
-  const [image] = useImage(HEARTBEAT_SRC);
-  const handleHeartbeatClick = (e) => {
-    console.log('heartbeat clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[7]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleHeartbeatClick}
-        image={image} />;
-};
-
-
-
-const Recycle = (props) => {
-  const [image] = useImage(RECYCLE_SRC);
-  const handleRecycleClick = (e) => {
-    console.log('recycle clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[8]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleRecycleClick}
-        image={image} />;
-};
-
-const Utensils = (props) => {
-  const [image] = useImage(UTENSILS_SRC);
-  const handleUtensilsClick = (e) => {
-    console.log('utensils clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[4]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleUtensilsClick}
-        image={image} />;
-};
-
-const Stairs = (props) => {
-  const [image] = useImage(STAIRS_SRC);
-  const handleStairsClick = (e) => {
-    console.log('stairs clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[6]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleStairsClick}
-        image={image} />;
-};
-
-const Elevator = (props) => {
-  const [image] = useImage(ELEVATOR_SRC);
-  const handleElevatorClick = (e) => {
-    console.log('elevator clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[6]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleElevatorClick}
-        image={image} />;
-};
-
-
-const Coffee = (props) => {
-  const [image] = useImage(COFFEE_SRC);
-  const handleCoffeeClick = (e) => {
-    console.log('coffee clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[4]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleCoffeeClick}
-        image={image} />;
-};
-
-const DoorOpen = (props) => {
-  const [image] = useImage(DOOR_OPEN_SRC);
-  const handleDoorOpenClick = (e) => {
-    console.log('door open clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[5]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleDoorOpenClick}
-        image={image} />;
-};
-
-const DoorClosed = (props) => {
-  const [image] = useImage(DOOR_CLOSED_SRC);
-  const handleDoorClosedClick = (e) => {
-    console.log('door closed clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[5]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleDoorClosedClick}
-        image={image} />;
-};
-
-const DrawPolygon = (props) => {
-  const [image] = useImage(DRAW_POLYGON_SRC);
-  const handleDrawPolygonClick = (e) => {
-    console.log('draw polygon clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[13]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleDrawPolygonClick}
-        image={image} />;
-};
-
-const Restroom = (props) => {
-  const [image] = useImage(RESTROOM_SRC);
-  const handleRestroomClick = (e) => {
-    console.log('restroom clicked');
-  }
-
-  return <Image 
-          x={X[0]} 
-          y={Y[3]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleRestroomClick}
-        image={image} />;
-};
-
-const Male = (props) => {
-  const [image] = useImage(MALE_SRC);
-  const handleMaleClick = (e) => {
-    console.log('male clicked');
-  }
-  return <Image 
-          x={X[1] + CIRC_RADIUS} 
-          y={Y[3]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleMaleClick}
-        image={image} />;
-};
-
-const Female = (props) => {
-  const [image] = useImage(FEMALE_SRC);
-  const handleFemaleClick = (e) => {
-    console.log('female clicked');
-  }
-  return <Image 
-          x={X[2] + CIRC_RADIUS} 
-          y={Y[3]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleFemaleClick}
-        image={image} />;
 };
 
 
@@ -611,29 +259,6 @@ class Graphics extends Component {
     
   }
 
-
-
-  // display_init_modal = () => {
-  //   // console.log("displaying model now...");
-  //   var Modal = ReactBootstrap.Modal;
-
-
-  // }
-
-  // set_location_config = () => {
-  //   console.log("checking if primary and secondary are set...");
-  //   // if primary and secondary and grid not set, then show modal to input
-  //   const foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
-  //   const foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
-
-  //   console.log("foundPrimary: ", foundPrimary);
-  //   console.log("foundSecondary: ", foundSecondary);
-
-  //   if (!foundPrimary || !foundSecondary) {
-  //     // show model to set them and set grid
-  //     display_init_modal();
-  //   }
-  // }
 
   handleClick = e => { 
     // open sidebar with focus - show delete or edit buttons
@@ -877,50 +502,51 @@ class Graphics extends Component {
               />
 
 
-              <Restroom />
-              <Restroom handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Male />
-              <Male handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Female />
-              <Female handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Restroom x={X[0]} y={Y[3]} />
+              <Restroom x={X[0]} y={Y[3]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} />
+              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} />
+              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
 
-              <Coffee />
-              <Coffee handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Utensils />
-              <Utensils handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Coffee x={X[0]} y={Y[4]} />
+              <Coffee x={X[0]} y={Y[4]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Utensils x={X[1]} y={Y[4]} />
+              <Utensils x={X[1]} y={Y[4]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
 
-              <DoorOpen />
-              <DoorOpen handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <DoorClosed />
-              <DoorClosed handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <DoorOpen x={X[0]} y={Y[5]} />
+              <DoorOpen x={X[0]} y={Y[5]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <DoorClosed x={X[1]} y={Y[5]} />
+              <DoorClosed x={X[1]} y={Y[5]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
             
-              <Stairs />
-              <Stairs handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Elevator />
-              <Elevator handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Stairs x={X[0]} y={Y[6]} />
+              <Stairs x={X[0]} y={Y[6]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Elevator x={X[1]} y={Y[6]} />
+              <Elevator x={X[1]} y={Y[6]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
 
-              <FireExtinguisher />
-              <FireExtinguisher handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <MapMarker />
-              <MapMarker handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <ImageRegular />
-              <ImageRegular handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Square />
-              <Square handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Pencil />
-              <Redo />
-              <Undo />
-              <Plus />
-              <Minus />
-              <HandPaper />
-              <Heartbeat />
-              <Heartbeat handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Recycle />
-              <Recycle handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Utensils />
-              <Utensils handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Heartbeat x={X[0]} y={Y[7]} />
+              <Heartbeat x={X[0]} y={Y[7]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Recycle x={X[0]} y={Y[8]} />
+              <Recycle x={X[0]} y={Y[8]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
 
-  <DrawPolygon />
+              <FireExtinguisher x={X[0]} y={Y[9]} />
+              <FireExtinguisher x={X[0]} y={Y[9]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <MapMarker x={X[0]} y={Y[10]} />
+              <MapMarker x={X[0]} y={Y[10]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              
+              <ImageRegular x={X[0]} y={Y[11]}/>
+              <ImageRegular x={X[0]} y={Y[11]}handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              <Square x={X[0]} y={Y[12]} />
+              <Square x={X[0]} y={Y[12]} handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
+              
+              <Pencil x={X[0]} y={Y[13]} />
+              <Redo x={X[0]} y={Y[14]} />
+              <Undo x={X[1]} y={Y[14]} />
+              <Plus x={X[0]} y={Y[15]} />
+              <Minus x={X[1]} y={Y[15]} />
+              <HandPaper x={X[2]} y={Y[15]} />
+
+              <DrawPolygon x={X[1]} y={Y[13]} />
 
 
               <Circle x={X[0] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} radius={CIRC_RADIUS_SM} fill="red" shadowBlur={1} />
