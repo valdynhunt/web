@@ -13,7 +13,7 @@ function RenderPath(props) {
             <Star
               key={key}
               x={key.image_x}
-              y={window.innerHeight - key.image_y}
+              y={key.image_y}
               numPoints={5}
               innerRadius={5}
               outerRadius={10}

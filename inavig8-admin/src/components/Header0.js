@@ -22,7 +22,7 @@ class Header extends React.Component {
           <Navbar.Brand href="/">
             <img
               alt=""
-              src="/logo.png"
+              src="/logo.png" 
               width="50"
               height="40"
               className="d-inline-block align-middle"

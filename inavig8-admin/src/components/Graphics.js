@@ -24,6 +24,49 @@ import RenderMapMarker from './RenderMapMarker';
 import RenderSquare from './RenderSquare';
 import RenderDoorOpen from './RenderDoorOpen';
 import RenderDoorClosed from './RenderDoorClosed';
+import RenderSquareRed from './RenderSquareRed';
+import RenderSquareGrey from './RenderSquareGrey';
+import RenderSquareGreen from './RenderSquareGreen';
+import RenderCircleRedSm from './RenderCircleRedSm';
+import RenderCircleGreySm from './RenderCircleGreySm';
+import RenderCircleGreenSm from './RenderCircleGreenSm';
+import RenderCircleRedLg from './RenderCircleRedLg';
+import RenderCircleGreyLg from './RenderCircleGreyLg';
+import RenderCircleGreenLg from './RenderCircleGreenLg';
+
+import CircleRedSm from './CircleRedSm';
+import CircleGreySm from './CircleGreySm';
+import CircleGreenSm from './CircleGreenSm';
+import CircleRedLg from './CircleRedLg';
+import CircleGreyLg from './CircleGreyLg';
+import CircleGreenLg from './CircleGreenLg';
+import SquareRed from './SquareRed';
+import SquareGrey from './SquareGrey';
+import SquareGreen from './SquareGreen';
+
+import Restroom from './Restroom';
+import Male from './Male';
+import Female from './Female';
+import Coffee from './Coffee';
+import Utensils from './Utensils';
+import DoorOpen from './DoorOpen';
+import DoorClosed from './DoorClosed';
+import Stairs from './Stairs';
+import Elevator from './Elevator';
+import Heartbeat from './Heartbeat';
+import Recycle from './Recycle';
+import FireExtinguisher from './FireExtinguisher';
+import MapMarker from './MapMarker';
+import ImageRegular from './ImageRegular';
+
+import Square from './Square';
+import Pencil from './Pencil';
+import Redo from './Redo';
+import Undo from './Undo';
+import Plus from './Plus';
+import Minus from './Minus';
+import HandPaper from './HandPaper';
+import DrawPolygon from './DrawPolygon';
 
 const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
@@ -31,37 +74,10 @@ const TOOLBAR_WIDTH = 120;
 const TOOLBAR_HEIGHT = 650;
 const TOOLBAR_X = 10;
 const TOOLBAR_Y = 30;
-const RECT_WIDTH = 14;
-const RECT_HEIGHT = 14;
 const CIRC_RADIUS = 7;
 const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
 const FONT_SIZE = 20;
-
-const COFFEE_SRC = '/img/icons/coffee.png';
-const UTENSILS_SRC = '/img/icons/utensils.png';
-const RESTROOM_SRC = '/img/icons/restroom.png'; //
-const MALE_SRC = '/img/icons/male.png'; //
-const FEMALE_SRC = '/img/icons/female.png'; //
-const HEARTBEAT_SRC = '/img/icons/heartbeat.png';
-const RECYCLE_SRC = '/img/icons/recycle.png';
-const FIRE_EXTINGUISHER_SRC = '/img/icons/fire-extinguisher.png';
-const HAND_PAPER_SRC = '/img/icons/hand-paper.png';
-const MAP_MARKER_SRC = '/img/icons/map-marker.png';
-const DOOR_CLOSED_SRC = '/img/icons/door-closed.png';
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
-const IMAGE_SRC = '/img/icons/image-regular.png';
-const SQUARE_SRC = '/img/icons/square.png';
-{/* <div>Stairs and Elevator Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}
-const STAIRS_SRC = '/img/icons/stairs.png';
-const ELEVATOR_SRC = '/img/icons/elevator.png';
-
-const PENCIL_ALT_SRC = '/img/icons/pencil-alt.png';
-const DRAW_POLYGON_SRC = '/img/icons/draw-polygon.png'; //
-const REDO_SRC = '/img/icons/redo-alt.png';
-const UNDO_SRC = '/img/icons/undo-alt.png';
-const PLUS_SRC = '/img/icons/plus.png';
-const MINUS_SRC = '/img/icons/minus.png';
 
 const X = [25, 60, 95]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
@@ -86,368 +102,6 @@ var tooltip = new Konva.Text({
 const handleClick = e => { 
   // open sidebar with focus - show delete or edit buttons
   console.log("clicked obj ", e.target)
-};
-
-const FireExtinguisher = (props) => {
-  const [image] = useImage(FIRE_EXTINGUISHER_SRC);
-  const handleFireExtinguisherClick = (e) => {
-    console.log('fire extinguisher clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[9]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleFireExtinguisherClick}
-        image={image} />;
-};
-
-const MapMarker = (props) => {
-  const [image] = useImage(MAP_MARKER_SRC);
-  const handleMapMarkerClick = (e) => {
-    console.log('map marker clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[10]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleMapMarkerClick}
-        image={image} />;
-};
-
-const ImageRegular = (props) => {
-  const [image] = useImage(IMAGE_SRC);
-  const handleImageRegularClick = (e) => {
-    console.log('image regular clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[11]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleImageRegularClick}
-        image={image} />;
-};
-
-const Square = (props) => {
-  const [image] = useImage(SQUARE_SRC);
-  const handleSquareClick = (e) => {
-    console.log('square clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[12]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleSquareClick}
-        image={image} />;
-};
-
-const Pencil = () => {
-  const [image] = useImage(PENCIL_ALT_SRC);
-  const handlePencilClick = (e) => {
-    console.log('pencil clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[13]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handlePencilClick}
-        image={image} />;
-};
-
-const Redo = () => {
-  const [image] = useImage(REDO_SRC);
-  const handleRedoClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("rotate cw ", e.target)
-  };
-  return <Image 
-          x={X[0]} 
-          y={Y[14]} 
-          scaleX={0.04} 
-          scaleY={0.04}            
-          onClick={handleRedoClick}
-        image={image} />;
-};
-
-const Undo = () => {
-  const [image] = useImage(UNDO_SRC);
-  const handleUndoClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("rotate ccw ", e.target)
-  };
-  return <Image 
-          x={X[1]} 
-          y={Y[14]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleUndoClick}
-        image={image} />;
-};
-
-const Plus = () => {
-  const [image] = useImage(PLUS_SRC);
-  const handlePlusClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("zoom in ", e.target)
-  };
-  return <Image 
-          x={X[0]} 
-          y={Y[15]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handlePlusClick}
-        image={image} />;
-};
-
-const Minus = () => {
-  const [image] = useImage(MINUS_SRC);
-  const handleMinusClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("zoom out ", e.target)
-  };
-  return <Image 
-          x={X[1]} 
-          y={Y[15]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleMinusClick}
-        image={image} />;
-};
-
-const HandPaper = () => {
-  const [image] = useImage(HAND_PAPER_SRC);
-  const handleHandPaperClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("pan mode ", e.target)
-  };
-  return <Image 
-          x={X[2]} 
-          y={Y[15]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleHandPaperClick}
-        image={image} />;
-};
-
-const Heartbeat = (props) => {
-  const [image] = useImage(HEARTBEAT_SRC);
-  const handleHeartbeatClick = (e) => {
-    console.log('heartbeat clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[7]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleHeartbeatClick}
-        image={image} />;
-};
-
-
-
-const Recycle = (props) => {
-  const [image] = useImage(RECYCLE_SRC);
-  const handleRecycleClick = (e) => {
-    console.log('recycle clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[8]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleRecycleClick}
-        image={image} />;
-};
-
-const Utensils = (props) => {
-  const [image] = useImage(UTENSILS_SRC);
-  const handleUtensilsClick = (e) => {
-    console.log('utensils clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[4]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleUtensilsClick}
-        image={image} />;
-};
-
-const Stairs = (props) => {
-  const [image] = useImage(STAIRS_SRC);
-  const handleStairsClick = (e) => {
-    console.log('stairs clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[6]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleStairsClick}
-        image={image} />;
-};
-
-const Elevator = (props) => {
-  const [image] = useImage(ELEVATOR_SRC);
-  const handleElevatorClick = (e) => {
-    console.log('elevator clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[6]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleElevatorClick}
-        image={image} />;
-};
-
-
-const Coffee = (props) => {
-  const [image] = useImage(COFFEE_SRC);
-  const handleCoffeeClick = (e) => {
-    console.log('coffee clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[4]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleCoffeeClick}
-        image={image} />;
-};
-
-const DoorOpen = (props) => {
-  const [image] = useImage(DOOR_OPEN_SRC);
-  const handleDoorOpenClick = (e) => {
-    console.log('door open clicked');
-  }
-  return <Image 
-          x={X[0]} 
-          y={Y[5]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleDoorOpenClick}
-        image={image} />;
-};
-
-const DoorClosed = (props) => {
-  const [image] = useImage(DOOR_CLOSED_SRC);
-  const handleDoorClosedClick = (e) => {
-    console.log('door closed clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[5]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleDoorClosedClick}
-        image={image} />;
-};
-
-const DrawPolygon = (props) => {
-  const [image] = useImage(DRAW_POLYGON_SRC);
-  const handleDrawPolygonClick = (e) => {
-    console.log('draw polygon clicked');
-  }
-  return <Image 
-          x={X[1]} 
-          y={Y[13]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          onClick={handleDrawPolygonClick}
-        image={image} />;
-};
-
-const Restroom = (props) => {
-  const [image] = useImage(RESTROOM_SRC);
-  const handleRestroomClick = (e) => {
-    console.log('restroom clicked');
-  }
-
-  return <Image 
-          x={X[0]} 
-          y={Y[3]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleRestroomClick}
-        image={image} />;
-};
-
-const Male = (props) => {
-  const [image] = useImage(MALE_SRC);
-  const handleMaleClick = (e) => {
-    console.log('male clicked');
-  }
-  return <Image 
-          x={X[1] + CIRC_RADIUS} 
-          y={Y[3]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleMaleClick}
-        image={image} />;
-};
-
-const Female = (props) => {
-  const [image] = useImage(FEMALE_SRC);
-  const handleFemaleClick = (e) => {
-    console.log('female clicked');
-  }
-  return <Image 
-          x={X[2] + CIRC_RADIUS} 
-          y={Y[3]} 
-          scaleX={0.04} 
-          scaleY={0.04} 
-          draggable              
-          onDragStart={props.handleDragImageStart}
-          onDragEnd={props.handleDragImageEnd}
-          onClick={handleFemaleClick}
-        image={image} />;
 };
 
 
@@ -554,8 +208,12 @@ class Graphics extends Component {
       canvasText: []
     }
 
+    this.handleDragRectStart = this.handleDragRectStart.bind(this)
+    this.handleDragRectEnd = this.handleDragRectEnd.bind(this)
     this.handleDragImageStart = this.handleDragImageStart.bind(this)
     this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
+    this.handleMouseMove = this.handleMouseMove.bind(this)
+    this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
   componentDidMount() {
@@ -602,29 +260,6 @@ class Graphics extends Component {
   }
 
 
-
-  // display_init_modal = () => {
-  //   // console.log("displaying model now...");
-  //   var Modal = ReactBootstrap.Modal;
-
-
-  // }
-
-  // set_location_config = () => {
-  //   console.log("checking if primary and secondary are set...");
-  //   // if primary and secondary and grid not set, then show modal to input
-  //   const foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
-  //   const foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
-
-  //   console.log("foundPrimary: ", foundPrimary);
-  //   console.log("foundSecondary: ", foundSecondary);
-
-  //   if (!foundPrimary || !foundSecondary) {
-  //     // show model to set them and set grid
-  //     display_init_modal();
-  //   }
-  // }
-
   handleClick = e => { 
     // open sidebar with focus - show delete or edit buttons
     console.log("clicked obj ", e.target)
@@ -659,42 +294,42 @@ class Graphics extends Component {
     console.log("mouse out ", e.target)
   };
 
-  handleDragTextStart = e => {
-    origX = e.target.attrs.x;
-    origY = e.target.attrs.y;
-  };
+  // handleDragTextStart = e => {
+  //   origX = e.target.attrs.x;
+  //   origY = e.target.attrs.y;
+  // };
 
-  handleDragTextEnd = e => {
+  // handleDragTextEnd = e => {
 
-    const stage = e.target.getStage();
-    const pointerPosition = stage.getPointerPosition();
+  //   const stage = e.target.getStage();
+  //   const pointerPosition = stage.getPointerPosition();
 
-    console.table({x: pointerPosition.x, y: pointerPosition.y});
+  //   console.table({x: pointerPosition.x, y: pointerPosition.y});
 
-    console.log("new - canvasText length before add is ", this.state.canvasText.length);
-    console.log("target is: ", e.target);
-    console.log("target color is: ", e.target.attrs.fill);
+  //   console.log("new - canvasText length before add is ", this.state.canvasText.length);
+  //   console.log("target is: ", e.target);
+  //   console.log("target color is: ", e.target.attrs.fill);
 
-    this.setState(prevState => ({
-      canvasText: [...prevState.canvasText, { ...newText(e.target, pointerPosition) }]
-    }));
+  //   this.setState(prevState => ({
+  //     canvasText: [...prevState.canvasText, { ...newText(e.target, pointerPosition) }]
+  //   }));
 
-    // put draggable back to original location
-    e.target.position({ 
-      x: origX,
-      y: origY
-    });
+  //   // put draggable back to original location
+  //   e.target.position({ 
+  //     x: origX,
+  //     y: origY
+  //   });
 
-    e.target.to({
-      duration: 0.2,
-      easing: Konva.Easings.ElasticEaseOut,
-      shadowOffsetX: 0,
-      shadowOffsetY: 0
-    });
+  //   e.target.to({
+  //     duration: 0.2,
+  //     easing: Konva.Easings.ElasticEaseOut,
+  //     shadowOffsetX: 0,
+  //     shadowOffsetY: 0
+  //   });
 
-    e.target.getStage().draw();
+  //   e.target.getStage().draw();
 
-  }; // end handleDragTextEnd
+  // }; // end handleDragTextEnd
 
   handleDragImageStart = e => {
     console.log("drag image start e: ", e);
@@ -847,7 +482,7 @@ class Graphics extends Component {
         <Stage 
           width={STAGE_WIDTH} 
           height={STAGE_HEIGHT} 
-          ref="stage">
+          >
           <Layer name="background">
           {this.state.location.map((i) => (
             <MapBackground img={i.canvas_image} />
@@ -866,296 +501,260 @@ class Graphics extends Component {
                 stroke="lightgrey"
               />
 
-
-              <Restroom />
-              <Restroom handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Male />
-              <Male handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Female />
-              <Female handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-
-              <Coffee />
-              <Coffee handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Utensils />
-              <Utensils handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-
-              <DoorOpen />
-              <DoorOpen handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <DoorClosed />
-              <DoorClosed handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-            
-              <Stairs />
-              <Stairs handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Elevator />
-              <Elevator handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-
-              <FireExtinguisher />
-              <FireExtinguisher handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <MapMarker />
-              <MapMarker handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <ImageRegular />
-              <ImageRegular handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Square />
-              <Square handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Pencil />
-              <Redo />
-              <Undo />
-              <Plus />
-              <Minus />
-              <HandPaper />
-              <Heartbeat />
-              <Heartbeat handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Recycle />
-              <Recycle handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-              <Utensils />
-              <Utensils handleDragImageStart = {this.handleDragImageStart} handleDragImageEnd = {this.handleDragImageEnd} />
-
-  <DrawPolygon />
-
-
-              <Circle x={X[0] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} radius={CIRC_RADIUS_SM} fill="red" shadowBlur={1} />
-              <Circle 
+              <CircleRedSm x={X[0] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
+              <CircleRedSm 
                 x={X[0] + CIRC_RADIUS} 
                 y={Y[0] + CIRC_RADIUS} 
-                radius={CIRC_RADIUS_SM} 
-                name="Circ1"
-                fill="red" 
-                draggable 
+                name="CircRdSm"
                 onDragStart={this.handleDragCircStart}
                 onDragEnd={this.handleDragCircEnd}
-                shadowBlur={1} 
-              />
-
-              <Circle x={X[1] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} radius={CIRC_RADIUS_SM} fill="lightgrey" shadowBlur={1} />
-              <Circle 
-                x={X[1] + CIRC_RADIUS} 
-                y={Y[0] + CIRC_RADIUS} 
-                radius={CIRC_RADIUS_SM} 
-                name="Circ1"
-                fill="lightgrey" 
-                draggable 
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                shadowBlur={1} 
-              />
-
-              <Circle x={X[2] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} radius={CIRC_RADIUS_SM} fill="green" shadowBlur={1} />
-              <Circle 
-                x={X[2] + CIRC_RADIUS} 
-                y={Y[0] + CIRC_RADIUS} 
-                radius={CIRC_RADIUS_SM} 
-                name="Circ1"
-                fill="green" 
-                draggable 
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                shadowBlur={1} 
-              />
-
-              <Circle x={X[0] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} radius={CIRC_RADIUS} fill="red" shadowBlur={1} />
-              <Circle 
-                x={X[0] + CIRC_RADIUS} 
-                y={Y[1] + CIRC_RADIUS} 
-                radius={CIRC_RADIUS} 
-                name="Circ1"
-                fill="red" 
-                draggable 
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                shadowBlur={1} 
-              />
-
-              <Circle x={X[1] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} radius={CIRC_RADIUS} fill="lightgrey" shadowBlur={1} />
-              <Circle 
-                x={X[1] + CIRC_RADIUS} 
-                y={Y[1] + CIRC_RADIUS} 
-                radius={CIRC_RADIUS} 
-                name="Circ1"
-                fill="lightgrey" 
-                draggable 
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                shadowBlur={1} 
-              />
-
-              <Circle x={X[2] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} radius={CIRC_RADIUS} fill="green" shadowBlur={1} />
-              <Circle 
-                x={X[2] + CIRC_RADIUS} 
-                y={Y[1] + CIRC_RADIUS} 
-                radius={CIRC_RADIUS} 
-                name="Circ1"
-                fill="green" 
-                draggable 
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                shadowBlur={1} 
-              />
-
-              <Rect
-                x={X[0]}
-                y={Y[2]}
-                width={RECT_WIDTH}
-                height={RECT_HEIGHT}
-                fill="red"
-                shadowOffset={{ x: 1, y: 1 }}
-                shadowBlur={2}
-              />
-
-              <Rect
-                x={X[0]}
-                y={Y[2]}
-                width={RECT_WIDTH}
-                height={RECT_HEIGHT}
-                name="Rect2"
-                fill="red"
-                ref="draggableRect"
-                draggable
-                onDragStart={this.handleDragRectStart}
-                onDragEnd={this.handleDragRectEnd}
-                shadowBlur={1}
-              />
-
-              <Rect
-                x={X[1]}
-                y={Y[2]}
-                width={RECT_WIDTH}
-                height={RECT_HEIGHT}
-                fill="lightgrey"
-                shadowOffset={{ x: 1, y: 1 }}
-                shadowBlur={1}
-              />
-
-              <Rect
-                x={X[1]}
-                y={Y[2]}
-                width={RECT_WIDTH}
-                height={RECT_HEIGHT}
-                name="Rect1"
-                fill="lightgrey"
-                draggable
-                onDragStart={this.handleDragRectStart}
-                onDragEnd={this.handleDragRectEnd}
-                shadowBlur={1}
-              />
-
-              <Rect
-                x={X[2]}
-                y={Y[2]}
-                width={RECT_WIDTH}
-                height={RECT_HEIGHT}
-                fill="green"
-                shadowOffset={{ x: 1, y: 1 }}
-                shadowBlur={1}
-              />
-
-              <Rect
-                x={X[2]}
-                y={Y[2]}
-                width={RECT_WIDTH}
-                height={RECT_HEIGHT}
-                name="Rect1"
-                fill="green"
-                draggable
-                onDragStart={this.handleDragRectStart}
-                onDragEnd={this.handleDragRectEnd}
-                shadowBlur={1}
-              />
-
-
-              {this.state.canvasImage.map(  ({ x, y, scaleX, scaleY, image }, key) => ( // maps over this.state.canvas objects
-
-              <Image
-                key={key}
-                x={x} y={y} 
-                scaleX={scaleX} scaleY={scaleY} 
-                draggable              
-                onDragStart={this.handleDragImageStart}
-                onDragEnd={this.handleDragImageEnd}
-                onClick={this.handleClick}
-              image={image}
-                
-              />
-              ))}
-
-
-              {this.state.canvasRect.map(  ({ x, y, height, width, fill, stroke }, key) => ( // maps over this.state.canvas objects
-
-                    <Rect
-                      key={key}
-                      x={x}
-                      y={y}
-                      width={width}
-                      height={height}
-
-                      stroke={stroke}
-                      draggable
-                      fill={fill}
-
-                      shadowOffset={{ x: 1, y: 1 }}
-                      onDragStart={this.handleDragShapeStart}
-                      onDragEnd={this.handleDragShapeEnd}
-                      onClick={this.handleClick}
-                    />
-              ))}
-
-
-              {/* location_id, key, short_name, description, long_name, active, x, y, x_coordinate, y_coordinate, object_type_id, latitude, longitude, radius, fill, stroke */}
-              {this.state.canvasCirc.map(  ({ 
-              location_id, short_name, description, long_name, 
-              active, x, y, x_coordinate, y_coordinate, object_type_id, 
-              latitude, longitude, radius, fill, stroke }) => ( // maps over this.state.canvas objects
-
-              <Circle
-                key={location_id}
-                location_id = {location_id}
-                short_name = {short_name}
-                descrioption = {description}
-                long_name = {long_name}
-                active = {active}
-                
-                x={x}
-                y={y}
-                x_coordinate = {x_coordinate}
-                y_coordinate = {y_coordinate}
-                
-                object_type_id = {object_type_id}
-                latitude = {latitude} 
-                longitude = {longitude}
-
-                radius={radius}
-                stroke={stroke}
-                draggable
-                fill={fill}
-
-                shadowOffset={{ x: 1, y: 1 }}
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
-                onClick={this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
-              ))}
-              
 
-              {/* {this.state.canvasText.map(  ({ x, y, fontFamily, fontSize, text, fill }, key) => ( // maps over this.state.canvas objects
-
-              <Text
-                key={key}
-                x={x}
-                y={y}
-                fontFamily={fontFamily}
-                fontSize={fontSize}
-
-                text={text}
-                draggable
-                fill={fill}
-
-                // shadowOffset={{ x: 1, y: 1 }}
-                onDragStart={this.handleDragTextStart}
-                onDragEnd={this.handleDragTextEnd}
-                onClick={this.handleClick}
+              <CircleGreySm x={X[1] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
+              <CircleGreySm
+                x={X[1] + CIRC_RADIUS} 
+                y={Y[0] + CIRC_RADIUS} 
+                name="CircGrySm"
+                onDragStart={this.handleDragCircStart}
+                onDragEnd={this.handleDragCircEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
               />
-              ))} */}
+
+              <CircleGreenSm x={X[2] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
+              <CircleGreenSm 
+                x={X[2] + CIRC_RADIUS} 
+                y={Y[0] + CIRC_RADIUS} 
+                name="CircGrnSm"
+                onDragStart={this.handleDragCircStart}
+                onDragEnd={this.handleDragCircEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleRedLg x={X[0] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
+              <CircleRedLg 
+                x={X[0] + CIRC_RADIUS} 
+                y={Y[1] + CIRC_RADIUS} 
+                name="CircRdLg"
+                onDragStart={this.handleDragCircStart}
+                onDragEnd={this.handleDragCircEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleGreyLg x={X[1] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
+              <CircleGreyLg
+                x={X[1] + CIRC_RADIUS} 
+                y={Y[1] + CIRC_RADIUS} 
+                name="CircGryLg"
+                onDragStart={this.handleDragCircStart}
+                onDragEnd={this.handleDragCircEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleGreenLg x={X[2] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
+              <CircleGreenLg 
+                x={X[2] + CIRC_RADIUS} 
+                y={Y[1] + CIRC_RADIUS} 
+                name="CircGrnLg"
+                onDragStart={this.handleDragCircStart}
+                onDragEnd={this.handleDragCircEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <SquareRed x={X[0]} y={Y[2]} />
+              <SquareRed
+                x={X[0]}
+                y={Y[2]}
+                name="Rect2"
+                onDragStart={this.handleDragRectStart}
+                onDragEnd={this.handleDragRectEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <SquareGrey x={X[1]} y={Y[2]} />
+              <SquareGrey
+                x={X[1]}
+                y={Y[2]}
+                name="Rect2"
+                onDragStart={this.handleDragRectStart}
+                onDragEnd={this.handleDragRectEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <SquareGreen x={X[2]} y={Y[2]} />
+              <SquareGreen
+                x={X[2]}
+                y={Y[2]}
+                name="Rect2"
+                onDragStart={this.handleDragRectStart}
+                onDragEnd={this.handleDragRectEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Restroom x={X[0]} y={Y[3]} />
+              <Restroom x={X[0]} y={Y[3]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} />
+              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} />
+              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Coffee x={X[0]} y={Y[4]} />
+              <Coffee x={X[0]} y={Y[4]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Utensils x={X[1]} y={Y[4]} />
+              <Utensils x={X[1]} y={Y[4]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <DoorOpen x={X[0]} y={Y[5]} />
+              <DoorOpen x={X[0]} y={Y[5]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <DoorClosed x={X[1]} y={Y[5]} />
+              <DoorClosed x={X[1]} y={Y[5]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+            
+              <Stairs x={X[0]} y={Y[6]} />
+              <Stairs x={X[0]} y={Y[6]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <Elevator x={X[1]} y={Y[6]} />
+              <Elevator x={X[1]} y={Y[6]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Heartbeat x={X[0]} y={Y[7]} />
+              <Heartbeat x={X[0]} y={Y[7]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <Recycle x={X[0]} y={Y[8]} />
+              <Recycle x={X[0]} y={Y[8]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <FireExtinguisher x={X[0]} y={Y[9]} />
+              <FireExtinguisher x={X[0]} y={Y[9]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+             
+              <MapMarker x={X[0]} y={Y[10]} />
+              <MapMarker x={X[0]} y={Y[10]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <ImageRegular x={X[0]} y={Y[11]}/>
+              <ImageRegular x={X[0]} y={Y[11]}
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+             
+             <Square x={X[0]} y={Y[12]} />
+              <Square x={X[0]} y={Y[12]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <Pencil x={X[0]} y={Y[13]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <DrawPolygon x={X[1]} y={Y[13]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Redo x={X[0]} y={Y[14]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Undo x={X[1]} y={Y[14]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Plus x={X[0]} y={Y[15]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Minus x={X[1]} y={Y[15]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <HandPaper x={X[2]} y={Y[15]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
 
             <RenderGeneric objects={this.state.objects}/>
             <RenderPath objects={this.state.objects}/>
@@ -1174,6 +773,15 @@ class Graphics extends Component {
             <RenderSquare objects={this.state.objects}/>
             <RenderDoorOpen objects={this.state.objects}/>
             <RenderDoorClosed objects={this.state.objects}/>
+            <RenderSquareRed objects={this.state.objects}/>
+            <RenderSquareGrey objects={this.state.objects}/>
+            <RenderSquareGreen objects={this.state.objects}/>
+            <RenderCircleRedLg objects={this.state.objects}/>
+            <RenderCircleGreyLg objects={this.state.objects}/>
+            <RenderCircleGreenLg objects={this.state.objects}/>
+            <RenderCircleRedSm objects={this.state.objects}/>
+            <RenderCircleGreySm objects={this.state.objects}/>
+            <RenderCircleGreenSm objects={this.state.objects}/>
 
           </Layer>
         </Stage>
