@@ -7,7 +7,7 @@ const REDO_SRC = '/img/icons/redo-alt.png';
 const Redo = (props) => {
     const [image] = useImage(REDO_SRC);
     const handleRedoClick = (e) => {
-      console.log('redo clicked');
+      console.log('rotate cw');
     }
     return <Image 
             x={props.x} 

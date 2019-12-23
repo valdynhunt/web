@@ -7,7 +7,7 @@ const UNDO_SRC = '/img/icons/undo-alt.png';
 const Undo = (props) => {
     const [image] = useImage(UNDO_SRC);
     const handleUndoClick = (e) => {
-      console.log('undo clicked');
+      console.log('rotate ccw');
     }
     return <Image 
             x={props.x} 
