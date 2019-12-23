@@ -8,7 +8,7 @@ function RenderRestroom(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "restroom" &&
+            key.object_type.short_name === "restroom" && key.active &&
             <Restroom
               key={key}
               x={key.image_x}

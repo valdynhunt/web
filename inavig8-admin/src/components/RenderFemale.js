@@ -8,7 +8,7 @@ function RenderFemale(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "female" &&
+            key.object_type.short_name === "female" && key.active &&
             <Female
               key={key}
               x={key.image_x}

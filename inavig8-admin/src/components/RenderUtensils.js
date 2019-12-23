@@ -8,7 +8,7 @@ function RenderUtensils(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "utensils" &&
+        key.object_type.short_name === "utensils" && key.active &&
         <Utensils
           key={key}
           x={key.image_x}

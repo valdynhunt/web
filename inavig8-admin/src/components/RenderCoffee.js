@@ -8,7 +8,7 @@ function RenderCoffee(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "coffee" &&
+        key.object_type.short_name === "coffee" && key.active &&
         <Coffee
           key={key}
           x={key.image_x}

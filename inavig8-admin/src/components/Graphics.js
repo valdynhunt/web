@@ -89,7 +89,7 @@ var stage;
 var mousePos;
 var tooltipLayer = new Konva.Layer();
 var tooltip = new Konva.Text({
-  text: '',
+  text: 'hi',
   fontFamily: 'Calibri',
   fontSize: 18,
   padding: 5,
@@ -201,11 +201,11 @@ class Graphics extends Component {
     super()
     this.state = {
       location: [],
-      objects: [],
-      canvasImage: [],
-      canvasRect: [],
-      canvasCirc: [],
-      canvasText: []
+      objects: []
+      // canvasImage: [],
+      // canvasRect: [],
+      // canvasCirc: [],
+      // canvasText: []
     }
 
     this.handleDragRectStart = this.handleDragRectStart.bind(this)
@@ -756,8 +756,8 @@ class Graphics extends Component {
               />
 
 
-            <RenderGeneric objects={this.state.objects}/>
-            <RenderPath objects={this.state.objects}/>
+            {/* <RenderGeneric objects={this.state.objects}/>
+            <RenderPath objects={this.state.objects}/> */}
             <RenderDoor objects={this.state.objects}/>
             <RenderElevator objects={this.state.objects}/>
             <RenderStairs objects={this.state.objects}/>

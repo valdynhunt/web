@@ -8,7 +8,7 @@ function RenderElevator(props) {
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "elevator" &&
+        key.object_type.short_name === "elevator" && key.active &&
         <Elevator
           key={key}
           x={key.image_x}

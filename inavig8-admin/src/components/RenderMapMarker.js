@@ -8,7 +8,7 @@ function RenderMapMarker(props) {
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "map marker" &&
+        key.object_type.short_name === "map marker" && key.active &&
         <MapMarker
           key={key}
           x={key.image_x}

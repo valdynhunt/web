@@ -8,7 +8,7 @@ function RenderFireExtinguisher(props) {
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "fire extinguisher" &&
+        key.object_type.short_name === "fire extinguisher" && key.active &&
         <FireExtinguisher
           key={key}
           x={key.image_x}

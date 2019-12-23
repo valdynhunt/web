@@ -8,7 +8,7 @@ function RenderGeneric(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "generic" &&
+            key.object_type.short_name === "generic" && key.active &&
             <Star
               key={key}
               x={key.image_x}

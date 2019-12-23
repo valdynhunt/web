@@ -8,7 +8,7 @@ function RenderSquare(props) {
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "square" &&
+        key.object_type.short_name === "square" && key.active &&
         <Square
           key={key}
           x={key.image_x}

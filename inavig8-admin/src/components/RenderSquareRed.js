@@ -7,7 +7,7 @@ function RenderSquareRed(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "red square" &&
+            key.object_type.short_name === "red square" && key.active &&
             <SquareRed
               key={key}
               x={key.image_x}
