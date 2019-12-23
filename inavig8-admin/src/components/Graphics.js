@@ -487,7 +487,7 @@ class Graphics extends Component {
           {this.state.location.map((i) => (
             <MapBackground img={i.canvas_image} />
             ))}
-            {/* <ModalSetGrid objects ={this.state.objects}/> */}
+            <ModalSetGrid objects ={this.state.objects}/>
 
           </Layer>
           <Layer name="main">

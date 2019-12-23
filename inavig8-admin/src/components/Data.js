@@ -25,7 +25,7 @@ class Data extends React.Component {
     if (this.state.isActive) {
       return (
         <div className="data">   
-          <button onClick={this.handleHide}>data view toggle</button>         
+          <button onClick={this.handleHide}>hide data</button>         
           <p>Data component is here!</p>         
                 
         </div>
@@ -33,7 +33,7 @@ class Data extends React.Component {
     } else {      
       return (
         <div>          
-          <button onClick={this.handleShow}>data view toggle</button>
+          <button onClick={this.handleShow}>show data</button>
         </div>      
       )    
     }  

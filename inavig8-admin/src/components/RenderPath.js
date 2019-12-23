@@ -24,8 +24,6 @@ function RenderPath(props) {
               shadowColor="black"
               shadowBlur={10}
               shadowOpacity={0.6}
-            //   onDragStart={this.handleDragStart}
-            //   onDragEnd={this.handleDragEnd}
             />
 
         )))

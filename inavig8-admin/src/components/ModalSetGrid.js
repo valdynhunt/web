@@ -28,10 +28,11 @@ class ModalSetGrid extends React.Component {
 
       console.log("foundPrimary: ", foundPrimary);
       console.log("foundSecondary: ", foundSecondary);
-      while (!foundPrimary || !foundSecondary || !scaleIsSet) {
-        // show model to set them and set grid
-        renderModal = true;
-      }
+      renderModal = true;
+      // while (!foundPrimary || !foundSecondary || !scaleIsSet) {
+      //   // show model to set them and set grid
+      //   renderModal = true;
+      // }
       
     }
 
