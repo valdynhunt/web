@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stage, Layer, Image } from 'react-konva';
+import { Image } from 'react-konva';
 
 
 class URLImage extends React.Component {

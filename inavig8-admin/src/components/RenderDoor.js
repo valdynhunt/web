@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import Konva from 'konva';
-import { Stage, Layer, Image, Rect, Text, Circle, Star } from 'react-konva';
+import React from 'react';
+import { Star } from 'react-konva';
 
 
 function RenderDoor(props) {

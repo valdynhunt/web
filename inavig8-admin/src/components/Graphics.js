@@ -96,7 +96,8 @@ var tooltip = new Konva.Text({
   textFill: 'white',
   fill: 'black',
   alpha: 0.75,
-  visible: false
+  // visible: false
+  visible: true
 })
 
 const handleClick = e => { 
@@ -251,9 +252,33 @@ class Graphics extends Component {
 				{
 					objects: result.body.data
 				}
-			);
-      console.log("objects... ", result.body.data);
+      );
 
+      console.log("objects... ", result.body.data);
+      console.log("checking if primary and secondary are set...");
+
+      let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
+      let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
+      let scaleIsSet = false;
+      let renderModal = false;
+
+      console.log("scale set? ", scaleIsSet);
+      console.log("foundPrimary: ", foundPrimary);
+      console.log("foundSecondary: ", foundSecondary);
+
+      // check if scale set
+      scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
+      console.log("scale set? ", scaleIsSet);
+
+      // if primary and secondary and grid not set, then show modal to input
+      if (!foundPrimary || !foundSecondary || !scaleIsSet) {
+        // show model to set them and set grid
+        // show modal here
+        renderModal = true;
+
+      }
+
+      console.log("renderModal: ", renderModal);
     });
     
     
@@ -479,19 +504,16 @@ class Graphics extends Component {
     return (
       <div className="graphics">
         
-        <Stage 
-          width={STAGE_WIDTH} 
-          height={STAGE_HEIGHT} 
-          >
+        <Stage width={STAGE_WIDTH} height={STAGE_HEIGHT} >
           <Layer name="background">
+
           {this.state.location.map((i) => (
             <MapBackground img={i.canvas_image} />
             ))}
-            <ModalSetGrid objects ={this.state.objects}/>
 
           </Layer>
           <Layer name="main">
-
+          <ModalSetGrid objects ={this.state.objects} /> 
               <Rect
                 x={TOOLBAR_X}
                 y={TOOLBAR_Y}
