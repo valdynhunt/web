@@ -24,16 +24,16 @@ class Data extends React.Component {
   render() {
     if (this.state.isActive) {
       return (
-        <div className="data">   
-          <button onClick={this.handleHide}>hide data</button>         
+        <div id="dataArea1">   
+          <button type="button" class="btn btn-secondary" onClick={this.handleHide}>hide data</button>     
           <p>Data component is here!</p>         
                 
         </div>
       )    
     } else {      
       return (
-        <div>          
-          <button onClick={this.handleShow}>show data</button>
+        <div id="dataArea2">
+          <button type="button" class="btn btn-secondary" onClick={this.handleShow}>show data</button>     
         </div>      
       )    
     }  

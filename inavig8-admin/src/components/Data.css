@@ -1,4 +1,8 @@
 .data {
-    background-color: lightblue;
-    min-height: 100px;
-}
+    background: lightgrey;
+    
+  }
+
+button {
+      margin: 1em;
+  }
