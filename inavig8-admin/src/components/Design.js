@@ -21,8 +21,8 @@ class Design extends Component {
         <Container fluid="true" className="main">
             <Row><Col sm={12}><Header className="header" /></Col></Row>
             <Row>
-            <Col sm={9}><Graphics location_id={this.props.match.params.location_id} className="graphics" /></Col>
-            <Col sm={3}><Data className="data" /></Col>
+            <Col sm={9}><Graphics location_id={this.props.match.params.location_id} className="graphics" key="1" /></Col>
+            <Col sm={3}><Data className="data" key={this.props.location_id}/></Col>
             </Row>
             <Row><Col sm={12}><Footer className="footer" /></Col></Row>
         </Container>

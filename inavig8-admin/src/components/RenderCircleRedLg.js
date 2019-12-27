@@ -8,9 +8,9 @@ function RenderCircleRedLg(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "red circle lg" && key.active &&
+        key.object_type.short_name === "red circle lg" &&
         <CircleRedLg
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
           name={key.name}

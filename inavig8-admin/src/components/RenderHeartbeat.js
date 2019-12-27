@@ -8,9 +8,9 @@ function RenderHeartbeat(props) {
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "heartbeat" && key.active &&
+        key.object_type.short_name === "heartbeat" &&
         <Heartbeat
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

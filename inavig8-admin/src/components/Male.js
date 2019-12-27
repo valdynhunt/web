@@ -3,6 +3,7 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 
 const MALE_SRC = '/img/icons/male.png'; 
+const OBJECT_TYPE_ID = 11;
 
 const Male = (props) => {
     const [image] = useImage(MALE_SRC);
@@ -14,6 +15,8 @@ const Male = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"male"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}

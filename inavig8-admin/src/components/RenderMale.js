@@ -8,9 +8,9 @@ function RenderMale(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "male" && key.active &&
+            key.object_type.short_name === "male" &&
             <Male
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
             />

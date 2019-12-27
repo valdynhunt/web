@@ -4,6 +4,7 @@ import useImage from 'use-image';
 
 
 const DOOR_OPEN_SRC = '/img/icons/door-open.png';
+const OBJECT_TYPE_ID = 18;
 
 const DoorOpen = (props) => {
     const [image] = useImage(DOOR_OPEN_SRC);
@@ -15,6 +16,8 @@ const DoorOpen = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"door open"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}

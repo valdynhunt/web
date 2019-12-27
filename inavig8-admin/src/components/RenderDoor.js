@@ -8,9 +8,9 @@ function RenderDoor(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "door" && key.active &&
+            key.object_type.short_name === "door" &&
             <Star
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
               numPoints={5}

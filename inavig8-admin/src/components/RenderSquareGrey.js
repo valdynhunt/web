@@ -7,9 +7,9 @@ function RenderSquareGrey(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "grey square" && key.active &&
+            key.object_type.short_name === "grey square" &&
             <SquareGrey
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
               name={key.name}

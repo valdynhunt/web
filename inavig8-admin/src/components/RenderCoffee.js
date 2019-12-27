@@ -8,9 +8,9 @@ function RenderCoffee(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "coffee" && key.active &&
+        key.object_type.short_name === "coffee" &&
         <Coffee
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

@@ -8,9 +8,9 @@ function RenderPath(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "path" && key.active &&
+            key.object_type.short_name === "path" &&
             <Star
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
               numPoints={5}

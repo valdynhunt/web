@@ -3,7 +3,7 @@ import { Circle } from 'react-konva';
 
 
 const CIRC_RADIUS_SM = 3;
-
+const OBJECT_TYPE_ID = 23;
 
 const CircleGreenSm = (props) => {
     const handleCircleGreenSmClick = (e) => {
@@ -15,6 +15,8 @@ const CircleGreenSm = (props) => {
             radius={CIRC_RADIUS_SM} 
             name={props.name}
             fill="green" 
+            short_name={"green circle sm"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragCircStart}
             onDragEnd={props.handleDragCircEnd}

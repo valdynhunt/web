@@ -8,9 +8,9 @@ function RenderCircleGreenSm(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "green circle sm" && key.active &&
+        key.object_type.short_name === "green circle sm" &&
         <CircleGreenSm
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
           name={key.name}

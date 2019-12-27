@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 
@@ -25,7 +26,7 @@ class Data extends React.Component {
     if (this.state.isActive) {
       return (
         <div id="dataArea1">   
-          <button type="button" class="btn btn-secondary" onClick={this.handleHide}>hide data</button>     
+          <button type="button" className="btn btn-secondary" onClick={this.handleHide}>hide data</button>     
           <p>Data component is here!</p>         
                 
         </div>
@@ -33,7 +34,7 @@ class Data extends React.Component {
     } else {      
       return (
         <div id="dataArea2">
-          <button type="button" class="btn btn-secondary" onClick={this.handleShow}>show data</button>     
+          <button type="button" className="btn btn-secondary" onClick={this.handleShow}>show data</button>     
         </div>      
       )    
     }  
@@ -42,9 +43,3 @@ class Data extends React.Component {
 }
   
 export default Data
-
-
-
-
-
-

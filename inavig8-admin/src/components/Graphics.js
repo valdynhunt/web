@@ -59,7 +59,7 @@ import FireExtinguisher from './FireExtinguisher';
 import MapMarker from './MapMarker';
 import ImageRegular from './ImageRegular';
 
-import Square from './Square';
+import Generic from './Generic';
 import Pencil from './Pencil';
 import Redo from './Redo';
 import Undo from './Undo';
@@ -78,6 +78,7 @@ const CIRC_RADIUS = 7;
 const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
 const FONT_SIZE = 20;
+const BACKGROUND_OFFSET = 150;
 
 const X = [25, 60, 95]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
@@ -107,33 +108,24 @@ const handleClick = e => {
 
 
 let newImage = (t, pointerPosition) => ({
-  // fetch new location_id?
-  location_id: 7,  // fetch it
-  key: 7, // location_id
+  // fetch new....
 
-  // pop up modal to input short_name and description
-  short_name: "fooImage",
-  description: "foo2Image",
-  long_name: "fooeyImage",
-  active: "true", // can we just make this a default on the creation of new objects?
-  
-  // x and y are pixel ref
-  x: pointerPosition.x,
-  y: pointerPosition.y,
-  scaleX: t.attrs.scaleX,
-  scaleY: t.attrs.scaleY,
+      "location_id": t.attrs.location_id, // use same?
+      "short_name": "mensrm", // prompt
+      "long_name": "foo77",  // prompt
+      "description": "men's restroom - 77th floor", // prompt
+      "object_type_id": t.attrs.location_id,
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "image_x": pointerPosition.x,
+      "image_y": pointerPosition.y,
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "active": true,
+      "image": t.attrs.image
 
-  // x_coordinate and y_coordinate are relative coords
-  x_coordinate: 2,
-  y_coordinate: 3,
-  
-  object_type_id: 1,
-  
-  // lat and long are only set for primary or secondary objects - does each floor need them?
-  latitude: 0,
-  longitude: 0,
-
-  image: t.attrs.image,
+  // key???
+  // key: 7, // location_id
 
 });
 
@@ -194,6 +186,18 @@ let newText = (t, pointerPosition) => ({
   // key: target.ref + 1
 });
 
+let newObject = (t, pointerPosition) => ({
+
+  x: pointerPosition.x,
+  y: pointerPosition.y,
+  // fontFamily: t.attrs.fontFamily,
+  // fontSize: t.attrs.fontSize,
+  // text: t.attrs.text,
+  // fill: t.attrs.fill
+  // name: increment name + 1?
+  // key: target.ref + 1
+});
+
 
 
 class Graphics extends Component {
@@ -203,10 +207,6 @@ class Graphics extends Component {
     this.state = {
       location: [],
       objects: []
-      // canvasImage: [],
-      // canvasRect: [],
-      // canvasCirc: [],
-      // canvasText: []
     }
 
     this.handleDragRectStart = this.handleDragRectStart.bind(this)
@@ -254,7 +254,8 @@ class Graphics extends Component {
 				}
       );
 
-      console.log("objects... ", result.body.data);
+      console.log("objects: ", result.body.data);
+      console.log("state: ", this.state);
       console.log("checking if primary and secondary are set...");
 
       let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
@@ -306,6 +307,7 @@ class Graphics extends Component {
 
     // console.log("get stage ", e.target.getStage);
     // e.target.getStage().batchdraw();
+    console.log("tiptext: ", tooltip.text);
     tooltipLayer.batchDraw();
     console.log("mouse move ", e.target)
   };
@@ -373,20 +375,63 @@ class Graphics extends Component {
   handleDragImageEnd = e => {
     console.log("drag image end e: ", e);
     console.log(origX, " ", origY);
+
     const stage = e.target.getStage();
     const pointerPosition = stage.getPointerPosition();
 
     console.table({x: pointerPosition.x, y: pointerPosition.y});
-
-    console.log("new - canvasImage length before add is ", this.state.canvasImage.length);
+    console.log("new - objects length before add is ", this.state.objects.length);
     console.log("target is: ", e.target);
-    // console.log("target color is: ", e.target.attrs.fill);
 
-    // call to get new location_id?? and feed in to ...newCirc(location_id, e.target, pointerPosition) ??
+    // "location_id": t.attrs.location_id, // use same?
+    // "short_name": "mensrm", // prompt
+    // "long_name": "foo77",  // prompt
+    // "description": "men's restroom - 77th floor", // prompt
+    // "object_type_id": t.attrs.location_id,
+    // "x_coordinate": 0,
+    // "y_coordinate": 0,
+    // "image_x": pointerPosition.x,
+    // "image_y": pointerPosition.y,
+    // "latitude": 0.0,
+    // "longitude": 0.0,
+    // "active": true
+console.log("location id: " + this.props.location_id);
+console.log("short name: " + e.target.attrs.short_name);
+console.log("object type id: " + e.target.attrs.object_type_id);
+    // var raw = JSON.stringify({"location_id":1, "short_name":"men's restroom","long_name":"foo99","description":"men's room - 99th floor","object_type_id": 11,"x_coordinate": 0,"y_coordinate": 0,"image_x": 99,"image_y": 99,"latitude": 0.0,"longitude": 0.0,"active": true});
+    var raw = JSON.stringify({
+      "location_id":this.props.location_id, 
+      "short_name":e.target.attrs.short_name,
+      "long_name":"a",
+      "description":"a",
+      "object_type_id": e.target.attrs.object_type_id,
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "image_x": pointerPosition.x,
+      "image_y": pointerPosition.y,
+    });
 
-    this.setState(prevState => ({
-      canvasImage: [...prevState.canvasImage, { ...newImage(e.target, pointerPosition) }]
-    }));
+    let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+    let headers = config.api.headers;
+
+    const url3 = config.api.invokeUrl + '/object/new';
+		fetch(url3, 
+		{
+			method: "POST",
+      headers,
+      body: raw,
+		}).then(response => {
+			return response.json();
+		}).then(result => {
+      console.log("result: ", result);
+			this.setState(
+				{
+          // objects: result.body.data
+          // objects: [...prevState.objects, { ...newImage(e.target, pointerPosition) }]
+				}
+      );
 
     // put draggable back to original location
     e.target.position({ 
@@ -401,9 +446,13 @@ class Graphics extends Component {
       shadowOffsetY: 0
     });
 
+
     e.target.getStage().draw();
 
+  });
   }; // end handleDragImageEnd
+
+
 
   handleDragCircStart = e => {
     origX = e.target.attrs.x;
@@ -507,13 +556,13 @@ class Graphics extends Component {
         <Stage width={STAGE_WIDTH} height={STAGE_HEIGHT} >
           <Layer name="background">
 
-          {this.state.location.map((i) => (
-            <MapBackground img={i.canvas_image} />
+          {this.state.location.map((key) => (
+            <MapBackground key={key.location_id} img={key.canvas_image} background_offset={BACKGROUND_OFFSET}/>
             ))}
 
           </Layer>
           <Layer name="main">
-          <ModalSetGrid objects ={this.state.objects} /> 
+          {/* <ModalSetGrid objects ={this.state.objects} />  */}
               <Rect
                 x={TOOLBAR_X}
                 y={TOOLBAR_Y}
@@ -734,8 +783,8 @@ class Graphics extends Component {
                 onMouseOut={this.handleMouseOut}
               />
              
-             <Square x={X[0]} y={Y[12]} />
-              <Square x={X[0]} y={Y[12]} 
+             <Generic x={X[0]} y={Y[12]} />
+              <Generic x={X[0]} y={Y[12]} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
@@ -778,8 +827,8 @@ class Graphics extends Component {
               />
 
 
-            {/* <RenderGeneric objects={this.state.objects}/>
-            <RenderPath objects={this.state.objects}/> */}
+            <RenderGeneric objects={this.state.objects}/>
+            <RenderPath objects={this.state.objects}/>
             <RenderDoor objects={this.state.objects}/>
             <RenderElevator objects={this.state.objects}/>
             <RenderStairs objects={this.state.objects}/>
