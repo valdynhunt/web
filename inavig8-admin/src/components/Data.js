@@ -1,6 +1,6 @@
 
 import React from 'react'
-
+import Obj from './Obj'
 
 
 class Data extends React.Component {
@@ -23,11 +23,23 @@ class Data extends React.Component {
   };
 
   render() {
+
+    var data = this.props.objects;
+    var location = this.props.location;
+    console.log("data component: ", data);
+
     if (this.state.isActive) {
       return (
         <div id="dataArea1">   
           <button type="button" className="btn btn-secondary" onClick={this.handleHide}>hide data</button>     
-          <p>Data component is here!</p>         
+          {Object.keys(data).map(key => (
+              <Obj
+                  key={key}
+                  id={key}
+                  details={data[key]}
+                  location_id={location.location_id}
+              />
+          ))}         
                 
         </div>
       )    

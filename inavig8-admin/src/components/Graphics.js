@@ -197,17 +197,17 @@ let newObject = (t, pointerPosition) => ({
   // name: increment name + 1?
   // key: target.ref + 1
 });
-
+//
 
 
 class Graphics extends Component {
 
   constructor() {
     super()
-    this.state = {
-      location: [],
-      objects: []
-    }
+    // this.state = {
+    //   location: [],
+    //   objects: []
+    // }
 
     this.handleDragRectStart = this.handleDragRectStart.bind(this)
     this.handleDragRectEnd = this.handleDragRectEnd.bind(this)
@@ -217,78 +217,77 @@ class Graphics extends Component {
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-		let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+	// 	let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+	// 	JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
-    let headers = config.api.headers;
+  //   let headers = config.api.headers;
     
-    const url = config.api.invokeUrl + '/location/' + this.props.location_id;
-		fetch(url, 
-		{
-			method: "GET",
-			headers,
-		}).then(response => {
-			return response.json();
-		}).then(result => {
-			this.setState(
-				{
-					location: result.body.data
-				}
-			);
-			console.log("location... ", result.body.data);
-		});
+  //   const url = config.api.invokeUrl + '/location/' + this.props.location_id;
+	// 	fetch(url, 
+	// 	{
+	// 		method: "GET",
+	// 		headers,
+	// 	}).then(response => {
+	// 		return response.json();
+	// 	}).then(result => {
+	// 		this.setState(
+	// 			{
+	// 				location: result.body.data
+	// 			}
+	// 		);
+	// 		console.log("location... ", result.body.data);
+	// 	});
     
-    const url2 = config.api.invokeUrl + '/objects/location/' + this.props.location_id;
-		fetch(url2, 
-		{
-			method: "GET",
-			headers,
-		}).then(response => {
-			return response.json();
-		}).then(result => {
-			this.setState(
-				{
-					objects: result.body.data
-				}
-      );
+  //   const url2 = config.api.invokeUrl + '/objects/location/' + this.props.location_id;
+	// 	fetch(url2, 
+	// 	{
+	// 		method: "GET",
+	// 		headers,
+	// 	}).then(response => {
+	// 		return response.json();
+	// 	}).then(result => {
+	// 		this.setState(
+	// 			{
+	// 				objects: result.body.data
+	// 			}
+  //     );
 
-      console.log("objects: ", result.body.data);
-      console.log("state: ", this.state);
-      console.log("checking if primary and secondary are set...");
+  //     console.log("objects: ", result.body.data);
+  //     console.log("state: ", this.state);
+  //     console.log("checking if primary and secondary are set...");
 
-      let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
-      let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
-      let scaleIsSet = false;
-      let renderModal = false;
+  //     let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
+  //     let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
+  //     let scaleIsSet = false;
+  //     let renderModal = false;
 
-      console.log("scale set? ", scaleIsSet);
-      console.log("foundPrimary: ", foundPrimary);
-      console.log("foundSecondary: ", foundSecondary);
+  //     console.log("scale set? ", scaleIsSet);
+  //     console.log("foundPrimary: ", foundPrimary);
+  //     console.log("foundSecondary: ", foundSecondary);
 
-      // check if scale set
-      scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
-      console.log("scale set? ", scaleIsSet);
+  //     // check if scale set
+  //     scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
+  //     console.log("scale set? ", scaleIsSet);
 
-      // if primary and secondary and grid not set, then show modal to input
-      if (!foundPrimary || !foundSecondary || !scaleIsSet) {
-        // show model to set them and set grid
-        // show modal here
-        renderModal = true;
+  //     // if primary and secondary and grid not set, then show modal to input
+  //     if (!foundPrimary || !foundSecondary || !scaleIsSet) {
+  //       // show model to set them and set grid
+  //       // show modal here
+  //       renderModal = true;
 
-      }
+  //     }
 
-      console.log("renderModal: ", renderModal);
-    });
+  //     console.log("renderModal: ", renderModal);
+  //   });
     
     
-  }
-
+  // }
 
   handleClick = e => { 
     // open sidebar with focus - show delete or edit buttons
-    console.log("clicked obj ", e.target)
+    console.log("clicked obj ", e.target);
   };
 
   handleMouseMove = e => { 
@@ -380,7 +379,7 @@ class Graphics extends Component {
     const pointerPosition = stage.getPointerPosition();
 
     console.table({x: pointerPosition.x, y: pointerPosition.y});
-    console.log("new - objects length before add is ", this.state.objects.length);
+    console.log("new - objects length before add is ", this.props.objects.length);
     console.log("target is: ", e.target);
 
     // "location_id": t.attrs.location_id, // use same?
@@ -410,28 +409,35 @@ console.log("object type id: " + e.target.attrs.object_type_id);
       "image_x": pointerPosition.x,
       "image_y": pointerPosition.y,
     });
+console.log("props: ", this.props);
+    this.props.updateObjects(raw);
 
-    let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+  //   let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+	// 	JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
-    let headers = config.api.headers;
+  //   let headers = config.api.headers;
 
-    const url3 = config.api.invokeUrl + '/object/new';
-		fetch(url3, 
-		{
-			method: "POST",
-      headers,
-      body: raw,
-		}).then(response => {
-			return response.json();
-		}).then(result => {
-      console.log("result: ", result);
-			this.setState(
-				{
-          // objects: result.body.data
-          // objects: [...prevState.objects, { ...newImage(e.target, pointerPosition) }]
-				}
-      );
+  //   const url3 = config.api.invokeUrl + '/object/new';
+	// 	fetch(url3, 
+	// 	{
+	// 		method: "POST",
+  //     headers,
+  //     body: raw,
+	// 	}).then(response => {
+	// 		return response.json();
+	// 	}).then(result => {
+  //     //console.log("result: ", result);
+  //     // result.body.data[0]
+  //     //console.log("prevState.objects: " , this.state.objects);
+  //     
+	// 		this.setState(
+	// 			{
+  //         // objects: result.body.data
+  //         // objects: [...prevState.objects, { ...newImage(e.target, pointerPosition) }]
+  //         objects: [...this.props.objects, { ...result.body.data[0] }]
+	// 			}
+  //     );
+
 
     // put draggable back to original location
     e.target.position({ 
@@ -449,7 +455,7 @@ console.log("object type id: " + e.target.attrs.object_type_id);
 
     e.target.getStage().draw();
 
-  });
+  // });
   }; // end handleDragImageEnd
 
 
@@ -556,7 +562,7 @@ console.log("object type id: " + e.target.attrs.object_type_id);
         <Stage width={STAGE_WIDTH} height={STAGE_HEIGHT} >
           <Layer name="background">
 
-          {this.state.location.map((key) => (
+          {this.props.location.map((key) => (
             <MapBackground key={key.location_id} img={key.canvas_image} background_offset={BACKGROUND_OFFSET}/>
             ))}
 
@@ -835,31 +841,31 @@ console.log("object type id: " + e.target.attrs.object_type_id);
               />
 
 
-            <RenderGeneric objects={this.state.objects}/>
-            <RenderPath objects={this.state.objects}/>
-            <RenderDoor objects={this.state.objects}/>
-            <RenderElevator objects={this.state.objects}/>
-            <RenderStairs objects={this.state.objects}/>
-            <RenderCoffee objects={this.state.objects}/>
-            <RenderUtensils objects={this.state.objects}/>
-            <RenderRestroom objects={this.state.objects}/>
-            <RenderMale objects={this.state.objects}/>
-            <RenderFemale objects={this.state.objects}/>
-            <RenderHeartbeat objects={this.state.objects}/>
-            <RenderRecycle objects={this.state.objects}/>
-            <RenderFireExtinguisher objects={this.state.objects}/>
-            <RenderMapMarker objects={this.state.objects}/>
-            <RenderDoorOpen objects={this.state.objects}/>
-            <RenderDoorClosed objects={this.state.objects}/>
-            <RenderSquareRed objects={this.state.objects}/>
-            <RenderSquareGrey objects={this.state.objects}/>
-            <RenderSquareGreen objects={this.state.objects}/>
-            <RenderCircleRedLg objects={this.state.objects}/>
-            <RenderCircleGreyLg objects={this.state.objects}/>
-            <RenderCircleGreenLg objects={this.state.objects}/>
-            <RenderCircleRedSm objects={this.state.objects}/>
-            <RenderCircleGreySm objects={this.state.objects}/>
-            <RenderCircleGreenSm objects={this.state.objects}/>
+            <RenderGeneric objects={this.props.objects}/>
+            <RenderPath objects={this.props.objects}/>
+            <RenderDoor objects={this.props.objects}/>
+            <RenderElevator objects={this.props.objects}/>
+            <RenderStairs objects={this.props.objects}/>
+            <RenderCoffee objects={this.props.objects}/>
+            <RenderUtensils objects={this.props.objects}/>
+            <RenderRestroom objects={this.props.objects}/>
+            <RenderMale objects={this.props.objects}/>
+            <RenderFemale objects={this.props.objects}/>
+            <RenderHeartbeat objects={this.props.objects}/>
+            <RenderRecycle objects={this.props.objects}/>
+            <RenderFireExtinguisher objects={this.props.objects}/>
+            <RenderMapMarker objects={this.props.objects}/>
+            <RenderDoorOpen objects={this.props.objects}/>
+            <RenderDoorClosed objects={this.props.objects}/>
+            <RenderSquareRed objects={this.props.objects}/>
+            <RenderSquareGrey objects={this.props.objects}/>
+            <RenderSquareGreen objects={this.props.objects}/>
+            <RenderCircleRedLg objects={this.props.objects}/>
+            <RenderCircleGreyLg objects={this.props.objects}/>
+            <RenderCircleGreenLg objects={this.props.objects}/>
+            <RenderCircleRedSm objects={this.props.objects}/>
+            <RenderCircleGreySm objects={this.props.objects}/>
+            <RenderCircleGreenSm objects={this.props.objects}/>
 
           </Layer>
         </Stage>
