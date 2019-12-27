@@ -18,29 +18,17 @@ main.locations-container h4 {
     text-align: center;
 }
 
-section.locations-list {
+
+/* Location List */
+main.locations-container section.location-list {
     grid-row: 1 / span 2;
     grid-column: 1;
 
     width: 100%;
 }
 
-main.locations-container ul {
-    list-style: none;
-    padding-left: 0.6em;
-}
 
-main.locations-container section.locations-list ul li,
-main.locations-container section.location-details ul li {
-    margin-bottom: 0.4em;
-}
-
-main.locations-container section.locations-list ul li,
-main.locations-container section.locations-list ul li ul li,
-main.locations-container section.locations-list ul li ul li ul li {
-    font-size: 1.25em;
-}
-
+/* Location View */
 main.locations-container section.location-view {
     grid-row: 1;
     grid-column: 2;
@@ -57,6 +45,8 @@ main.locations-container section.location-view img {
     align-self: center;
 }
 
+
+/* Location Details */
 main.locations-container section.location-details {
     grid-row: 2;
     grid-column: 2;
