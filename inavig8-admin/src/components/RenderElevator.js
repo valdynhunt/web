@@ -10,7 +10,7 @@ function RenderElevator(props) {
         
         key.object_type.short_name === "elevator" &&
         <Elevator
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

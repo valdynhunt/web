@@ -3,6 +3,7 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 
 const STAIRS_SRC = '/img/icons/stairs.png'; 
+const OBJECT_TYPE_ID = 7;
 
 const Stairs = (props) => {
     const [image] = useImage(STAIRS_SRC);
@@ -14,6 +15,8 @@ const Stairs = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"stairs"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
@@ -23,7 +26,3 @@ const Stairs = (props) => {
 
 
   export default Stairs;
-
-
-
-  {/* <div>Stairs and Elevator Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */}

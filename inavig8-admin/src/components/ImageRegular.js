@@ -3,6 +3,7 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 
 const IMAGE_REGULAR_SRC = '/img/icons/image-regular.png'; 
+const OBJECT_TYPE_ID = 10;
 
 const ImageRegular = (props) => {
     const [image] = useImage(IMAGE_REGULAR_SRC);
@@ -14,6 +15,8 @@ const ImageRegular = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"image regular"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}

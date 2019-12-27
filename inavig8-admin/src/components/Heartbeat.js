@@ -3,6 +3,7 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 
 const HEARTBEAT_SRC = '/img/icons/heartbeat.png'; 
+const OBJECT_TYPE_ID = 13;
 
 const Heartbeat = (props) => {
     const [image] = useImage(HEARTBEAT_SRC);
@@ -14,6 +15,8 @@ const Heartbeat = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"heartbeat"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}

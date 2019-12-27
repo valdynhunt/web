@@ -3,6 +3,7 @@ import { Rect } from 'react-konva';
 
 const RECT_WIDTH = 14;
 const RECT_HEIGHT = 14;
+const OBJECT_TYPE_ID = 21;
 
 const SquareGrey = (props) => {
     const handleSquareGreyClick = (e) => {
@@ -15,6 +16,8 @@ const SquareGrey = (props) => {
             height={RECT_HEIGHT}
             name={props.name}
             fill="lightgrey"
+            short_name={"grey square"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable
             onDragStart={props.handleDragRectStart}
             onDragEnd={props.handleDragRectEnd}

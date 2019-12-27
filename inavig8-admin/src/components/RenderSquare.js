@@ -1,5 +1,5 @@
 import React from 'react';
-import Square from './Square';
+import Square from './Generic';
 
 
 function RenderSquare(props) {
@@ -10,7 +10,7 @@ function RenderSquare(props) {
         
         key.object_type.short_name === "square" &&
         <Square
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

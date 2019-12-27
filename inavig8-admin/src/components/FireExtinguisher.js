@@ -3,6 +3,7 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 
 const FIRE_EXTINGUISHER_SRC = '/img/icons/fire-extinguisher.png';
+const OBJECT_TYPE_ID = 15;
 
 
 const FireExtinguisher = (props) => {
@@ -15,6 +16,8 @@ const FireExtinguisher = (props) => {
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"fire extinguisher"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}

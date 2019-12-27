@@ -10,7 +10,7 @@ function RenderFemale(props) {
             
             key.object_type.short_name === "female" &&
             <Female
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
             />

@@ -9,7 +9,7 @@ function RenderSquareGrey(props) {
             
             key.object_type.short_name === "grey square" &&
             <SquareGrey
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
               name={key.name}

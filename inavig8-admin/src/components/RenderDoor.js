@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import Konva from 'konva';
-import { Stage, Layer, Image, Rect, Text, Circle, Star } from 'react-konva';
+import React from 'react';
+import { Star } from 'react-konva';
 
 
 function RenderDoor(props) {
@@ -11,9 +10,9 @@ function RenderDoor(props) {
             
             key.object_type.short_name === "door" &&
             <Star
-              key={key}
+              key={key.object_id}
               x={key.image_x}
-              y={window.innerHeight - key.image_y}
+              y={key.image_y}
               numPoints={5}
               innerRadius={5}
               outerRadius={10}
