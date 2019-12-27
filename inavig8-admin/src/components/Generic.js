@@ -13,8 +13,8 @@ const Generic = (props) => {
     return <Image 
             x={props.x} 
             y={props.y} 
-            scaleX={0.04} 
-            scaleY={0.04} 
+            scaleX={0.02} 
+            scaleY={0.02} 
             short_name={"generic"}
             object_type_id={OBJECT_TYPE_ID}
             draggable              

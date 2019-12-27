@@ -21,7 +21,6 @@ import RenderHeartbeat from './RenderHeartbeat';
 import RenderRecycle from './RenderRecycle';
 import RenderFireExtinguisher from './RenderFireExtinguisher';
 import RenderMapMarker from './RenderMapMarker';
-import RenderSquare from './RenderSquare';
 import RenderDoorOpen from './RenderDoorOpen';
 import RenderDoorClosed from './RenderDoorClosed';
 import RenderSquareRed from './RenderSquareRed';
@@ -60,6 +59,7 @@ import MapMarker from './MapMarker';
 import ImageRegular from './ImageRegular';
 
 import Generic from './Generic';
+import Path from './Path';
 import Pencil from './Pencil';
 import Redo from './Redo';
 import Undo from './Undo';
@@ -783,13 +783,21 @@ console.log("object type id: " + e.target.attrs.object_type_id);
                 onMouseOut={this.handleMouseOut}
               />
              
-             <Generic x={X[0]} y={Y[12]} />
+              <Generic x={X[0]} y={Y[12]} />
               <Generic x={X[0]} y={Y[12]} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
+
+              <Path x={X[1]} y={Y[12]} />
+              <Path x={X[1]} y={Y[12]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />      
               
               <Pencil x={X[0]} y={Y[13]}
                 onMouseMove={this.handleMouseMove}
@@ -841,7 +849,6 @@ console.log("object type id: " + e.target.attrs.object_type_id);
             <RenderRecycle objects={this.state.objects}/>
             <RenderFireExtinguisher objects={this.state.objects}/>
             <RenderMapMarker objects={this.state.objects}/>
-            <RenderSquare objects={this.state.objects}/>
             <RenderDoorOpen objects={this.state.objects}/>
             <RenderDoorClosed objects={this.state.objects}/>
             <RenderSquareRed objects={this.state.objects}/>
