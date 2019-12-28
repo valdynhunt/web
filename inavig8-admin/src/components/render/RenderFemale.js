@@ -1,15 +1,15 @@
 import React from 'react';
-import Restroom from './Restroom';
+import Female from '../toolbar/Female';
 
 
-function RenderRestroom(props) {
+function RenderFemale(props) {
              
     return (
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "restroom" &&
-            <Restroom
+            key.object_type.short_name === "female" &&
+            <Female
               key={key.object_id}
               x={key.image_x}
               y={key.image_y}
@@ -18,4 +18,4 @@ function RenderRestroom(props) {
         )))
 }
 
-export default RenderRestroom;
+export default RenderFemale;

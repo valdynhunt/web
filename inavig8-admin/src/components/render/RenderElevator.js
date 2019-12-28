@@ -1,21 +1,23 @@
 import React from 'react';
-import Coffee from './Coffee';
+import Elevator from '../toolbar/Elevator';
 
 
-function RenderCoffee(props) {
+function RenderElevator(props) {
              
   return (
-
+  
     props.objects.map((key) => (
         
-        key.object_type.short_name === "coffee" &&
-        <Coffee
+        key.object_type.short_name === "elevator" &&
+        <Elevator
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />
 
     )))
+
+
 }
 
-export default RenderCoffee;
+export default RenderElevator;

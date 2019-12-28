@@ -1,14 +1,14 @@
 import React from 'react';
-import SquareGreen from './SquareGreen';
+import SquareGrey from '../toolbar/SquareGrey';
 
-function RenderSquareGreen(props) {
+function RenderSquareGrey(props) {
              
     return (
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "green square" &&
-            <SquareGreen
+            key.object_type.short_name === "grey square" &&
+            <SquareGrey
               key={key.object_id}
               x={key.image_x}
               y={key.image_y}
@@ -23,5 +23,4 @@ function RenderSquareGreen(props) {
         )))
 }
 
-export default RenderSquareGreen;
-
+export default RenderSquareGrey;

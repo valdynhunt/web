@@ -1,14 +1,15 @@
 import React from 'react';
-import CircleGreenLg from './CircleGreenLg';
+import Path from '../toolbar/Path'
 
-function RenderCircleGreenLg(props) {
+
+function RenderPath(props) {
              
     return (
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "green circle lg" &&
-            <CircleGreenLg
+            key.object_type.short_name === "path" &&
+            <Path
               key={key.object_id}
               x={key.image_x}
               y={key.image_y}
@@ -19,8 +20,7 @@ function RenderCircleGreenLg(props) {
               onMouseOut={props.handleMouseOut}
               shadowBlur={1}
             />
-
         )))
 }
 
-export default RenderCircleGreenLg;
+export default RenderPath;

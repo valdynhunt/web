@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Male from './Male';
+import Male from '../Male';
 
 
 function RenderMale(props) {

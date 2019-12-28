@@ -1,15 +1,15 @@
 import React from 'react';
-import CircleGreySm from './CircleGreySm';
+import CircleRedSm from '../toolbar/CircleRedSm';
 
 
-function RenderCircleGreySm(props) {
+function RenderCircleRedSm(props) {
              
   return (
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "grey circle sm" &&
-        <CircleGreySm
+        key.object_type.short_name === "red circle sm" &&
+        <CircleRedSm
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
@@ -24,4 +24,4 @@ function RenderCircleGreySm(props) {
     )))
 }
 
-export default RenderCircleGreySm;
+export default RenderCircleRedSm;

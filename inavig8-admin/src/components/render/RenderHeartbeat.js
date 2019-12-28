@@ -1,5 +1,5 @@
 import React from 'react';
-import Heartbeat from './Heartbeat';
+import Heartbeat from '../toolbar/Heartbeat';
 
 
 function RenderHeartbeat(props) {

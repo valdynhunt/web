@@ -1,23 +1,21 @@
 import React from 'react';
-import Elevator from './Elevator';
+import MapMarker from '../toolbar/MapMarker';
 
 
-function RenderElevator(props) {
+function RenderMapMarker(props) {
              
   return (
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "elevator" &&
-        <Elevator
+        key.object_type.short_name === "map marker" &&
+        <MapMarker
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />
 
-    )))
-
-
+    )))  
 }
 
-export default RenderElevator;
+export default RenderMapMarker;

@@ -1,21 +1,21 @@
 import React from 'react';
-import MapMarker from './MapMarker';
+import Square from '../Generic';
 
 
-function RenderMapMarker(props) {
+function RenderSquare(props) {
              
   return (
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "map marker" &&
-        <MapMarker
+        key.object_type.short_name === "square" &&
+        <Square
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />
 
-    )))  
+    )))   
 }
 
-export default RenderMapMarker;
+export default RenderSquare;
