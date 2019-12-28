@@ -1,5 +1,5 @@
 import React from 'react';
-import SquareGreen from './SquareGreen';
+import SquareGreen from './toolbar/SquareGreen';
 
 function RenderSquareGreen(props) {
              

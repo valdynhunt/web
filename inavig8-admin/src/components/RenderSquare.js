@@ -1,5 +1,5 @@
 import React from 'react';
-import Square from './Generic';
+import Square from './toolbar/Generic';
 
 
 function RenderSquare(props) {

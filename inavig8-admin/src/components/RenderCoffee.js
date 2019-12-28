@@ -1,5 +1,5 @@
 import React from 'react';
-import Coffee from './Coffee';
+import Coffee from './toolbar/Coffee';
 
 
 function RenderCoffee(props) {

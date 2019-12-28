@@ -1,5 +1,5 @@
 import React from 'react';
-import Utensils from './Utensils';
+import Utensils from './toolbar/Utensils';
 
 
 function RenderUtensils(props) {

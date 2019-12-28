@@ -1,5 +1,5 @@
 import React from 'react';
-import DoorClosed from './DoorClosed';
+import DoorClosed from './toolbar/DoorClosed';
 
 
 function RenderDoorClosed(props) {

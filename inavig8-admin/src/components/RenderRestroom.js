@@ -1,5 +1,5 @@
 import React from 'react';
-import Restroom from './Restroom';
+import Restroom from './toolbar/Restroom';
 
 
 function RenderRestroom(props) {

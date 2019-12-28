@@ -1,5 +1,5 @@
 import React from 'react';
-import Elevator from './Elevator';
+import Elevator from './toolbar/Elevator';
 
 
 function RenderElevator(props) {

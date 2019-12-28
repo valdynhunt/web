@@ -1,5 +1,5 @@
 import React from 'react';
-import Path from './Path'
+import Path from './toolbar/Path'
 
 
 function RenderPath(props) {

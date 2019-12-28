@@ -1,5 +1,5 @@
 import React from 'react';
-import FireExtinguisher from './FireExtinguisher';
+import FireExtinguisher from './toolbar/FireExtinguisher';
 
 
 function RenderFireExtinguisher(props) {

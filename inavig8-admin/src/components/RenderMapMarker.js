@@ -1,5 +1,5 @@
 import React from 'react';
-import MapMarker from './MapMarker';
+import MapMarker from './toolbar/MapMarker';
 
 
 function RenderMapMarker(props) {

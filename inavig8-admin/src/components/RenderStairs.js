@@ -1,5 +1,5 @@
 import React from 'react';
-import Stairs from './Stairs';
+import Stairs from './toolbar/Stairs';
 
 
 function RenderStairs(props) {

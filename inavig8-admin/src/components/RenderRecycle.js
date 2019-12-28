@@ -1,5 +1,5 @@
 import React from 'react';
-import Recycle from './Recycle';
+import Recycle from './toolbar/Recycle';
 
 
 function RenderRecycle(props) {

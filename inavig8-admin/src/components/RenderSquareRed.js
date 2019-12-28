@@ -1,5 +1,5 @@
 import React from 'react';
-import SquareRed from './SquareRed';
+import SquareRed from './toolbar/SquareRed';
 
 function RenderSquareRed(props) {
              

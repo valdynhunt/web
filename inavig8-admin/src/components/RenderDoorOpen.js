@@ -1,5 +1,5 @@
 import React from 'react';
-import DoorOpen from './DoorOpen';
+import DoorOpen from './toolbar/DoorOpen';
 
 
 function RenderDoorOpen(props) {

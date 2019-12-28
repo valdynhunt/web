@@ -1,5 +1,5 @@
 import React from 'react';
-import CircleRedSm from './CircleRedSm';
+import CircleRedSm from './toolbar/CircleRedSm';
 
 
 function RenderCircleRedSm(props) {

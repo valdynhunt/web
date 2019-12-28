@@ -1,5 +1,5 @@
 import React from 'react';
-import CircleGreenLg from './CircleGreenLg';
+import CircleGreenLg from './toolbar/CircleGreenLg';
 
 function RenderCircleGreenLg(props) {
              

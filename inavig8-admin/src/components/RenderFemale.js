@@ -1,5 +1,5 @@
 import React from 'react';
-import Female from './Female';
+import Female from './toolbar/Female';
 
 
 function RenderFemale(props) {
