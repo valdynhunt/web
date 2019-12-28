@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
 import Konva from 'konva';
-import { Stage, Layer, Image, Rect, Text, Circle, Star } from 'react-konva';
-import useImage from 'use-image';
+import { Stage, Layer, Rect } from 'react-konva';
 import MapBackground from './MapBackground'
 import config from '../config.json';
 import ModalSetGrid from './ModalSetGrid';
+
 import RenderGeneric from './render/RenderGeneric';
 import RenderPath from './render/RenderPath';
 import RenderDoor from './render/RenderDoor';
@@ -58,7 +57,7 @@ import FireExtinguisher from './toolbar/FireExtinguisher';
 import MapMarker from './toolbar/MapMarker';
 import ImageRegular from './toolbar/ImageRegular';
 
-import Generic from './Generic';
+import Generic from './toolbar/Generic';
 import Path from './toolbar/Path';
 import Pencil from './toolbar/Pencil';
 import Redo from './toolbar/Redo';
@@ -101,104 +100,17 @@ var tooltip = new Konva.Text({
   visible: true
 })
 
-const handleClick = e => { 
-  // open sidebar with focus - show delete or edit buttons
-  console.log("clicked obj ", e.target)
-};
+// let newText = (t, pointerPosition) => ({
 
-
-let newImage = (t, pointerPosition) => ({
-  // fetch new....
-
-      "location_id": t.attrs.location_id, // use same?
-      "short_name": "mensrm", // prompt
-      "long_name": "foo77",  // prompt
-      "description": "men's restroom - 77th floor", // prompt
-      "object_type_id": t.attrs.location_id,
-      "x_coordinate": 0,
-      "y_coordinate": 0,
-      "image_x": pointerPosition.x,
-      "image_y": pointerPosition.y,
-      "latitude": 0.0,
-      "longitude": 0.0,
-      "active": true,
-      "image": t.attrs.image
-
-  // key???
-  // key: 7, // location_id
-
-});
-
-let newCirc = (t, pointerPosition) => ({
-  // fetch new location_id?
-  location_id: 7,  // fetch it
-  key: 7, // location_id
-
-  // pop up modal to input short_name and description
-  short_name: "foo",
-  description: "foo2",
-  long_name: "fooey",
-  active: "true", // can we just make this a default on the creation of new objects?
-  
-  // x and y are pixel ref
-  x: pointerPosition.x,
-  y: pointerPosition.y,
-
-  // x_coordinate and y_coordinate are relative coords
-  x_coordinate: 2,
-  y_coordinate: 3,
-  
-  object_type_id: 1,
-  
-  // lat and long are only set for primary or secondary objects - does each floor need them?
-  latitude: 0,
-  longitude: 0,
-
-  radius: t.attrs.radius,
-  fill: t.attrs.fill,
-  stroke: t.attrs.stroke
-
-});
-
-
-let newRect = (t, pointerPosition) => ({
-
-  x: pointerPosition.x - t.attrs.width / 2,
-  y: pointerPosition.y - t.attrs.height / 2,
-  height: t.attrs.height,
-  width: t.attrs.width,
-  fill: t.attrs.fill,
-  stroke: t.attrs.stroke
-  // name: 
-  // key: target.ref + 1
-});
-
-
-let newText = (t, pointerPosition) => ({
-
-  x: pointerPosition.x - t.textWidth / 2,
-  y: pointerPosition.y - t.textHeight / 2,
-  fontFamily: t.attrs.fontFamily,
-  fontSize: t.attrs.fontSize,
-  text: t.attrs.text,
-  fill: t.attrs.fill
-  // name: increment name + 1?
-  // key: target.ref + 1
-});
-
-let newObject = (t, pointerPosition) => ({
-
-  x: pointerPosition.x,
-  y: pointerPosition.y,
-  // fontFamily: t.attrs.fontFamily,
-  // fontSize: t.attrs.fontSize,
-  // text: t.attrs.text,
-  // fill: t.attrs.fill
-  // name: increment name + 1?
-  // key: target.ref + 1
-});
-//
-
+//   x: pointerPosition.x - t.textWidth / 2,
+//   y: pointerPosition.y - t.textHeight / 2,
+//   fontFamily: t.attrs.fontFamily,
+//   fontSize: t.attrs.fontSize,
+//   text: t.attrs.text,
+//   fill: t.attrs.fill
+//   // name: increment name + 1?
+//   // key: target.ref + 1
+// });
 
 class Graphics extends Component {
 
@@ -209,86 +121,16 @@ class Graphics extends Component {
     //   objects: []
     // }
 
-    this.handleDragRectStart = this.handleDragRectStart.bind(this)
-    this.handleDragRectEnd = this.handleDragRectEnd.bind(this)
     this.handleDragImageStart = this.handleDragImageStart.bind(this)
     this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
-  // componentDidMount() {
 
-	// 	let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-	// 	JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+  componentDidMount() {
 
-  //   let headers = config.api.headers;
-    
-  //   const url = config.api.invokeUrl + '/location/' + this.props.location_id;
-	// 	fetch(url, 
-	// 	{
-	// 		method: "GET",
-	// 		headers,
-	// 	}).then(response => {
-	// 		return response.json();
-	// 	}).then(result => {
-	// 		this.setState(
-	// 			{
-	// 				location: result.body.data
-	// 			}
-	// 		);
-	// 		console.log("location... ", result.body.data);
-	// 	});
-    
-  //   const url2 = config.api.invokeUrl + '/objects/location/' + this.props.location_id;
-	// 	fetch(url2, 
-	// 	{
-	// 		method: "GET",
-	// 		headers,
-	// 	}).then(response => {
-	// 		return response.json();
-	// 	}).then(result => {
-	// 		this.setState(
-	// 			{
-	// 				objects: result.body.data
-	// 			}
-  //     );
-
-  //     console.log("objects: ", result.body.data);
-  //     console.log("state: ", this.state);
-  //     console.log("checking if primary and secondary are set...");
-
-  //     let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
-  //     let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
-  //     let scaleIsSet = false;
-  //     let renderModal = false;
-
-  //     console.log("scale set? ", scaleIsSet);
-  //     console.log("foundPrimary: ", foundPrimary);
-  //     console.log("foundSecondary: ", foundSecondary);
-
-  //     // check if scale set
-  //     scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
-  //     console.log("scale set? ", scaleIsSet);
-
-  //     // if primary and secondary and grid not set, then show modal to input
-  //     if (!foundPrimary || !foundSecondary || !scaleIsSet) {
-  //       // show model to set them and set grid
-  //       // show modal here
-  //       renderModal = true;
-
-  //     }
-
-  //     console.log("renderModal: ", renderModal);
-  //   });
-    
-    
-  // }
-
-  handleClick = e => { 
-    // open sidebar with focus - show delete or edit buttons
-    console.log("clicked obj ", e.target);
-  };
+  }
 
   handleMouseMove = e => { 
     stage = e.target.getStage();
@@ -313,66 +155,26 @@ class Graphics extends Component {
 
 
   handleMouseOut = e => { 
-
-
     tooltip.hide();
     e.target.getStage().draw();
     console.log("mouse out ", e.target)
   };
 
-  // handleDragTextStart = e => {
-  //   origX = e.target.attrs.x;
-  //   origY = e.target.attrs.y;
-  // };
-
-  // handleDragTextEnd = e => {
-
-  //   const stage = e.target.getStage();
-  //   const pointerPosition = stage.getPointerPosition();
-
-  //   console.table({x: pointerPosition.x, y: pointerPosition.y});
-
-  //   console.log("new - canvasText length before add is ", this.state.canvasText.length);
-  //   console.log("target is: ", e.target);
-  //   console.log("target color is: ", e.target.attrs.fill);
-
-  //   this.setState(prevState => ({
-  //     canvasText: [...prevState.canvasText, { ...newText(e.target, pointerPosition) }]
-  //   }));
-
-  //   // put draggable back to original location
-  //   e.target.position({ 
-  //     x: origX,
-  //     y: origY
-  //   });
-
-  //   e.target.to({
-  //     duration: 0.2,
-  //     easing: Konva.Easings.ElasticEaseOut,
-  //     shadowOffsetX: 0,
-  //     shadowOffsetY: 0
-  //   });
-
-  //   e.target.getStage().draw();
-
-  // }; // end handleDragTextEnd
 
   handleDragImageStart = e => {
-    console.log("drag image start e: ", e);
+    console.log("drag image start: ", e);
     origX = e.target.attrs.x;
     origY = e.target.attrs.y;
     e.target.setAttrs({
       shadowOffset: {
         x: SHADOW_OFFSET,
         y: SHADOW_OFFSET
-      },
-      scaleX: 0.04,
-      scaleY: 0.04
+      }
     });
   };  // end handleDragImageStart
 
   handleDragImageEnd = e => {
-    console.log("drag image end e: ", e);
+    console.log("drag image end: ", e);
     console.log(origX, " ", origY);
 
     const stage = e.target.getStage();
@@ -381,23 +183,10 @@ class Graphics extends Component {
     console.table({x: pointerPosition.x, y: pointerPosition.y});
     console.log("new - objects length before add is ", this.props.objects.length);
     console.log("target is: ", e.target);
+    console.log("location id: " + this.props.location_id);
+    console.log("short name: " + e.target.attrs.short_name);
+    console.log("object type id: " + e.target.attrs.object_type_id);
 
-    // "location_id": t.attrs.location_id, // use same?
-    // "short_name": "mensrm", // prompt
-    // "long_name": "foo77",  // prompt
-    // "description": "men's restroom - 77th floor", // prompt
-    // "object_type_id": t.attrs.location_id,
-    // "x_coordinate": 0,
-    // "y_coordinate": 0,
-    // "image_x": pointerPosition.x,
-    // "image_y": pointerPosition.y,
-    // "latitude": 0.0,
-    // "longitude": 0.0,
-    // "active": true
-console.log("location id: " + this.props.location_id);
-console.log("short name: " + e.target.attrs.short_name);
-console.log("object type id: " + e.target.attrs.object_type_id);
-    // var raw = JSON.stringify({"location_id":1, "short_name":"men's restroom","long_name":"foo99","description":"men's room - 99th floor","object_type_id": 11,"x_coordinate": 0,"y_coordinate": 0,"image_x": 99,"image_y": 99,"latitude": 0.0,"longitude": 0.0,"active": true});
     var raw = JSON.stringify({
       "location_id":this.props.location_id, 
       "short_name":e.target.attrs.short_name,
@@ -409,36 +198,10 @@ console.log("object type id: " + e.target.attrs.object_type_id);
       "image_x": pointerPosition.x,
       "image_y": pointerPosition.y,
     });
-console.log("props: ", this.props);
+
+    console.log("props: ", this.props);
     this.props.updateObjects(raw);
 
-  //   let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-	// 	JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
-
-  //   let headers = config.api.headers;
-
-  //   const url3 = config.api.invokeUrl + '/object/new';
-	// 	fetch(url3, 
-	// 	{
-	// 		method: "POST",
-  //     headers,
-  //     body: raw,
-	// 	}).then(response => {
-	// 		return response.json();
-	// 	}).then(result => {
-  //     //console.log("result: ", result);
-  //     // result.body.data[0]
-  //     //console.log("prevState.objects: " , this.state.objects);
-  //     
-	// 		this.setState(
-	// 			{
-  //         // objects: result.body.data
-  //         // objects: [...prevState.objects, { ...newImage(e.target, pointerPosition) }]
-  //         objects: [...this.props.objects, { ...result.body.data[0] }]
-	// 			}
-  //     );
-
-
     // put draggable back to original location
     e.target.position({ 
       x: origX,
@@ -452,107 +215,10 @@ console.log("props: ", this.props);
       shadowOffsetY: 0
     });
 
-
     e.target.getStage().draw();
 
-  // });
   }; // end handleDragImageEnd
 
-
-
-  handleDragCircStart = e => {
-    origX = e.target.attrs.x;
-    origY = e.target.attrs.y;
-    e.target.setAttrs({
-      shadowOffset: {
-        x: SHADOW_OFFSET,
-        y: SHADOW_OFFSET
-      }
-      // scaleX: 1.1,
-      // scaleY: 1.1
-    });
-  };  // end handleDragCircStart
-
-  handleDragCircEnd = e => {
-
-    const stage = e.target.getStage();
-    const pointerPosition = stage.getPointerPosition();
-
-    console.table({x: pointerPosition.x, y: pointerPosition.y});
-
-    console.log("new - canvasCirc length before add is ", this.state.canvasCirc.length);
-    console.log("target is: ", e.target);
-    console.log("target color is: ", e.target.attrs.fill);
-
-    // call to get new location_id?? and feed in to ...newCirc(location_id, e.target, pointerPosition) ??
-
-    this.setState(prevState => ({
-      canvasCirc: [...prevState.canvasCirc, { ...newCirc(e.target, pointerPosition) }]
-    }));
-
-    // put draggable back to original location
-    e.target.position({ 
-      x: origX,
-      y: origY
-    });
-
-    e.target.to({
-      duration: 0.2,
-      easing: Konva.Easings.ElasticEaseOut,
-      shadowOffsetX: 0,
-      shadowOffsetY: 0
-    });
-
-    e.target.getStage().draw();
-
-  }; // end handleDragCircEnd
-
-
-  handleDragRectStart = e => {
-    origX = e.target.attrs.x;
-    origY = e.target.attrs.y;
-    e.target.setAttrs({
-      shadowOffset: {
-        x: SHADOW_OFFSET,
-        y: SHADOW_OFFSET
-      }
-      // scaleX: 1.1,
-      // scaleY: 1.1
-    });
-  }; // end handleDragRectStart
-
-
-  handleDragRectEnd = e => {
-
-    const stage = e.target.getStage();
-    const pointerPosition = stage.getPointerPosition();
-
-    console.table({x: pointerPosition.x, y: pointerPosition.y});
-
-    console.log("new - canvasRect length before add is ", this.state.canvasRect.length);
-    console.log("target is: ", e.target);
-    console.log("target color is: ", e.target.attrs.fill);
-
-    this.setState(prevState => ({
-      canvasRect: [...prevState.canvasRect, { ...newRect(e.target, pointerPosition) }]
-    }));
-
-    // put draggable back to original location
-    e.target.position({ 
-      x: origX,
-      y: origY
-    });
-
-    e.target.to({
-      duration: 0.2,
-      easing: Konva.Easings.ElasticEaseOut,
-      shadowOffsetX: 0,
-      shadowOffsetY: 0
-    });
-
-    e.target.getStage().draw();
-
-  }; // end handleDragRectEnd
 
   render() {
 
@@ -583,8 +249,8 @@ console.log("props: ", this.props);
                 x={X[0] + CIRC_RADIUS} 
                 y={Y[0] + CIRC_RADIUS} 
                 name="CircRdSm"
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -594,8 +260,8 @@ console.log("props: ", this.props);
                 x={X[1] + CIRC_RADIUS} 
                 y={Y[0] + CIRC_RADIUS} 
                 name="CircGrySm"
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -605,8 +271,8 @@ console.log("props: ", this.props);
                 x={X[2] + CIRC_RADIUS} 
                 y={Y[0] + CIRC_RADIUS} 
                 name="CircGrnSm"
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -616,8 +282,8 @@ console.log("props: ", this.props);
                 x={X[0] + CIRC_RADIUS} 
                 y={Y[1] + CIRC_RADIUS} 
                 name="CircRdLg"
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -627,8 +293,8 @@ console.log("props: ", this.props);
                 x={X[1] + CIRC_RADIUS} 
                 y={Y[1] + CIRC_RADIUS} 
                 name="CircGryLg"
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -638,8 +304,8 @@ console.log("props: ", this.props);
                 x={X[2] + CIRC_RADIUS} 
                 y={Y[1] + CIRC_RADIUS} 
                 name="CircGrnLg"
-                onDragStart={this.handleDragCircStart}
-                onDragEnd={this.handleDragCircEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -649,8 +315,8 @@ console.log("props: ", this.props);
                 x={X[0]}
                 y={Y[2]}
                 name="Rect2"
-                onDragStart={this.handleDragRectStart}
-                onDragEnd={this.handleDragRectEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -660,8 +326,8 @@ console.log("props: ", this.props);
                 x={X[1]}
                 y={Y[2]}
                 name="Rect2"
-                onDragStart={this.handleDragRectStart}
-                onDragEnd={this.handleDragRectEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -671,8 +337,8 @@ console.log("props: ", this.props);
                 x={X[2]}
                 y={Y[2]}
                 name="Rect2"
-                onDragStart={this.handleDragRectStart}
-                onDragEnd={this.handleDragRectEnd}
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -839,7 +505,6 @@ console.log("props: ", this.props);
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
-
 
             <RenderGeneric objects={this.props.objects}/>
             <RenderPath objects={this.props.objects}/>

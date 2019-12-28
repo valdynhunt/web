@@ -19,8 +19,8 @@ const SquareGrey = (props) => {
             short_name={"grey square"}
             object_type_id={OBJECT_TYPE_ID}
             draggable
-            onDragStart={props.handleDragRectStart}
-            onDragEnd={props.handleDragRectEnd}
+            onDragStart={props.handleDragStart}
+            onDragEnd={props.handleDragEnd}
             onClick={handleSquareGreyClick}
             onMouseMove={props.handleMouseMove}
             onMouseOut={props.handleMouseOut}

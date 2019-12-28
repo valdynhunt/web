@@ -1,5 +1,5 @@
 import React from 'react';
-import Generic from '../Generic'
+import Generic from '../toolbar/Generic'
 
 
 function RenderGeneric(props) {

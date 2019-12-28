@@ -19,8 +19,8 @@ const SquareRed = (props) => {
             short_name={"red square"}
             object_type_id={OBJECT_TYPE_ID}
             draggable
-            onDragStart={props.handleDragRectStart}
-            onDragEnd={props.handleDragRectEnd}
+            onDragStart={props.handleDragStart}
+            onDragEnd={props.handleDragEnd}
             onClick={handleSquareRedClick}
             onMouseMove={props.handleMouseMove}
             onMouseOut={props.handleMouseOut}

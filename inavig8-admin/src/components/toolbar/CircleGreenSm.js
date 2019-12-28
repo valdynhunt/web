@@ -18,8 +18,8 @@ const CircleGreenSm = (props) => {
             short_name={"green circle sm"}
             object_type_id={OBJECT_TYPE_ID}
             draggable              
-            onDragStart={props.handleDragCircStart}
-            onDragEnd={props.handleDragCircEnd}
+            onDragStart={props.handleDragStart}
+            onDragEnd={props.handleDragEnd}
             onClick={handleCircleGreenSmClick}
             onMouseMove={props.handleMouseMove}
             onMouseOut={props.handleMouseOut}
