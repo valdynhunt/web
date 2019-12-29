@@ -21,8 +21,8 @@ const CircleGreenLg = (props) => {
             onDragStart={props.handleDragStart}
             onDragEnd={props.handleDragEnd}
             onClick={handleCircleGreenLgClick}
-            onMouseMove={props.handleMouseMove}
-            onMouseOut={props.handleMouseOut}  
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut} 
             shadowBlur={1} />;
   };
 

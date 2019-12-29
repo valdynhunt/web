@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Konva from 'konva';
-import { Stage, Layer, Rect } from 'react-konva';
+import { Stage, Layer, Rect, Text } from 'react-konva';
 import MapBackground from './MapBackground'
 import config from '../config.json';
 import ModalSetGrid from './ModalSetGrid';
@@ -66,6 +66,7 @@ import Plus from './toolbar/Plus';
 import Minus from './toolbar/Minus';
 import HandPaper from './toolbar/HandPaper';
 import DrawPolygon from './toolbar/DrawPolygon';
+import Tooltip from './Tooltip';
 
 const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
@@ -87,18 +88,23 @@ let origY = 0;
 
 var stage;
 var mousePos;
-var tooltipLayer = new Konva.Layer();
-var tooltip = new Konva.Text({
-  text: 'hi',
-  fontFamily: 'Calibri',
-  fontSize: 18,
-  padding: 5,
-  textFill: 'white',
-  fill: 'black',
-  alpha: 0.75,
-  // visible: false
-  visible: true
-})
+
+// var tooltipLayer = new Konva.Layer();
+// var tooltip = new Konva.Text({
+//   text: 'hi',
+//   fontFamily: 'Calibri',
+//   fontSize: 18,
+//   padding: 5,
+//   textFill: 'white',
+//   fill: 'black',
+//   alpha: 0.75,
+//   // visible: false
+//   visible: true
+// })
+
+// stage = e.target.getStage();
+// tooltipLayer.add(tooltip);
+// stage.add(tooltipLayer);
 
 // let newText = (t, pointerPosition) => ({
 
@@ -136,26 +142,25 @@ class Graphics extends Component {
     stage = e.target.getStage();
     mousePos = stage.getPointerPosition();
 
-    tooltip.position({
-      x: mousePos.x + 5,
-      y: mousePos.y + 5
-    });
+    // tooltip.position({
+    //   x: mousePos.x + 5,
+    //   y: mousePos.y + 5
+    // });
 
-    tooltip.text(e.target.attrs.text);
-    tooltip.show();
-    tooltipLayer.add(tooltip);
-    stage.add(tooltipLayer);
+    // tooltip.text(e.target.attrs.text);
+    // tooltip.show();
+
 
     // console.log("get stage ", e.target.getStage);
     // e.target.getStage().batchdraw();
-    console.log("tiptext: ", tooltip.text);
-    tooltipLayer.batchDraw();
+    // console.log("tiptext: ", tooltip.text);
+    // tooltipLayer.batchDraw();
     console.log("mouse move ", e.target)
   };
 
 
   handleMouseOut = e => { 
-    tooltip.hide();
+    // tooltip.hide();
     e.target.getStage().draw();
     console.log("mouse out ", e.target)
   };
@@ -506,32 +511,158 @@ class Graphics extends Component {
                 onMouseOut={this.handleMouseOut}
               />
 
-            <RenderGeneric objects={this.props.objects}/>
-            <RenderPath objects={this.props.objects}/>
-            <RenderDoor objects={this.props.objects}/>
-            <RenderElevator objects={this.props.objects}/>
-            <RenderStairs objects={this.props.objects}/>
-            <RenderCoffee objects={this.props.objects}/>
-            <RenderUtensils objects={this.props.objects}/>
-            <RenderRestroom objects={this.props.objects}/>
-            <RenderMale objects={this.props.objects}/>
-            <RenderFemale objects={this.props.objects}/>
-            <RenderHeartbeat objects={this.props.objects}/>
-            <RenderRecycle objects={this.props.objects}/>
-            <RenderFireExtinguisher objects={this.props.objects}/>
-            <RenderMapMarker objects={this.props.objects}/>
-            <RenderDoorOpen objects={this.props.objects}/>
-            <RenderDoorClosed objects={this.props.objects}/>
-            <RenderSquareRed objects={this.props.objects}/>
-            <RenderSquareGrey objects={this.props.objects}/>
-            <RenderSquareGreen objects={this.props.objects}/>
-            <RenderCircleRedLg objects={this.props.objects}/>
-            <RenderCircleGreyLg objects={this.props.objects}/>
-            <RenderCircleGreenLg objects={this.props.objects}/>
-            <RenderCircleRedSm objects={this.props.objects}/>
-            <RenderCircleGreySm objects={this.props.objects}/>
-            <RenderCircleGreenSm objects={this.props.objects}/>
+              <RenderGeneric
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+              <RenderPath 
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+              <RenderDoor
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
 
+              <RenderElevator
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+            
+              <RenderStairs
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+            
+              <RenderCoffee
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderUtensils
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderRestroom
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderMale
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderFemale
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderHeartbeat
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderRecycle
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderFireExtinguisher
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderMapMarker
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderDoorOpen
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderDoorClosed
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderSquareRed
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderSquareGrey
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderSquareGreen
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderCircleRedLg
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderCircleGreyLg
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderCircleGreenLg
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderCircleRedSm
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderCircleGreySm
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+              <RenderCircleGreenSm
+                objects={this.props.objects}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
+
+          </Layer>
+          <Layer>
+            <Tooltip                 
+              />
           </Layer>
         </Stage>
       </div>

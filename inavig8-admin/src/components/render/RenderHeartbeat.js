@@ -13,6 +13,8 @@ function RenderHeartbeat(props) {
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
         />
 
     )))      

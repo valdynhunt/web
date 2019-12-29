@@ -20,6 +20,8 @@ const Female = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut}
             onClick={handleFemaleClick}
           image={image} />;
   };

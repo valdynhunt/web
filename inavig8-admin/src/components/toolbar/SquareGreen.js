@@ -22,8 +22,8 @@ const SquareGreen = (props) => {
             onDragStart={props.handleDragStart}
             onDragEnd={props.handleDragEnd}
             onClick={handleSquareGreenClick}
-            onMouseMove={props.handleMouseMove}
-            onMouseOut={props.handleMouseOut}
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut}
             shadowOffset={{ x: 1, y: 1 }}
             shadowBlur={1} />;
   };

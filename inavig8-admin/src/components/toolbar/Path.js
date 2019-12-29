@@ -22,8 +22,8 @@ const Path = (props) => {
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
             onClick={handlePathClick}
-            onMouseMove={props.handleMouseMove}
-            onMouseOut={props.handleMouseOut}
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut}
             shadowBlur={1} />;
   };
 
