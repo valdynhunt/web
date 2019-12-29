@@ -155,14 +155,15 @@ class Graphics extends Component {
     // e.target.getStage().batchdraw();
     // console.log("tiptext: ", tooltip.text);
     // tooltipLayer.batchDraw();
-    console.log("mouse move ", e.target)
+    console.log("mouse move - object id: ", e.target._id, " ", e.target.short_name)
   };
 
 
   handleMouseOut = e => { 
     // tooltip.hide();
     e.target.getStage().draw();
-    console.log("mouse out ", e.target)
+    console.log("mouse out - object id: ", e.target._id, " ", e.target.short_name)
+
   };
 
 
