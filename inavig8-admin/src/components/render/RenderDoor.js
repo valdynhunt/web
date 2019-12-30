@@ -23,6 +23,8 @@ function RenderDoor(props) {
               shadowColor="black"
               shadowBlur={10}
               shadowOpacity={0.6}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
             //   onDragStart={this.handleDragStart}
             //   onDragEnd={this.handleDragEnd}
             />

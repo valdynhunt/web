@@ -5,7 +5,12 @@
  #dataArea1, #dataArea2 {
     padding: 1em;
     border: 1px solid lightgrey;
-    text-align:center;
+  }
+
+  .top-button {
+    margin-bottom: 0.7em;
+    display: flex;
+    justify-content: center;
   }
 
  p {

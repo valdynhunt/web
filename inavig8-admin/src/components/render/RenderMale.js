@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Male from './toolbar/Male';
+import React from 'react';
+import Male from '../toolbar/Male';
 
 
 function RenderMale(props) {
@@ -14,7 +14,8 @@ function RenderMale(props) {
                 key={key.object_id}
                 x={key.image_x}
                 y={key.image_y}
-
+                onMouseMove={props.onMouseMove}
+                onMouseOut={props.onMouseOut}
               />
 
         )))

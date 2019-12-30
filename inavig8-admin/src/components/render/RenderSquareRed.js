@@ -1,5 +1,6 @@
 import React from 'react';
-import SquareRed from './toolbar/SquareRed';
+import SquareRed from '../toolbar/SquareRed';
+
 
 function RenderSquareRed(props) {
              
@@ -15,8 +16,8 @@ function RenderSquareRed(props) {
               name={key.name}
               onDragStart={props.handleDragRectStart}
               onDragEnd={props.handleDragRectEnd}
-              onMouseMove={props.handleMouseMove}
-              onMouseOut={props.handleMouseOut}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
               shadowOffset={{ x: 1, y: 1 }}
               shadowBlur={1} />
 

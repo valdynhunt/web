@@ -18,11 +18,11 @@ const CircleGreyLg = (props) => {
             short_name={"grey circle lg"}
             object_type_id={OBJECT_TYPE_ID}
             draggable              
-            onDragStart={props.handleDragCircStart}
-            onDragEnd={props.handleDragCircEnd}
+            onDragStart={props.handleDragStart}
+            onDragEnd={props.handleDragEnd}
             onClick={handleCircleGreyLgClick}
-            onMouseMove={props.handleMouseMove}
-            onMouseOut={props.handleMouseOut}
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut}
             shadowBlur={1} />;
   };
 

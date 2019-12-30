@@ -1,5 +1,5 @@
 import React from 'react';
-import Restroom from './toolbar/Restroom';
+import Restroom from '../toolbar/Restroom';
 
 
 function RenderRestroom(props) {
@@ -13,6 +13,8 @@ function RenderRestroom(props) {
               key={key.object_id}
               x={key.image_x}
               y={key.image_y}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
             />
 
         )))

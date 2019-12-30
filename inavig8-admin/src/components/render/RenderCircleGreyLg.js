@@ -1,27 +1,27 @@
 import React from 'react';
-import CircleRedSm from './toolbar/CircleRedSm';
+import CircleGreyLg from '../toolbar/CircleGreyLg';
 
 
-function RenderCircleRedSm(props) {
+function RenderCircleGreyLg(props) {
              
   return (
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "red circle sm" &&
-        <CircleRedSm
+        key.object_type.short_name === "grey circle lg" &&
+        <CircleGreyLg
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
           name={key.name}
           onDragStart={props.handleDragCircStart}
           onDragEnd={props.handleDragCircEnd}
-          onMouseMove={props.handleMouseMove}
-          onMouseOut={props.handleMouseOut}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
           shadowBlur={1}
         />
 
     )))
 }
 
-export default RenderCircleRedSm;
+export default RenderCircleGreyLg;

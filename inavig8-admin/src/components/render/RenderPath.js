@@ -1,5 +1,5 @@
 import React from 'react';
-import Path from './toolbar/Path'
+import Path from '../toolbar/Path'
 
 
 function RenderPath(props) {
@@ -16,8 +16,8 @@ function RenderPath(props) {
               name={key.name}
               onDragStart={props.handleDragCircStart}
               onDragEnd={props.handleDragCircEnd}
-              onMouseMove={props.handleMouseMove}
-              onMouseOut={props.handleMouseOut}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
               shadowBlur={1}
             />
         )))

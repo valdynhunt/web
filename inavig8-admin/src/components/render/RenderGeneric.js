@@ -1,5 +1,5 @@
 import React from 'react';
-import Generic from './toolbar/Generic'
+import Generic from '../toolbar/Generic'
 
 
 function RenderGeneric(props) {
@@ -13,6 +13,8 @@ function RenderGeneric(props) {
               key={key.object_id}
               x={key.image_x}
               y={key.image_y}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
             />
         )))
 }

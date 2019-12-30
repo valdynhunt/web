@@ -1,5 +1,5 @@
 import React from 'react';
-import DoorClosed from './toolbar/DoorClosed';
+import DoorClosed from '../toolbar/DoorClosed';
 
 
 function RenderDoorClosed(props) {
@@ -13,6 +13,8 @@ function RenderDoorClosed(props) {
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
         />
 
     )))

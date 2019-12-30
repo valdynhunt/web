@@ -20,6 +20,8 @@ const ImageRegular = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut}
             onClick={handleImageRegularClick}
           image={image} />;
   };

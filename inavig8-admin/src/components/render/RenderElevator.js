@@ -1,5 +1,5 @@
 import React from 'react';
-import Elevator from './toolbar/Elevator';
+import Elevator from '../toolbar/Elevator';
 
 
 function RenderElevator(props) {
@@ -13,6 +13,8 @@ function RenderElevator(props) {
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
         />
 
     )))

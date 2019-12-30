@@ -1,5 +1,5 @@
 import React from 'react';
-import FireExtinguisher from './toolbar/FireExtinguisher';
+import FireExtinguisher from '../toolbar/FireExtinguisher';
 
 
 function RenderFireExtinguisher(props) {
@@ -13,6 +13,8 @@ function RenderFireExtinguisher(props) {
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
         />
 
     )))      

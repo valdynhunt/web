@@ -1,5 +1,5 @@
 import React from 'react';
-import Utensils from './toolbar/Utensils';
+import Utensils from '../toolbar/Utensils';
 
 
 function RenderUtensils(props) {
@@ -13,6 +13,8 @@ function RenderUtensils(props) {
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
         />
 
     )))
