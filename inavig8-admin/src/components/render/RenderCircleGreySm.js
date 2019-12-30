@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderCircleGreySm.js
 import CircleGreySm from '../toolbar/CircleGreySm';
-=======
-import CircleGreySm from './toolbar/CircleGreySm';
->>>>>>> master:inavig8-admin/src/components/RenderCircleGreySm.js
 
 
 function RenderCircleGreySm(props) {

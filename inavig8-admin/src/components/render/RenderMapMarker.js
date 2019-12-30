@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderMapMarker.js
 import MapMarker from '../toolbar/MapMarker';
-=======
-import MapMarker from './toolbar/MapMarker';
->>>>>>> master:inavig8-admin/src/components/RenderMapMarker.js
 
 
 function RenderMapMarker(props) {

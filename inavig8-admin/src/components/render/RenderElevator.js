@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderElevator.js
 import Elevator from '../toolbar/Elevator';
-=======
-import Elevator from './toolbar/Elevator';
->>>>>>> master:inavig8-admin/src/components/RenderElevator.js
 
 
 function RenderElevator(props) {

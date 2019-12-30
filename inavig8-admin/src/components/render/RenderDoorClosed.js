@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderDoorClosed.js
 import DoorClosed from '../toolbar/DoorClosed';
-=======
-import DoorClosed from './toolbar/DoorClosed';
->>>>>>> master:inavig8-admin/src/components/RenderDoorClosed.js
 
 
 function RenderDoorClosed(props) {

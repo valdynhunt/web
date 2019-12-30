@@ -5,7 +5,6 @@ import { Stage, Layer, Rect, Text } from 'react-konva';
 import MapBackground from './MapBackground'
 import config from '../config.json';
 import ModalSetGrid from './ModalSetGrid';
-<<<<<<< HEAD
 
 import RenderGeneric from './render/RenderGeneric';
 import RenderPath from './render/RenderPath';
@@ -32,33 +31,6 @@ import RenderCircleGreenSm from './render/RenderCircleGreenSm';
 import RenderCircleRedLg from './render/RenderCircleRedLg';
 import RenderCircleGreyLg from './render/RenderCircleGreyLg';
 import RenderCircleGreenLg from './render/RenderCircleGreenLg';
-=======
-import RenderGeneric from './RenderGeneric';
-import RenderPath from './RenderPath';
-import RenderDoor from './RenderDoor';
-import RenderElevator from './RenderElevator';
-import RenderStairs from './RenderStairs';
-import RenderCoffee from './RenderCoffee';
-import RenderUtensils from './RenderUtensils';
-import RenderRestroom from './RenderRestroom';
-import RenderMale from './RenderMale';
-import RenderFemale from './RenderFemale';
-import RenderHeartbeat from './RenderHeartbeat';
-import RenderRecycle from './RenderRecycle';
-import RenderFireExtinguisher from './RenderFireExtinguisher';
-import RenderMapMarker from './RenderMapMarker';
-import RenderDoorOpen from './RenderDoorOpen';
-import RenderDoorClosed from './RenderDoorClosed';
-import RenderSquareRed from './RenderSquareRed';
-import RenderSquareGrey from './RenderSquareGrey';
-import RenderSquareGreen from './RenderSquareGreen';
-import RenderCircleRedSm from './RenderCircleRedSm';
-import RenderCircleGreySm from './RenderCircleGreySm';
-import RenderCircleGreenSm from './RenderCircleGreenSm';
-import RenderCircleRedLg from './RenderCircleRedLg';
-import RenderCircleGreyLg from './RenderCircleGreyLg';
-import RenderCircleGreenLg from './RenderCircleGreenLg';
->>>>>>> master
 
 import CircleRedSm from './toolbar/CircleRedSm';
 import CircleGreySm from './toolbar/CircleGreySm';
@@ -71,11 +43,7 @@ import SquareGrey from './toolbar/SquareGrey';
 import SquareGreen from './toolbar/SquareGreen';
 
 import Restroom from './toolbar/Restroom';
-<<<<<<< HEAD
-import Male from './Male';
-=======
 import Male from './toolbar/Male';
->>>>>>> master
 import Female from './toolbar/Female';
 import Coffee from './toolbar/Coffee';
 import Utensils from './toolbar/Utensils';
@@ -98,11 +66,7 @@ import Plus from './toolbar/Plus';
 import Minus from './toolbar/Minus';
 import HandPaper from './toolbar/HandPaper';
 import DrawPolygon from './toolbar/DrawPolygon';
-<<<<<<< HEAD
 import Tooltip from './Tooltip';
-=======
->>>>>>> master
-
 const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
 const TOOLBAR_WIDTH = 120;
