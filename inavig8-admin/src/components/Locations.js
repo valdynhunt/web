@@ -1,5 +1,5 @@
 import React from 'react';
-import Location from './Location';
+import LocationList from './LocationList';
 import './Locations.css';
 
 class Locations extends React.Component {
@@ -9,29 +9,18 @@ class Locations extends React.Component {
         return (
 
             <main className="locations-container">
-                {/* <section className="locations-list">//
-                    <h4>Locations List</h4>
+                <section className="location-list">
+                    <h4>Locations</h4>
                     <ul>
-                        <li>&#187; lorem ipsum dolor sit amet
-                            <ul>
-                                <li>&#187; lorem ipsum dolor sit amet</li>
-                                <li>&#187; lorem ipsum dolor sit amet
-                                    <ul>
-                                        <li>&#187; lorem ipsum dolor sit amet</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>&#187; lorem ipsum dolor sit amet</li>
+                        {Object.keys(this.props.locations).map(key => (
+                            <LocationList
+                                key={key}
+                                id={key}
+                                details={this.props.locations[key]} 
+                            />
+                        ))}
                     </ul>
-                </section> */}
-                {Object.keys(this.props.locations).map(key => (
-                    <Location
-                        key={key}
-                        id={key}
-                        details={this.props.locations[key]} 
-                    />
-                ))}
+                </section>
                 <section className="location-view">
                     <h4>Locations View</h4>
                     <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />

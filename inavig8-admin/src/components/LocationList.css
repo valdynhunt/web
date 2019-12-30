@@ -1,0 +1,14 @@
+section.location-list ul {
+    list-style: none;
+    /* padding-left: 0.6em; */
+}
+
+section.location-list ul li {
+    padding: 0.4em 0.4em 0.4em 0.8em;
+    font-size: 1.25em;
+    margin-bottom: 0.4em;
+}
+
+section.location-list ul li:hover {
+    background: var(--primary-color);
+}

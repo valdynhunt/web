@@ -9,6 +9,12 @@ class Header extends React.Component {
     render() {
 
         const { username, password, email, first_name, last_name, role } = this.props.profile;
+        const months = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+
+        var today = new Date();
+        var date = months[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear();
 
         return (
 
@@ -87,7 +93,7 @@ class Header extends React.Component {
                 </div>
                 <div className="header-lower">
                     {/* <h6>Hello, Jason</h6> */}
-                    <input type="button" className="button-date" value="Nov 17, 2019" readOnly="readonly" />
+                    <input type="button" className="button-date" value={date} readOnly="readonly" />
                 </div>
             </header>
 
