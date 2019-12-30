@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderCircleGreySm.js
+import CircleGreySm from '../toolbar/CircleGreySm';
+=======
 import CircleGreySm from './toolbar/CircleGreySm';
+>>>>>>> master:inavig8-admin/src/components/RenderCircleGreySm.js
 
 
 function RenderCircleGreySm(props) {
@@ -16,8 +20,8 @@ function RenderCircleGreySm(props) {
           name={key.name}
           onDragStart={props.handleDragCircStart}
           onDragEnd={props.handleDragCircEnd}
-          onMouseMove={props.handleMouseMove}
-          onMouseOut={props.handleMouseOut}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
           shadowBlur={1}
         />
 

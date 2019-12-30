@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderSquareGreen.js
+import SquareGreen from '../toolbar/SquareGreen';
+=======
 import SquareGreen from './toolbar/SquareGreen';
+>>>>>>> master:inavig8-admin/src/components/RenderSquareGreen.js
 
 function RenderSquareGreen(props) {
              
@@ -15,8 +19,8 @@ function RenderSquareGreen(props) {
               name={key.name}
               onDragStart={props.handleDragRectStart}
               onDragEnd={props.handleDragRectEnd}
-              onMouseMove={props.handleMouseMove}
-              onMouseOut={props.handleMouseOut}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
               shadowOffset={{ x: 1, y: 1 }}
               shadowBlur={1} />
 

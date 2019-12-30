@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderStairs.js
+import Stairs from '../toolbar/Stairs';
+=======
 import Stairs from './toolbar/Stairs';
+>>>>>>> master:inavig8-admin/src/components/RenderStairs.js
 
 
 function RenderStairs(props) {
@@ -13,6 +17,8 @@ function RenderStairs(props) {
             key={key.object_id}
             x={key.image_x}
             y={key.image_y}
+            onMouseMove={props.onMouseMove}
+            onMouseOut={props.onMouseOut}
           />
   
       )))

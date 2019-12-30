@@ -30,8 +30,11 @@ class Data extends React.Component {
 
     if (this.state.isActive) {
       return (
-        <div id="dataArea1">   
-          <button type="button" className="btn btn-secondary" onClick={this.handleHide}>hide data</button>     
+        <div id="dataArea1">
+          <div className="top-button">
+            <button type="button" className="btn btn-secondary" onClick={this.handleHide}>hide data</button>  
+          </div>   
+             
           {Object.keys(data).map(key => (
               <Obj
                   key={key}
@@ -46,7 +49,9 @@ class Data extends React.Component {
     } else {      
       return (
         <div id="dataArea2">
-          <button type="button" className="btn btn-secondary" onClick={this.handleShow}>show data</button>     
+          <div className="top-button">
+            <button type="button" className="btn btn-secondary" onClick={this.handleShow}>show data</button>     
+          </div>
         </div>      
       )    
     }  

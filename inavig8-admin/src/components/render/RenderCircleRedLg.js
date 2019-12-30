@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderCircleRedLg.js
+import CircleRedLg from '../toolbar/CircleRedLg';
+=======
 import CircleRedLg from './toolbar/CircleRedLg';
+>>>>>>> master:inavig8-admin/src/components/RenderCircleRedLg.js
 
 
 function RenderCircleRedLg(props) {
@@ -16,8 +20,8 @@ function RenderCircleRedLg(props) {
           name={key.name}
           onDragStart={props.handleDragCircStart}
           onDragEnd={props.handleDragCircEnd}
-          onMouseMove={props.handleMouseMove}
-          onMouseOut={props.handleMouseOut}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
           shadowBlur={1}
         />
 

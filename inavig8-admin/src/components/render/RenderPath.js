@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderPath.js
+import Path from '../toolbar/Path'
+=======
 import Path from './toolbar/Path'
+>>>>>>> master:inavig8-admin/src/components/RenderPath.js
 
 
 function RenderPath(props) {
@@ -16,8 +20,8 @@ function RenderPath(props) {
               name={key.name}
               onDragStart={props.handleDragCircStart}
               onDragEnd={props.handleDragCircEnd}
-              onMouseMove={props.handleMouseMove}
-              onMouseOut={props.handleMouseOut}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
               shadowBlur={1}
             />
         )))

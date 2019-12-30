@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderCircleGreenSm.js
+import CircleGreenSm from '../toolbar/CircleGreenSm';
+=======
 import CircleGreenSm from './toolbar/CircleGreenSm';
+>>>>>>> master:inavig8-admin/src/components/RenderCircleGreenSm.js
 
 
 function RenderCircleGreenSm(props) {
@@ -16,8 +20,8 @@ function RenderCircleGreenSm(props) {
           name={key.name}
           onDragStart={props.handleDragCircStart}
           onDragEnd={props.handleDragCircEnd}
-          onMouseMove={props.handleMouseMove}
-          onMouseOut={props.handleMouseOut}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
           shadowBlur={1}
         />
 

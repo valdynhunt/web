@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderSquareGrey.js
+import SquareGrey from '../toolbar/SquareGrey';
+=======
 import SquareGrey from './toolbar/SquareGrey';
+>>>>>>> master:inavig8-admin/src/components/RenderSquareGrey.js
 
 function RenderSquareGrey(props) {
              
@@ -15,8 +19,8 @@ function RenderSquareGrey(props) {
               name={key.name}
               onDragStart={props.handleDragRectStart}
               onDragEnd={props.handleDragRectEnd}
-              onMouseMove={props.handleMouseMove}
-              onMouseOut={props.handleMouseOut}
+              onMouseMove={props.onMouseMove}
+              onMouseOut={props.onMouseOut}
               shadowOffset={{ x: 1, y: 1 }}
               shadowBlur={1} />
 

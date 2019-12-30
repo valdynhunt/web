@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderFireExtinguisher.js
+import FireExtinguisher from '../toolbar/FireExtinguisher';
+=======
 import FireExtinguisher from './toolbar/FireExtinguisher';
+>>>>>>> master:inavig8-admin/src/components/RenderFireExtinguisher.js
 
 
 function RenderFireExtinguisher(props) {
@@ -13,6 +17,8 @@ function RenderFireExtinguisher(props) {
           key={key.object_id}
           x={key.image_x}
           y={key.image_y}
+          onMouseMove={props.onMouseMove}
+          onMouseOut={props.onMouseOut}
         />
 
     )))      
