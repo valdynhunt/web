@@ -1,9 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderSquareGrey.js
 import SquareGrey from '../toolbar/SquareGrey';
-=======
-import SquareGrey from './toolbar/SquareGrey';
->>>>>>> master:inavig8-admin/src/components/RenderSquareGrey.js
+
 
 function RenderSquareGrey(props) {
              

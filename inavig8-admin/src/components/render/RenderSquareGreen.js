@@ -1,9 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderSquareGreen.js
 import SquareGreen from '../toolbar/SquareGreen';
-=======
-import SquareGreen from './toolbar/SquareGreen';
->>>>>>> master:inavig8-admin/src/components/RenderSquareGreen.js
+
 
 function RenderSquareGreen(props) {
              

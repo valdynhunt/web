@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderSquare.js
-import Square from '../Generic';
-=======
-import Square from './toolbar/Generic';
->>>>>>> master:inavig8-admin/src/components/RenderSquare.js
+import Square from '../toolbar/Generic';
 
 
 function RenderSquare(props) {

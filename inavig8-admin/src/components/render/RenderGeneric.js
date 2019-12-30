@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderGeneric.js
 import Generic from '../toolbar/Generic'
-=======
-import Generic from './toolbar/Generic'
->>>>>>> master:inavig8-admin/src/components/RenderGeneric.js
 
 
 function RenderGeneric(props) {

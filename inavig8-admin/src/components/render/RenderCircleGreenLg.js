@@ -1,9 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD:inavig8-admin/src/components/render/RenderCircleGreenLg.js
 import CircleGreenLg from '../toolbar/CircleGreenLg';
-=======
-import CircleGreenLg from './toolbar/CircleGreenLg';
->>>>>>> master:inavig8-admin/src/components/RenderCircleGreenLg.js
+
 
 function RenderCircleGreenLg(props) {
              
