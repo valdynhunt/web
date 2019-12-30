@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderRestroom.js
 import Restroom from '../toolbar/Restroom';
+=======
+import Restroom from './toolbar/Restroom';
+>>>>>>> master:inavig8-admin/src/components/RenderRestroom.js
 
 
 function RenderRestroom(props) {

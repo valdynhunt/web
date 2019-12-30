@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderCoffee.js
 import Coffee from '../toolbar/Coffee';
+=======
+import Coffee from './toolbar/Coffee';
+>>>>>>> master:inavig8-admin/src/components/RenderCoffee.js
 
 
 function RenderCoffee(props) {

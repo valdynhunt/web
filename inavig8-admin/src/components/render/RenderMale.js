@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderMale.js
 import Male from '../Male';
+=======
+import Male from './toolbar/Male';
+>>>>>>> master:inavig8-admin/src/components/RenderMale.js
 
 
 function RenderMale(props) {

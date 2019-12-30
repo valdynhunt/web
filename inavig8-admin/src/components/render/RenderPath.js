@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderPath.js
 import Path from '../toolbar/Path'
+=======
+import Path from './toolbar/Path'
+>>>>>>> master:inavig8-admin/src/components/RenderPath.js
 
 
 function RenderPath(props) {

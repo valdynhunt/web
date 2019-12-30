@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:inavig8-admin/src/components/render/RenderStairs.js
 import Stairs from '../toolbar/Stairs';
+=======
+import Stairs from './toolbar/Stairs';
+>>>>>>> master:inavig8-admin/src/components/RenderStairs.js
 
 
 function RenderStairs(props) {
