@@ -1,5 +1,5 @@
 import React from 'react';
-import Recycle from './Recycle';
+import Recycle from './toolbar/Recycle';
 
 
 function RenderRecycle(props) {
@@ -10,7 +10,7 @@ function RenderRecycle(props) {
         
         key.object_type.short_name === "recycle" &&
         <Recycle
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

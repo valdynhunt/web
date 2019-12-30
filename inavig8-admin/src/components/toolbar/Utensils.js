@@ -2,24 +2,27 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const HEARTBEAT_SRC = '/img/icons/heartbeat.png'; 
+const UTENSILS_SRC = '/img/icons/utensils.png'; 
+const OBJECT_TYPE_ID = 9;
 
-const Heartbeat = (props) => {
-    const [image] = useImage(HEARTBEAT_SRC);
-    const handleHeartbeatClick = (e) => {
-      console.log('heartbeat clicked');
+const Utensils = (props) => {
+    const [image] = useImage(UTENSILS_SRC);
+    const handleUtensilsClick = (e) => {
+      console.log('utensils clicked');
     }
     return <Image 
             x={props.x} 
             y={props.y} 
             scaleX={0.04} 
             scaleY={0.04} 
+            short_name={"utensils"}
+            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onClick={handleHeartbeatClick}
+            onClick={handleUtensilsClick}
           image={image} />;
   };
 
 
-  export default Heartbeat;
+  export default Utensils;

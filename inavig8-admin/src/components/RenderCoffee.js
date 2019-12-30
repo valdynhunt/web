@@ -1,5 +1,5 @@
 import React from 'react';
-import Coffee from './Coffee';
+import Coffee from './toolbar/Coffee';
 
 
 function RenderCoffee(props) {
@@ -10,7 +10,7 @@ function RenderCoffee(props) {
         
         key.object_type.short_name === "coffee" &&
         <Coffee
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

@@ -1,5 +1,5 @@
 import React from 'react';
-import SquareGreen from './SquareGreen';
+import SquareGreen from './toolbar/SquareGreen';
 
 function RenderSquareGreen(props) {
              
@@ -9,7 +9,7 @@ function RenderSquareGreen(props) {
             
             key.object_type.short_name === "green square" &&
             <SquareGreen
-              key={key}
+              key={key.object_id}
               x={key.image_x}
               y={key.image_y}
               name={key.name}

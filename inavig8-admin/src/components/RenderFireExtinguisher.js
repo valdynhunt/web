@@ -1,5 +1,5 @@
 import React from 'react';
-import FireExtinguisher from './FireExtinguisher';
+import FireExtinguisher from './toolbar/FireExtinguisher';
 
 
 function RenderFireExtinguisher(props) {
@@ -10,7 +10,7 @@ function RenderFireExtinguisher(props) {
         
         key.object_type.short_name === "fire extinguisher" &&
         <FireExtinguisher
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
         />

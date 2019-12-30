@@ -1,5 +1,5 @@
 import React from 'react';
-import Stairs from './Stairs';
+import Stairs from './toolbar/Stairs';
 
 
 function RenderStairs(props) {
@@ -10,7 +10,7 @@ function RenderStairs(props) {
           
           key.object_type.short_name === "stairs" &&
           <Stairs
-            key={key}
+            key={key.object_id}
             x={key.image_x}
             y={key.image_y}
           />

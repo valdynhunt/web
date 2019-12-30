@@ -1,0 +1,13 @@
+.data {
+    background: lightgrey;
+  }
+
+ #dataArea1, #dataArea2 {
+    padding: 1em;
+    border: 1px solid lightgrey;
+    text-align:center;
+  }
+
+ p {
+    margin-top: 1em;
+  }

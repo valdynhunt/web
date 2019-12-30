@@ -1,5 +1,5 @@
 import React from 'react';
-import CircleGreyLg from './CircleGreyLg';
+import CircleGreyLg from './toolbar/CircleGreyLg';
 
 
 function RenderCircleGreyLg(props) {
@@ -10,7 +10,7 @@ function RenderCircleGreyLg(props) {
         
         key.object_type.short_name === "grey circle lg" &&
         <CircleGreyLg
-          key={key}
+          key={key.object_id}
           x={key.image_x}
           y={key.image_y}
           name={key.name}
