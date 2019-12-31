@@ -94,9 +94,8 @@ class Design extends Component {
 
         const url3 = config.api.invokeUrl + '/object/delete/' + object_id;
         fetch(url3, {
-            method: "DELETE",
+            method: "GET",
             headers,
-            body: raw,
         }).then(response => {
             return response.json();
         }).then(result => {
@@ -140,7 +139,7 @@ class Design extends Component {
 
         const url3 = config.api.invokeUrl + '/object/update';
         fetch(url3, {
-            method: "UPDATE",
+            method: "POST",
             headers,
             body: raw,
         }).then(response => {
