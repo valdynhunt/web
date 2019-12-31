@@ -10,6 +10,20 @@ class Data extends React.Component {
     this.state = {isActive: false}
   }
 
+  handleUpdateObject = (raw) => {
+    this.props.handleUpdateObject(raw);
+    console.log("updated...kidding from Data.js! raw : ", raw);
+
+  }
+
+  handleDeleteObject = (object_id) => {
+    this.props.handleDeleteObject(object_id);
+    console.log("deleted...kidding from Data.js! id: ", object_id);
+
+  }
+
+
+
   handleShow = () => {
     this.setState({
       isActive: true
@@ -41,6 +55,8 @@ class Data extends React.Component {
                   id={key}
                   details={data[key]}
                   location_id={location.location_id}
+                  handleDeleteObject={this.handleDeleteObject}
+                  handleUpdateObject={this.handleUpdateObject}
               />
           ))}         
                 

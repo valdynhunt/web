@@ -27,12 +27,22 @@ class Object extends React.Component {
         );
     }
 
-    onUpdate = () => {
-        console.log("updated...kidding!");
+    onUpdate = (raw) => {
+        this.props.handleUpdateObject(raw);
+        console.log("updated...kidding from Obj.js! raw : ", raw);
+
     }
 
-    onDelete = () => {
-        console.log("deleted...kidding!");
+    onDelete = (object_id) => {
+        this.props.handleDeleteObject(object_id);
+        console.log("deleted...kidding from Obj.js! id: ", object_id);
+    }
+
+    handleChange = (e) => {
+        console.log("changing: ", e.currentTarget.value);
+        let updateObject = {
+            ...this.props.details, 
+            [e.currentTarget.name]: e.currentTarget.value}
     }
   
     render() {
@@ -84,7 +94,10 @@ class Object extends React.Component {
                                     //placeholder="short_name"
                                     aria-label="short_name"
                                     aria-describedby="basic-addon1"
+                                    ref="short_name"
                                     value={short_name}
+                                    onChange={this.handleChange}
+
                                 />
                             </InputGroup>
                         </label>
@@ -97,7 +110,10 @@ class Object extends React.Component {
                                     placeholder="no long name"
                                     aria-label="long_name"
                                     aria-describedby="basic-addon1"
+                                    name="long_name"
                                     value={long_name}
+                                    onChange={this.handleChange}
+
                                 />
                             </InputGroup>
                         </label>
@@ -110,7 +126,10 @@ class Object extends React.Component {
                                     placeholder="no description"
                                     aria-label="desc"
                                     aria-describedby="basic-addon1"
+                                    name="desc"
                                     value={desc}
+                                    onChange={this.handleChange}
+
                                 />
                             </InputGroup>
                         </label>
@@ -123,7 +142,9 @@ class Object extends React.Component {
                                     placeholder="no x-coordinate"
                                     aria-label="image_x"
                                     aria-describedby="basic-addon1"
+                                    name="image_x"
                                     value={image_x}
+                                    readOnly="readonly"
                                 />
                             </InputGroup>
                         </label>
@@ -136,7 +157,9 @@ class Object extends React.Component {
                                     placeholder="no y-coordinate"
                                     aria-label="image_y"
                                     aria-describedby="basic-addon1"
+                                    name="image_y"
                                     value={image_y}
+                                    readOnly="readonly"
                                 />
                             </InputGroup>
                         </label>
@@ -149,16 +172,18 @@ class Object extends React.Component {
                                     //placeholder="no y-coordinate"
                                     aria-label="location_id"
                                     aria-describedby="basic-addon1"
+                                    name="location_id"
                                     value={location_id}
+                                    onChange={this.handleChange}
                                 />
                             </InputGroup>
                         </label>
                         <hr />
-                        <Button variant="danger" onClick={this.onDelete}>Delete</Button>
+                        <Button variant="danger" onClick={() => this.onDelete(object_id)}>Delete</Button>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>
-                        <Button onClick={this.onUpdate}>Update</Button>
+                        <Button onClick={() => this.onUpdate(this.props.details)}>Update</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
