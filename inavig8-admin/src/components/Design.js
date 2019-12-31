@@ -83,7 +83,31 @@ class Design extends Component {
         
     }
 
-    updateObjects = (raw) => {
+
+    handleDeleteObject = (object_id) => {
+
+        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+        let headers = config.api.headers;
+        var raw = "";
+
+        const url3 = config.api.invokeUrl + '/object/delete/' + object_id;
+        fetch(url3, {
+            method: "DELETE",
+            headers,
+            body: raw,
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            console.log("deleting object...", result);
+            this.setState(
+                prevState => ({ objects: prevState.objects.filter(object => object.object_id !== object_id) })
+                );
+        });
+    }
+
+    newObject = (raw) => {
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -93,6 +117,30 @@ class Design extends Component {
         const url3 = config.api.invokeUrl + '/object/new';
         fetch(url3, {
             method: "POST",
+            headers,
+            body: raw,
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            this.setState(
+                {
+                    objects: [...this.state.objects, { ...result.body.data[0] }]
+                }
+            );
+
+        });
+    }
+
+    handleUpdateObject = (raw) => {
+
+        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+        let headers = config.api.headers;
+
+        const url3 = config.api.invokeUrl + '/object/update';
+        fetch(url3, {
+            method: "UPDATE",
             headers,
             body: raw,
         }).then(response => {
@@ -117,7 +165,8 @@ class Design extends Component {
             <Row><Col sm={12}><Header className="header" /></Col></Row>
             <Row>
             <Col sm={9}><Graphics location_id={this.props.match.params.location_id} className="graphics" key="1" objects={this.state.objects} location={this.state.location} updateObjects={this.updateObjects} /></Col>
-            <Col sm={3}><Data className="data" key={this.props.match.params.location_id}  objects={this.state.objects} location={this.state.location} /></Col>
+            <Col sm={3}><Data className="data" key={this.props.match.params.location_id}  objects={this.state.objects} location={this.state.location} 
+                        handleDeleteObject={this.handleDeleteObject} handleUpdateObject={this.handleUpdateObject} /></Col>
             </Row>
             <Row><Col sm={12}><Footer className="footer" /></Col></Row>
         </Container>
