@@ -14,6 +14,7 @@ const Path = (props) => {
             x={props.x} 
             y={props.y} 
             radius={CIRC_RADIUS_SM} 
+            object_id={props.object_id}
             name={props.name}
             fill="black" 
             short_name={"path"}

@@ -14,6 +14,7 @@ const FireExtinguisher = (props) => {
     return <Image 
             x={props.x} 
             y={props.y} 
+            object_id={props.object_id}
             scaleX={0.04} 
             scaleY={0.04} 
             short_name={"fire extinguisher"}

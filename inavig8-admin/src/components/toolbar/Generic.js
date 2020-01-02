@@ -13,6 +13,7 @@ const Generic = (props) => {
     return <Image 
             x={props.x} 
             y={props.y} 
+            object_id={props.object_id}
             scaleX={0.02} 
             scaleY={0.02} 
             short_name={"generic"}

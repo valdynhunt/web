@@ -3,7 +3,7 @@ import Path from '../toolbar/Path'
 
 
 function RenderPath(props) {
-             
+  
     return (
 
         props.objects.map((key) => (
@@ -11,6 +11,7 @@ function RenderPath(props) {
             key.object_type.short_name === "path" &&
             <Path
               key={key.object_id}
+              object_id={key.object_id}
               x={key.image_x}
               y={key.image_y}
               name={key.name}

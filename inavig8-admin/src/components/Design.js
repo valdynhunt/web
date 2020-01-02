@@ -51,40 +51,65 @@ class Design extends Component {
                     {
                         objects: result.body.data
                     }
-            );
+                );
 
-        console.log("objects: ", result.body.data);
-        console.log("state: ", this.state);
-        console.log("checking if primary and secondary are set...");
+                console.log("JASON! objects: ", result.body.data);
+                console.log("state: ", this.state);
+                console.log("checking if primary and secondary are set...");
 
-        let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
-        let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
-        let scaleIsSet = false;
-        let renderModal = false;
+                let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
+                let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
+                let scaleIsSet = false;
+                let renderModal = false;
 
-        console.log("scale set? ", scaleIsSet);
-        console.log("foundPrimary: ", foundPrimary);
-        console.log("foundSecondary: ", foundSecondary);
+                console.log("scale set? ", scaleIsSet);
+                console.log("foundPrimary: ", foundPrimary);
+                console.log("foundSecondary: ", foundSecondary);
 
-        // check if scale set
-        scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
-        console.log("scale set? ", scaleIsSet);
+                // check if scale set
+                scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
+                console.log("scale set? ", scaleIsSet);
 
-        // if primary and secondary and grid not set, then show modal to input
-        if (!foundPrimary || !foundSecondary || !scaleIsSet) {
-            // show model to set them and set grid
-            // show modal here
-            renderModal = true;
+                // if primary and secondary and grid not set, then show modal to input
+                if (!foundPrimary || !foundSecondary || !scaleIsSet) {
+                    // show model to set them and set grid
+                    // show modal here
+                    renderModal = true;
 
-        }
+                }
 
-        console.log("renderModal: ", renderModal);
-        });
+                console.log("renderModal: ", renderModal);
+            });
+
+        const localStorageRef = localStorage.getItem(this.props.match.params.location_id);
+        console.log("localStorageRef: ", localStorageRef);
+        // if (localStorageRef) {
+        //     this.setState(
+        //         { 
+        //             objects: JSON.parse(localStorageRef) 
+        //         }
+        //     );
+        // }
         
     }
 
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (prevState.objects !== this.state.objects) {
+    //         console.log("ALERT! the state has changed!!");
+    //         console.log("prevState.objects: ", prevState.objects);
+    //         console.log("this.state.objects: ", this.state.objects);
+    //         this.setState(
+    //             {
+    //                 objects: [ ...this.state.objects ]
+    //             }
+    //         )
+    //     }
+    // }
+
 
     handleDeleteObject = (object_id) => {
+
+        console.log("deleting object in Design.js, object id " + object_id);
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -99,14 +124,20 @@ class Design extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
-            console.log("deleting object...", result);
+            console.log("deleted object from Design.js", result);
             this.setState(
-                prevState => ({ objects: prevState.objects.filter(object => object.object_id !== object_id) })
-                );
+                prevState => (
+                    { 
+                        objects: prevState.objects.filter(object => object.object_id !== object_id) 
+                    }
+                )
+            );
         });
+
+        console.log("list of objects after deletion: ", this.state.objects);
     }
 
-    newObject = (raw) => {
+    handleNewObject = (raw) => {
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -130,7 +161,7 @@ class Design extends Component {
         });
     }
 
-    handleUpdateObject = (raw) => {
+    handleUpdateObject = (index, raw) => {
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -145,31 +176,73 @@ class Design extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
-            this.setState(
-                {
-                    objects: [...this.state.objects, { ...result.body.data[0] }]
-                }
-            );
-
+            /* TODO: unable to setState without errors */
+            
+            // const objects = {...this.state.objects};
+            // raw.long_name="def leppard";
+            // objects[index] = raw;
+            // this.setState(
+            //     { 
+            //         objects
+            //     }
+            // );
         });
+    }
+
+    handleFormChange = (index, updatedField) => {
+        console.log(index + ": updatedField in Design.js = ", updatedField);
+        /* TODO: unable to setState without errors */
+        
+        // const objects = {...this.state.objects};
+        // objects[index] = updatedField; 
+        // this.setState(
+        //     { 
+        //         objects 
+        //     }
+        // );
     }
 
 
     render() {
 
-        const location_id = this.props.match.params.location_id;
         return (
-        <div>
-        <Container fluid="true" className="main">
-            <Row><Col sm={12}><Header className="header" /></Col></Row>
-            <Row>
-            <Col sm={9}><Graphics location_id={this.props.match.params.location_id} className="graphics" key="1" objects={this.state.objects} location={this.state.location} updateObjects={this.updateObjects} /></Col>
-            <Col sm={3}><Data className="data" key={this.props.match.params.location_id}  objects={this.state.objects} location={this.state.location} 
-                        handleDeleteObject={this.handleDeleteObject} handleUpdateObject={this.handleUpdateObject} /></Col>
-            </Row>
-            <Row><Col sm={12}><Footer className="footer" /></Col></Row>
-        </Container>
-        </div>
+            <div>
+                <Container fluid="true" className="main">
+                    <Row>
+                        <Col sm={12}>
+                            <Header className="header" />
+                        </Col>
+                    </Row>
+                    <Row>
+                    <Col sm={9}>
+                        <Graphics
+                            location_id={this.props.match.params.location_id} 
+                            className="graphics" key="1" 
+                            objects={this.state.objects} 
+                            location={this.state.location}
+                            //updateObjects={this.updateObjects} 
+
+                        />
+                    </Col>
+                    <Col sm={3}>
+                        <Data 
+                            className="data" 
+                            key={this.props.match.params.location_id}  
+                            objects={this.state.objects} 
+                            location={this.state.location} 
+                            handleDeleteObject={this.handleDeleteObject} 
+                            handleUpdateObject={this.handleUpdateObject} 
+                            handleFormChange={this.handleFormChange}
+                        />
+                    </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
+                            <Footer className="footer" />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }

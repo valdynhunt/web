@@ -13,6 +13,7 @@ const Coffee = (props) => {
     return <Image 
             x={props.x} 
             y={props.y} 
+            object_id={props.object_id}
             object_type_id={OBJECT_TYPE_ID}
             scaleX={0.04} 
             scaleY={0.04} 

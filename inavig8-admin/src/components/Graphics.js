@@ -133,11 +133,12 @@ class Graphics extends Component {
   }
 
 
-  componentDidMount() {
+  // componentDidMount() {
 
-  }
+  // }
 
   handleMouseMove = e => { 
+    console.log("handleMouseMove (mouse move): ", e);
     stage = e.target.getStage();
     mousePos = stage.getPointerPosition();
 
@@ -154,14 +155,14 @@ class Graphics extends Component {
     // e.target.getStage().batchdraw();
     // console.log("tiptext: ", tooltip.text);
     // tooltipLayer.batchDraw();
-    console.log("mouse move - object id: ", e.target._id, " ", e.target.short_name)
+    console.log("mouse move - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name);
   };
 
 
   handleMouseOut = e => { 
     // tooltip.hide();
     e.target.getStage().draw();
-    console.log("mouse out - object id: ", e.target._id, " ", e.target.short_name)
+    console.log("mouse out - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name)
 
   };
 
@@ -204,8 +205,8 @@ class Graphics extends Component {
       "image_y": pointerPosition.y,
     });
 
-    console.log("props: ", this.props);
-    this.props.updateObjects(raw);
+    // console.log("props: ", this.props);
+    // this.props.updateObjects(raw);
 
     // put draggable back to original location
     e.target.position({ 
@@ -222,7 +223,7 @@ class Graphics extends Component {
 
     e.target.getStage().draw();
 
-  }; // end handleDragImageEnd
+  }; // end handleDragImageEnd//
 
 
   render() {
@@ -233,9 +234,9 @@ class Graphics extends Component {
         <Stage width={STAGE_WIDTH} height={STAGE_HEIGHT} >
           <Layer name="background">
 
-          {this.props.location.map((key) => (
-            <MapBackground key={key.location_id} img={key.canvas_image} background_offset={BACKGROUND_OFFSET}/>
-            ))}
+              {this.props.location.map((key) => (
+                  <MapBackground key={key.location_id} img={key.canvas_image} background_offset={BACKGROUND_OFFSET}/>
+              ))}
 
           </Layer>
           <Layer name="main">
