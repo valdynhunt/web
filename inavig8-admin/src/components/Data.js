@@ -10,16 +10,20 @@ class Data extends React.Component {
     this.state = {isActive: false}
   }
 
-  handleUpdateObject = (raw) => {
-    this.props.handleUpdateObject(raw);
-    console.log("updated...kidding from Data.js! raw : ", raw);
+  handleUpdateObject = (index, raw) => {
+    this.props.handleUpdateObject(index, raw);
+    console.log("updated from Data.js! raw : ", raw);
 
   }
 
   handleDeleteObject = (object_id) => {
     this.props.handleDeleteObject(object_id);
-    console.log("deleted...kidding from Data.js! id: ", object_id);
+    console.log("deleted from Data.js! id: ", object_id);
+  }
 
+  handleFormChange = (index, updatedField) => {
+    //console.log(index + ": updatedField in Data.js = ", updatedField);
+    this.props.handleFormChange(index, updatedField);
   }
 
 
@@ -57,6 +61,7 @@ class Data extends React.Component {
                   location_id={location.location_id}
                   handleDeleteObject={this.handleDeleteObject}
                   handleUpdateObject={this.handleUpdateObject}
+                  handleFormChange={this.handleFormChange}
               />
           ))}         
                 

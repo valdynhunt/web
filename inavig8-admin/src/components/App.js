@@ -16,10 +16,9 @@ class App extends React.Component {
   state = {
     admin: JSON.parse(localStorage.getItem('admin')) || [],
     nav: 'Dashboard',
-    locations: {}, //from Dashboard
+    locations: {},
   }
 
-  //from Dashboard.js
   componentDidMount() {
 
     let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 

@@ -12,6 +12,7 @@ const SquareGreen = (props) => {
     return <Rect
             x={props.x}
             y={props.y}
+            object_id={props.object_id}
             width={RECT_WIDTH}
             height={RECT_HEIGHT}
             name={props.name}

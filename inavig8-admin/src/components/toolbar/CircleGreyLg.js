@@ -12,6 +12,7 @@ const CircleGreyLg = (props) => {
     return <Circle 
             x={props.x} 
             y={props.y} 
+            object_id={props.object_id}
             radius={CIRC_RADIUS} 
             name={props.name}
             fill="lightgrey" 

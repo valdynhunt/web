@@ -13,6 +13,7 @@ function RenderDoor(props) {
               key={key.object_id}
               x={key.image_x}
               y={key.image_y}
+              object_id={key.object_id}
               numPoints={5}
               innerRadius={5}
               outerRadius={10}
