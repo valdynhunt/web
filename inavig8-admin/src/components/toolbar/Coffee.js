@@ -21,9 +21,9 @@ const Coffee = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onMouseMove={props.onMouseMove}
+            // onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleCoffeeClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

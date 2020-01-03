@@ -9,25 +9,18 @@ import FormControl from 'react-bootstrap/FormControl'
 class Object extends React.Component {
 
     state = {
-        showModal: false,
         currentIndex: this.props.id,
         currentObject: this.props.details,
     }
 
     onClose = () => {
-        this.setState(
-            {
-                showModal: false
-            }
-        );
+        console.log("closing modal show - ", this.props.showModal);
+        this.props.handleShowModal(false);
     }
 
     onOpen = () => {
-        this.setState(
-            {
-                showModal: true
-            }
-        );
+        console.log("opening modal show - ", this.props.showModal);
+        this.props.handleShowModal(true);
     }
 
     onUpdate = () => {
@@ -94,7 +87,7 @@ console.log("raw: ", raw);
                         </Button>
                     </li>
                 </ul>
-                <Modal show={this.state.showModal} onHide={this.onClose}>
+                <Modal show={this.props.showModal} onHide={this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Object ID: {object_id}</Modal.Title>
                     </Modal.Header>

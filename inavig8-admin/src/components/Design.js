@@ -12,6 +12,7 @@ import './Design.css';
 class Design extends Component {
     // team 5 rules
     state = {
+        showModal: false,
         location: [],
         objects: [],
     }
@@ -105,6 +106,15 @@ class Design extends Component {
     //         )
     //     }
     // }
+
+    handleShowModal = (status) => {
+        console.log("status in Design.js............................: ", status);
+        this.setState(
+            {
+                showModal: status
+            }
+        );
+      }
 
 
     handleDeleteObject = (object_id) => {
@@ -222,6 +232,8 @@ class Design extends Component {
                             className="graphics" key="1" 
                             objects={this.state.objects} 
                             location={this.state.location}
+                            showModal={this.state.showModal}
+                            handleShowModal={this.handleShowModal}
                             handleNewObject={this.handleNewObject} 
 
                         />
@@ -231,7 +243,9 @@ class Design extends Component {
                             className="data" 
                             key={this.props.match.params.location_id}  
                             objects={this.state.objects} 
-                            location={this.state.location} 
+                            location={this.state.location}
+                            showModal={this.state.showModal}
+                            handleShowModal={this.handleShowModal} 
                             handleDeleteObject={this.handleDeleteObject} 
                             handleUpdateObject={this.handleUpdateObject} 
                             handleFormChange={this.handleFormChange}

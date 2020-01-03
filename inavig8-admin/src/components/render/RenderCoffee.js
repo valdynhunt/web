@@ -14,6 +14,7 @@ function RenderCoffee(props) {
           x={key.image_x}
           y={key.image_y}
           object_id={key.object_id}
+          handleClick={props.handleClick}
           onMouseMove={props.onMouseMove}
           onMouseOut={props.onMouseOut}
         />

@@ -137,6 +137,14 @@ class Graphics extends Component {
 
   // }
 
+  // showModal={this.state.showModal}
+  // handleShowModal={this.handleShowModal}
+  
+  handleClick = e => {
+    console.log("clicked.");
+    this.props.handleShowModal(true);
+  }
+
   handleMouseMove = e => { 
     console.log("handleMouseMove (mouse move): ", e);
     stage = e.target.getStage();
@@ -377,6 +385,7 @@ class Graphics extends Component {
               <Coffee x={X[0]} y={Y[4]} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
+                handleClick = {this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -542,6 +551,7 @@ class Graphics extends Component {
             
               <RenderCoffee
                 objects={this.props.objects}
+                handleClick={this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
               />

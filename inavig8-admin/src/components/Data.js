@@ -25,6 +25,10 @@ class Data extends React.Component {
   //   //console.log(index + ": updatedField in Data.js = ", updatedField);
   //   this.props.handleFormChange(index, updatedField);
   // }
+  handleShowModal = (status) => {
+    console.log("statussssssssssssssssssssssssssssssssssssssssss: ", status);
+    this.props.handleShowModal(status);
+  }
 
 
 
@@ -59,6 +63,8 @@ class Data extends React.Component {
                   id={key}
                   details={data[key]}
                   location_id={location.location_id}
+                  showModal={this.props.showModal}
+                  handleShowModal={this.handleShowModal}
                   handleDeleteObject={this.handleDeleteObject}
                   handleUpdateObject={this.handleUpdateObject}
                   // handleFormChange={this.handleFormChange}
