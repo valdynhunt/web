@@ -206,7 +206,7 @@ class Graphics extends Component {
     });
 
     // console.log("props: ", this.props);
-    // this.props.updateObjects(raw);
+    this.props.handleNewObject(raw);
 
     // put draggable back to original location
     e.target.position({ 

@@ -18,7 +18,6 @@ const Coffee = (props) => {
             scaleX={0.04} 
             scaleY={0.04} 
             short_name={"coffee"}
-            object_type_id={OBJECT_TYPE_ID}
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}

@@ -21,10 +21,10 @@ class Data extends React.Component {
     console.log("deleted from Data.js! id: ", object_id);
   }
 
-  handleFormChange = (index, updatedField) => {
-    //console.log(index + ": updatedField in Data.js = ", updatedField);
-    this.props.handleFormChange(index, updatedField);
-  }
+  // handleFormChange = (index, updatedField) => {
+  //   //console.log(index + ": updatedField in Data.js = ", updatedField);
+  //   this.props.handleFormChange(index, updatedField);
+  // }
 
 
 
@@ -61,7 +61,7 @@ class Data extends React.Component {
                   location_id={location.location_id}
                   handleDeleteObject={this.handleDeleteObject}
                   handleUpdateObject={this.handleUpdateObject}
-                  handleFormChange={this.handleFormChange}
+                  // handleFormChange={this.handleFormChange}
               />
           ))}         
                 
