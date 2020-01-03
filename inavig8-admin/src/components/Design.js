@@ -12,6 +12,7 @@ import './Design.css';
 class Design extends Component {
     // team 5 rules
     state = {
+        showModal: false,
         location: [],
         objects: [],
     }
@@ -106,6 +107,15 @@ class Design extends Component {
     //     }
     // }
 
+    handleShowModal = (status) => {
+        console.log("status in Design.js............................: ", status);
+        this.setState(
+            {
+                showModal: status
+            }
+        );
+      }
+
 
     handleDeleteObject = (object_id) => {
 
@@ -162,6 +172,8 @@ class Design extends Component {
     }
 
     handleUpdateObject = (index, raw) => {
+        console.log(index + ": handleUpdateObject in Design.js = ", raw);
+        console.log("description in Design: ", raw);
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -189,18 +201,18 @@ class Design extends Component {
         });
     }
 
-    handleFormChange = (index, updatedField) => {
-        console.log(index + ": updatedField in Design.js = ", updatedField);
-        /* TODO: unable to setState without errors */
+    // handleFormChange = (index, updatedField) => {
+    //     console.log(index + ": updatedField in Design.js = ", updatedField);
+    //     /* TODO: unable to setState without errors */
         
-        // const objects = {...this.state.objects};
-        // objects[index] = updatedField; 
-        // this.setState(
-        //     { 
-        //         objects 
-        //     }
-        // );
-    }
+    //     // const objects = {...this.state.objects};
+    //     // objects[index] = updatedField; 
+    //     // this.setState(
+    //     //     { 
+    //     //         objects 
+    //     //     }
+    //     // );
+    // }
 
 
     render() {
@@ -220,7 +232,9 @@ class Design extends Component {
                             className="graphics" key="1" 
                             objects={this.state.objects} 
                             location={this.state.location}
-                            //updateObjects={this.updateObjects} 
+                            showModal={this.state.showModal}
+                            handleShowModal={this.handleShowModal}
+                            handleNewObject={this.handleNewObject} 
 
                         />
                     </Col>
@@ -229,7 +243,9 @@ class Design extends Component {
                             className="data" 
                             key={this.props.match.params.location_id}  
                             objects={this.state.objects} 
-                            location={this.state.location} 
+                            location={this.state.location}
+                            showModal={this.state.showModal}
+                            handleShowModal={this.handleShowModal} 
                             handleDeleteObject={this.handleDeleteObject} 
                             handleUpdateObject={this.handleUpdateObject} 
                             handleFormChange={this.handleFormChange}

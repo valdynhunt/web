@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 import Konva from 'konva';
 import { Stage, Layer, Rect, Text } from 'react-konva';
 import MapBackground from './MapBackground'
@@ -132,10 +136,35 @@ class Graphics extends Component {
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
-
+  state = {
+    currentObject: {
+         object_id: 0, 
+         short_name: "", 
+         long_name: "", 
+         description: "", 
+         object_type: "" 
+    }
+  };
   // componentDidMount() {
 
   // }
+
+  // showModal={this.state.showModal}
+  // handleShowModal={this.handleShowModal}
+  
+  handleClick = e => {
+    console.log("clicked.");
+    console.log("handleClick in Graphics.js, object_id", e.currentTarget.attrs.object_id);
+    this.props.handleShowModal(true);
+    const curObj = this.props.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+    this.setState(
+      prevState => (
+          { 
+              currentObject: curObj[0]
+          }
+      )
+    );
+  }
 
   handleMouseMove = e => { 
     console.log("handleMouseMove (mouse move): ", e);
@@ -206,7 +235,7 @@ class Graphics extends Component {
     });
 
     // console.log("props: ", this.props);
-    // this.props.updateObjects(raw);
+    this.props.handleNewObject(raw);
 
     // put draggable back to original location
     e.target.position({ 
@@ -225,8 +254,17 @@ class Graphics extends Component {
 
   }; // end handleDragImageEnd//
 
+  onClose = () => {
+      console.log("closing modal show - ", this.props.showModal);
+      this.props.handleShowModal(false);
+  }
+
 
   render() {
+
+    //const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.props.objects;
+    console.log("jason says current object: ", this.state.currentObject);
+    
 
     return (
       <div className="graphics">
@@ -377,6 +415,7 @@ class Graphics extends Component {
               <Coffee x={X[0]} y={Y[4]} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
+                handleClick = {this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -542,6 +581,7 @@ class Graphics extends Component {
             
               <RenderCoffee
                 objects={this.props.objects}
+                handleClick={this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
               />
@@ -666,6 +706,79 @@ class Graphics extends Component {
               />
           </Layer>
         </Stage>
+
+
+        <Modal show={this.props.showModal} onHide={this.onClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Object ID: {this.state.currentObject.object_id}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <label htmlFor="object_type">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Object Type</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    aria-label="object_type"
+                                    aria-describedby="basic-addon1"
+                                    defaultValue={this.state.currentObject.object_type.short_name}
+                                    readOnly="readonly"
+                                />
+                            </InputGroup>
+                        </label>
+                        <label htmlFor="short_name">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Short Name</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    aria-label="short_name"
+                                    aria-describedby="basic-addon1"
+                                    name="short_name"
+                                    defaultValue={this.state.currentObject.short_name}
+
+                                />
+                            </InputGroup>
+                        </label>
+                        <label htmlFor="long_name">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Long Name</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    placeholder="enter long name"
+                                    aria-label="long_name"
+                                    aria-describedby="basic-addon1"
+                                    name="long_name"
+                                    defaultValue={this.state.currentObject.long_name}
+                                    onChange={this.onChange}
+                                />
+                            </InputGroup>
+                        </label>
+                        <label htmlFor="description">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Description</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    placeholder="no description"
+                                    aria-label="description"
+                                    aria-describedby="basic-addon1"
+                                    name="description"
+                                    defaultValue={this.state.currentObject.description}
+                                    onChange={this.onChange}
+
+                                />
+                            </InputGroup>
+                        </label>
+                        <hr />
+                        {/* <Button variant="danger" onClick={() => this.onDelete(object_id)}>Delete</Button> */}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.onClose}>Close</Button>
+                        {/* <Button onClick={this.onUpdate}>Update</Button> */}
+                    </Modal.Footer>
+                </Modal>
       </div>
     )
   }
