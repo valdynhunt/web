@@ -4,6 +4,37 @@ import './Locations.css';
 
 class Locations extends React.Component {
 
+    state = {
+        isHover: false,
+        showImage: false,
+        showDetails: false,
+        index: -1,
+    }
+
+    handleHover = (index) => {
+        let status = !this.state.isHover;
+
+        if (status) {
+            this.setState(
+                {
+                    isHover: status,
+                    showImage: status,
+                    showDetails: status,
+                    index
+                }
+            );
+        } else {
+            this.setState(
+                {
+                    isHover: status,
+                    showImage: status,
+                    showDetails: status,
+                    index: -1
+                }
+            );
+        }
+    }
+
     render() {
 
         return (
@@ -17,36 +48,60 @@ class Locations extends React.Component {
                                 key={key}
                                 id={key}
                                 details={this.props.locations[key]} 
+                                handleHover={this.handleHover}
+                                hover={this.state.isHover}
                             />
                         ))}
                     </ul>
                 </section>
                 <section className="location-view">
                     <h4>Locations View</h4>
-                    <img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
+                    {
+                        this.state.showImage &&
+                        <img 
+                            src={this.props.locations[this.state.index].canvas_image} 
+                            alt={this.props.locations[this.state.index].long_name} 
+                            title={this.props.locations[this.state.index].long_name}
+                        />
+                        //<img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
+                    }
                 </section>
                 <section className="location-details">
                     <h4>Locations Details</h4>
                     <ul className="location-detail">
                         <li>Name:</li>
-                        <li>Lorem Ipsum</li>
+                        {
+                            this.state.showImage &&
+                            <li>{this.props.locations[this.state.index].long_name}</li>
+                        }
                     </ul>
                     <ul className="location-detail">
                         <li>Nickname:</li>
-                        <li>LorIp</li>
+                        {
+                            this.state.showImage &&
+                            <li>{this.props.locations[this.state.index].short_name}</li>
+                        }
                     </ul>
-                    <ul className="location-detail">
+                    {/* <ul className="location-detail">
                         <li>GPS Coordinates:</li>
-                        <li>Lorem Ipsum Dolor Sit</li>
+                        {
+                            this.state.showImage &&
+                            <li>unknown</li>
+                        }
                     </ul>
                     <ul className="location-detail">
                         <li># of assigned Admins:</li>
-                        <li>8</li>
+                        {
+                            this.state.showImage &&
+                            <li>unknown</li>
+                        }
                     </ul>
                     <ul className="location-detail">
                         <li># of total Objects:</li>
-                        <li>999,999</li>
-                    </ul>
+                        {
+                            <li>unknown</li>
+                        }
+                    </ul> */}
                 </section>
             </main>
 
