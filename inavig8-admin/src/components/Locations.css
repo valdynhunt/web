@@ -59,6 +59,7 @@ main.locations-container section.location-details ul.location-detail {
     flex-direction: row;
     align-content: center;
     justify-items: flex-start;
+    list-style: none;
 }
 
 main.locations-container section.location-details ul.location-detail li {

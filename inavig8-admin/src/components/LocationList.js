@@ -3,18 +3,9 @@ import './LocationList.css';
 
 class Location extends React.Component {
 
-    state = {
-        onHover: false,
-    }
-
-    onMouseHover = (e) => {
-        this.setState(this.toggleHoverState);
-    }
-
-    toggleHoverState(state) {
-        return {
-            onHover: !state.onHover,
-        };
+    onMouseHover = () => {
+        // console.log("this.props: ", this.props.id);
+        this.props.handleHover(this.props.id);
     }
 
     render() {
@@ -29,7 +20,7 @@ class Location extends React.Component {
                 <a href={`/design/${location_id}`}>
                     {long_name}
                 </a>
-                {this.state.onHover && <p>yahoo!</p>}
+                {/* { this.props.hover && <span>yeppers!</span>} */}
             </li>
 
         );
