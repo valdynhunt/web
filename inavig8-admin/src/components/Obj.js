@@ -10,7 +10,7 @@ class Object extends React.Component {
 
     state = {
         currentIndex: this.props.id,
-        currentObject: this.props.details,
+        currentObject: this.props.details
     }
 
     onClose = () => {
@@ -115,6 +115,7 @@ console.log("raw: ", raw);
                                     aria-describedby="basic-addon1"
                                     name="short_name"
                                     defaultValue={short_name}
+                                    readOnly="readonly"
 
                                 />
                             </InputGroup>
@@ -191,6 +192,7 @@ console.log("raw: ", raw);
                                     aria-describedby="basic-addon1"
                                     name="location_id"
                                     defaultValue={location_id}
+                                    readOnly="readonly"
                                     //onChange={this.handleChange}
                                 />
                             </InputGroup>
@@ -200,11 +202,7 @@ console.log("raw: ", raw);
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>
-                        {/* <Button onClick={() => this.onUpdate()}>Update</Button> */}
-
                         <Button onClick={this.onUpdate}>Update</Button>
-                        {/* <Button type="submit">Update</Button> */}
-
                     </Modal.Footer>
                 </Modal>
             </div>
