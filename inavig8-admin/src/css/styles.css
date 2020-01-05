@@ -66,5 +66,6 @@ a, a:link, a:visited, a:hover {
 a:hover {
   font-weight: bold;
   color: var(--tertiary-color);
-  text-shadow: 2px 2px 2px var(--accent1-color);
+  text-shadow: none;
+  /* text-shadow: 2px 2px 2px var(--accent1-color); */
 }
