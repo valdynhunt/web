@@ -12,7 +12,6 @@ import './Design.css';
 class Design extends Component {
     // team 5 rules
     state = {
-        showModal: false,
         showModalG: false,
         location: [],
         objects: [],
@@ -108,14 +107,6 @@ class Design extends Component {
     //     }
     // }
 
-    handleShowModal = (status) => {
-        console.log("status in Design.js............................: ", status);
-        this.setState(
-            {
-                showModal: status
-            }
-        );
-      }
 
       handleShowModalG = (status) => {
         console.log("status in Design.js............................: ", status);
@@ -200,14 +191,17 @@ class Design extends Component {
         }).then(result => {
             /* TODO: unable to setState without errors */
             
-            // const objects = {...this.state.objects};
-            // raw.long_name="def leppard";
-            // objects[index] = raw;
-            // this.setState(
-            //     { 
-            //         objects
-            //     }
-            // );
+            const objects = {...this.state.objects};
+
+
+            objects[index] = raw;
+            this.setState(
+                { 
+                    // objects
+                    objects: [...this.state.objects, { ...objects}]
+
+                }
+            );
         });
     }
 
@@ -256,8 +250,6 @@ class Design extends Component {
                             key={this.props.match.params.location_id}  
                             objects={this.state.objects} 
                             location={this.state.location}
-                            showModal={this.state.showModal}
-                            handleShowModal={this.handleShowModal} 
                             handleDeleteObject={this.handleDeleteObject} 
                             handleUpdateObject={this.handleUpdateObject} 
                             // handleFormChange={this.handleFormChange}

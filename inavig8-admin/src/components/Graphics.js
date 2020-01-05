@@ -126,8 +126,6 @@ class Graphics extends Component {
   constructor() {
     super()
     this.state = {
-      location: [],
-      objects: [],
       currentObjectG: {
         object_id: 0,
         location_id: 0, 
@@ -304,7 +302,8 @@ onUpdate = () => {
         "image_y": this.state.currentObjectG.image_y,
       });
 console.log("raw: ", raw);
-    this.props.handleUpdateObject(this.state.currentIndex, raw);
+      let index = this.props.objects.filter(object => object.object_id === raw.object_id);
+    this.props.handleUpdateObject(index, raw);
     // console.log("updated from Obj.js! raw : ", raw);
     this.onClose();
 }
@@ -354,7 +353,7 @@ onChange = (e) => {
 
           </Layer>
           <Layer name="main">
-          {/* <ModalSetGrid objects ={this.state.objects} />  */}
+          {/* <ModalSetGrid objects ={this.props.objects} />  */}
               <Rect
                 x={TOOLBAR_X}
                 y={TOOLBAR_Y}
@@ -814,7 +813,7 @@ onChange = (e) => {
                         <Modal.Title>Object ID: {this.state.currentObjectG.object_id}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <label htmlFor="object_type">
+                        {/* <label htmlFor="object_type">
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1">Object Type</InputGroup.Text>
@@ -826,7 +825,7 @@ onChange = (e) => {
                                     readOnly="readonly"
                                 />
                             </InputGroup>
-                        </label>
+                        </label> */}
                         <label htmlFor="short_name">
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
