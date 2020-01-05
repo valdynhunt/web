@@ -10,7 +10,7 @@ class Location extends React.Component {
         return (
 
             <section className="location-list">
-                <h4>Location: <a href={`/design/${location_id}`}>{long_name}</a></h4>
+                <h4><a href={`/design/${location_id}`}>{long_name}</a></h4>
                 <a href={`/design/${location_id}`}>
                     <img src={canvas_image} alt={long_name} title={long_name} />
                 </a>

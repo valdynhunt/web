@@ -8,21 +8,25 @@ class Location extends React.Component {
         this.props.handleHover(this.props.id);
     }
 
+    onClick = (location_id) => {
+        let url = "design/" + location_id;
+        //window.location.assign(url);
+    }
+
     render() {
 
         const { location_id, long_name } = this.props.details;
         
         return (
-            <li
-                onMouseEnter={this.onMouseHover}
-                onMouseLeave={this.onMouseHover}
-            >
-                <a href={`/design/${location_id}`}>
-                    {long_name}
-                </a>
-                {/* { this.props.hover && <span>yeppers!</span>} */}
-            </li>
-
+            <a href={`/design/${location_id}`}>
+                <li
+                    className=""
+                    onMouseOver={this.onMouseHover}
+                    // onClick={this.onClick(location_id)}
+                >              
+                        {long_name}
+                </li>
+            </a>
         );
     };
 

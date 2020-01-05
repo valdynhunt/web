@@ -12,27 +12,14 @@ class Locations extends React.Component {
     }
 
     handleHover = (index) => {
-        let status = !this.state.isHover;
-
-        if (status) {
             this.setState(
                 {
-                    isHover: status,
-                    showImage: status,
-                    showDetails: status,
+                    isHover: true,
+                    showImage: true,
+                    showDetails: true,
                     index
                 }
             );
-        } else {
-            this.setState(
-                {
-                    isHover: status,
-                    showImage: status,
-                    showDetails: status,
-                    index: -1
-                }
-            );
-        }
     }
 
     render() {
@@ -42,7 +29,7 @@ class Locations extends React.Component {
             <main className="locations-container">
                 <section className="location-list">
                     <h4>Locations</h4>
-                    <ul>
+                    <ul className="ul-location-list">
                         {Object.keys(this.props.locations).map(key => (
                             <LocationList
                                 key={key}
@@ -80,6 +67,20 @@ class Locations extends React.Component {
                         {
                             this.state.showImage &&
                             <li>{this.props.locations[this.state.index].short_name}</li>
+                        }
+                    </ul>
+                    <ul className="location-detail">
+                        <li>Description:</li>
+                        {
+                            this.state.showImage &&
+                            <li>{this.props.locations[this.state.index].description}</li>
+                        }
+                    </ul>
+                    <ul className="location-detail">
+                        <li>Location Type:</li>
+                        {
+                            this.state.showImage &&
+                            <li>{this.props.locations[this.state.index].location_type.short_name}</li>
                         }
                     </ul>
                     {/* <ul className="location-detail">

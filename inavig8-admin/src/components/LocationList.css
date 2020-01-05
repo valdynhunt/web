@@ -9,6 +9,12 @@ section.location-list ul li {
     margin-bottom: 0.4em;
 }
 
-section.location-list ul li:hover {
+section.location-list ul.ul-location-list li:hover {
     background: var(--primary-color);
+    color: white;
+    text-shadow: 0px 0px 0px white;
+}
+
+section.location-list ul.ul-location-list li a:hover {
+    text-shadow: 0px 0px 0px white;
 }
