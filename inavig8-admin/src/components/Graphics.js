@@ -125,10 +125,23 @@ class Graphics extends Component {
 
   constructor() {
     super()
-    // this.state = {
-    //   location: [],
-    //   objects: []
-    // }
+    this.state = {
+      location: [],
+      objects: [],
+      currentObject: {
+        object_id: 0,
+        location_id: 0, 
+        short_name: "", 
+        long_name: "", 
+        description: "", 
+        object_type: "",
+        "x_coordinate": 0,
+        "y_coordinate": 0,
+        "image_x": 0,
+        "image_y": 0
+   }
+
+    }
 
     this.handleDragImageStart = this.handleDragImageStart.bind(this)
     this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
@@ -136,15 +149,21 @@ class Graphics extends Component {
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
-  state = {
-    currentObject: {
-         object_id: 0, 
-         short_name: "", 
-         long_name: "", 
-         description: "", 
-         object_type: "" 
-    }
-  };
+  // state = {
+  //   currentObject: {
+  //        object_id: 0,
+  //        location_id: 0, 
+  //        short_name: "", 
+  //        long_name: "", 
+  //        description: "", 
+  //        object_type_id: "",
+  //        "x_coordinate": 0,
+  //        "y_coordinate": 0,
+  //        "image_x": 0,
+  //        "image_y": 0
+  //   }
+  // };
+
   // componentDidMount() {
 
   // }
@@ -155,8 +174,9 @@ class Graphics extends Component {
   handleClick = e => {
     console.log("clicked.");
     console.log("handleClick in Graphics.js, object_id", e.currentTarget.attrs.object_id);
-    this.props.handleShowModal(true);
-    const curObj = this.props.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+    
+    let curObj = this.props.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+    console.log("curObj right before setState: ", curObj);
     this.setState(
       prevState => (
           { 
@@ -164,6 +184,8 @@ class Graphics extends Component {
           }
       )
     );
+    console.log("currentObject after setState: ", this.state.currentObject.object_id);
+    this.props.handleShowModal(true);
   }
 
   handleMouseMove = e => { 
@@ -260,9 +282,61 @@ class Graphics extends Component {
   }
 
 
+onOpen = () => {
+    console.log("opening modal show - ", this.props.showModal);
+    this.props.handleShowModal(true);
+}
+
+onUpdate = () => {
+    // console.log("currentIndex: ", this.state.currentIndex);
+    // console.log("currentObject: ", this.state.currentObject);
+    // console.log("description: ", this.state.currentObject.description)
+    var raw = JSON.stringify({
+        "object_id": this.state.currentObject.object_id,
+        "location_id":this.state.currentObject.location_id, 
+        "short_name":this.state.currentObject.short_name,
+        "long_name":this.state.currentObject.long_name,
+        "description":this.state.currentObject.description,
+        "object_type_id": this.state.currentObject.object_type_id,
+        "x_coordinate": 0,
+        "y_coordinate": 0,
+        "image_x": this.state.currentObject.image_x,
+        "image_y": this.state.currentObject.image_y,
+      });
+console.log("raw: ", raw);
+    this.props.handleUpdateObject(this.state.currentIndex, raw);
+    // console.log("updated from Obj.js! raw : ", raw);
+    this.onClose();
+}
+
+onDelete = (object_id) => {
+    this.props.handleDeleteObject(object_id);
+    console.log("deleted from Graphics.js! id: ", object_id);
+    this.onClose();
+}
+
+onChange = (e) => {
+  console.log("currentTarget: ", e.currentTarget.name);
+  console.log("currentValue: ", e.currentTarget.value);
+
+  const currentObject = {
+      ...this.state.currentObject, 
+      [e.currentTarget.name]: e.currentTarget.value
+  }
+  this.setState(
+      {
+      currentObject
+      }
+  );
+  console.log("onChange object: ", currentObject);
+  console.log("onChange object from state: ", this.state.currentObject);
+
+}
+
+
   render() {
 
-    //const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.props.objects;
+    // const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.props.objects;
     console.log("jason says current object: ", this.state.currentObject);
     
 
@@ -555,28 +629,33 @@ class Graphics extends Component {
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
               <RenderPath 
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
               <RenderDoor
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderElevator
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
             
               <RenderStairs
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
             
               <RenderCoffee
@@ -584,120 +663,140 @@ class Graphics extends Component {
                 handleClick={this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderUtensils
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderRestroom
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderMale
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderFemale
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderHeartbeat
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderRecycle
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderFireExtinguisher
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderMapMarker
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderDoorOpen
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderDoorClosed
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderSquareRed
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderSquareGrey
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderSquareGreen
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderCircleRedLg
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderCircleGreyLg
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderCircleGreenLg
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderCircleRedSm
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderCircleGreySm
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
               <RenderCircleGreenSm
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
+                handleClick={this.handleClick}
               />
 
           </Layer>
@@ -736,6 +835,7 @@ class Graphics extends Component {
                                     aria-describedby="basic-addon1"
                                     name="short_name"
                                     defaultValue={this.state.currentObject.short_name}
+                                    readOnly="readonly"
 
                                 />
                             </InputGroup>
@@ -771,12 +871,58 @@ class Graphics extends Component {
                                 />
                             </InputGroup>
                         </label>
+                        <label htmlFor="image_x">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Image Location X</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    placeholder="no x-coordinate"
+                                    aria-label="image_x"
+                                    aria-describedby="basic-addon1"
+                                    name="image_x"
+                                    defaultValue={this.state.currentObject.image_x}
+                                    readOnly="readonly"
+                                />
+                            </InputGroup>
+                        </label>
+                        <label htmlFor="image_y">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Image Location Y</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    placeholder="no y-coordinate"
+                                    aria-label="image_y"
+                                    aria-describedby="basic-addon1"
+                                    name="image_y"
+                                    defaultValue={this.state.currentObject.image_y}
+                                    readOnly="readonly"
+                                />
+                            </InputGroup>
+                        </label>
+                        <label htmlFor="location_id">
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">Location ID</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    //placeholder="no y-coordinate"
+                                    aria-label="location_id"
+                                    aria-describedby="basic-addon1"
+                                    name="location_id"
+                                    defaultValue={this.state.currentObject.location_id}
+                                    readOnly="readonly"
+                                    //onChange={this.handleChange}
+                                />
+                            </InputGroup>
+                        </label>
                         <hr />
-                        {/* <Button variant="danger" onClick={() => this.onDelete(object_id)}>Delete</Button> */}
+                        <Button variant="danger" onClick={() => this.onDelete(this.state.currentObject.object_id)}>Delete</Button>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>
-                        {/* <Button onClick={this.onUpdate}>Update</Button> */}
+                        <Button onClick={this.onUpdate}>Update</Button>
                     </Modal.Footer>
                 </Modal>
       </div>

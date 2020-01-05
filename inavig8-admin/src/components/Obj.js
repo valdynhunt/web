@@ -10,7 +10,7 @@ class Object extends React.Component {
 
     state = {
         currentIndex: this.props.id,
-        currentObject: this.props.details,
+        currentObject: this.props.details
     }
 
     onClose = () => {
@@ -59,13 +59,16 @@ console.log("raw: ", raw);
             ...this.state.currentObject, 
             [e.currentTarget.name]: e.currentTarget.value
         }
+        console.log("onChange currentObject before setState: ", currentObject);
         this.setState(
             {
             currentObject
             }
         );
-        console.log("onChange object: ", currentObject);
-        console.log("onChange object from state: ", this.state.currentObject);
+        
+        console.log("onChange object after setState: ", this.state.currentObject);
+        console.log("currentObject after setState: ", this.state.currentObject.object_id);
+
 
     }
   
@@ -115,6 +118,7 @@ console.log("raw: ", raw);
                                     aria-describedby="basic-addon1"
                                     name="short_name"
                                     defaultValue={short_name}
+                                    readOnly="readonly"
 
                                 />
                             </InputGroup>
@@ -191,6 +195,7 @@ console.log("raw: ", raw);
                                     aria-describedby="basic-addon1"
                                     name="location_id"
                                     defaultValue={location_id}
+                                    readOnly="readonly"
                                     //onChange={this.handleChange}
                                 />
                             </InputGroup>
@@ -200,11 +205,7 @@ console.log("raw: ", raw);
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>
-                        {/* <Button onClick={() => this.onUpdate()}>Update</Button> */}
-
                         <Button onClick={this.onUpdate}>Update</Button>
-                        {/* <Button type="submit">Update</Button> */}
-
                     </Modal.Footer>
                 </Modal>
             </div>
