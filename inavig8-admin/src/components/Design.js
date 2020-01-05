@@ -233,8 +233,9 @@ class Design extends Component {
                             objects={this.state.objects} 
                             location={this.state.location}
                             showModal={this.state.showModal}
-                            handleShowModal={this.handleShowModal}
-                            handleNewObject={this.handleNewObject} 
+                            handleShowModal={this.handleShowModal} 
+                            handleDeleteObject={this.handleDeleteObject} 
+                            handleUpdateObject={this.handleUpdateObject} 
 
                         />
                     </Col>
@@ -248,7 +249,7 @@ class Design extends Component {
                             handleShowModal={this.handleShowModal} 
                             handleDeleteObject={this.handleDeleteObject} 
                             handleUpdateObject={this.handleUpdateObject} 
-                            handleFormChange={this.handleFormChange}
+                            // handleFormChange={this.handleFormChange}
                         />
                     </Col>
                     </Row>

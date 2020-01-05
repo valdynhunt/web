@@ -59,13 +59,16 @@ console.log("raw: ", raw);
             ...this.state.currentObject, 
             [e.currentTarget.name]: e.currentTarget.value
         }
+        console.log("onChange currentObject before setState: ", currentObject);
         this.setState(
             {
             currentObject
             }
         );
-        console.log("onChange object: ", currentObject);
-        console.log("onChange object from state: ", this.state.currentObject);
+        
+        console.log("onChange object after setState: ", this.state.currentObject);
+        console.log("currentObject after setState: ", this.state.currentObject.object_id);
+
 
     }
   

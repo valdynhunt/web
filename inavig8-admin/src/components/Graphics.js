@@ -174,8 +174,9 @@ class Graphics extends Component {
   handleClick = e => {
     console.log("clicked.");
     console.log("handleClick in Graphics.js, object_id", e.currentTarget.attrs.object_id);
-    this.props.handleShowModal(true);
-    const curObj = this.props.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+    
+    let curObj = this.props.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+    console.log("curObj right before setState: ", curObj);
     this.setState(
       prevState => (
           { 
@@ -183,6 +184,8 @@ class Graphics extends Component {
           }
       )
     );
+    console.log("currentObject after setState: ", this.state.currentObject.object_id);
+    this.props.handleShowModal(true);
   }
 
   handleMouseMove = e => { 
