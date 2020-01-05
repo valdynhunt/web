@@ -7,7 +7,22 @@ class Data extends React.Component {
   
   constructor() {
     super()
-    this.state = {isActive: false}
+    this.state = {
+      isActive: false,
+      currentIndex: -1,
+      currentObject: {
+        object_id: 0,
+        location_id: 0, 
+        short_name: "", 
+        long_name: "", 
+        description: "", 
+        object_type: "",
+        "x_coordinate": 0,
+        "y_coordinate": 0,
+        "image_x": 0,
+        "image_y": 0
+   }
+    }
   }
 
   handleUpdateObject = (index, raw) => {
@@ -44,11 +59,18 @@ class Data extends React.Component {
     });
   };
 
+  handleCurrentIndex = (index) => {
+    this.setState({
+      currentIndex: index
+    });
+  };
+
   render() {
 
     var data = this.props.objects;
     var location = this.props.location;
-    console.log("data component: ", data);
+    // console.log("data component: ", data);
+    
 
     if (this.state.isActive) {
       return (
@@ -62,6 +84,9 @@ class Data extends React.Component {
                   key={key}
                   id={key}
                   details={data[key]}
+                  currentIndex={this.state.currentIndex}
+                  currentObject={this.state.currentObject}
+                  handleCurrentIndex={this.handleCurrentIndex}
                   location_id={location.location_id}
                   showModal={this.props.showModal}
                   handleShowModal={this.handleShowModal}

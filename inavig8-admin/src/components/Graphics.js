@@ -128,7 +128,7 @@ class Graphics extends Component {
     this.state = {
       location: [],
       objects: [],
-      currentObject: {
+      currentObjectG: {
         object_id: 0,
         location_id: 0, 
         short_name: "", 
@@ -150,7 +150,7 @@ class Graphics extends Component {
   }
 
   // state = {
-  //   currentObject: {
+  //   currentObjectG: {
   //        object_id: 0,
   //        location_id: 0, 
   //        short_name: "", 
@@ -168,8 +168,8 @@ class Graphics extends Component {
 
   // }
 
-  // showModal={this.state.showModal}
-  // handleShowModal={this.handleShowModal}
+  // showModalG={this.state.showModalG}
+  // handleShowModalG={this.handleShowModalG}
   
   handleClick = e => {
     console.log("clicked.");
@@ -180,12 +180,12 @@ class Graphics extends Component {
     this.setState(
       prevState => (
           { 
-              currentObject: curObj[0]
+              currentObjectG: curObj[0]
           }
       )
     );
-    console.log("currentObject after setState: ", this.state.currentObject.object_id);
-    this.props.handleShowModal(true);
+    console.log("currentObjectG after setState: ", this.state.currentObjectG.object_id);
+    this.props.handleShowModalG(true);
   }
 
   handleMouseMove = e => { 
@@ -277,31 +277,31 @@ class Graphics extends Component {
   }; // end handleDragImageEnd//
 
   onClose = () => {
-      console.log("closing modal show - ", this.props.showModal);
-      this.props.handleShowModal(false);
+      console.log("closing modal show - ", this.props.showModalG);
+      this.props.handleShowModalG(false);
   }
 
 
 onOpen = () => {
-    console.log("opening modal show - ", this.props.showModal);
-    this.props.handleShowModal(true);
+    console.log("opening modal show - ", this.props.showModalG);
+    this.props.handleShowModalG(true);
 }
 
 onUpdate = () => {
     // console.log("currentIndex: ", this.state.currentIndex);
-    // console.log("currentObject: ", this.state.currentObject);
-    // console.log("description: ", this.state.currentObject.description)
+    // console.log("currentObjectG: ", this.state.currentObjectG);
+    // console.log("description: ", this.state.currentObjectG.description)
     var raw = JSON.stringify({
-        "object_id": this.state.currentObject.object_id,
-        "location_id":this.state.currentObject.location_id, 
-        "short_name":this.state.currentObject.short_name,
-        "long_name":this.state.currentObject.long_name,
-        "description":this.state.currentObject.description,
-        "object_type_id": this.state.currentObject.object_type_id,
+        "object_id": this.state.currentObjectG.object_id,
+        "location_id":this.state.currentObjectG.location_id, 
+        "short_name":this.state.currentObjectG.short_name,
+        "long_name":this.state.currentObjectG.long_name,
+        "description":this.state.currentObjectG.description,
+        "object_type_id": this.state.currentObjectG.object_type_id,
         "x_coordinate": 0,
         "y_coordinate": 0,
-        "image_x": this.state.currentObject.image_x,
-        "image_y": this.state.currentObject.image_y,
+        "image_x": this.state.currentObjectG.image_x,
+        "image_y": this.state.currentObjectG.image_y,
       });
 console.log("raw: ", raw);
     this.props.handleUpdateObject(this.state.currentIndex, raw);
@@ -319,17 +319,17 @@ onChange = (e) => {
   console.log("currentTarget: ", e.currentTarget.name);
   console.log("currentValue: ", e.currentTarget.value);
 
-  const currentObject = {
-      ...this.state.currentObject, 
+  const currentObjectG = {
+      ...this.state.currentObjectG, 
       [e.currentTarget.name]: e.currentTarget.value
   }
   this.setState(
       {
-      currentObject
+      currentObjectG
       }
   );
-  console.log("onChange object: ", currentObject);
-  console.log("onChange object from state: ", this.state.currentObject);
+  console.log("onChange object: ", currentObjectG);
+  console.log("onChange object from state: ", this.state.currentObjectG);
 
 }
 
@@ -337,7 +337,9 @@ onChange = (e) => {
   render() {
 
     // const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.props.objects;
-    console.log("jason says current object: ", this.state.currentObject);
+    console.log("jason says current objectG in Graphics.js: ", this.state.currentObjectG);
+    console.log("valdyn says current object_id in Graphics.js: ", this.state.currentObjectG.object_id);
+
     
 
     return (
@@ -807,9 +809,9 @@ onChange = (e) => {
         </Stage>
 
 
-        <Modal show={this.props.showModal} onHide={this.onClose}>
+        <Modal show={this.props.showModalG} onHide={this.onClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Object ID: {this.state.currentObject.object_id}</Modal.Title>
+                        <Modal.Title>Object ID: {this.state.currentObjectG.object_id}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <label htmlFor="object_type">
@@ -820,7 +822,7 @@ onChange = (e) => {
                                 <FormControl
                                     aria-label="object_type"
                                     aria-describedby="basic-addon1"
-                                    defaultValue={this.state.currentObject.object_type.short_name}
+                                    defaultValue={this.state.currentObjectG.object_type.short_name}
                                     readOnly="readonly"
                                 />
                             </InputGroup>
@@ -834,7 +836,7 @@ onChange = (e) => {
                                     aria-label="short_name"
                                     aria-describedby="basic-addon1"
                                     name="short_name"
-                                    defaultValue={this.state.currentObject.short_name}
+                                    defaultValue={this.state.currentObjectG.short_name}
                                     readOnly="readonly"
 
                                 />
@@ -850,7 +852,7 @@ onChange = (e) => {
                                     aria-label="long_name"
                                     aria-describedby="basic-addon1"
                                     name="long_name"
-                                    defaultValue={this.state.currentObject.long_name}
+                                    defaultValue={this.state.currentObjectG.long_name}
                                     onChange={this.onChange}
                                 />
                             </InputGroup>
@@ -865,7 +867,7 @@ onChange = (e) => {
                                     aria-label="description"
                                     aria-describedby="basic-addon1"
                                     name="description"
-                                    defaultValue={this.state.currentObject.description}
+                                    defaultValue={this.state.currentObjectG.description}
                                     onChange={this.onChange}
 
                                 />
@@ -881,7 +883,7 @@ onChange = (e) => {
                                     aria-label="image_x"
                                     aria-describedby="basic-addon1"
                                     name="image_x"
-                                    defaultValue={this.state.currentObject.image_x}
+                                    defaultValue={this.state.currentObjectG.image_x}
                                     readOnly="readonly"
                                 />
                             </InputGroup>
@@ -896,7 +898,7 @@ onChange = (e) => {
                                     aria-label="image_y"
                                     aria-describedby="basic-addon1"
                                     name="image_y"
-                                    defaultValue={this.state.currentObject.image_y}
+                                    defaultValue={this.state.currentObjectG.image_y}
                                     readOnly="readonly"
                                 />
                             </InputGroup>
@@ -911,14 +913,14 @@ onChange = (e) => {
                                     aria-label="location_id"
                                     aria-describedby="basic-addon1"
                                     name="location_id"
-                                    defaultValue={this.state.currentObject.location_id}
+                                    defaultValue={this.state.currentObjectG.location_id}
                                     readOnly="readonly"
                                     //onChange={this.handleChange}
                                 />
                             </InputGroup>
                         </label>
                         <hr />
-                        <Button variant="danger" onClick={() => this.onDelete(this.state.currentObject.object_id)}>Delete</Button>
+                        <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>

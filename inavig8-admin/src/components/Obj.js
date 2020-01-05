@@ -9,8 +9,8 @@ import FormControl from 'react-bootstrap/FormControl'
 class Object extends React.Component {
 
     state = {
-        currentIndex: this.props.id,
-        currentObject: this.props.details
+        // currentIndex: this.props.id,
+        // currentObject: this.props.details
     }
 
     onClose = () => {
@@ -20,27 +20,32 @@ class Object extends React.Component {
 
     onOpen = () => {
         console.log("opening modal show - ", this.props.showModal);
+        this.onHandleCurrentIndex();
         this.props.handleShowModal(true);
     }
 
+    onHandleCurrentIndex = () => {
+        this.props.handleCurrentIndex(this.props.id)
+    }
+
     onUpdate = () => {
-console.log("currentIndex: ", this.state.currentIndex);
-console.log("currentObject: ", this.state.currentObject);
-console.log("description: ", this.state.currentObject.description)
+console.log("currentIndex: ", this.props.currentIndex);
+console.log("currentObject: ", this.props.currentObject);
+console.log("description: ", this.props.currentObject.description)
         var raw = JSON.stringify({
-            "object_id": this.state.currentObject.object_id,
-            "location_id":this.state.currentObject.location_id, 
-            "short_name":this.state.currentObject.short_name,
-            "long_name":this.state.currentObject.long_name,
-            "description":this.state.currentObject.description,
-            "object_type_id": this.state.currentObject.object_type_id,
+            "object_id": this.props.currentObject.object_id,
+            "location_id":this.props.currentObject.location_id, 
+            "short_name":this.props.currentObject.short_name,
+            "long_name":this.props.currentObject.long_name,
+            "description":this.props.currentObject.description,
+            "object_type_id": this.props.currentObject.object_type_id,
             "x_coordinate": 0,
             "y_coordinate": 0,
-            "image_x": this.state.currentObject.image_x,
-            "image_y": this.state.currentObject.image_y,
+            "image_x": this.props.currentObject.image_x,
+            "image_y": this.props.currentObject.image_y,
           });
 console.log("raw: ", raw);
-        this.props.handleUpdateObject(this.state.currentIndex, raw);
+        this.props.handleUpdateObject(this.props.currentIndex, raw);
         // console.log("updated from Obj.js! raw : ", raw);
         this.onClose();
     }
@@ -56,7 +61,7 @@ console.log("raw: ", raw);
         console.log("currentValue: ", e.currentTarget.value);
 
         const currentObject = {
-            ...this.state.currentObject, 
+            ...this.props.currentObject, 
             [e.currentTarget.name]: e.currentTarget.value
         }
         console.log("onChange currentObject before setState: ", currentObject);
@@ -66,16 +71,18 @@ console.log("raw: ", raw);
             }
         );
         
-        console.log("onChange object after setState: ", this.state.currentObject);
-        console.log("currentObject after setState: ", this.state.currentObject.object_id);
+        console.log("onChange object after setState: ", this.props.currentObject);
+        console.log("currentObject after setState: ", this.props.currentObject.object_id);
 
 
     }
   
     render() {
 
-        const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.state.currentObject;
-        
+        const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.props.currentObject;
+        console.log("jason says current objectG in Obj.js: ", this.props.currentObject);
+        console.log("valdyn says current object_id in Obj.js: ", this.props.currentObject.object_id);
+
         return (
             <div>
                 <ul className="object-list">
@@ -133,7 +140,7 @@ console.log("raw: ", raw);
                                     aria-label="long_name"
                                     aria-describedby="basic-addon1"
                                     name="long_name"
-                                    defaultValue={this.state.currentObject.long_name}
+                                    defaultValue={this.props.currentObject.long_name}
                                     onChange={this.onChange}
                                 />
                             </InputGroup>
@@ -148,7 +155,7 @@ console.log("raw: ", raw);
                                     aria-label="description"
                                     aria-describedby="basic-addon1"
                                     name="description"
-                                    defaultValue={this.state.currentObject.description}
+                                    defaultValue={this.props.currentObject.description}
                                     onChange={this.onChange}
 
                                 />
