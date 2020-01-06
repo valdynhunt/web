@@ -9,19 +9,27 @@ import FormControl from 'react-bootstrap/FormControl'
 class Object extends React.Component {
 
     state = {
+        showModal: false,
         currentIndex: this.props.id,
         currentObject: this.props.details
     }
 
     onClose = () => {
-        console.log("closing modal show - ", this.props.showModal);
-        this.props.handleShowModal(false);
+        this.setState(
+            {
+            showModal: false
+            }
+        );
     }
 
     onOpen = () => {
-        console.log("opening modal show - ", this.props.showModal);
-        this.props.handleShowModal(true);
+        this.setState(
+            {
+            showModal: true
+            }
+        );
     }
+
 
     onUpdate = () => {
 console.log("currentIndex: ", this.state.currentIndex);
@@ -75,7 +83,9 @@ console.log("raw: ", raw);
     render() {
 
         const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.state.currentObject;
-        
+        console.log("jason says current object in Obj.js: ", this.state.currentObject);
+        console.log("valdyn says current object_id in Obj.js: ", this.state.currentObject.object_id);
+
         return (
             <div>
                 <ul className="object-list">
@@ -90,12 +100,12 @@ console.log("raw: ", raw);
                         </Button>
                     </li>
                 </ul>
-                <Modal show={this.props.showModal} onHide={this.onClose}>
+                <Modal show={this.state.showModal} onHide={this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Object ID: {object_id}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <label htmlFor="object_type">
+                        {/* <label htmlFor="object_type">
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1">Object Type</InputGroup.Text>
@@ -107,7 +117,7 @@ console.log("raw: ", raw);
                                     readOnly="readonly"
                                 />
                             </InputGroup>
-                        </label>
+                        </label> */}
                         <label htmlFor="short_name">
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
