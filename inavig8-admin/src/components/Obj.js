@@ -48,9 +48,10 @@ console.log("description: ", this.state.currentObject.description)
             "image_y": this.state.currentObject.image_y,
           });
 console.log("raw: ", raw);
+
 console.log("currentObject in onUpdate in Obj.js: ", this.state.currentObject);
 
-        this.props.handleUpdateObject(this.state.currentObject, this.state.currentIndex, raw);
+        this.props.handleUpdateObject(this.state.currentIndex, raw);
         // console.log("updated from Obj.js! raw : ", raw);
         this.onClose();
     }

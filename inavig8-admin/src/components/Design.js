@@ -172,7 +172,8 @@ class Design extends Component {
         });
     }
 
-    handleUpdateObject = (curObj, index, raw) => {
+    handleUpdateObject = (index, raw) => {
+
         console.log(index + ": handleUpdateObject in Design.js = ", raw);
         console.log("description in Design: ", raw);
 
@@ -189,37 +190,22 @@ class Design extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
-            /* TODO: unable to setState without errors */
-            // result does NOT have the changed object
-            const objs = {...this.state.objects};
-            // objects[index] = JSON.parse(raw);
-            objs[index] = curObj;
-            console.log("Design.js result - objs[index]: ", objs[index]);
+
+            const objects = {...this.state.objects};
+            objects[index] = result.body.data[0];
+            console.log("Design.js result - objects[index]: ", objects[index]);
 
             this.setState(
                 { 
-                    objects: [...this.state.objects, { ...objs}]
+                    objects: [...this.state.objects, { ...objects}]
                 }
             );
         });
     }
 
-    // handleFormChange = (index, updatedField) => {
-    //     console.log(index + ": updatedField in Design.js = ", updatedField);
-    //     /* TODO: unable to setState without errors */
-        
-    //     // const objects = {...this.state.objects};
-    //     // objects[index] = updatedField; 
-    //     // this.setState(
-    //     //     { 
-    //     //         objects 
-    //     //     }
-    //     // );
-    // }
-
 
     render() {
-
+console.log("sending details from Design.js to Graphics.js: ", this.state.objects[0]);
         return (
             <div>
                 <Container fluid="true" className="main">
@@ -234,6 +220,7 @@ class Design extends Component {
                             location_id={this.props.match.params.location_id} 
                             className="graphics" key="1" 
                             objects={this.state.objects} 
+                            details={this.state.objects[0]}
                             location={this.state.location}
                             showModalG={this.state.showModalG}
                             handleShowModalG={this.handleShowModalG} 
@@ -251,7 +238,6 @@ class Design extends Component {
                             location={this.state.location}
                             handleDeleteObject={this.handleDeleteObject} 
                             handleUpdateObject={this.handleUpdateObject} 
-                            // handleFormChange={this.handleFormChange}
                         />
                     </Col>
                     </Row>

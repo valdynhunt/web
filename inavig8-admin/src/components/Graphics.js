@@ -91,6 +91,7 @@ let origY = 0;
 
 var stage;
 var mousePos;
+let showMe;
 
 // var tooltipLayer = new Konva.Layer();
 // var tooltip = new Konva.Text({
@@ -121,11 +122,14 @@ var mousePos;
 //   // key: target.ref + 1
 // });
 
-class Graphics extends Component {
+class Graphics extends React.Component {
 
   constructor() {
     super()
     this.state = {
+      // currentObjectG: this.props.details
+      // currentObjectG: null
+
       currentObjectG: {
         object_id: 0,
         location_id: 0, 
@@ -133,10 +137,10 @@ class Graphics extends Component {
         long_name: "", 
         description: "", 
         object_type: "",
-        "x_coordinate": 0,
-        "y_coordinate": 0,
-        "image_x": 0,
-        "image_y": 0
+        x_coordinate: 0,
+        y_coordinate: 0,
+        image_x: 0,
+        image_y: 0
    }
 
     }
@@ -147,20 +151,6 @@ class Graphics extends Component {
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
-  // state = {
-  //   currentObjectG: {
-  //        object_id: 0,
-  //        location_id: 0, 
-  //        short_name: "", 
-  //        long_name: "", 
-  //        description: "", 
-  //        object_type_id: "",
-  //        "x_coordinate": 0,
-  //        "y_coordinate": 0,
-  //        "image_x": 0,
-  //        "image_y": 0
-  //   }
-  // };
 
   // componentDidMount() {
 
@@ -288,7 +278,7 @@ onOpen = () => {
 onUpdate = () => {
     // console.log("currentIndex: ", this.state.currentIndex);
     // console.log("currentObjectG: ", this.state.currentObjectG);
-    // console.log("description: ", this.state.currentObjectG.description)
+    console.log("Graphics.js onUpdate - description: ", this.state.currentObjectG.description)
     var raw = JSON.stringify({
         "object_id": this.state.currentObjectG.object_id,
         "location_id":this.state.currentObjectG.location_id, 
@@ -301,9 +291,19 @@ onUpdate = () => {
         "image_x": this.state.currentObjectG.image_x,
         "image_y": this.state.currentObjectG.image_y,
       });
-console.log("raw: ", raw);
-      let index = this.props.objects.filter(object => object.object_id === raw.object_id);
-      // const curObj = this.props.objects[index];
+      
+    console.log("raw: ", raw);
+    console.log(JSON.parse(raw));
+    console.log("object_id: ", JSON.parse(raw).object_id);
+    console.log("objects: ", this.props.objects);
+
+    const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
+    console.log();
+
+    const index = this.props.objects.findIndex(isCurrentObjectId)
+    console.log("index: ", index);
+      
+    console.log("valdyn says Graphics.js onUpdate index is: ", index);
     this.props.handleUpdateObject(index, raw);
     // console.log("updated from Obj.js! raw : ", raw);
     this.onClose();
@@ -323,13 +323,15 @@ onChange = (e) => {
       ...this.state.currentObjectG, 
       [e.currentTarget.name]: e.currentTarget.value
   }
+  console.log("onChange currentObjectG before setState: ", currentObjectG);
+
   this.setState(
       {
       currentObjectG
       }
   );
-  console.log("onChange object: ", currentObjectG);
-  console.log("onChange object from state: ", this.state.currentObjectG);
+  console.log("Graphics.js onChange object: ", currentObjectG);
+  console.log("Graphics.js onChange object from state: ", this.state.currentObjectG);
 
 }
 
@@ -337,8 +339,8 @@ onChange = (e) => {
   render() {
 
     // const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.props.objects;
-    console.log("jason says current objectG in Graphics.js: ", this.state.currentObjectG);
-    console.log("valdyn says current object_id in Graphics.js: ", this.state.currentObjectG.object_id);
+    // console.log("jason says current objectG in Graphics.js: ", this.state.currentObjectG);
+    // console.log("valdyn says current object_id in Graphics.js: ", this.state.currentObjectG.object_id);
 
     
 
@@ -807,7 +809,6 @@ onChange = (e) => {
               />
           </Layer>
         </Stage>
-
 
         <Modal show={this.props.showModalG} onHide={this.onClose}>
                     <Modal.Header closeButton>
