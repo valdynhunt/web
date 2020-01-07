@@ -8,7 +8,7 @@ function RenderRecycle(props) {
   
     props.objects.map((key) => (
         
-        key.object_type.short_name === "recycle" &&
+      key.object_type && key.object_type.short_name === "recycle" &&
         <Recycle
           key={key.object_id}
           x={key.image_x}

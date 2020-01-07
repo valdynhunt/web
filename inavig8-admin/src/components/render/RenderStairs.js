@@ -8,7 +8,7 @@ function RenderStairs(props) {
   
       props.objects.map((key) => (
           
-          key.object_type.short_name === "stairs" &&
+        key.object_type && key.object_type.short_name === "stairs" &&
           <Stairs
             key={key.object_id}
             x={key.image_x}

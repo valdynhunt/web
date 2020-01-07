@@ -172,7 +172,7 @@ class Design extends Component {
         });
     }
 
-    handleUpdateObject = (index, raw) => {
+    handleUpdateObject = (curObj, index, raw) => {
         console.log(index + ": handleUpdateObject in Design.js = ", raw);
         console.log("description in Design: ", raw);
 
@@ -190,16 +190,15 @@ class Design extends Component {
             return response.json();
         }).then(result => {
             /* TODO: unable to setState without errors */
-            
-            const objects = {...this.state.objects};
+            // result does NOT have the changed object
+            const objs = {...this.state.objects};
+            // objects[index] = JSON.parse(raw);
+            objs[index] = curObj;
+            console.log("Design.js result - objs[index]: ", objs[index]);
 
-
-            objects[index] = raw;
             this.setState(
                 { 
-                    // objects
-                    objects: [...this.state.objects, { ...objects}]
-
+                    objects: [...this.state.objects, { ...objs}]
                 }
             );
         });

@@ -8,7 +8,7 @@ function RenderDoorClosed(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "door closed" &&
+      key.object_type && key.object_type.short_name === "door closed" &&
         <DoorClosed
           key={key.object_id}
           x={key.image_x}

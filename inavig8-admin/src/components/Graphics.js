@@ -303,6 +303,7 @@ onUpdate = () => {
       });
 console.log("raw: ", raw);
       let index = this.props.objects.filter(object => object.object_id === raw.object_id);
+      // const curObj = this.props.objects[index];
     this.props.handleUpdateObject(index, raw);
     // console.log("updated from Obj.js! raw : ", raw);
     this.onClose();
