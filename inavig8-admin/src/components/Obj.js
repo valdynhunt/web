@@ -129,7 +129,6 @@ console.log("raw: ", raw);
                                     name="short_name"
                                     defaultValue={short_name}
                                     readOnly="readonly"
-
                                 />
                             </InputGroup>
                         </label>
@@ -160,7 +159,6 @@ console.log("raw: ", raw);
                                     name="description"
                                     defaultValue={this.state.currentObject.description}
                                     onChange={this.onChange}
-
                                 />
                             </InputGroup>
                         </label>
@@ -200,7 +198,6 @@ console.log("raw: ", raw);
                                 <InputGroup.Text id="basic-addon1">Location ID</InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl
-                                    //placeholder="no y-coordinate"
                                     aria-label="location_id"
                                     aria-describedby="basic-addon1"
                                     name="location_id"

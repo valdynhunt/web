@@ -51,7 +51,6 @@ header div.header-upper img {
 header div.header-lower {
     grid-row: 2;
     grid-column: 2;
-    /* background: #666666; */
 }
 
 header div.header-lower input[type=button] {
@@ -63,3 +62,11 @@ header div.header-lower input[type=button] {
     font: 1.5em 'Open Sans', sans-serif;
     font-weight: bold;
 }
+
+header .extra-wide {
+    width: 100% !important;
+}
+
+/* header .form-control {
+    width: 100% !important;
+} */
