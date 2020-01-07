@@ -4,10 +4,7 @@ import './Header.css';
 import './Profile.css';
 import Popup from 'reactjs-popup';
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
-// import Modal from 'react-bootstrap/Modal'
-// import Button from 'react-bootstrap/Button'
-// import InputGroup from 'react-bootstrap/InputGroup'
-// import FormControl from 'react-bootstrap/FormControl'
+
 
 class Header extends React.Component {
 

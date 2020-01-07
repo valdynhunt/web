@@ -27,6 +27,22 @@ main.locations-container section.location-list {
     width: 100%;
 }
 
+/* section.location-list h4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section.location-list h4 span {
+    font: 0.8em 'Libre Baskerville', serif;
+    font-weight: normal;
+}
+
+section.location-list h4 span:hover {
+    font-weight: bold;
+} */
+
 
 /* Location View */
 main.locations-container section.location-view {

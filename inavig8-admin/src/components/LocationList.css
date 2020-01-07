@@ -1,6 +1,15 @@
 section.location-list ul {
     list-style: none;
-    /* padding-left: 0.6em; */
+    
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 0.8em;
+    align-items: center;
+}
+
+section.location-list ul:hover {
+    background: var(--primary-color);
+    color: white;
 }
 
 section.location-list ul li {
@@ -9,12 +18,12 @@ section.location-list ul li {
     margin-bottom: 0.4em;
 }
 
-section.location-list ul.ul-location-list li:hover {
-    background: var(--primary-color);
-    color: white;
-    text-shadow: 0px 0px 0px white;
+section.location-list ul li:nth-child(2) {
+    justify-self: end;
+    font: 1.0em 'Libre Baskerville', serif;
+    font-weight: normal;
 }
 
-section.location-list ul.ul-location-list li a:hover {
+section.location-list ul.ul-location-list li:hover {
     text-shadow: 0px 0px 0px white;
 }
