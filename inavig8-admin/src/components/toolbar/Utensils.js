@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 9;
 
 const Utensils = (props) => {
     const [image] = useImage(UTENSILS_SRC);
-    const handleUtensilsClick = (e) => {
-      console.log('utensils clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Utensils = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleUtensilsClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

@@ -6,9 +6,7 @@ const CIRC_RADIUS = 7;
 const OBJECT_TYPE_ID = 28;
 
 const CircleRedLg = (props) => {
-    const handleCircleRedLgClick = (e) => {
-      console.log('large red circle clicked');
-    }
+
     return <Circle 
             x={props.x} 
             y={props.y} 
@@ -21,7 +19,7 @@ const CircleRedLg = (props) => {
             draggable              
             onDragStart={props.handleDragStart}
             onDragEnd={props.handleDragEnd}
-            onClick={handleCircleRedLgClick}
+            onClick={props.handleClick}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
             shadowBlur={1} />;

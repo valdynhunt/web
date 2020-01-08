@@ -8,7 +8,7 @@ function RenderPath(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "path" &&
+          key.object_type && key.object_type.short_name === "path" &&
             <Path
               key={key.object_id}
               object_id={key.object_id}
@@ -20,6 +20,7 @@ function RenderPath(props) {
               onMouseMove={props.onMouseMove}
               onMouseOut={props.onMouseOut}
               shadowBlur={1}
+              handleClick={props.handleClick}
             />
         )))
 }

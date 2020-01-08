@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 10;
 
 const Restroom = (props) => {
     const [image] = useImage(RESTROOM_SRC);
-    const handleRestroomClick = (e) => {
-      console.log('restroom clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Restroom = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleRestroomClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

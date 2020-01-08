@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 6;
 
 const Elevator = (props) => {
     const [image] = useImage(ELEVATOR_SRC);
-    const handleElevatorClick = (e) => {
-      console.log('elevator clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Elevator = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleElevatorClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

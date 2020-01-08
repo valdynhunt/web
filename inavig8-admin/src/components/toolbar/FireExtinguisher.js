@@ -8,9 +8,7 @@ const OBJECT_TYPE_ID = 15;
 
 const FireExtinguisher = (props) => {
     const [image] = useImage(FIRE_EXTINGUISHER_SRC);
-    const handleFireExtinguisherClick = (e) => {
-      console.log('fire extinguisher clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -24,7 +22,7 @@ const FireExtinguisher = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleFireExtinguisherClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

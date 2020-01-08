@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 16;
 
 const MapMarker = (props) => {
     const [image] = useImage(MAP_MARKER_SRC);
-    const handleMapMarkerClick = (e) => {
-      console.log('map marker clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y}
@@ -23,7 +21,7 @@ const MapMarker = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleMapMarkerClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

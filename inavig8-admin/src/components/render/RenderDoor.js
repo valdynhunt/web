@@ -5,10 +5,9 @@ import { Star } from 'react-konva';
 function RenderDoor(props) {
              
     return (
-
         props.objects.map((key) => (
-            
-            key.object_type.short_name === "door" &&
+
+          key.object_type && key.object_type.short_name === "door" &&
             <Star
               key={key.object_id}
               x={key.image_x}
@@ -26,6 +25,7 @@ function RenderDoor(props) {
               shadowOpacity={0.6}
               onMouseMove={props.onMouseMove}
               onMouseOut={props.onMouseOut}
+              handleClick={props.handleClick}
             //   onDragStart={this.handleDragStart}
             //   onDragEnd={this.handleDragEnd}
             />

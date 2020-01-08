@@ -8,9 +8,6 @@ const OBJECT_TYPE_ID = 11;
 const Male = (props) => {
 
     const [image] = useImage(MALE_SRC);
-    const handleMaleClick = (e) => {
-      console.log('male clicked');
-    }
     
     return (
         <Image 
@@ -26,7 +23,7 @@ const Male = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleMaleClick}
+            onClick={props.handleClick}
           image={image}
         />
     );

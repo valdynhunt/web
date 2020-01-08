@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 1;
 
 
 const Path = (props) => {
-    const handlePathClick = (e) => {
-      console.log('path (blk sm circle) clicked');
-    }
+
     return <Circle 
             x={props.x} 
             y={props.y} 
@@ -22,7 +20,7 @@ const Path = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            onClick={handlePathClick}
+            onClick={props.handleClick}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
             shadowBlur={1} />;

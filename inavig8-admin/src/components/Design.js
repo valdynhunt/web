@@ -173,8 +173,16 @@ class Design extends Component {
     }
 
     handleUpdateObject = (index, raw) => {
+
         console.log(index + ": handleUpdateObject in Design.js = ", raw);
-        console.log("description in Design: ", raw);
+        
+        this.setState(
+            prevState => (
+                { 
+                    objects: prevState.objects.filter(object => object.object_id !== JSON.parse(raw).object_id) 
+                }
+            )
+        );
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -189,38 +197,20 @@ class Design extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
-            /* TODO: unable to setState without errors */
-            
-            const objects = {...this.state.objects};
 
-
-            objects[index] = raw;
             this.setState(
-                { 
-                    // objects
-                    objects: [...this.state.objects, { ...objects}]
-
+                {
+                    objects: [...this.state.objects, { ...result.body.data[0] }]
                 }
             );
+
+            console.log("after setState - Design.js result: ", this.state.objects);
+
         });
     }
 
-    // handleFormChange = (index, updatedField) => {
-    //     console.log(index + ": updatedField in Design.js = ", updatedField);
-    //     /* TODO: unable to setState without errors */
-        
-    //     // const objects = {...this.state.objects};
-    //     // objects[index] = updatedField; 
-    //     // this.setState(
-    //     //     { 
-    //     //         objects 
-    //     //     }
-    //     // );
-    // }
-
 
     render() {
-
         return (
             <div>
                 <Container fluid="true" className="main">
@@ -235,6 +225,7 @@ class Design extends Component {
                             location_id={this.props.match.params.location_id} 
                             className="graphics" key="1" 
                             objects={this.state.objects} 
+                            details={this.state.objects[0]}
                             location={this.state.location}
                             showModalG={this.state.showModalG}
                             handleShowModalG={this.handleShowModalG} 
@@ -252,7 +243,6 @@ class Design extends Component {
                             location={this.state.location}
                             handleDeleteObject={this.handleDeleteObject} 
                             handleUpdateObject={this.handleUpdateObject} 
-                            // handleFormChange={this.handleFormChange}
                         />
                     </Col>
                     </Row>

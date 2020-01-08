@@ -8,7 +8,7 @@ function RenderSquareGreen(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "green square" &&
+            key.object_type && key.object_type.short_name === "green square" &&
             <SquareGreen
               key={key.object_id}
               x={key.image_x}
@@ -20,7 +20,8 @@ function RenderSquareGreen(props) {
               onMouseMove={props.onMouseMove}
               onMouseOut={props.onMouseOut}
               shadowOffset={{ x: 1, y: 1 }}
-              shadowBlur={1} />
+              shadowBlur={1} 
+              handleClick={props.handleClick}/>
 
         )))
 }

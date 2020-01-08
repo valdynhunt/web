@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 26;
 
 
 const CircleGreySm = (props) => {
-    const handleCircleGreySmClick = (e) => {
-      console.log('small grey circle clicked');
-    }
+
     return <Circle 
             x={props.x} 
             y={props.y} 
@@ -22,7 +20,7 @@ const CircleGreySm = (props) => {
             draggable              
             onDragStart={props.handleDragStart}
             onDragEnd={props.handleDragEnd}
-            onClick={handleCircleGreySmClick}
+            onClick={props.handleClick}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
             shadowBlur={1} />;

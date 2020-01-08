@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 10;
 
 const ImageRegular = (props) => {
     const [image] = useImage(IMAGE_REGULAR_SRC);
-    const handleImageRegularClick = (e) => {
-      console.log('image regular clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y}
@@ -23,7 +21,7 @@ const ImageRegular = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleImageRegularClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

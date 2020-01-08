@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 3;
 
 const Generic = (props) => {
     const [image] = useImage(SQUARE_SRC);
-    const handleGenericClick = (e) => {
-      console.log('generic (blk square) clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Generic = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleGenericClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 
