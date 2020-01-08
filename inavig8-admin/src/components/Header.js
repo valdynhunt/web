@@ -3,8 +3,33 @@ import './Header.css';
 //import Profile from './Profile';
 import './Profile.css';
 import Popup from 'reactjs-popup';
+import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
+// import Modal from 'react-bootstrap/Modal'
+// import Button from 'react-bootstrap/Button'
+// import InputGroup from 'react-bootstrap/InputGroup'
+// import FormControl from 'react-bootstrap/FormControl'
 
 class Header extends React.Component {
+
+    state = {
+        showModal: false,
+    }
+
+    onClose = () => {
+        this.setState(
+            {
+            showModal: false
+            }
+        );
+    }
+
+    onOpen = () => {
+        this.setState(
+            {
+            showModal: true
+            }
+        );
+    }
 
     render() {
 
@@ -20,76 +45,86 @@ class Header extends React.Component {
 
             <header>
                 <div className="header-upper">
-                    <div className="username-area">
+                    <div className="username-area" onClick={this.onOpen}>
                         <h6>{email}</h6>
-                        <Popup 
-                            trigger={
-                                <img src="./img/icons/dropdown-icon.png" alt="Profile" title="Profile" />
-                            }
-                            modal
-                            closeOnDocumentClick
-                            lockScrollcloseOnEscape
-                            //repositionOnResize
-                        >
-                            {close => (
-                                <div className="profile-modal">
-                                    <a href="/#" className="profile-modal-close" onClick={close}>&times;</a>
-                                    <h3>Profile</h3>
-                                    <div className="layout-profile">
-                                        <section className="profile-col-left">
-                                            <label className="profile-bold" htmlFor="first_name">First Name:</label>
-                                            <input type="text" className="profile-input" name="first_name" id="first_name" value={first_name} readOnly="readonly" />
-                                            <label className="profile-bold" htmlFor="last_name">Last Name:</label>
-                                            <input type="text" className="profile-input" name="last_name" id="last_name" value={last_name} readOnly="readonly" />
-                                            <label className="profile-bold" htmlFor="email">Email:</label>
-                                            <input type="email" className="profile-input" name="email" id="email" value={email} readOnly="readonly" />
-                                            
-                                            {/* <label className="profile-bold" htmlFor="first_name">First Name:&nbsp;
-                                                <input type="text" className="profile-input" name="first_name" id="first_name" value={first_name} readOnly="readonly" />
-                                            </label>
-                                            <label className="profile-bold" htmlFor="last_name">Last Name:&nbsp;
-                                                <input type="text" className="profile-input" name="last_name" id="last_name" value={last_name} readOnly="readonly" />
-                                            </label>
-                                            <label className="profile-bold" htmlFor="email">Email:&nbsp;
-                                                <input type="email" className="profile-input" name="email" id="email" value={email} readOnly="readonly" />
-                                            </label> */}
-                                        </section>
-                                        <section className="profile-col-right">
-                                            <label className="profile-bold" htmlFor="username">Username:</label>
-                                            <input type="text" className="profile-input" name="username" id="username" value={username} readOnly="readonly" />
-                                            <label className="profile-bold" htmlFor="password">Password:</label>
-                                            <input type="password" className="profile-input" name="password" id="password" value={password} readOnly="readonly" />
-                                            <label className="profile-bold" htmlFor="role">Role:</label>
-                                            <input type="text" className="profile-input" name="role" id="role" value={role} readOnly="readonly" />
-                                            
-                                            {/* <label className="profile-bold" htmlFor="username">Username:&nbsp;
-                                                <input type="text" className="profile-input" name="username" id="username" value={username} readOnly="readonly" />
-                                            </label>
-                                            <label className="profile-bold" htmlFor="password">Password:&nbsp;
-                                            <input type="password" className="profile-input" name="password" id="password" value={password} readOnly="readonly" />
-                                            </label>
-                                            <label className="profile-bold" htmlFor="role">Role:&nbsp;
-                                            <input type="text" className="profile-input" name="role" id="role" value={role} readOnly="readonly" />
-                                            </label> */}
-                                        </section>
-                                    </div>
-                                    <div className="profile-buttons">
-                                        <button
-                                            className="profile-button"
-                                            onClick={close}
-                                        >
-                                                close
-                                        </button>
-                                        <button
-                                            className="profile-button"
-                                        >
-                                                save
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </Popup>
+                        <img src="./img/icons/dropdown-icon.png" alt="Profile" title="Profile" />
                     </div>
+
+                    <Modal show={this.state.showModal} onHide={this.onClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Admin User: {username}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <label htmlFor="first_name">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon1">First Name</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        placeholder="enter first name"
+                                        aria-label="first_name"
+                                        aria-describedby="basic-addon1"
+                                        name="first_name"
+                                        defaultValue={first_name}
+                                        onChange={this.onChange}
+                                    />
+                                </InputGroup>
+                            </label>
+                            <label htmlFor="last_name">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon1">Last Name</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        placeholder="enter last name"
+                                        aria-label="last_name"
+                                        aria-describedby="basic-addon1"
+                                        name="long_name"
+                                        defaultValue={last_name}
+                                        onChange={this.onChange}
+                                    />
+                                </InputGroup>
+                            </label>
+                            <label htmlFor="email">
+                                <InputGroup className="mb-3 wl-100">
+                                    <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        placeholder="enter email"
+                                        aria-label="email"
+                                        aria-describedby="basic-addon1"
+                                        name="email"
+                                        defaultValue={email}
+                                        onChange={this.onChange}
+                                    />
+                                </InputGroup>
+                            </label>
+                            <label htmlFor="role">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon1">Role</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <FormControl
+                                        placeholder="enter role"
+                                        aria-label="role"
+                                        aria-describedby="basic-addon1"
+                                        name="role"
+                                        defaultValue={role}
+                                        onChange={this.onChange}
+
+                                    />
+                                </InputGroup>
+                            </label>
+                            {/* <hr />
+                            <Button variant="danger" onClick={() => this.onDelete(object_id)}>Delete</Button> */}
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.onClose}>Close</Button>
+                            {/* <Button onClick={this.onUpdate}>Update</Button> */}
+                        </Modal.Footer>
+                    </Modal>
+
                 </div>
                 <div className="header-lower">
                     {/* <h6>Hello, Jason</h6> */}

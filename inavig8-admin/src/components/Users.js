@@ -1,7 +1,27 @@
 import React from 'react';
+import UserList from './UserList'
 import './Users.css';
 
 class Users extends React.Component {
+
+    state = {
+        isHover: false,
+        showImage: false,
+        showDetails: false,
+        index: -1,
+        users: [ localStorage.getItem('admin') ],
+    }
+
+    handleHover = (index) => {
+        this.setState(
+            {
+                isHover: true,
+                showImage: true,
+                showDetails: true,
+                index
+            }
+        );
+    }
 
     render() {
 
@@ -11,14 +31,7 @@ class Users extends React.Component {
                 <section className="users-list-area">
                     <h4>Users List</h4>
                     <ul className="users-list">
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
-                        <li>&#187; Loremipsum Dolorsit</li>
+                        <li>...users</li>
                     </ul>
                 </section>
                 <section className="user-details">
