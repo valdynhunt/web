@@ -491,7 +491,6 @@ onChange = (e) => {
               <Coffee x={X[0]} y={Y[4]} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
-                handleClick = {this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />

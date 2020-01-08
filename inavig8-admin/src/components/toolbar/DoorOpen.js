@@ -8,9 +8,7 @@ const OBJECT_TYPE_ID = 18;
 
 const DoorOpen = (props) => {
     const [image] = useImage(DOOR_OPEN_SRC);
-    const handleDoorOpenClick = (e) => {
-      console.log('door open clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -24,7 +22,7 @@ const DoorOpen = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleDoorOpenClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

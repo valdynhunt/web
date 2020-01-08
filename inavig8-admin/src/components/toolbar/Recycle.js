@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 14;
 
 const Recycle = (props) => {
     const [image] = useImage(RECYCLE_SRC);
-    const handleRecycleClick = (e) => {
-      console.log('recycle clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y}
@@ -23,7 +21,7 @@ const Recycle = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleRecycleClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

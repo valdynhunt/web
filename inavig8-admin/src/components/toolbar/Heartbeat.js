@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 13;
 
 const Heartbeat = (props) => {
     const [image] = useImage(HEARTBEAT_SRC);
-    const handleHeartbeatClick = (e) => {
-      console.log('heartbeat clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Heartbeat = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleHeartbeatClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

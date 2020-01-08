@@ -20,7 +20,9 @@ function RenderSquareGrey(props) {
               onMouseMove={props.onMouseMove}
               onMouseOut={props.onMouseOut}
               shadowOffset={{ x: 1, y: 1 }}
-              shadowBlur={1} />
+              shadowBlur={1} 
+              handleClick={props.handleClick}
+              />
 
         )))
 }

@@ -20,6 +20,7 @@ function RenderCircleGreenSm(props) {
           onMouseMove={props.onMouseMove}
           onMouseOut={props.onMouseOut}
           shadowBlur={1}
+          handleClick={props.handleClick}
         />
 
     )))

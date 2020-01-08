@@ -6,9 +6,7 @@ const RECT_HEIGHT = 14;
 const OBJECT_TYPE_ID = 22;
 
 const SquareGreen = (props) => {
-    const handleSquareGreenClick = (e) => {
-      console.log('green square clicked');
-    }
+
     return <Rect
             x={props.x}
             y={props.y}
@@ -22,7 +20,7 @@ const SquareGreen = (props) => {
             draggable
             onDragStart={props.handleDragStart}
             onDragEnd={props.handleDragEnd}
-            onClick={handleSquareGreenClick}
+            onClick={props.handleClick}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
             shadowOffset={{ x: 1, y: 1 }}

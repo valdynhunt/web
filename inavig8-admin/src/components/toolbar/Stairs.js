@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 7;
 
 const Stairs = (props) => {
     const [image] = useImage(STAIRS_SRC);
-    const handleStairsClick = (e) => {
-      console.log('stairs clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Stairs = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleStairsClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

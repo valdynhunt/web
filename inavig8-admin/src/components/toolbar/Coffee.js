@@ -7,9 +7,7 @@ const OBJECT_TYPE_ID = 8;
 
 const Coffee = (props) => {
     const [image] = useImage(COFFEE_SRC);
-    const handleCoffeeClick = (e) => {
-      console.log('coffee clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -21,7 +19,7 @@ const Coffee = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            // onMouseMove={props.onMouseMove}
+            onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
             onClick={props.handleClick}
           image={image} />;

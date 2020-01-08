@@ -17,6 +17,7 @@ function RenderMale(props) {
                 object_id={key.object_id}
                 onMouseMove={props.onMouseMove}
                 onMouseOut={props.onMouseOut}
+                handleClick={props.handleClick}
               />
 
         )))
