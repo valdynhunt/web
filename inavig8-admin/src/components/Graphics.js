@@ -292,18 +292,16 @@ onUpdate = () => {
         "image_y": this.state.currentObjectG.image_y,
       });
       
-    console.log("raw: ", raw);
-    console.log(JSON.parse(raw));
-    console.log("object_id: ", JSON.parse(raw).object_id);
-    console.log("objects: ", this.props.objects);
+    // console.log(JSON.parse(raw));
+    // console.log("object_id: ", JSON.parse(raw).object_id);
+    // console.log("long_name: ", JSON.parse(raw).long_name);
+    // console.log("description: ", JSON.parse(raw).description);
 
     const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
-    console.log();
-
     const index = this.props.objects.findIndex(isCurrentObjectId)
     console.log("index: ", index);
       
-    console.log("valdyn says Graphics.js onUpdate index is: ", index);
+    // console.log("valdyn says Graphics.js onUpdate index is: ", index);
     this.props.handleUpdateObject(index, raw);
     // console.log("updated from Obj.js! raw : ", raw);
     this.onClose();

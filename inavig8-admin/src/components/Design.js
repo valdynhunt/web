@@ -175,7 +175,14 @@ class Design extends Component {
     handleUpdateObject = (index, raw) => {
 
         console.log(index + ": handleUpdateObject in Design.js = ", raw);
-        console.log("description in Design: ", raw);
+        
+        this.setState(
+            prevState => (
+                { 
+                    objects: prevState.objects.filter(object => object.object_id !== JSON.parse(raw).object_id) 
+                }
+            )
+        );
 
         let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
@@ -191,21 +198,19 @@ class Design extends Component {
             return response.json();
         }).then(result => {
 
-            const objects = {...this.state.objects};
-            objects[index] = result.body.data[0];
-            console.log("Design.js result - objects[index]: ", objects[index]);
-
             this.setState(
-                { 
-                    objects: [...this.state.objects, { ...objects}]
+                {
+                    objects: [...this.state.objects, { ...result.body.data[0] }]
                 }
             );
+
+            console.log("after setState - Design.js result: ", this.state.objects);
+
         });
     }
 
 
     render() {
-console.log("sending details from Design.js to Graphics.js: ", this.state.objects[0]);
         return (
             <div>
                 <Container fluid="true" className="main">
