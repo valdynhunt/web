@@ -40,6 +40,10 @@ class Locations extends React.Component {
         );
     }
 
+    handleCreate = (newLocation, parent_location_id) => {
+        this.props.handleCreate(newLocation, parent_location_id);
+    }
+
     render() {
 
         return (
@@ -59,8 +63,9 @@ class Locations extends React.Component {
                                 key={key}
                                 id={key}
                                 details={this.props.locations[key]} 
-                                handleHover={this.handleHover}
                                 hover={this.state.isHover}
+                                handleHover={this.handleHover}
+                                handleCreate={this.handleCreate}
                             />
                         ))}
                     {/* </ul> */}

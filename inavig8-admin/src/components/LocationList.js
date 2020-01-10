@@ -1,19 +1,19 @@
 import React from 'react';
-import { Modal, Form, Button, InputGroup, FormControl } from 'react-bootstrap/'
+import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap/'
 import './LocationList.css';
 
 class Location extends React.Component {
 
     state = {
         showModal: false,
-        newObj: null,
+        newLocation: null,
     }
 
     onClose = () => {
         this.setState(
             {
                 showModal: false,
-                newObj: null,
+                newLocation: null,
             }
         );
     }
@@ -22,7 +22,7 @@ class Location extends React.Component {
         this.setState(
             {
                 showModal: true,
-                newObj: null,
+                newLocation: null,
             }
         );
     }
@@ -32,41 +32,46 @@ class Location extends React.Component {
     }
 
     onCreate = () => {
-        let newObj = {
-            "latitude": 0.0,
-            "address_id": this.props.details.address_id,
-            "description": this.state.newObj.description,
-            "min_x_coordinate": 0,
-            "max_x_coordinate": 0,
-            "active": false,
-            "long_name": this.state.newObj.long_name,
-            "location_type_id": this.props.details.location_type_id,
-            "scale_ft": 1.0,
-            "short_name": this.state.newObj.short_name,
-            "primary_object_id": 1,
-            "min_y_coordinate": 0,
-            "max_y_coordinate": 0,
-            "longitude": 0.0
-        }
-        console.log("Jason says new object created! ", newObj);
-        //this.onClose();
+        let newLocation = JSON.stringify(
+            {
+                "latitude": 0.0,
+                "address_id": this.props.details.address_id,
+                "description": this.state.newLocation.description,
+                "min_x_coordinate": 3,
+                "max_x_coordinate": 5,
+                "active": true,
+                "long_name": this.state.newLocation.long_name,
+                "location_type_id": this.props.details.location_type_id,
+                "scale_ft": 1.0,
+                "short_name": this.state.newLocation.short_name,
+                "primary_object_id": 1,
+                "min_y_coordinate": 4,
+                "max_y_coordinate": 6,
+                "longitude": 0.0,
+            }
+        );
+
+        console.log("LocationList.js -> onCreate: ", newLocation);
+        let parent_location_id = this.props.details.location_id;
+        this.props.handleCreate(newLocation, parent_location_id);
+        this.onClose();
     }
 
     onChange = (e) => {
-        const newObj = {
-            ...this.state.newObj, 
+        const newLocation = {
+            ...this.state.newLocation, 
             [e.currentTarget.name]: e.currentTarget.value
         }
         this.setState(
             {
-                newObj
+                newLocation
             }
         );
     }
 
     render() {
 
-        const { location_id, long_name, address_id, location_type_id } = this.props.details;
+        const { location_id, long_name } = this.props.details;
         
         return (
             <ul className="ul-location-list">
@@ -77,12 +82,24 @@ class Location extends React.Component {
                             {long_name}
                     </li>
                 </a>
-                <li onClick={this.onOpen}>
-                    add new location
+                {/* <li onClick={this.onOpen}> */}
+                <li>
+                    {/* <img src="/img/icons/down-arrow-icon.png" alt="" title="edit location" /> */}
+                    <DropdownButton
+                        //as={InputGroup.Append}
+                        variant="outline-secondary"
+                        title="Action"
+                        id="input-group-dropdown-2"
+                    >
+                    <Dropdown.Item href="#">edit this location</Dropdown.Item>
+                    <Dropdown.Item href="#">delete this location</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={this.onOpen}>add new sub-location</Dropdown.Item>
+                    </DropdownButton>
                 </li>
                 <Modal show={this.state.showModal} onHide={this.onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>New Location for<br/>{long_name}</Modal.Title>
+                    <Modal.Title>new location for<br/><b>{long_name}</b></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <label htmlFor="long_name">
@@ -143,6 +160,9 @@ class Location extends React.Component {
                                 defaultValue=""
                                 readOnly="readonly"
                             />
+                            <InputGroup.Append>
+                                <Button variant="outline-secondary">import</Button>
+                            </InputGroup.Append>
                         </InputGroup>
                     </label>
                 </Modal.Body>
