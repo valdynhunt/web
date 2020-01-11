@@ -2,7 +2,10 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const FIRE_EXTINGUISHER_SRC = '/img/icons/fire-extinguisher.png';
+
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/fire-extinguisher.png';
+const FIRE_EXTINGUISHER_SRC = BASE_URL.concat(NAME);
 const OBJECT_TYPE_ID = 15;
 
 

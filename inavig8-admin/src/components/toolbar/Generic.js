@@ -2,7 +2,10 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const SQUARE_SRC = '/img/icons/square.png'; 
+
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/square.png';
+const SQUARE_SRC = BASE_URL.concat(NAME); 
 const OBJECT_TYPE_ID = 3;
 
 const Generic = (props) => {
