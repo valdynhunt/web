@@ -3,7 +3,9 @@ import { Image } from 'react-konva';
 import useImage from 'use-image';
 
 
-const DOOR_OPEN_SRC = '/img/icons/door-open.png';
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/door-open.png';
+const DOOR_OPEN_SRC = BASE_URL.concat(NAME);
 const OBJECT_TYPE_ID = 18;
 
 const DoorOpen = (props) => {
