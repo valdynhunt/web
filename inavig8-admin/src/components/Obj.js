@@ -48,6 +48,9 @@ console.log("description: ", this.state.currentObject.description)
             "image_y": this.state.currentObject.image_y,
           });
 console.log("raw: ", raw);
+
+console.log("currentObject in onUpdate in Obj.js: ", this.state.currentObject);
+
         this.props.handleUpdateObject(this.state.currentIndex, raw);
         // console.log("updated from Obj.js! raw : ", raw);
         this.onClose();
@@ -85,6 +88,8 @@ console.log("raw: ", raw);
         const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.state.currentObject;
         console.log("jason says current object in Obj.js: ", this.state.currentObject);
         console.log("valdyn says current object_id in Obj.js: ", this.state.currentObject.object_id);
+        console.log("this.props.details in Obj.js: ", this.props.details);
+
 
         return (
             <div>

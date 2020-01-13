@@ -8,7 +8,7 @@ function RenderCircleGreyLg(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "grey circle lg" &&
+      key.object_type && key.object_type.short_name === "grey circle lg" &&
         <CircleGreyLg
           key={key.object_id}
           x={key.image_x}
@@ -20,6 +20,7 @@ function RenderCircleGreyLg(props) {
           onMouseMove={props.onMouseMove}
           onMouseOut={props.onMouseOut}
           shadowBlur={1}
+          handleClick={props.handleClick}
         />
 
     )))

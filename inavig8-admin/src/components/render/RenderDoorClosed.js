@@ -8,7 +8,7 @@ function RenderDoorClosed(props) {
 
     props.objects.map((key) => (
         
-        key.object_type.short_name === "door closed" &&
+      key.object_type && key.object_type.short_name === "door closed" &&
         <DoorClosed
           key={key.object_id}
           x={key.image_x}
@@ -16,6 +16,7 @@ function RenderDoorClosed(props) {
           object_id={key.object_id}
           onMouseMove={props.onMouseMove}
           onMouseOut={props.onMouseOut}
+          handleClick={props.handleClick}
         />
 
     )))

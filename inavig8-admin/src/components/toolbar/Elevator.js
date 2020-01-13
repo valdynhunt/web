@@ -2,14 +2,15 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const ELEVATOR_SRC = '/img/icons/elevator.png'; 
+
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/elevator.png';
+const ELEVATOR_SRC = BASE_URL.concat(NAME);
 const OBJECT_TYPE_ID = 6;
 
 const Elevator = (props) => {
     const [image] = useImage(ELEVATOR_SRC);
-    const handleElevatorClick = (e) => {
-      console.log('elevator clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +24,7 @@ const Elevator = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleElevatorClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

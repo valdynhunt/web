@@ -2,14 +2,14 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const UTENSILS_SRC = '/img/icons/utensils.png'; 
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/utensils.png';
+const UTENSILS_SRC = BASE_URL.concat(NAME);
 const OBJECT_TYPE_ID = 9;
 
 const Utensils = (props) => {
     const [image] = useImage(UTENSILS_SRC);
-    const handleUtensilsClick = (e) => {
-      console.log('utensils clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +23,7 @@ const Utensils = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleUtensilsClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

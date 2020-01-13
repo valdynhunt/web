@@ -2,15 +2,15 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const MALE_SRC = '/img/icons/male.png'; 
+
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/male.png';
+const MALE_SRC = BASE_URL.concat(NAME);
 const OBJECT_TYPE_ID = 11;
 
 const Male = (props) => {
 
     const [image] = useImage(MALE_SRC);
-    const handleMaleClick = (e) => {
-      console.log('male clicked');
-    }
     
     return (
         <Image 
@@ -26,7 +26,7 @@ const Male = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleMaleClick}
+            onClick={props.handleClick}
           image={image}
         />
     );

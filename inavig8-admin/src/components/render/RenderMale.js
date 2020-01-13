@@ -8,7 +8,7 @@ function RenderMale(props) {
 
         props.objects.map((key) => (
             
-            key.object_type.short_name === "male" &&
+          key.object_type && key.object_type.short_name === "male" &&
 
               <Male
                 key={key.object_id}
@@ -17,6 +17,7 @@ function RenderMale(props) {
                 object_id={key.object_id}
                 onMouseMove={props.onMouseMove}
                 onMouseOut={props.onMouseOut}
+                handleClick={props.handleClick}
               />
 
         )))

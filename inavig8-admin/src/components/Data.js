@@ -12,8 +12,8 @@ class Data extends React.Component {
     }
   }
 
-  handleUpdateObject = (index, raw) => {
-    this.props.handleUpdateObject(index, raw);
+  handleUpdateObject = (curObj, index, raw) => {
+    this.props.handleUpdateObject(curObj, index, raw);
     console.log("updated from Data.js! raw : ", raw);
 
   }

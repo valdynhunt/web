@@ -2,14 +2,14 @@ import React from 'react';
 import { Image } from 'react-konva';
 import useImage from 'use-image';
 
-const COFFEE_SRC = '/img/icons/coffee.png';
+const BASE_URL = 'https://inav-icons-e64a0b92-4062-44d4-8660-a911f2743bd5.s3-us-west-2.amazonaws.com';
+const NAME = '/coffee.png';
+const COFFEE_SRC = BASE_URL.concat(NAME);
 const OBJECT_TYPE_ID = 8; 
 
 const Coffee = (props) => {
     const [image] = useImage(COFFEE_SRC);
-    const handleCoffeeClick = (e) => {
-      console.log('coffee clicked');
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -21,7 +21,7 @@ const Coffee = (props) => {
             draggable              
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
-            // onMouseMove={props.onMouseMove}
+            onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
             onClick={props.handleClick}
           image={image} />;
