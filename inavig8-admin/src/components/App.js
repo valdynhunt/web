@@ -21,26 +21,23 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-        JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+    // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+    //     JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
     let headers = config.api.headers;
     
-    fetch(config.api.invokeUrl + '/locations', 
-    {
+    fetch(config.api.invokeUrl + '/locations', {
         method: "GET",
         headers,
-    }) // david
-        .then(response => {
-            return response.json();
-        }).then(result => {
-            console.log(result);
-            this.setState(
-                {
-                    locations: result.body.data
-                }
-            );
-        });
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+        this.setState(
+            {
+                locations: result.body.data
+            }
+        );
+    });
 
 }
 
@@ -73,6 +70,60 @@ class App extends React.Component {
 
   }
 
+  handleCreate = (newLocation, parent_location_id) => {
+    
+      console.log("handleCreate: ", newLocation);
+      
+      var child_location_id;
+      let headers = config.api.headers;
+      const url1 = config.api.invokeUrl + '/location/new';
+
+      fetch(url1, {
+          method: "POST",
+          headers,
+          body: newLocation,
+      }).then(response => {
+          console.log("App.js -> response: ", response);
+          return response.json();
+      // }).then(result => {
+      //     console.log("App.js -> result: ", result);
+      //     const locations = {...this.state.locations};
+      //     this.setState(
+      //         {
+      //             locations: [...this.state.locations, { ...result.body.data[0] }]
+      //         }
+      //     );
+      //     child_location_id = {...result.body.data[0].location_id};
+      });
+
+      if (child_location_id) {
+          const url2 = config.api.invokeUrl + '/location/set-child?parent_id=' + parent_location_id + '&child_id=' + child_location_id;
+          console.log("url2: ", url2);
+
+          //
+          fetch(url2, {
+              method: "GET",
+              headers,
+          }).then(response => {
+              return response.json();
+          });
+
+          fetch(config.api.invokeUrl + '/locations', {
+            method: "GET",
+            headers,
+          }).then(response => {
+              return response.json();
+          }).then(result => {
+              this.setState(
+                  {
+                      locations: result.body.data
+                  }
+              );
+          });
+        }
+
+  }
+
   render() {
 
     Auth.currentSession()
@@ -96,7 +147,7 @@ class App extends React.Component {
     })
     .catch(err => console.log(err));
 
-    console.log("this.state.admin.length: ", this.state.admin.length);
+    //console.log("this.state.admin.length: ", this.state.admin.length);
     if (!this.state.admin || this.state.admin.length === 0) {
       return <Login onLogin={this.onLogin} />;
     } else {
@@ -106,7 +157,7 @@ class App extends React.Component {
           <Logo />
           <Header profile={this.state.admin} />
           <Nav onNavSelection={this.onNavSelection} highlight={this.state.nav} />
-          <Main page={this.state.nav} locations={this.state.locations}/>
+          <Main page={this.state.nav} locations={this.state.locations} handleCreate={this.handleCreate} />
           <Footer />
         </div>
 

@@ -1,25 +1,46 @@
-import React from 'react';
-import LocationList from './LocationList';
-import './Locations.css';
+import React from 'react'
+import LocationList from './LocationList'
+import './Locations.css'
 
 class Locations extends React.Component {
 
     state = {
+        showModal: false,
         isHover: false,
         showImage: false,
         showDetails: false,
         index: -1,
     }
 
+    onClose = () => {
+        this.setState(
+            {
+                showModal: false
+            }
+        );
+    }
+
+    onOpen = () => {
+        this.setState(
+            {
+                showModal: true
+            }
+        );
+    }
+
     handleHover = (index) => {
-            this.setState(
-                {
-                    isHover: true,
-                    showImage: true,
-                    showDetails: true,
-                    index
-                }
-            );
+        this.setState(
+            {
+                isHover: true,
+                showImage: true,
+                showDetails: true,
+                index
+            }
+        );
+    }
+
+    handleCreate = (newLocation, parent_location_id) => {
+        this.props.handleCreate(newLocation, parent_location_id);
     }
 
     render() {
@@ -28,18 +49,21 @@ class Locations extends React.Component {
 
             <main className="locations-container">
                 <section className="location-list">
-                    <h4>Locations</h4>
-                    <ul className="ul-location-list">
+                    <h4>
+                        Locations 
+                    </h4>
+                    <div>
                         {Object.keys(this.props.locations).map(key => (
                             <LocationList
                                 key={key}
                                 id={key}
                                 details={this.props.locations[key]} 
-                                handleHover={this.handleHover}
                                 hover={this.state.isHover}
+                                handleHover={this.handleHover}
+                                handleCreate={this.handleCreate}
                             />
                         ))}
-                    </ul>
+                    </div>
                 </section>
                 <section className="location-view">
                     <h4>Locations View</h4>
@@ -50,7 +74,6 @@ class Locations extends React.Component {
                             alt={this.props.locations[this.state.index].long_name} 
                             title={this.props.locations[this.state.index].long_name}
                         />
-                        //<img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
                     }
                 </section>
                 <section className="location-details">
@@ -83,26 +106,6 @@ class Locations extends React.Component {
                             <li>{this.props.locations[this.state.index].location_type.short_name}</li>
                         }
                     </ul>
-                    {/* <ul className="location-detail">
-                        <li>GPS Coordinates:</li>
-                        {
-                            this.state.showImage &&
-                            <li>unknown</li>
-                        }
-                    </ul>
-                    <ul className="location-detail">
-                        <li># of assigned Admins:</li>
-                        {
-                            this.state.showImage &&
-                            <li>unknown</li>
-                        }
-                    </ul>
-                    <ul className="location-detail">
-                        <li># of total Objects:</li>
-                        {
-                            <li>unknown</li>
-                        }
-                    </ul> */}
                 </section>
             </main>
 
