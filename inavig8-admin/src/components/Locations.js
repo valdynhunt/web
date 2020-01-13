@@ -1,7 +1,6 @@
-import React from 'react';
-import LocationList from './LocationList';
-import './Locations.css';
-// import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
+import React from 'react'
+import LocationList from './LocationList'
+import './Locations.css'
 
 class Locations extends React.Component {
 
@@ -52,12 +51,8 @@ class Locations extends React.Component {
                 <section className="location-list">
                     <h4>
                         Locations 
-                        {/* <span onClick={this.onOpen}>
-                            add new location
-                        </span> */}
                     </h4>
                     <div>
-                    {/* <ul className="ul-location-list"> */}
                         {Object.keys(this.props.locations).map(key => (
                             <LocationList
                                 key={key}
@@ -68,7 +63,6 @@ class Locations extends React.Component {
                                 handleCreate={this.handleCreate}
                             />
                         ))}
-                    {/* </ul> */}
                     </div>
                 </section>
                 <section className="location-view">
@@ -113,93 +107,6 @@ class Locations extends React.Component {
                         }
                     </ul>
                 </section>
-                {/* <Modal show={this.state.showModal} onHide={this.onClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>New Location</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <label htmlFor="long_name">
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">Long Name</InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                        placeholder="enter long name"
-                                        aria-label="long_name"
-                                        aria-describedby="basic-addon1"
-                                        name="long_name"
-                                        defaultValue=""
-                                        //onChange={this.onChange}
-                                    />
-                                </InputGroup>
-                            </label>
-                            <label htmlFor="short_name">
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">Short Name</InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                        placeholder="enter short name"
-                                        aria-label="short_name"
-                                        aria-describedby="basic-addon1"
-                                        name="short_name"
-                                        defaultValue=""
-                                        //onChange={this.onChange}
-                                    />
-                                </InputGroup>
-                            </label>
-                            <label htmlFor="description">
-                                <InputGroup className="mb-3 wl-100">
-                                    <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">Description</InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                        placeholder="enter description"
-                                        aria-label="description"
-                                        aria-describedby="basic-addon1"
-                                        name="description"
-                                        defaultValue=""
-                                        //onChange={this.onChange}
-                                    />
-                                </InputGroup>
-                            </label>
-                            <label htmlFor="location_type">
-                                <InputGroup className="mb-3 wl-100">
-                                    <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                        placeholder="enter email"
-                                        aria-label="email"
-                                        aria-describedby="basic-addon1"
-                                        name="email"
-                                        defaultValue=""
-                                        //onChange={this.onChange}
-                                    />
-                                </InputGroup>
-                            </label>
-                            <label htmlFor="role">
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">Role</InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl
-                                        placeholder="enter role"
-                                        aria-label="role"
-                                        aria-describedby="basic-addon1"
-                                        name="role"
-                                        defaultValue=""
-                                        //onChange={this.onChange}
-
-                                    />
-                                </InputGroup>
-                            </label>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={this.onClose}>Close</Button>
-                            <Button onClick={this.onCreate}>Create</Button>
-                        </Modal.Footer>
-                    </Modal> */}
             </main>
 
         )

@@ -2,7 +2,7 @@ section.location-list ul {
     list-style: none;
     
     display: grid;
-    grid-template-columns: 8fr repeat(3, 1fr);
+    grid-template-columns: 8fr 1fr;
     gap: 0 0.8em;
     align-items: center;
 }

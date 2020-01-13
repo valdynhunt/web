@@ -5,26 +5,51 @@ import './LocationList.css';
 class Location extends React.Component {
 
     state = {
-        showModal: false,
+        showAddModal: false,
+        showDeleteModal: false,
+        showUpdateModal: false,
         newLocation: null,
     }
 
     onClose = () => {
         this.setState(
             {
-                showModal: false,
+                showAddModal: false,
+                showDeleteModal: false,
+                showUpdateModal: false,
                 newLocation: null,
             }
         );
     }
 
-    onOpen = () => {
+    onAddOpen = () => {
         this.setState(
             {
-                showModal: true,
+                showAddModal: true,
+                showDeleteModal: false,
+                showUpdateModal: false,
                 newLocation: null,
             }
         );
+    }
+
+    onUpdateOpen = () => {
+        this.setState(
+            {
+                showAddModal: false,
+                showDeleteModal: false,
+                showUpdateModal: true,
+                newLocation: null,
+            }
+        );
+    }
+
+    onDeleteOpen = () => {
+        // remove location
+    }
+
+    openMap = () => {
+        // redirect to design/<location_id>
     }
 
     onMouseHover = () => {
@@ -57,6 +82,10 @@ class Location extends React.Component {
         this.onClose();
     }
 
+    onUpdate = (e) => {
+        //do something
+    }
+
     onChange = (e) => {
         const newLocation = {
             ...this.state.newLocation, 
@@ -71,33 +100,30 @@ class Location extends React.Component {
 
     render() {
 
-        const { location_id, long_name } = this.props.details;
+        const { location_id, long_name, short_name, description, canvas_image, location_type } = this.props.details;
         
         return (
             <ul className="ul-location-list">
                 <a href={`/design/${location_id}`}>
-                    <li
-                        onMouseOver={this.onMouseHover}
-                    >              
-                            {long_name}
-                    </li>
+                    <li onMouseOver={this.onMouseHover}>{long_name}</li>
                 </a>
-                {/* <li onClick={this.onOpen}> */}
                 <li>
-                    {/* <img src="/img/icons/down-arrow-icon.png" alt="" title="edit location" /> */}
                     <DropdownButton
-                        //as={InputGroup.Append}
                         variant="outline-secondary"
                         title="Action"
                         id="input-group-dropdown-2"
                     >
-                    <Dropdown.Item href="#">edit this location</Dropdown.Item>
-                    <Dropdown.Item href="#">delete this location</Dropdown.Item>
+                    <Dropdown.Item  onClick={this.onUpdateOpen}>edit this location</Dropdown.Item>
+                    <Dropdown.Item  onClick={this.onDeleteOpen}>delete this location</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={this.onOpen}>add new sub-location</Dropdown.Item>
+                    <Dropdown.Item onClick={this.openMap}>map this location</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={this.onAddOpen}>add new sub-location</Dropdown.Item>
                     </DropdownButton>
                 </li>
-                <Modal show={this.state.showModal} onHide={this.onClose}>
+
+                {/* Add Location Modal */}
+                <Modal show={this.state.showAddModal} onHide={this.onClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>new location for<br/><b>{long_name}</b></Modal.Title>
                 </Modal.Header>
@@ -171,6 +197,98 @@ class Location extends React.Component {
                     <Button onClick={this.onCreate}>Create</Button>
                 </Modal.Footer>
             </Modal>
+
+            {/* Update Location Modal */}
+            <Modal show={this.state.showUpdateModal} onHide={this.onClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Update Location</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <label htmlFor="long_name">
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Long Name</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                placeholder="enter long name"
+                                aria-label="long_name"
+                                aria-describedby="basic-addon1"
+                                name="long_name"
+                                defaultValue={long_name}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
+                    </label>
+                    <label htmlFor="short_name">
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Short Name</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                placeholder="enter short name"
+                                aria-label="short_name"
+                                aria-describedby="basic-addon1"
+                                name="short_name"
+                                defaultValue={short_name}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
+                    </label>
+                    <label htmlFor="description">
+                        <InputGroup className="mb-3 wl-100">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Description</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                placeholder="enter description"
+                                aria-label="description"
+                                aria-describedby="basic-addon1"
+                                name="description"
+                                defaultValue={description}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
+                    </label>
+                    <label htmlFor="location_type_short_name">
+                        <InputGroup className="mb-3 wl-100">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Location Type</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                placeholder="enter location type"
+                                aria-label="location_type_short_name"
+                                aria-describedby="basic-addon1"
+                                name="location_type_short_name"
+                                defaultValue={location_type.short_name}
+                                onChange={this.onChange}
+                            />
+                        </InputGroup>
+                    </label>
+                    <label htmlFor="canvas_image">
+                        <InputGroup className="mb-3 wl-100">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1">Import Image</InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                placeholder="feature coming soon!"
+                                aria-label="canvas_image"
+                                aria-describedby="basic-addon1"
+                                name="canvas_image"
+                                defaultValue={canvas_image}
+                                readOnly="readonly"
+                            />
+                            <InputGroup.Append>
+                                <Button variant="outline-secondary">import</Button>
+                            </InputGroup.Append>
+                        </InputGroup>
+                    </label>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.onClose}>Close</Button>
+                    <Button onClick={this.onUpdate}>Update</Button>
+                </Modal.Footer>
+            </Modal>
+
         </ul>
         );
     };
