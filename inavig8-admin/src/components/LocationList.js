@@ -107,7 +107,7 @@ class Location extends React.Component {
 
     render() {
 
-        const { location_id, long_name, short_name, description, canvas_image, location_type } = this.props.details;
+        const { location_id, long_name, short_name, description, canvas_image } = this.props.details;
 
         let $imagePreview = null;
         if (canvas_image) {
