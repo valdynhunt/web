@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap/'
+import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image } from 'react-bootstrap/'
 import './LocationList.css';
 
 class Location extends React.Component {
@@ -8,7 +8,7 @@ class Location extends React.Component {
         showAddModal: false,
         showDeleteModal: false,
         showUpdateModal: false,
-        newLocation: null,
+        currentLocation: null,
     }
 
     onClose = () => {
@@ -17,7 +17,7 @@ class Location extends React.Component {
                 showAddModal: false,
                 showDeleteModal: false,
                 showUpdateModal: false,
-                newLocation: null,
+                currentLocation: null,
             }
         );
     }
@@ -28,7 +28,7 @@ class Location extends React.Component {
                 showAddModal: true,
                 showDeleteModal: false,
                 showUpdateModal: false,
-                newLocation: null,
+                currentLocation: null,
             }
         );
     }
@@ -39,36 +39,39 @@ class Location extends React.Component {
                 showAddModal: false,
                 showDeleteModal: false,
                 showUpdateModal: true,
-                newLocation: null,
+                currentLocation: {
+                    location_id: this.props.details.location_id,
+                    short_name: this.props.details.short_name,
+                    long_name: this.props.details.long_name,
+                    description: this.props.details.description,
+                    //canvas_image: this.props.details.canvas_image,
+                }
             }
         );
     }
 
     onDeleteOpen = () => {
         // remove location
+        // ISSUE: cannot delete a parent location if there are children linked to it
     }
 
     openMap = () => {
         // redirect to design/<location_id>
     }
 
-    onMouseHover = () => {
-        this.props.handleHover(this.props.id);
-    }
-
     onCreate = () => {
-        let newLocation = JSON.stringify(
+        let currentLocation = JSON.stringify(
             {
                 "latitude": 0.0,
                 "address_id": this.props.details.address_id,
-                "description": this.state.newLocation.description,
+                "description": this.state.currentLocation.description,
                 "min_x_coordinate": 3,
                 "max_x_coordinate": 5,
                 "active": true,
-                "long_name": this.state.newLocation.long_name,
+                "long_name": this.state.currentLocation.long_name,
                 "location_type_id": this.props.details.location_type_id,
                 "scale_ft": 1.0,
-                "short_name": this.state.newLocation.short_name,
+                "short_name": this.state.currentLocation.short_name,
                 "primary_object_id": 1,
                 "min_y_coordinate": 4,
                 "max_y_coordinate": 6,
@@ -76,33 +79,54 @@ class Location extends React.Component {
             }
         );
 
-        console.log("LocationList.js -> onCreate: ", newLocation);
+        console.log("LocationList.js -> onCreate: ", currentLocation);
         let parent_location_id = this.props.details.location_id;
-        this.props.handleCreate(newLocation, parent_location_id);
+        this.props.handleCreateLocation(currentLocation, parent_location_id);
         this.onClose();
     }
 
     onUpdate = (e) => {
-        //do something
+        let currentLocation = JSON.stringify(
+            {
+                "location_id": this.state.currentLocation.location_id,
+                "description": this.state.currentLocation.description,
+                "long_name": this.state.currentLocation.long_name,
+                "short_name": this.state.currentLocation.short_name,
+            }
+        );
+
+        this.props.handleUpdateLocation(currentLocation);
     }
 
     onChange = (e) => {
-        const newLocation = {
-            ...this.state.newLocation, 
+        const currentLocation = {
+            ...this.state.currentLocation, 
             [e.currentTarget.name]: e.currentTarget.value
         }
         this.setState(
             {
-                newLocation
+                currentLocation
             }
         );
+    }
+
+    onMouseHover = () => {
+        this.props.handleHover(this.props.id);
     }
 
     render() {
 
         const { location_id, long_name, short_name, description, canvas_image, location_type } = this.props.details;
+
+        let $imagePreview = null;
+        if (canvas_image) {
+            $imagePreview = (<Image src={canvas_image} alt={long_name} title={long_name} thumbnail />);
+        } else {
+            $imagePreview = (<p>No image to preview</p>);
+        }
         
         return (
+
             <ul className="ul-location-list">
                 <a href={`/design/${location_id}`}>
                     <li onMouseOver={this.onMouseHover}>{long_name}</li>
@@ -113,8 +137,8 @@ class Location extends React.Component {
                         title="Action"
                         id="input-group-dropdown-2"
                     >
-                    <Dropdown.Item  onClick={this.onUpdateOpen}>edit this location</Dropdown.Item>
-                    <Dropdown.Item  onClick={this.onDeleteOpen}>delete this location</Dropdown.Item>
+                    <Dropdown.Item onClick={this.onUpdateOpen}>edit this location</Dropdown.Item>
+                    <Dropdown.Item onClick={this.onDeleteOpen}>delete this location</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={this.openMap}>map this location</Dropdown.Item>
                     <Dropdown.Divider />
@@ -282,6 +306,9 @@ class Location extends React.Component {
                             </InputGroup.Append>
                         </InputGroup>
                     </label>
+                    <div className="imagePreview">
+                        {$imagePreview}
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.onClose}>Close</Button>

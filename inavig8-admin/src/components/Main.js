@@ -6,14 +6,24 @@ import Users from './Users';
 
 class Main extends React.Component {
 
-    handleCreate = (newLocation, parent_location_id) => {
-        this.props.handleCreate(newLocation, parent_location_id);
+    handleCreateLocation = (newLocation, parent_location_id) => {
+        this.props.handleCreateLocation(newLocation, parent_location_id);
+    }
+
+    handleUpdateLocation = (currentLocation) => {
+        this.props.handleUpdateLocation(currentLocation);
     }
 
     render() {
 
         if (this.props.page === 'Locations') {
-            return <Locations  locations={this.props.locations} handleCreate={this.handleCreate} />
+            return (
+                <Locations 
+                    locations={this.props.locations} 
+                    handleCreateLocation={this.handleCreateLocation}
+                    handleUpdateLocation={this.handleUpdateLocation}
+                />
+            );
         } else if (this.props.page === 'Users') {
             return <Users />
         } else {

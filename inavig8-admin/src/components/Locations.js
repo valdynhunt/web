@@ -39,8 +39,12 @@ class Locations extends React.Component {
         );
     }
 
-    handleCreate = (newLocation, parent_location_id) => {
-        this.props.handleCreate(newLocation, parent_location_id);
+    handleCreateLocation = (newLocation, parent_location_id) => {
+        this.props.handleCreateLocation(newLocation, parent_location_id);
+    }
+
+    handleUpdateLocation = (currentLocation) => {
+        this.props.handleUpdateLocation(currentLocation);
     }
 
     render() {
@@ -60,7 +64,8 @@ class Locations extends React.Component {
                                 details={this.props.locations[key]} 
                                 hover={this.state.isHover}
                                 handleHover={this.handleHover}
-                                handleCreate={this.handleCreate}
+                                handleCreateLocation={this.handleCreate}
+                                handleUpdateLocation={this.handleUpdateLocation}
                             />
                         ))}
                     </div>

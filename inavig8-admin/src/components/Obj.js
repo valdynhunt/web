@@ -1,10 +1,6 @@
 import React from 'react'
 import './Obj.css'
-import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
+import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
 
 class Object extends React.Component {
 
@@ -30,11 +26,8 @@ class Object extends React.Component {
         );
     }
 
-
     onUpdate = () => {
-console.log("currentIndex: ", this.state.currentIndex);
-console.log("currentObject: ", this.state.currentObject);
-console.log("description: ", this.state.currentObject.description)
+
         var raw = JSON.stringify({
             "object_id": this.state.currentObject.object_id,
             "location_id":this.state.currentObject.location_id, 
@@ -47,49 +40,35 @@ console.log("description: ", this.state.currentObject.description)
             "image_x": this.state.currentObject.image_x,
             "image_y": this.state.currentObject.image_y,
           });
-console.log("raw: ", raw);
-
-console.log("currentObject in onUpdate in Obj.js: ", this.state.currentObject);
 
         this.props.handleUpdateObject(this.state.currentIndex, raw);
-        // console.log("updated from Obj.js! raw : ", raw);
         this.onClose();
+
     }
 
     onDelete = (object_id) => {
         this.props.handleDeleteObject(object_id);
-        console.log("deleted from Obj.js! id: ", object_id);
         this.onClose();
     }
 
     onChange = (e) => {
-        console.log("currentTarget: ", e.currentTarget.name);
-        console.log("currentValue: ", e.currentTarget.value);
-
+        
         const currentObject = {
             ...this.state.currentObject, 
             [e.currentTarget.name]: e.currentTarget.value
         }
-        console.log("onChange currentObject before setState: ", currentObject);
+        
         this.setState(
             {
             currentObject
             }
         );
-        
-        console.log("onChange object after setState: ", this.state.currentObject);
-        console.log("currentObject after setState: ", this.state.currentObject.object_id);
-
 
     }
   
     render() {
 
         const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.state.currentObject;
-        console.log("jason says current object in Obj.js: ", this.state.currentObject);
-        console.log("valdyn says current object_id in Obj.js: ", this.state.currentObject.object_id);
-        console.log("this.props.details in Obj.js: ", this.props.details);
-
 
         return (
             <div>

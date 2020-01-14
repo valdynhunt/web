@@ -70,9 +70,9 @@ class App extends React.Component {
 
   }
 
-  handleCreate = (newLocation, parent_location_id) => {
+  handleCreateLocation = (newLocation, parent_location_id) => {
     
-      console.log("handleCreate: ", newLocation);
+      console.log("handleCreateLocation: ", newLocation);
       
       var child_location_id;
       let headers = config.api.headers;
@@ -124,6 +124,10 @@ class App extends React.Component {
 
   }
 
+  handleUpdateLocation = (currentLocation) => {
+    console.log("App.js's handleUpdateLocation: ", currentLocation);
+  }
+
   render() {
 
     Auth.currentSession()
@@ -155,9 +159,19 @@ class App extends React.Component {
 
         <div className="container-loggIn">
           <Logo />
-          <Header profile={this.state.admin} />
-          <Nav onNavSelection={this.onNavSelection} highlight={this.state.nav} />
-          <Main page={this.state.nav} locations={this.state.locations} handleCreate={this.handleCreate} />
+          <Header
+              profile={this.state.admin} 
+          />
+          <Nav 
+              onNavSelection={this.onNavSelection} 
+              highlight={this.state.nav} 
+          />
+          <Main 
+              page={this.state.nav} 
+              locations={this.state.locations} 
+              handleCreateLocation={this.handleCreateLocation}
+              handleUpdateLocation={this.handleUpdateLocation}
+          />
           <Footer />
         </div>
 
