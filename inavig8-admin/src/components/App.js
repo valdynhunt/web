@@ -74,53 +74,50 @@ class App extends React.Component {
     
       console.log("handleCreateLocation: ", newLocation);
       
-      var child_location_id;
+      //var child_location_id;
+      const url = config.api.invokeUrl + '/location/new';
       let headers = config.api.headers;
-      const url1 = config.api.invokeUrl + '/location/new';
+      let body = JSON.stringify(newLocation);
 
-      fetch(url1, {
+      fetch(url, {
           method: "POST",
           headers,
-          body: newLocation,
+          body,
       }).then(response => {
-          console.log("App.js -> response: ", response);
-          return response.json();
-      // }).then(result => {
-      //     console.log("App.js -> result: ", result);
-      //     const locations = {...this.state.locations};
-      //     this.setState(
-      //         {
-      //             locations: [...this.state.locations, { ...result.body.data[0] }]
-      //         }
-      //     );
-      //     child_location_id = {...result.body.data[0].location_id};
+        if (response.ok) {
+            console.log("response is ok");
+            return response.json();
+        } else {
+            throw Error(`Request rejected with status ${response.status}`);
+        }
+      }).then(result => {
+          console.log("App.js -> result: ", result);
+          
+          this.setState(
+              {
+                  locations: [...this.state.locations, { ...result.body.data[0] }]
+              }
+          );
+          //child_location_id = {...result.body.data[0].location_id};
       });
 
-      if (child_location_id) {
-          const url2 = config.api.invokeUrl + '/location/set-child?parent_id=' + parent_location_id + '&child_id=' + child_location_id;
-          console.log("url2: ", url2);
+      // if (child_location_id) {
+      //     const url2 = config.api.invokeUrl + '/location/set-child?parent_id=' + parent_location_id + '&child_id=' + child_location_id;
 
-          //
-          fetch(url2, {
-              method: "GET",
-              headers,
-          }).then(response => {
-              return response.json();
-          });
+      //     fetch(url2, {
+      //         method: "GET",
+      //         headers,
+      //     }).then(response => {
+      //         return response.json();
+      //     });
 
-          fetch(config.api.invokeUrl + '/locations', {
-            method: "GET",
-            headers,
-          }).then(response => {
-              return response.json();
-          }).then(result => {
-              this.setState(
-                  {
-                      locations: result.body.data
-                  }
-              );
-          });
-        }
+      //     fetch(config.api.invokeUrl + '/locations', {
+      //       method: "GET",
+      //       headers,
+      //     }).then(response => {
+      //         return response.json();
+      //     });
+      // }
 
   }
 

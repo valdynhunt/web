@@ -101,7 +101,7 @@ class Locations extends React.Component {
                                 details={this.props.locations[key]} 
                                 hover={this.state.isHover}
                                 handleHover={this.handleHover}
-                                handleCreateLocation={this.handleCreate}
+                                handleCreateLocation={this.handleCreateLocation}
                                 handleUpdateLocation={this.handleUpdateLocation}
                             />
                         ))}

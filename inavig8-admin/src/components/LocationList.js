@@ -55,32 +55,25 @@ class Location extends React.Component {
         // ISSUE: cannot delete a parent location if there are children linked to it
     }
 
-    openMap = () => {
-        // redirect to design/<location_id>
-    }
-
     onCreate = () => {
-        let currentLocation = JSON.stringify(
-            {
-                "latitude": 0.0,
-                "address_id": this.props.details.address_id,
-                "description": this.state.currentLocation.description,
-                "min_x_coordinate": 3,
-                "max_x_coordinate": 5,
-                "active": true,
-                "long_name": this.state.currentLocation.long_name,
-                "location_type_id": this.props.details.location_type_id,
-                "scale_ft": 1.0,
-                "short_name": this.state.currentLocation.short_name,
-                "primary_object_id": 1,
-                "min_y_coordinate": 4,
-                "max_y_coordinate": 6,
-                "longitude": 0.0,
-            }
-        );
-
-        let parent_location_id = this.props.details.location_id;
-        this.props.handleCreateLocation(currentLocation, parent_location_id);
+        let currentLocation = {
+            "latitude": 0.0,
+            "address_id": this.props.details.address_id,
+            "description": this.state.currentLocation.description,
+            "min_x_coordinate": 0,
+            "max_x_coordinate": 0,
+            "active": false,
+            "long_name": this.state.currentLocation.long_name,
+            "location_type_id": this.props.details.location_type_id,
+            "scale_ft": 1.0,
+            "short_name": this.state.currentLocation.short_name,
+            "primary_object_id": 1,
+            "min_y_coordinate": 0,
+            "max_y_coordinate": 0,
+            "longitude": 0.0
+        };
+        
+        this.props.handleCreateLocation(currentLocation, this.props.details.location_id);
         this.onClose();
     }
 
@@ -271,7 +264,7 @@ class Location extends React.Component {
                             />
                         </InputGroup>
                     </label>
-                    <label htmlFor="location_type_short_name">
+                    {/* <label htmlFor="location_type_short_name">
                         <InputGroup className="mb-3 wl-100">
                             <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1">Location Type</InputGroup.Text>
@@ -282,10 +275,11 @@ class Location extends React.Component {
                                 aria-describedby="basic-addon1"
                                 name="location_type_short_name"
                                 defaultValue={location_type.short_name}
-                                onChange={this.onChange}
+                                // onChange={this.onChange}
+                                readOnly="readonly"
                             />
                         </InputGroup>
-                    </label>
+                    </label> */}
                     <label htmlFor="canvas_image">
                         <InputGroup className="mb-3 wl-100">
                             <InputGroup.Prepend>
