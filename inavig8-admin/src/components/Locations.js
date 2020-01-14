@@ -40,14 +40,62 @@ class Locations extends React.Component {
     }
 
     handleCreateLocation = (newLocation, parent_location_id) => {
+        this.setState(
+            {
+                showModal: false,
+                isHover: false,
+                showImage: false,
+                showDetails: false,
+                index: -1,
+            }
+        );
         this.props.handleCreateLocation(newLocation, parent_location_id);
     }
 
     handleUpdateLocation = (currentLocation) => {
+        this.setState(
+            {
+                showModal: false,
+                isHover: false,
+                showImage: false,
+                showDetails: false,
+                index: -1,
+            }
+        );
         this.props.handleUpdateLocation(currentLocation);
     }
 
     render() {
+
+        // try {
+        //     console.log("Jason says this.state.index: ", this.state.index);
+        //     console.log("Jason says this.props.locations: ", this.props.locations);
+
+        //     if (this.state.index > -1) {
+        //         console.log("Jason says this.props.locations[this.state.index]: ", this.props.locations[this.state.index]);
+        //     }
+        // } catch {
+        //     console.log("Jason says it didn't work!");
+        // }
+
+        let $imagePreview = null;
+        if (
+            this.state.index > -1 && 
+            typeof(this.props.locations[this.state.index]) !== "undefined" && 
+            this.props.locations[this.state.index].canvas_image !== "" && 
+            this.props.locations[this.state.index].canvas_image !== null
+        ) {
+            console.log("imagePreview: ", this.props.locations[this.state.index].canvas_image);
+            $imagePreview = (
+                <img 
+                    src={this.props.locations[this.state.index].canvas_image} 
+                    alt={this.props.locations[this.state.index].long_name} 
+                    title={this.props.locations[this.state.index].long_name}
+                />
+            );
+        } else {
+            $imagePreview = (<p>No image to preview</p>);
+        }
 
         return (
 
@@ -73,12 +121,12 @@ class Locations extends React.Component {
                 <section className="location-view">
                     <h4>Locations View</h4>
                     {
-                        this.state.showImage &&
-                        <img 
-                            src={this.props.locations[this.state.index].canvas_image} 
-                            alt={this.props.locations[this.state.index].long_name} 
-                            title={this.props.locations[this.state.index].long_name}
-                        />
+                        this.state.showImage && $imagePreview
+                        // <img 
+                        //     src={this.props.locations[this.state.index].canvas_image} 
+                        //     alt={this.props.locations[this.state.index].long_name} 
+                        //     title={this.props.locations[this.state.index].long_name}
+                        // />
                     }
                 </section>
                 <section className="location-details">

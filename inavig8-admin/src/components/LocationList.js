@@ -79,23 +79,21 @@ class Location extends React.Component {
             }
         );
 
-        console.log("LocationList.js -> onCreate: ", currentLocation);
         let parent_location_id = this.props.details.location_id;
         this.props.handleCreateLocation(currentLocation, parent_location_id);
         this.onClose();
     }
 
     onUpdate = (e) => {
-        let currentLocation = JSON.stringify(
-            {
-                "location_id": this.state.currentLocation.location_id,
-                "description": this.state.currentLocation.description,
-                "long_name": this.state.currentLocation.long_name,
-                "short_name": this.state.currentLocation.short_name,
-            }
-        );
+        let currentLocation = {
+            "location_id": this.state.currentLocation.location_id,
+            "description": this.state.currentLocation.description,
+            "long_name": this.state.currentLocation.long_name,
+            "short_name": this.state.currentLocation.short_name,
+        }
 
         this.props.handleUpdateLocation(currentLocation);
+        this.onClose();
     }
 
     onChange = (e) => {
