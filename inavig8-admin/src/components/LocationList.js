@@ -138,7 +138,7 @@ class Location extends React.Component {
                     <Dropdown.Item onClick={this.onUpdateOpen}>edit this location</Dropdown.Item>
                     <Dropdown.Item onClick={this.onDeleteOpen}>delete this location</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={this.openMap}>map this location</Dropdown.Item>
+                    <Dropdown.Item href={`/design/${location_id}`}>map this location</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={this.onAddOpen}>add new sub-location</Dropdown.Item>
                     </DropdownButton>
