@@ -68,7 +68,7 @@ class Object extends React.Component {
   
     render() {
 
-        const { object_id, short_name, long_name, description, object_type_id, object_type, image_x, image_y, location_id } = this.state.currentObject;
+        const { object_id, short_name, image_x, image_y, location_id } = this.state.currentObject;
 
         return (
             <div>
