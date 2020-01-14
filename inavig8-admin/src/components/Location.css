@@ -11,3 +11,7 @@ section.location-list h4 {
 section.location-list img {
     width: 100%;
 }
+
+section.location-list p {
+    text-align: center;
+}

@@ -67,25 +67,14 @@ class Locations extends React.Component {
 
     render() {
 
-        // try {
-        //     console.log("Jason says this.state.index: ", this.state.index);
-        //     console.log("Jason says this.props.locations: ", this.props.locations);
-
-        //     if (this.state.index > -1) {
-        //         console.log("Jason says this.props.locations[this.state.index]: ", this.props.locations[this.state.index]);
-        //     }
-        // } catch {
-        //     console.log("Jason says it didn't work!");
-        // }
-
         let $imagePreview = null;
+
         if (
             this.state.index > -1 && 
             typeof(this.props.locations[this.state.index]) !== "undefined" && 
             this.props.locations[this.state.index].canvas_image !== "" && 
             this.props.locations[this.state.index].canvas_image !== null
         ) {
-            console.log("imagePreview: ", this.props.locations[this.state.index].canvas_image);
             $imagePreview = (
                 <img 
                     src={this.props.locations[this.state.index].canvas_image} 
@@ -122,11 +111,6 @@ class Locations extends React.Component {
                     <h4>Locations View</h4>
                     {
                         this.state.showImage && $imagePreview
-                        // <img 
-                        //     src={this.props.locations[this.state.index].canvas_image} 
-                        //     alt={this.props.locations[this.state.index].long_name} 
-                        //     title={this.props.locations[this.state.index].long_name}
-                        // />
                     }
                 </section>
                 <section className="location-details">
