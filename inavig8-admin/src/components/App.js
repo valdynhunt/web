@@ -70,57 +70,108 @@ class App extends React.Component {
 
   }
 
-  handleCreate = (newLocation, parent_location_id) => {
+  handleCreateLocation = (newLocation, parent_location_id) => {
     
-      console.log("handleCreate: ", newLocation);
+      console.log("handleCreateLocation: ", newLocation);
       
-      var child_location_id;
+      //var child_location_id;
+      const url = config.api.invokeUrl + '/location/new';
       let headers = config.api.headers;
-      const url1 = config.api.invokeUrl + '/location/new';
+      let body = JSON.stringify(newLocation);
 
-      fetch(url1, {
+      fetch(url, {
           method: "POST",
           headers,
-          body: newLocation,
+          body,
       }).then(response => {
-          console.log("App.js -> response: ", response);
-          return response.json();
-      // }).then(result => {
-      //     console.log("App.js -> result: ", result);
-      //     const locations = {...this.state.locations};
-      //     this.setState(
-      //         {
-      //             locations: [...this.state.locations, { ...result.body.data[0] }]
-      //         }
-      //     );
-      //     child_location_id = {...result.body.data[0].location_id};
+        if (response.ok) {
+            console.log("response is ok");
+            return response.json();
+        } else {
+            throw Error(`Request rejected with status ${response.status}`);
+        }
+      }).then(result => {
+          console.log("App.js -> result: ", result);
+          
+          this.setState(
+              {
+                  locations: [...this.state.locations, { ...result.body.data[0] }]
+              }
+          );
+          //child_location_id = {...result.body.data[0].location_id};
+          
       });
 
-      if (child_location_id) {
-          const url2 = config.api.invokeUrl + '/location/set-child?parent_id=' + parent_location_id + '&child_id=' + child_location_id;
-          console.log("url2: ", url2);
+      // if (child_location_id) {
+      //     const url2 = config.api.invokeUrl + '/location/set-child?parent_id=' + parent_location_id + '&child_id=' + child_location_id;
 
-          //
-          fetch(url2, {
-              method: "GET",
-              headers,
-          }).then(response => {
-              return response.json();
-          });
+      //     fetch(url2, {
+      //         method: "GET",
+      //         headers,
+      //     }).then(response => {
+      //         return response.json();
+      //     });
 
-          fetch(config.api.invokeUrl + '/locations', {
-            method: "GET",
-            headers,
-          }).then(response => {
+      //     fetch(config.api.invokeUrl + '/locations', {
+      //       method: "GET",
+      //       headers,
+      //     }).then(response => {
+      //         return response.json();
+      //     });
+      // }
+
+  }
+
+  handleUpdateLocation = (currentLocation) => {
+
+      let headers = config.api.headers;
+      let body = JSON.stringify(currentLocation);
+      const url = config.api.invokeUrl + '/location/update';
+
+      fetch(url, {
+
+          method: "POST",
+          headers,
+          body,
+
+      }).then(response => {
+
+//TODO: it is updating the database, but not getting response because of CORS error
+/*
+  Access to fetch at 'https://6ifyh4p4z2.execute-api.us-west-2.amazonaws.com/dev/location/update' from
+  origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header 
+  is present on the requested resource. If an opaque response serves your needs, set the request's mode 
+  to 'no-cors' to fetch the resource with CORS disabled.
+
+  index.js:1375 TypeError: Failed to fetch
+*/
+
+          if (response.ok) {
               return response.json();
-          }).then(result => {
-              this.setState(
-                  {
-                      locations: result.body.data
+          } else {
+              throw Error(`Request rejected with status ${response.status}`);
+          }
+
+      }).catch(console.error);
+      // }).then(result => {
+          this.setState(state => {
+              const locations = this.state.locations.map(loc => {
+                  if (loc.location_id === currentLocation.location_id) {
+                      loc.short_name = currentLocation.short_name;
+                      loc.long_name = currentLocation.long_name;
+                      loc.description = currentLocation.description;
+                      // loc.canvas_image = currentLocation.canvas_image;
+                      return loc;
+                  } else {
+                    return loc;
                   }
-              );
+              });
+
+              return locations;
           });
-        }
+      // });
+
+      
 
   }
 
@@ -131,14 +182,14 @@ class App extends React.Component {
       // this.setState(data);
       console.log(data);
       var s = {
-        admin: {
-          username: data.accessToken.payload.username,
-          password: "",
-          email: data.idToken.payload.email,
-          first_name: "firstname",
-          last_name: "lastname",
-          role: "Admin"
-        }
+          admin: {
+              username: data.accessToken.payload.username,
+              password: "",
+              email: data.idToken.payload.email,
+              first_name: "firstname",
+              last_name: "lastname",
+              role: "Admin"
+          }
       };
       // this.setState(s);//
 
@@ -155,9 +206,19 @@ class App extends React.Component {
 
         <div className="container-loggIn">
           <Logo />
-          <Header profile={this.state.admin} />
-          <Nav onNavSelection={this.onNavSelection} highlight={this.state.nav} />
-          <Main page={this.state.nav} locations={this.state.locations} handleCreate={this.handleCreate} />
+          <Header
+              profile={this.state.admin} 
+          />
+          <Nav 
+              onNavSelection={this.onNavSelection} 
+              highlight={this.state.nav} 
+          />
+          <Main 
+              page={this.state.nav} 
+              locations={this.state.locations} 
+              handleCreateLocation={this.handleCreateLocation}
+              handleUpdateLocation={this.handleUpdateLocation}
+          />
           <Footer />
         </div>
 

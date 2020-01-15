@@ -39,11 +39,52 @@ class Locations extends React.Component {
         );
     }
 
-    handleCreate = (newLocation, parent_location_id) => {
-        this.props.handleCreate(newLocation, parent_location_id);
+    handleCreateLocation = (newLocation, parent_location_id) => {
+        this.setState(
+            {
+                showModal: false,
+                isHover: false,
+                showImage: false,
+                showDetails: false,
+                index: -1,
+            }
+        );
+        this.props.handleCreateLocation(newLocation, parent_location_id);
+    }
+
+    handleUpdateLocation = (currentLocation) => {
+        this.setState(
+            {
+                showModal: false,
+                isHover: false,
+                showImage: false,
+                showDetails: false,
+                index: -1,
+            }
+        );
+        this.props.handleUpdateLocation(currentLocation);
     }
 
     render() {
+
+        let $imagePreview = null;
+
+        if (
+            this.state.index > -1 && 
+            typeof(this.props.locations[this.state.index]) !== "undefined" && 
+            this.props.locations[this.state.index].canvas_image !== "" && 
+            this.props.locations[this.state.index].canvas_image !== null
+        ) {
+            $imagePreview = (
+                <img 
+                    src={this.props.locations[this.state.index].canvas_image} 
+                    alt={this.props.locations[this.state.index].long_name} 
+                    title={this.props.locations[this.state.index].long_name}
+                />
+            );
+        } else {
+            $imagePreview = (<p>No image to preview</p>);
+        }
 
         return (
 
@@ -60,7 +101,8 @@ class Locations extends React.Component {
                                 details={this.props.locations[key]} 
                                 hover={this.state.isHover}
                                 handleHover={this.handleHover}
-                                handleCreate={this.handleCreate}
+                                handleCreateLocation={this.handleCreateLocation}
+                                handleUpdateLocation={this.handleUpdateLocation}
                             />
                         ))}
                     </div>
@@ -68,12 +110,7 @@ class Locations extends React.Component {
                 <section className="location-view">
                     <h4>Locations View</h4>
                     {
-                        this.state.showImage &&
-                        <img 
-                            src={this.props.locations[this.state.index].canvas_image} 
-                            alt={this.props.locations[this.state.index].long_name} 
-                            title={this.props.locations[this.state.index].long_name}
-                        />
+                        this.state.showImage && $imagePreview
                     }
                 </section>
                 <section className="location-details">
