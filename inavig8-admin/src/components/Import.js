@@ -37,10 +37,10 @@ class Import extends React.Component {
         return (
             <div className="ImportBTN">
                 <input name="btn" type="file" onChange={this.onImport}></input>
-                {/* <br></br>
-                <Button type="file" onClick={this.onClick}>Import</Button>
+                {/* <br>
+                <Button type="file" onClick={this.onClick}>Import</Button>*/}
                 <br></br>
-                <img id="img" src={this.state.imagePreviewURL}></img> */}
+                <img id="img" src={this.state.imagePreviewURL}></img> 
             </div>
         );
     };
