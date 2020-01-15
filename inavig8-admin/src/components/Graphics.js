@@ -4,12 +4,15 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 import Konva from 'konva';
 import { Stage, Layer, Rect, Text } from 'react-konva';
 import MapBackground from './MapBackground'
 import config from '../config.json';
 import ModalSetGrid from './ModalSetGrid';
 
+import RenderConnections from './render/RenderConnections';
 import RenderGeneric from './render/RenderGeneric';
 import RenderPath from './render/RenderPath';
 import RenderDoor from './render/RenderDoor';
@@ -82,6 +85,8 @@ const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
 const FONT_SIZE = 20;
 const BACKGROUND_OFFSET = 150;
+const GENERIC_OFFSET = 4;
+const PATH_OFFSET = 7;
 
 const X = [25, 60, 95]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
@@ -129,7 +134,7 @@ class Graphics extends React.Component {
     this.state = {
       // currentObjectG: this.props.details
       // currentObjectG: null
-
+      connections: [],
       currentObjectG: {
         object_id: 0,
         location_id: 0, 
@@ -332,6 +337,37 @@ onChange = (e) => {
   console.log("Graphics.js onChange object from state: ", this.state.currentObjectG);
 
 }
+
+onShowConnections = (e) => {
+  console.log("showing connections in Graphics.js, location id " + this.props.location_id);
+
+  let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+  let headers = config.api.headers;
+  var raw = "";
+  const url0 = config.api.invokeUrl + '/edges/location/' + this.props.location_id;
+
+  fetch(url0, {
+    method: "GET",
+    headers
+  }).then(response => {
+    return response.json();
+  }).then(result => {
+
+    this.setState(
+      {
+          connections: result.body.data
+      }
+    );
+
+      console.log("list of connections: ", this.state.connections);
+  });
+}
+
+drawConnections = () => {
+  console.log("drawing connections...");
+}
+
 
 
   render() {
@@ -575,16 +611,16 @@ onChange = (e) => {
                 onMouseOut={this.handleMouseOut}
               />
              
-              <Generic x={X[0]} y={Y[12]} />
-              <Generic x={X[0]} y={Y[12]} 
+              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} />
+              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
 
-              <Path x={X[1]} y={Y[12]} />
-              <Path x={X[1]} y={Y[12]} 
+              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} />
+              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
@@ -616,7 +652,7 @@ onChange = (e) => {
                 onMouseOut={this.handleMouseOut}
               />
 
-              <Minus x={X[1]} y={Y[15]}
+              <Minus x={X[1]} y={Y[15] + 6}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
@@ -800,6 +836,11 @@ onChange = (e) => {
                 handleClick={this.handleClick}
               />
 
+              <RenderConnections
+                connections={this.state.connections}
+                handleClick={this.handleClick}
+              />
+
           </Layer>
           <Layer>
             <Tooltip                 
@@ -919,6 +960,12 @@ onChange = (e) => {
                         </label>
                         <hr />
                         <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button>
+                        <DropdownButton variant="info" id="dropdown-basic-button" title="Connections">
+                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Add connection</Dropdown.Item>
+                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Delete connection</Dropdown.Item>
+                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item>
+                        </DropdownButton>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>
