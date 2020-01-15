@@ -85,6 +85,8 @@ const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
 const FONT_SIZE = 20;
 const BACKGROUND_OFFSET = 150;
+const GENERIC_OFFSET = 4;
+const PATH_OFFSET = 7;
 
 const X = [25, 60, 95]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
@@ -609,16 +611,16 @@ drawConnections = () => {
                 onMouseOut={this.handleMouseOut}
               />
              
-              <Generic x={X[0]} y={Y[12]} />
-              <Generic x={X[0]} y={Y[12]} 
+              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} />
+              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
 
-              <Path x={X[1]} y={Y[12]} />
-              <Path x={X[1]} y={Y[12]} 
+              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} />
+              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} 
                 handleDragImageStart = {this.handleDragImageStart} 
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
@@ -650,7 +652,7 @@ drawConnections = () => {
                 onMouseOut={this.handleMouseOut}
               />
 
-              <Minus x={X[1]} y={Y[15]}
+              <Minus x={X[1]} y={Y[15] + 6}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
