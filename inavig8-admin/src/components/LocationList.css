@@ -1,20 +1,41 @@
 section.location-list ul {
     list-style: none;
-    /* padding-left: 0.6em; */
+    
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    gap: 0 0.8em;
+    align-items: center;
+}
+
+section.location-list ul:hover {
+    background: var(--primary-color);
+    color: white;
 }
 
 section.location-list ul li {
     padding: 0.4em 0.4em 0.4em 0.8em;
     font-size: 1.25em;
-    margin-bottom: 0.4em;
+    /* margin-bottom: 0.4em; */
+}
+
+section.location-list ul li:nth-child(2) {
+    justify-self: end;
+    font: 1.0em 'Libre Baskerville', serif;
+    font-weight: normal;
+}
+
+section.location-list ul li img {
+    width: 25px;
+    height: 25px;
+    place-self: center;
 }
 
 section.location-list ul.ul-location-list li:hover {
-    background: var(--primary-color);
-    color: white;
     text-shadow: 0px 0px 0px white;
 }
 
-section.location-list ul.ul-location-list li a:hover {
-    text-shadow: 0px 0px 0px white;
+.imagePreview {
+    text-align: center;
+    margin: 0.6em 1.0em;
+    border: 4px solid var(--primary-color);
 }

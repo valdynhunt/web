@@ -1,13 +1,8 @@
-import React from 'react';
-import './Header.css';
-//import Profile from './Profile';
-import './Profile.css';
-import Popup from 'reactjs-popup';
+import React from 'react'
+import './Header.css'
+import './Profile.css'
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
-// import Modal from 'react-bootstrap/Modal'
-// import Button from 'react-bootstrap/Button'
-// import InputGroup from 'react-bootstrap/InputGroup'
-// import FormControl from 'react-bootstrap/FormControl'
+
 
 class Header extends React.Component {
 
@@ -33,7 +28,7 @@ class Header extends React.Component {
 
     render() {
 
-        const { username, password, email, first_name, last_name, role } = this.props.profile;
+        const { username, email, first_name, last_name, role } = this.props.profile;
         const months = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];

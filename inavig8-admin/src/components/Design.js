@@ -19,8 +19,8 @@ class Design extends Component {
 
     componentDidMount() {
 
-		let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+		// let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = config.api.headers;
         
@@ -122,11 +122,10 @@ class Design extends Component {
 
         console.log("deleting object in Design.js, object id " + object_id);
 
-        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+        // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = config.api.headers;
-        var raw = "";
 
         const url3 = config.api.invokeUrl + '/object/delete/' + object_id;
         fetch(url3, {
@@ -150,8 +149,8 @@ class Design extends Component {
 
     handleNewObject = (raw) => {
 
-        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+        // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = config.api.headers;
 
@@ -184,8 +183,8 @@ class Design extends Component {
             )
         );
 
-        let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+        // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = config.api.headers;
 

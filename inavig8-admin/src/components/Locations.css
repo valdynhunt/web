@@ -45,6 +45,10 @@ main.locations-container section.location-view img {
     align-self: center;
 }
 
+main.locations-container section.location-view p {
+    text-align: center;
+}
+
 
 /* Location Details */
 main.locations-container section.location-details {

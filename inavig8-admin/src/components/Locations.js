@@ -1,56 +1,116 @@
-import React from 'react';
-import LocationList from './LocationList';
-import './Locations.css';
+import React from 'react'
+import LocationList from './LocationList'
+import './Locations.css'
 
 class Locations extends React.Component {
 
     state = {
+        showModal: false,
         isHover: false,
         showImage: false,
         showDetails: false,
         index: -1,
     }
 
+    onClose = () => {
+        this.setState(
+            {
+                showModal: false
+            }
+        );
+    }
+
+    onOpen = () => {
+        this.setState(
+            {
+                showModal: true
+            }
+        );
+    }
+
     handleHover = (index) => {
-            this.setState(
-                {
-                    isHover: true,
-                    showImage: true,
-                    showDetails: true,
-                    index
-                }
-            );
+        this.setState(
+            {
+                isHover: true,
+                showImage: true,
+                showDetails: true,
+                index
+            }
+        );
+    }
+
+    handleCreateLocation = (newLocation, parent_location_id) => {
+        this.setState(
+            {
+                showModal: false,
+                isHover: false,
+                showImage: false,
+                showDetails: false,
+                index: -1,
+            }
+        );
+        this.props.handleCreateLocation(newLocation, parent_location_id);
+    }
+
+    handleUpdateLocation = (currentLocation) => {
+        this.setState(
+            {
+                showModal: false,
+                isHover: false,
+                showImage: false,
+                showDetails: false,
+                index: -1,
+            }
+        );
+        this.props.handleUpdateLocation(currentLocation);
     }
 
     render() {
+
+        let $imagePreview = null;
+
+        if (
+            this.state.index > -1 && 
+            typeof(this.props.locations[this.state.index]) !== "undefined" && 
+            this.props.locations[this.state.index].canvas_image !== "" && 
+            this.props.locations[this.state.index].canvas_image !== null
+        ) {
+            $imagePreview = (
+                <img 
+                    src={this.props.locations[this.state.index].canvas_image} 
+                    alt={this.props.locations[this.state.index].long_name} 
+                    title={this.props.locations[this.state.index].long_name}
+                />
+            );
+        } else {
+            $imagePreview = (<p>No image to preview</p>);
+        }
 
         return (
 
             <main className="locations-container">
                 <section className="location-list">
-                    <h4>Locations</h4>
-                    <ul className="ul-location-list">
+                    <h4>
+                        Locations 
+                    </h4>
+                    <div>
                         {Object.keys(this.props.locations).map(key => (
                             <LocationList
                                 key={key}
                                 id={key}
                                 details={this.props.locations[key]} 
-                                handleHover={this.handleHover}
                                 hover={this.state.isHover}
+                                handleHover={this.handleHover}
+                                handleCreateLocation={this.handleCreateLocation}
+                                handleUpdateLocation={this.handleUpdateLocation}
                             />
                         ))}
-                    </ul>
+                    </div>
                 </section>
                 <section className="location-view">
                     <h4>Locations View</h4>
                     {
-                        this.state.showImage &&
-                        <img 
-                            src={this.props.locations[this.state.index].canvas_image} 
-                            alt={this.props.locations[this.state.index].long_name} 
-                            title={this.props.locations[this.state.index].long_name}
-                        />
-                        //<img src="./img/example-map.jpg" alt="Lorem Ipsum" title="Lorem Ipsum" />
+                        this.state.showImage && $imagePreview
                     }
                 </section>
                 <section className="location-details">
@@ -83,26 +143,6 @@ class Locations extends React.Component {
                             <li>{this.props.locations[this.state.index].location_type.short_name}</li>
                         }
                     </ul>
-                    {/* <ul className="location-detail">
-                        <li>GPS Coordinates:</li>
-                        {
-                            this.state.showImage &&
-                            <li>unknown</li>
-                        }
-                    </ul>
-                    <ul className="location-detail">
-                        <li># of assigned Admins:</li>
-                        {
-                            this.state.showImage &&
-                            <li>unknown</li>
-                        }
-                    </ul>
-                    <ul className="location-detail">
-                        <li># of total Objects:</li>
-                        {
-                            <li>unknown</li>
-                        }
-                    </ul> */}
                 </section>
             </main>
 
