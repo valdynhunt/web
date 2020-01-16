@@ -162,13 +162,6 @@ class Graphics extends React.Component {
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
-
-  // componentDidMount() {
-
-  // }
-
-  // showModalG={this.state.showModalG}
-  // handleShowModalG={this.handleShowModalG}
   
   handleClick = e => {
     console.log("clicked.");
@@ -405,7 +398,7 @@ scaleConnections2Canvas = () => {
     key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
     console.log("edge v1: " + key.v1.x + " " + key.v1.y),
     console.log("edge v2: " + key.v2.x + " " + key.v2.y)
-    
+
   ))
 
   this.setState(
