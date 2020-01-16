@@ -11,6 +11,7 @@ import { Stage, Layer, Rect, Text } from 'react-konva';
 import MapBackground from './MapBackground'
 import config from '../config.json';
 import ModalSetGrid from './ModalSetGrid';
+import './Graphics.css';
 
 import RenderConnections from './render/RenderConnections';
 import RenderGeneric from './render/RenderGeneric';
@@ -97,6 +98,11 @@ let origY = 0;
 var stage;
 var mousePos;
 let showMe;
+
+let primary;
+let secondary;
+let x_scale;
+let y_scale;
 
 // var tooltipLayer = new Konva.Layer();
 // var tooltip = new Konva.Text({
@@ -354,20 +360,63 @@ onShowConnections = (e) => {
     return response.json();
   }).then(result => {
 
+    this.getPrimarySecondary();
     this.setState(
       {
           connections: result.body.data
       }
     );
-
+      this.scaleConnections2Canvas();
       console.log("list of connections: ", this.state.connections);
   });
 }
 
-drawConnections = () => {
-  console.log("drawing connections...");
+onDeleteConnection = (obj) => {
+  console.log("deleting connection from obj: ", obj);
 }
 
+onAddConnection = (obj) => {
+  console.log("adding connection to obj: ", obj);
+}
+
+getPrimarySecondary = () => {
+
+  primary = this.props.objects.find(element =>  element.short_name === "primary");
+  secondary = this.props.objects.find(element => element.short_name === "secondary");
+
+  x_scale = (secondary.x_coordinate - primary.x_coordinate) / (secondary.image_x - primary.image_x);
+  y_scale = (secondary.y_coordinate - primary.y_coordinate) / (secondary.image_y - primary.image_y);
+
+}
+scaleConnections2Canvas = () => {
+
+  let tempConnections = this.state.connections;
+  tempConnections.map((key) => (
+
+    console.log("v1 object_id: ", key.v1.object_id),
+    console.log("v2 object_id: ", key.v2.object_id),
+    console.log("before"),
+    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+    console.log("edge v2: " + key.v2.x + " " + key.v2.y),
+    console.log("after"),
+    key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
+    key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
+    key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
+    key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
+    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+    console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+    
+  ))
+
+  this.setState(
+    {
+        connections: tempConnections
+    }
+  );
+
+  console.log("after conversion: ", this.state.connections);
+
+}
 
 
   render() {
@@ -839,6 +888,7 @@ drawConnections = () => {
               <RenderConnections
                 connections={this.state.connections}
                 handleClick={this.handleClick}
+                // getPrimarySecondary={this.getPrimarySecondary}
               />
 
           </Layer>
@@ -961,8 +1011,8 @@ drawConnections = () => {
                         <hr />
                         <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button>
                         <DropdownButton variant="info" id="dropdown-basic-button" title="Connections">
-                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Add connection</Dropdown.Item>
-                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Delete connection</Dropdown.Item>
+                          <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add connection</Dropdown.Item>
+                          <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete connection</Dropdown.Item>
                           <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item>
                         </DropdownButton>
 
