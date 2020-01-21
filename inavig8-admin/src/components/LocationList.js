@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image } from 'react-bootstrap/'
+import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image, Alert } from 'react-bootstrap/'
 import './LocationList.css';
 
 class Location extends React.Component {
@@ -9,6 +9,42 @@ class Location extends React.Component {
         showDeleteModal: false,
         showUpdateModal: false,
         currentLocation: null,
+        disabled: false,
+    }
+
+    checkForChildren = (parent_id) => {
+        //console.log("parent_id: ", parent_id);
+        // TEMP!!!! REMOVE THIS AFTER TESTING!!!!!!
+        // let headers = {
+        //     "Content-Type": "application/json",
+        //     "x-api-key": "Il5Hx547OB3VWglNlnYM35XJL4sv1ok57bJakZav",
+        //     "Authorization": "dummy",
+        // };
+        // let url = "https://6ifyh4p4z2.execute-api.us-west-2.amazonaws.com/dev";
+    
+        // fetch(url + '/locations/parent/' + parent_id, {
+        //     method: "GET",
+        //     headers,
+        // }).then(response => {
+        //     return response.json();
+        // }).then(result => {
+        //     console.log("result", result.body.data[0]);
+        //     if (result.body.data[0]) {
+        //         console.log("location id: " + parent_id + " is returning true");
+        //         this.setState(
+        //             {
+        //                 disabled: true
+        //             }
+        //         );
+        //     } else {
+        //         console.log("location id: " + parent_id + " is returning false");
+        //         this.setState(
+        //             {
+        //                 disabled: false
+        //             }
+        //         );
+        //     }
+        // });
     }
 
     onClose = () => {
@@ -50,9 +86,9 @@ class Location extends React.Component {
         );
     }
 
-    onDeleteOpen = () => {
-        // remove location
-        // ISSUE: cannot delete a parent location if there are children linked to it
+    onDeleteOpen = (location_id) => {
+        console.log("deleting location...");
+        this.props.handleDeleteLocation(location_id);
     }
 
     onCreate = () => {
@@ -108,6 +144,8 @@ class Location extends React.Component {
     render() {
 
         const { location_id, long_name, short_name, description, canvas_image } = this.props.details;
+        
+        this.checkForChildren(location_id);
 
         let $imagePreview = null;
         if (canvas_image) {
@@ -129,7 +167,17 @@ class Location extends React.Component {
                         id="input-group-dropdown-2"
                     >
                     <Dropdown.Item onClick={this.onUpdateOpen}>edit this location</Dropdown.Item>
-                    <Dropdown.Item onClick={this.onDeleteOpen}>delete this location</Dropdown.Item>
+                    <Dropdown.Item 
+                        disabled={ this.state.disabled }
+                        // TODO: change this to react-boostrap Alerts!!
+                        onClick={
+                            (e) => { 
+                                if (window.confirm('By deleted this location, you will be deleting any objects associated with this location. Are you sure you want to delete this location (' + long_name + ')?')) this.onDeleteOpen(location_id) 
+                            }
+                        }
+                        >
+                        delete this location
+                    </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item href={`/design/${location_id}`}>map this location</Dropdown.Item>
                     <Dropdown.Divider />

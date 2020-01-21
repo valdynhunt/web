@@ -65,6 +65,10 @@ class Locations extends React.Component {
         this.props.handleUpdateLocation(currentLocation);
     }
 
+    handleDeleteLocation = (location_id) => {
+        this.props.handleDeleteLocation(location_id);
+    }
+
     render() {
 
         let $imagePreview = null;
@@ -103,6 +107,7 @@ class Locations extends React.Component {
                                 handleHover={this.handleHover}
                                 handleCreateLocation={this.handleCreateLocation}
                                 handleUpdateLocation={this.handleUpdateLocation}
+                                handleDeleteLocation={this.handleDeleteLocation}
                             />
                         ))}
                     </div>

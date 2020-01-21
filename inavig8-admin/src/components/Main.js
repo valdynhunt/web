@@ -14,6 +14,10 @@ class Main extends React.Component {
         this.props.handleUpdateLocation(currentLocation);
     }
 
+    handleDeleteLocation = (location_id) => {
+        this.props.handleDeleteLocation(location_id);
+    }
+
     render() {
 
         if (this.props.page === 'Locations') {
@@ -22,6 +26,7 @@ class Main extends React.Component {
                     locations={this.props.locations} 
                     handleCreateLocation={this.handleCreateLocation}
                     handleUpdateLocation={this.handleUpdateLocation}
+                    handleDeleteLocation={this.handleDeleteLocation}
                 />
             );
         } else if (this.props.page === 'Users') {

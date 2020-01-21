@@ -175,6 +175,11 @@ class App extends React.Component {
 
   }
 
+  handleDeleteLocation = (location_id) => {
+      // delete location
+      console.log("App.js's handleDeleteLocation: (fake) deleting location ", location_id);
+  }
+
   render() {
 
     Auth.currentSession()
@@ -216,6 +221,7 @@ class App extends React.Component {
               locations={this.state.locations} 
               handleCreateLocation={this.handleCreateLocation}
               handleUpdateLocation={this.handleUpdateLocation}
+              handleDeleteLocation={this.handleDeleteLocation}
           />
           <Footer />
         </div>
