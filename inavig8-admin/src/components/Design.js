@@ -6,12 +6,7 @@ import Footer from './Footer0';
 import config from '../config.json';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
 import './Design.css';
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image, Alert } from 'react-bootstrap/'
+import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image } from 'react-bootstrap/'
 import './LocationList.css';
 
 class Location extends React.Component {

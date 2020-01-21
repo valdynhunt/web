@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 
 class Import extends React.Component {
     // onClick = () =>{
@@ -40,7 +40,7 @@ class Import extends React.Component {
                 {/* <br>
                 <Button type="file" onClick={this.onClick}>Import</Button>*/}
                 <br></br>
-                <img id="img" src={this.state.imagePreviewURL}></img> 
+                <img id="img" src={this.state.imagePreviewURL} alt=""></img> 
             </div>
         );
     };

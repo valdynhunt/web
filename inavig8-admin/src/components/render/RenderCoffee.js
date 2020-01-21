@@ -17,7 +17,6 @@ function RenderCoffee(props) {
           handleClick={props.handleClick}
           onMouseMove={props.onMouseMove}
           onMouseOut={props.onMouseOut}
-          handleClick={props.handleClick}
         />
 
     )))

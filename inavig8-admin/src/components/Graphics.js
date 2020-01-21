@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import React from 'react';
+//import { Component } from 'react';
+import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap/'
 import Konva from 'konva';
-import { Stage, Layer, Rect, Text } from 'react-konva';
+import { Stage, Layer, Rect } from 'react-konva';
+//import { Text } from 'react-konva';
 import MapBackground from './MapBackground'
 import config from '../config.json';
-import ModalSetGrid from './ModalSetGrid';
+//import ModalSetGrid from './ModalSetGrid';
 import './Graphics.css';
 
 import RenderConnections from './render/RenderConnections';
@@ -82,9 +78,9 @@ const TOOLBAR_HEIGHT = 650;
 const TOOLBAR_X = 10;
 const TOOLBAR_Y = 30;
 const CIRC_RADIUS = 7;
-const CIRC_RADIUS_SM = 3;
+// const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
-const FONT_SIZE = 20;
+// const FONT_SIZE = 20;
 const BACKGROUND_OFFSET = 150;
 const GENERIC_OFFSET = 4;
 const PATH_OFFSET = 7;
@@ -97,7 +93,7 @@ let origY = 0;
 
 var stage;
 var mousePos;
-let showMe;
+// let showMe;
 
 let primary;
 let secondary;
@@ -340,10 +336,10 @@ onChange = (e) => {
 onShowConnections = (e) => {
   console.log("showing connections in Graphics.js, location id " + this.props.location_id);
 
-  let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+  // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
   let headers = config.api.headers;
-  var raw = "";
+
   const url0 = config.api.invokeUrl + '/edges/location/' + this.props.location_id;
 
   fetch(url0, {
@@ -742,7 +738,6 @@ scaleConnections2Canvas = () => {
                 handleClick={this.handleClick}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
-                handleClick={this.handleClick}
               />
 
               <RenderUtensils

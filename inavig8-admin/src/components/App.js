@@ -186,16 +186,16 @@ class App extends React.Component {
     .then(data => {
       // this.setState(data);
       console.log(data);
-      var s = {
-          admin: {
-              username: data.accessToken.payload.username,
-              password: "",
-              email: data.idToken.payload.email,
-              first_name: "firstname",
-              last_name: "lastname",
-              role: "Admin"
-          }
-      };
+      // var s = {
+      //     admin: {
+      //         username: data.accessToken.payload.username,
+      //         password: "",
+      //         email: data.idToken.payload.email,
+      //         first_name: "firstname",
+      //         last_name: "lastname",
+      //         role: "Admin"
+      //     }
+      // };
       // this.setState(s);//
 
     })
