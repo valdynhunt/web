@@ -32,6 +32,7 @@ header div.header-upper div.username-area {
     border: 1px solid var(--tertiary-color);
     border-radius: 18px;
     padding: 0.6em 1.0em;
+    cursor: pointer;
 
     display: flex;
     flex-direction: row;
@@ -70,3 +71,6 @@ header .extra-wide {
 /* header .form-control {
     width: 100% !important;
 } */
+header div.header-lower input.button-date {
+    cursor: default;
+}

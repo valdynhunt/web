@@ -99,7 +99,7 @@ class App extends React.Component {
               }
           );
           //child_location_id = {...result.body.data[0].location_id};
-          
+
       });
 
       // if (child_location_id) {
@@ -192,8 +192,6 @@ class App extends React.Component {
           }
       };
       // this.setState(s);//
-
-  
 
     })
     .catch(err => console.log(err));
