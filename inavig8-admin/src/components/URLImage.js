@@ -3,10 +3,6 @@ import { Image } from 'react-konva';
 
 
 class URLImage extends React.Component {
-  constructor(props){
-        super(props);
-        // this.imageNode = React.createRef()
-      }
 
   state = {
     image: null

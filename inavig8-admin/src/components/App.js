@@ -99,7 +99,7 @@ class App extends React.Component {
               }
           );
           //child_location_id = {...result.body.data[0].location_id};
-          
+
       });
 
       // if (child_location_id) {
@@ -175,25 +175,28 @@ class App extends React.Component {
 
   }
 
+  handleDeleteLocation = (location_id) => {
+      // delete location
+      console.log("App.js's handleDeleteLocation: (fake) deleting location ", location_id);
+  }
+
   render() {
 
     Auth.currentSession()
     .then(data => {
       // this.setState(data);
       console.log(data);
-      var s = {
-          admin: {
-              username: data.accessToken.payload.username,
-              password: "",
-              email: data.idToken.payload.email,
-              first_name: "firstname",
-              last_name: "lastname",
-              role: "Admin"
-          }
-      };
+      // var s = {
+      //     admin: {
+      //         username: data.accessToken.payload.username,
+      //         password: "",
+      //         email: data.idToken.payload.email,
+      //         first_name: "firstname",
+      //         last_name: "lastname",
+      //         role: "Admin"
+      //     }
+      // };
       // this.setState(s);//
-
-  
 
     })
     .catch(err => console.log(err));
@@ -218,6 +221,7 @@ class App extends React.Component {
               locations={this.state.locations} 
               handleCreateLocation={this.handleCreateLocation}
               handleUpdateLocation={this.handleUpdateLocation}
+              handleDeleteLocation={this.handleDeleteLocation}
           />
           <Footer />
         </div>
