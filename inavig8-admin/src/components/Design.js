@@ -10,17 +10,43 @@ import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap/'
 import './Design.css';
 
 
+
 class Design extends Component {
     // team 5 rules
     state = {
         showModalG: false,
+        showModalStart: false,
         showModalSetScale: false,
+        primaryObject: {
+            object_id: 0,
+            location_id: 0, 
+            short_name: "", 
+            long_name: "", 
+            description: "", 
+            object_type: "",
+            x_coordinate: 1,
+            y_coordinate: 1,
+            image_x: 0,
+            image_y: 0
+        },
+        secondaryObject: {
+            object_id: 0,
+            location_id: 0, 
+            short_name: "", 
+            long_name: "", 
+            description: "", 
+            object_type: "",
+            x_coordinate: 1,
+            y_coordinate: 1,
+            image_x: 0,
+            image_y: 0
+        },
         location: [],
         objects: [],
     }
 
     componentDidMount() {
-
+        console.log("design mount");
 		// let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
@@ -58,33 +84,67 @@ class Design extends Component {
 
                 console.log("JASON! objects: ", result.body.data);
                 console.log("state: ", this.state);
-                console.log("checking if primary and secondary are set...");
 
-                let foundPrimary = this.state.objects.find(element =>  element.short_name === "primary");
-                let foundSecondary = this.state.objects.find(element => element.short_name === "secondary");
-                let scaleIsSet = false;
-                let renderModal = false;
+                const obs = this.state.objects.length;
+                console.log("obs: ", obs);
+                if (obs < 2) {
+                  this.handleShowModalStart(true);
+                } else {
 
-                console.log("scale set? ", scaleIsSet);
-                console.log("foundPrimary: ", foundPrimary);
-                console.log("foundSecondary: ", foundSecondary);
+                    // let priObj = this.state.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+                    let priObj = this.state.objects[0];
 
-                // check if scale set
-                if((foundPrimary != null) && (foundSecondary != null)) {
-                    scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
+                    console.log("priObj right before setState: ", priObj);
+                    this.setState(
+                      prevState => (
+                          { 
+                              primaryObject: priObj
+                          }
+                      )
+                    );
+                    console.log("primaryObject after setState: ", this.state.primaryObject.object_id);
+
+                    // let secObj = this.state.objects.filter(object => object.object_id === e.currentTarget.attrs.object_id);
+                    let secObj = this.state.objects[1];
+
+                    console.log("secObj right before setState: ", secObj);
+                    this.setState(
+                      prevState => (
+                          { 
+                              secondaryObject: secObj
+                          }
+                      )
+                    );
+                    console.log("secondaryObject after setState: ", this.state.secondaryObject.object_id);
+
+
+                    console.log("checking if primary and secondary are set...");
+
+                    let foundPrimary = this.state.objects.find(element =>  element.short_name === "location_primary");
+                    let foundSecondary = this.state.objects.find(element => element.short_name === "location_secondary");
+                    let scaleIsSet = false;
+                    let renderModal = false;
+    
+                    console.log("init scale set? ", scaleIsSet);
+                    console.log("foundPrimary: ", foundPrimary);
+                    console.log("foundSecondary: ", foundSecondary);
+    
+                    // check if scale set
+                    if((foundPrimary != null) && (foundSecondary != null)) {
+                        scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
+                    }
+    
+                    console.log("scale set? ", scaleIsSet);
+    
+                    // if primary and secondary and grid not set, then show modal to input
+                    if (!foundPrimary || !foundSecondary || !scaleIsSet) {
+                        this.handleShowModalSetScale(true);
+                    }
+    
+                    console.log("renderModal: ", renderModal);
+
                 }
 
-                console.log("scale set? ", scaleIsSet);
-
-                // if primary and secondary and grid not set, then show modal to input
-                if (!foundPrimary || !foundSecondary || !scaleIsSet) {
-                    this.handleShowModalSetScale(true);
-                    // show model to set them and set grid
-                    // show modal here
-
-                }
-
-                console.log("renderModal: ", renderModal);
             });
 
         const localStorageRef = localStorage.getItem(this.props.match.params.location_id);
@@ -97,6 +157,22 @@ class Design extends Component {
         //     );
         // }
         
+    }
+
+    handleShowModalStart = (status) => {
+        console.log("status in Graphics.js............................: ", status);
+        this.setState(
+            {
+                showModalStart: status
+            }
+        );
+        console.log("showModalStart: ", this.state.showModalStart);
+    
+      }
+
+    onCloseModalStart = () => {
+        console.log("closing modal show - ", this.state.showModalStart);
+        this.handleShowModalStart(false);
     }
 
     onClose = () => {
@@ -115,50 +191,90 @@ class Design extends Component {
     console.log("currentTarget: ", e.currentTarget.name);
     console.log("currentValue: ", e.currentTarget.value);
   
-    // const currentObjectG = {
-    //     ...this.state.currentObjectG, 
-    //     [e.currentTarget.name]: e.currentTarget.value
-    // }
-    // console.log("onChange currentObjectG before setState: ", currentObjectG);
+    const primaryObject = {
+        ...this.state.primaryObject, 
+        [e.currentTarget.name]: e.currentTarget.value
+    }
+    console.log("onChange primaryObject before setState: ", primaryObject);
   
-    // this.setState(
-    //     {
-    //     currentObjectG
-    //     }
-    // );
-    // console.log("Graphics.js onChange object: ", currentObjectG);
-    // console.log("Graphics.js onChange object from state: ", this.state.currentObjectG);
+    this.setState(
+        {
+        primaryObject
+        }
+    );
+    console.log("Graphics.js onChange object: ", primaryObject);
+    console.log("Graphics.js onChange object from state: ", this.state.primaryObject);
+  
+  }
+
+  onChangeSec = (e) => {
+    console.log("currentTarget: ", e.currentTarget.name);
+    console.log("currentValue: ", e.currentTarget.value);
+  
+    const secondaryObject = {
+        ...this.state.secondaryObject, 
+        [e.currentTarget.name]: e.currentTarget.value
+    }
+    console.log("onChangeSec secondaryObject before setState: ", secondaryObject);
+  
+    this.setState(
+        {
+        secondaryObject
+        }
+    );
+    console.log("Graphics.js onChangeSec object: ", secondaryObject);
+    console.log("Graphics.js onChangeSec object from state: ", this.state.secondaryObject);
   
   }
 
   onSetScale = () => {
-    // console.log("currentIndex: ", this.state.currentIndex);
-    // console.log("currentObjectG: ", this.state.currentObjectG);
-    console.log("Design.js onUpdate - description: ", this.state.currentObjectG.description)
-    // var raw = JSON.stringify({
-    //     "object_id": this.state.currentObjectG.object_id,
-    //     "location_id":this.state.currentObjectG.location_id, 
-    //     "short_name":this.state.currentObjectG.short_name,
-    //     "long_name":this.state.currentObjectG.long_name,
-    //     "description":this.state.currentObjectG.description,
-    //     "object_type_id": this.state.currentObjectG.object_type_id,
-    //     "x_coordinate": 0,
-    //     "y_coordinate": 0,
-    //     "image_x": this.state.currentObjectG.image_x,
-    //     "image_y": this.state.currentObjectG.image_y,
-    //   });
-      
-    // console.log(JSON.parse(raw));
-    // console.log("object_id: ", JSON.parse(raw).object_id);
-    // console.log("long_name: ", JSON.parse(raw).long_name);
-    // console.log("description: ", JSON.parse(raw).description);
+    console.log("primaryObject: ", this.state.primaryObject);
+    console.log("Design.js onUpdate - description: ", this.state.primaryObject.description)
 
-    // const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
+    var raw = JSON.stringify({
+        "object_id": this.state.primaryObject.object_id,
+        "location_id":this.state.primaryObject.location_id, 
+        "short_name":this.state.primaryObject.short_name,
+        "long_name":this.state.primaryObject.long_name,
+        "description":this.state.primaryObject.description,
+        "object_type_id": this.state.primaryObject.object_type_id,
+        "x_coordinate": 1,
+        "y_coordinate": 1,
+        "latitude": this.state.primaryObject.latitude_pri,
+        "longitude": this.state.primaryObject.longitude_pri,
+        "image_x": this.state.primaryObject.image_x,
+        "image_y": this.state.primaryObject.image_y,
+      });
+      
+    console.log(JSON.parse(raw));
+    console.log("object_id: ", JSON.parse(raw).object_id);
+    console.log("long_name: ", JSON.parse(raw).long_name);
+    console.log("description: ", JSON.parse(raw).description);
+
+    const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
     // const index = this.props.objects.findIndex(isCurrentObjectId)
     // console.log("index: ", index);
 
-    // this.handleSetScale(index, raw);
+    this.handleUpdateObject(raw);
 
+
+    raw = JSON.stringify({
+        "object_id": this.state.secondaryObject.object_id,
+        "location_id":this.state.secondaryObject.location_id, 
+        "short_name":this.state.secondaryObject.short_name,
+        "long_name":this.state.secondaryObject.long_name,
+        "description":this.state.secondaryObject.description,
+        "object_type_id": this.state.secondaryObject.object_type_id,
+        "x_coordinate": 1,
+        "y_coordinate": 1,
+        "latitude": this.state.secondaryObject.latitude_sec,
+        "longitude": this.state.secondaryObject.longitude_sec,
+        "image_x": this.state.secondaryObject.image_x,
+        "image_y": this.state.secondaryObject.image_y,
+      });
+
+
+    this.handleUpdateObject(raw);
     this.handleSetScale();
     this.onClose();
 }
@@ -219,7 +335,7 @@ class Design extends Component {
 		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = config.api.headers;
-
+        console.log("raw: ", raw);
         const url3 = config.api.invokeUrl + '/object/new';
         fetch(url3, {
             method: "POST",
@@ -228,6 +344,7 @@ class Design extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
+            console.log("result: ", result);
             this.setState(
                 {
                     objects: [...this.state.objects, { ...result.body.data[0] }]
@@ -237,9 +354,9 @@ class Design extends Component {
         });
     }
 
-    handleUpdateObject = (index, raw) => {
+    handleUpdateObject = (raw) => {
 
-        console.log(index + ": handleUpdateObject in Design.js = ", raw);
+        console.log("handleUpdateObject in Design.js = ", raw);
         
         this.setState(
             prevState => (
@@ -262,7 +379,7 @@ class Design extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
-
+console.log("result: ", result);
             this.setState(
                 {
                     objects: [...this.state.objects, { ...result.body.data[0] }]
@@ -274,35 +391,28 @@ class Design extends Component {
         });
     }
 
-    handleSetScale = (index, raw) => {
+    handleSetScale = () => {
+		    // "latitude": lat,
+			// "longitude": long
+        console.log("handleSetScale in Design.js");
 
-        console.log(index + ": handleUpdateObject in Design.js = ", raw);
-        
-        this.setState(
-            prevState => (
-                { 
-                    objects: prevState.objects.filter(object => object.object_id !== JSON.parse(raw).object_id) 
-                }
-            )
-        );
 
         // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
 		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
         let headers = config.api.headers;
 
-        const url3 = config.api.invokeUrl + '/object/update';
-        fetch(url3, {
-            method: "POST",
-            headers,
-            body: raw,
+        const url4 = config.api.invokeUrl + '/location/set-scale/' + this.props.match.params.location_id;
+        fetch(url4, {
+            method: "GET",
+            headers
         }).then(response => {
             return response.json();
         }).then(result => {
 
             this.setState(
                 {
-                    objects: [...this.state.objects, { ...result.body.data[0] }]
+                    // objects: [...this.state.objects, { ...result.body.data[0] }]
                 }
             );
 
@@ -357,6 +467,25 @@ class Design extends Component {
                 </Container>
 
 
+        <Modal show={this.state.showModalStart} onHide={this.onCloseModalStart}>
+          <Modal.Header closeButton>
+            <Modal.Title>Location Setup</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <ul><h6>To enable a location, please: </h6>
+                <li>Drag in a primary object</li>
+                <li>Drag in a secondary object</li>
+                <li>Refresh the page to begin</li>
+            </ul>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.onCloseModalStart}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+
+
         <Modal show={this.state.showModalSetScale} onHide={this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>Set Latitudes and Longitudes</Modal.Title>
@@ -387,7 +516,7 @@ class Design extends Component {
                                     aria-label="latitude_pri"
                                     aria-describedby="basic-addon1"
                                     name="latitude_pri"
-                                    // defaultValue={this.state.currentObjectG.long_name}
+                                    // defaultValue={this.state.primaryObject.long_name}
                                     onChange={this.onChange}
                                 />
                             </InputGroup>
@@ -403,7 +532,7 @@ class Design extends Component {
                                     aria-label="longitude_pri"
                                     aria-describedby="basic-addon1"
                                     name="longitude_pri"
-                                    // defaultValue={this.state.currentObjectG.long_name}
+                                    // defaultValue={this.state.primaryObject.long_name}
                                     onChange={this.onChange}
                                 />
                             </InputGroup>
@@ -419,8 +548,8 @@ class Design extends Component {
                                     aria-label="latitude_sec"
                                     aria-describedby="basic-addon1"
                                     name="latitude_sec"
-                                    // defaultValue={this.state.currentObjectG.long_name}
-                                    onChange={this.onChange}
+                                    // defaultValue={this.state.primaryObject.long_name}
+                                    onChange={this.onChangeSec}
                                 />
                             </InputGroup>
                         </label>
@@ -435,24 +564,12 @@ class Design extends Component {
                                     aria-label="longitude_sec"
                                     aria-describedby="basic-addon1"
                                     name="longitude_sec"
-                                    // defaultValue={this.state.currentObjectG.long_name}
-                                    onChange={this.onChange}
+                                    // defaultValue={this.state.primaryObject.long_name}
+                                    onChange={this.onChangeSec}
                                 />
                             </InputGroup>
                         </label>
-
-
-
-
-
                         <hr />
-                        {/* <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button> */}
-                        {/* <DropdownButton variant="info" id="dropdown-basic-button" title="Connections">
-                          <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add connection</Dropdown.Item>
-                          <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete connection</Dropdown.Item>
-                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item>
-                        </DropdownButton> */}
-
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={this.onClose}>Close</Button>

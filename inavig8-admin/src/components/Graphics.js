@@ -65,7 +65,9 @@ import Generic from './toolbar/Generic';
 import Path from './toolbar/Path';
 import Pencil from './toolbar/Pencil';
 import Redo from './toolbar/Redo';
+import Primary from './toolbar/Primary';
 import Undo from './toolbar/Undo';
+import Secondary from './toolbar/Secondary';
 import Plus from './toolbar/Plus';
 import Minus from './toolbar/Minus';
 import HandPaper from './toolbar/HandPaper';
@@ -131,11 +133,9 @@ let y_scale;
 
 class Graphics extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      // currentObjectG: this.props.details
-      // currentObjectG: null
       connections: [],
       currentObjectG: {
         object_id: 0,
@@ -148,7 +148,7 @@ class Graphics extends React.Component {
         y_coordinate: 0,
         image_x: 0,
         image_y: 0
-   }
+      }
 
     }
 
@@ -157,6 +157,12 @@ class Graphics extends React.Component {
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.handleMouseOut= this.handleMouseOut.bind(this)
   }
+
+  componentDidMount() {
+    console.log("graphics mount");    
+  }
+
+
 
   
   handleClick = e => {
@@ -232,16 +238,19 @@ class Graphics extends React.Component {
     console.log("short name: " + e.target.attrs.short_name);
     console.log("object type id: " + e.target.attrs.object_type_id);
 
+    const im_x = Math.round(pointerPosition.x);
+    const im_y = Math.round(pointerPosition.y);
+
     var raw = JSON.stringify({
       "location_id":this.props.location_id, 
       "short_name":e.target.attrs.short_name,
       "long_name":"a",
       "description":"a",
       "object_type_id": e.target.attrs.object_type_id,
-      "x_coordinate": 0,
-      "y_coordinate": 0,
-      "image_x": pointerPosition.x,
-      "image_y": pointerPosition.y,
+      "x_coordinate": 1,
+      "y_coordinate": 1,
+      "image_x": im_x,
+      "image_y": im_y,
     });
 
     // console.log("props: ", this.props);
@@ -264,6 +273,8 @@ class Graphics extends React.Component {
 
   }; // end handleDragImageEnd//
 
+
+
   onClose = () => {
       console.log("closing modal show - ", this.props.showModalG);
       this.props.handleShowModalG(false);
@@ -276,8 +287,6 @@ onOpen = () => {
 }
 
 onUpdate = () => {
-    // console.log("currentIndex: ", this.state.currentIndex);
-    // console.log("currentObjectG: ", this.state.currentObjectG);
     console.log("Graphics.js onUpdate - description: ", this.state.currentObjectG.description)
     var raw = JSON.stringify({
         "object_id": this.state.currentObjectG.object_id,
@@ -297,12 +306,12 @@ onUpdate = () => {
     // console.log("long_name: ", JSON.parse(raw).long_name);
     // console.log("description: ", JSON.parse(raw).description);
 
-    const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
-    const index = this.props.objects.findIndex(isCurrentObjectId)
-    console.log("index: ", index);
+    // const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
+    // const index = this.props.objects.findIndex(isCurrentObjectId)
+    // console.log("index: ", index);
       
     // console.log("valdyn says Graphics.js onUpdate index is: ", index);
-    this.props.handleUpdateObject(index, raw);
+    this.props.handleUpdateObject(raw);
     // console.log("updated from Obj.js! raw : ", raw);
     this.onClose();
 }
@@ -675,6 +684,14 @@ scaleConnections2Canvas = () => {
                 onMouseOut={this.handleMouseOut}
               />
 
+              <Primary x={X[2] + PATH_OFFSET} y={Y[13] + PATH_OFFSET} />
+              <Primary x={X[2] + PATH_OFFSET} y={Y[13] + PATH_OFFSET} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />   
+
               <Redo x={X[0]} y={Y[14]}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
@@ -684,6 +701,14 @@ scaleConnections2Canvas = () => {
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
               />
+
+              <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} />
+              <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />   
 
               <Plus x={X[0]} y={Y[15]}
                 onMouseMove={this.handleMouseMove}
@@ -887,129 +912,129 @@ scaleConnections2Canvas = () => {
         </Stage>
 
         <Modal show={this.props.showModalG} onHide={this.onClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Object ID: {this.state.currentObjectG.object_id}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {/* <label htmlFor="object_type">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Object Type</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    aria-label="object_type"
-                                    aria-describedby="basic-addon1"
-                                    defaultValue={this.state.currentObjectG.object_type.short_name}
-                                    readOnly="readonly"
-                                />
-                            </InputGroup>
-                        </label> */}
-                        <label htmlFor="short_name">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Short Name</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    aria-label="short_name"
-                                    aria-describedby="basic-addon1"
-                                    name="short_name"
-                                    defaultValue={this.state.currentObjectG.short_name}
-                                    readOnly="readonly"
+          <Modal.Header closeButton>
+              <Modal.Title>Object ID: {this.state.currentObjectG.object_id}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+              {/* <label htmlFor="object_type">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Object Type</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          aria-label="object_type"
+                          aria-describedby="basic-addon1"
+                          defaultValue={this.state.currentObjectG.object_type.short_name}
+                          readOnly="readonly"
+                      />
+                  </InputGroup>
+              </label> */}
+              <label htmlFor="short_name">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Short Name</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          aria-label="short_name"
+                          aria-describedby="basic-addon1"
+                          name="short_name"
+                          defaultValue={this.state.currentObjectG.short_name}
+                          readOnly="readonly"
 
-                                />
-                            </InputGroup>
-                        </label>
-                        <label htmlFor="long_name">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Long Name</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="enter long name"
-                                    aria-label="long_name"
-                                    aria-describedby="basic-addon1"
-                                    name="long_name"
-                                    defaultValue={this.state.currentObjectG.long_name}
-                                    onChange={this.onChange}
-                                />
-                            </InputGroup>
-                        </label>
-                        <label htmlFor="description">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Description</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="no description"
-                                    aria-label="description"
-                                    aria-describedby="basic-addon1"
-                                    name="description"
-                                    defaultValue={this.state.currentObjectG.description}
-                                    onChange={this.onChange}
+                      />
+                  </InputGroup>
+              </label>
+              <label htmlFor="long_name">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Long Name</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          placeholder="enter long name"
+                          aria-label="long_name"
+                          aria-describedby="basic-addon1"
+                          name="long_name"
+                          defaultValue={this.state.currentObjectG.long_name}
+                          onChange={this.onChange}
+                      />
+                  </InputGroup>
+              </label>
+              <label htmlFor="description">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Description</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          placeholder="no description"
+                          aria-label="description"
+                          aria-describedby="basic-addon1"
+                          name="description"
+                          defaultValue={this.state.currentObjectG.description}
+                          onChange={this.onChange}
 
-                                />
-                            </InputGroup>
-                        </label>
-                        <label htmlFor="image_x">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Image Location X</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="no x-coordinate"
-                                    aria-label="image_x"
-                                    aria-describedby="basic-addon1"
-                                    name="image_x"
-                                    defaultValue={this.state.currentObjectG.image_x}
-                                    readOnly="readonly"
-                                />
-                            </InputGroup>
-                        </label>
-                        <label htmlFor="image_y">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Image Location Y</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="no y-coordinate"
-                                    aria-label="image_y"
-                                    aria-describedby="basic-addon1"
-                                    name="image_y"
-                                    defaultValue={this.state.currentObjectG.image_y}
-                                    readOnly="readonly"
-                                />
-                            </InputGroup>
-                        </label>
-                        <label htmlFor="location_id">
-                            <InputGroup className="mb-3">
-                                <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1">Location ID</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    //placeholder="no y-coordinate"
-                                    aria-label="location_id"
-                                    aria-describedby="basic-addon1"
-                                    name="location_id"
-                                    defaultValue={this.state.currentObjectG.location_id}
-                                    readOnly="readonly"
-                                    //onChange={this.handleChange}
-                                />
-                            </InputGroup>
-                        </label>
-                        <hr />
-                        <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button>
-                        <DropdownButton variant="info" id="dropdown-basic-button" title="Connections">
-                          <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add connection</Dropdown.Item>
-                          <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete connection</Dropdown.Item>
-                          <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item>
-                        </DropdownButton>
+                      />
+                  </InputGroup>
+              </label>
+              <label htmlFor="image_x">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Image Location X</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          placeholder="no x-coordinate"
+                          aria-label="image_x"
+                          aria-describedby="basic-addon1"
+                          name="image_x"
+                          defaultValue={this.state.currentObjectG.image_x}
+                          readOnly="readonly"
+                      />
+                  </InputGroup>
+              </label>
+              <label htmlFor="image_y">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Image Location Y</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          placeholder="no y-coordinate"
+                          aria-label="image_y"
+                          aria-describedby="basic-addon1"
+                          name="image_y"
+                          defaultValue={this.state.currentObjectG.image_y}
+                          readOnly="readonly"
+                      />
+                  </InputGroup>
+              </label>
+              <label htmlFor="location_id">
+                  <InputGroup className="mb-3">
+                      <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">Location ID</InputGroup.Text>
+                      </InputGroup.Prepend>
+                      <FormControl
+                          //placeholder="no y-coordinate"
+                          aria-label="location_id"
+                          aria-describedby="basic-addon1"
+                          name="location_id"
+                          defaultValue={this.state.currentObjectG.location_id}
+                          readOnly="readonly"
+                          //onChange={this.handleChange}
+                      />
+                  </InputGroup>
+              </label>
+              <hr />
+              <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button>
+              <DropdownButton variant="info" id="dropdown-basic-button" title="Connections">
+                <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add connection</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete connection</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item>
+              </DropdownButton>
 
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.onClose}>Close</Button>
-                        <Button onClick={this.onUpdate}>Update</Button>
-                    </Modal.Footer>
-                </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+              <Button onClick={this.onClose}>Close</Button>
+              <Button onClick={this.onUpdate}>Update</Button>
+          </Modal.Footer>
+      </Modal>
       </div>
     )
   }
