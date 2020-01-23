@@ -1,12 +1,8 @@
 import React from 'react';
+//import config from '../config.json';
 //import Button from 'react-bootstrap/Button';
 
 class Import extends React.Component {
-    // onClick = () =>{
-    //     //console.log(e.target.files[0]);
-    //     console.log(this.state);
-    //     //this.setState({image: e.target.files[0]});
-    // }
     constructor(property){
         super(property);
 
@@ -29,16 +25,32 @@ class Import extends React.Component {
                 imagePreviewURL: read.result
             });
         }
-        read.readAsDataURL(file);
-    }
 
+        console.log(read);
+
+        let location_image_data = read.readAsDataURL(file);//Returns the complete data of blob as a Data URL, essentially a Base64-encoded string of the file data.
+        
+        let body = {
+            location_image_name: file.name,
+            location_image_data  
+       }
+
+        // fetch(config.api.invokeUrl + '/location/image', {
+        //     method: "POST",
+        //     body,
+            
+        // }).then(response => {
+        //     return response.json();
+        // });
+
+    }
+    
+// base 64 binary
     render() {
 
         return (
             <div className="ImportBTN">
                 <input name="btn" type="file" onChange={this.onImport}></input>
-                {/* <br>
-                <Button type="file" onClick={this.onClick}>Import</Button>*/}
                 <br></br>
                 <img id="img" src={this.state.imagePreviewURL} alt=""></img> 
             </div>
