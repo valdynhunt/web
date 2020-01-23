@@ -8,6 +8,7 @@ import Design from './Design'
 import LocationObjects from './LocationObjects'
 import App from './App';
 import Import from './Import';
+import Export from './Export';
 
 const Router = () => (
 
@@ -21,6 +22,7 @@ const Router = () => (
             <Route path="/design" component={Design} />
             <Route path="/location-objects/:location_id" component={LocationObjects} />
             <Route path="/import" component={Import} />
+            <Route path="/export" component={Export} />
             <Route component={Login} />
         </Switch>
     </BrowserRouter>
