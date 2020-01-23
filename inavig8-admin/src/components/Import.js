@@ -1,7 +1,6 @@
 import React from 'react';
-import config from '../config.json';
-
-import Button from 'react-bootstrap/Button';
+//import config from '../config.json';
+//import Button from 'react-bootstrap/Button';
 
 class Import extends React.Component {
     constructor(property){
@@ -53,7 +52,7 @@ class Import extends React.Component {
             <div className="ImportBTN">
                 <input name="btn" type="file" onChange={this.onImport}></input>
                 <br></br>
-                <img id="img" src={this.state.imagePreviewURL}></img>
+                <img id="img" src={this.state.imagePreviewURL} alt=""></img> 
             </div>
         );
     };

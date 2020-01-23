@@ -3,7 +3,7 @@ import { Line } from 'react-konva';
 
 
 function RenderConnections(props) {
-             
+    // this.props.getPrimarySecondary();   
   return (
   
     props.connections.map((key) => (

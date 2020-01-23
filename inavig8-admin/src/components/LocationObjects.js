@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import Konva from 'konva';
-import { render } from 'react-dom';
-import { Stage, Layer, Image, Rect, Text, Circle, Star } from 'react-konva';
+import React from 'react'
+//import { Component } from 'react'
+//import Konva from 'konva'
+//import { render } from 'react-dom'
+import { Stage, Layer, Star } from 'react-konva'
+//import { Image, Rect, Text, Circle } from 'react-konva'
 
-import './LocationObjects.css';
+import './LocationObjects.css'
 
-import config from '../config.json';
-import useImage from 'use-image';
+import config from '../config.json'
+//import useImage from 'use-image'
 
 import URLImage from './URLImage'
 
@@ -25,8 +27,8 @@ class LocationObjects extends React.Component {
 
 	componentDidMount() {
 
-		let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-		JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+		// let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+			// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
 		let headers = config.api.headers;
 		

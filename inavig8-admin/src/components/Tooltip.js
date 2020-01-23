@@ -3,9 +3,9 @@ import { Label, Text } from 'react-konva';
 
 
 const Tooltip = (props) => {
-    const handleRedoClick = (e) => {
-      console.log('rotate cw');
-    }
+    // const handleRedoClick = (e) => {
+    //   console.log('rotate cw');
+    // }
     return <Label
                 x={180} 
                 y={180} 
