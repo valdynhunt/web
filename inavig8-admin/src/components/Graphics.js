@@ -84,8 +84,8 @@ const CIRC_RADIUS = 7;
 const SHADOW_OFFSET = 4;
 // const FONT_SIZE = 20;
 const BACKGROUND_OFFSET = 150;
-const GENERIC_OFFSET = 4;
-const PATH_OFFSET = 7;
+const GENERIC_OFFSET = 5;
+const PATH_OFFSET = 9;
 
 const X = [25, 60, 95]; 
 const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];

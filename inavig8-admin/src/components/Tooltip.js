@@ -13,7 +13,7 @@ const Tooltip = (props) => {
                 // onMouseOut={props.onMouseOut}
             >
                 <Text  
-                    text={"Hello World!"}
+                    // text={"Hello World!"}
                     fontFamily={"Calibri"}
                     fontSize={14}
                     lineHeight={1.2}

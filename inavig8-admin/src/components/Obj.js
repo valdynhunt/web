@@ -6,8 +6,8 @@ class Object extends React.Component {
 
     state = {
         showModal: false,
-        currentIndex: -1,
-        currentObject: {}
+        currentIndex: this.props.id,
+        currentObject: this.props.details
     }
 
     // settingTheState() {
@@ -78,7 +78,7 @@ class Object extends React.Component {
     }
   
     render() {
-        this.settingTheState();
+        // this.settingTheState();
         const { object_id, short_name, image_x, image_y, location_id } = this.state.currentObject;
         console.log("Obj.js's this.props.details", this.props.details);
         console.log("Obj.js's  this.state.currentObject", this.state.currentObject);
@@ -87,7 +87,7 @@ class Object extends React.Component {
         return (
             <div>
                 <ul className="object-list">
-                    <li>{this.props.details.short_name} (id: {this.props.details.object_id})</li>
+                    <li>{short_name} (id: {object_id})</li>
                     <li>
                         <Button
                             variant="primary"

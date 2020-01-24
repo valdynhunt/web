@@ -40,7 +40,7 @@ class Data extends React.Component {
 
   render() {
 
-    //var data = this.props.objects;
+    var data = this.props.objects;
     var location = this.props.location;
     // console.log("data component: ", data);
 
@@ -51,13 +51,13 @@ class Data extends React.Component {
             <button type="button" className="btn btn-secondary" onClick={this.handleHide}>hide data</button>  
           </div>   
              
-          {Object.keys(this.props.objects).map(key => (
+          {Object.keys(data).map(key => (
               <Obj
                   key={key}
                   id={key}
-                  details={this.props.objects[key]}
-                  // currentIndex={this.state.currentIndex}
-                  // currentObject={this.state.currentObject}
+                  details={data[key]}
+                  currentIndex={this.state.currentIndex}
+                  currentObject={this.state.currentObject}
                   handleCurrentIndex={this.handleCurrentIndex}
                   location_id={location.location_id}
                   handleDeleteObject={this.handleDeleteObject}

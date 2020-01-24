@@ -317,20 +317,14 @@ class Design extends Component {
             return response.json();
         }).then(result => {
             console.log("deleted object from Design.js", result);
-            const objects = this.state.objects.filter(obj => obj.object_id !== object_id);
-            console.log("filtered objects: ", objects);
+            
             this.setState(
-                {
-                    objects
-                }
+                prevState => (
+                    { 
+                        objects: prevState.objects.filter(object => object.object_id !== object_id) 
+                    }
+                )
             );
-            // this.setState(
-            //     prevState => (
-            //         { 
-            //             objects: prevState.objects.filter(object => object.object_id !== object_id) 
-            //         }
-            //     )
-            // );
             console.log("list of objects after setting state: ", this.state.objects);
         });
 
