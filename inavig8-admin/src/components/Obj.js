@@ -6,14 +6,25 @@ class Object extends React.Component {
 
     state = {
         showModal: false,
-        currentIndex: this.props.id,
-        currentObject: this.props.details
+        currentIndex: -1,
+        currentObject: {}
     }
+
+    // settingTheState() {
+    //     console.log("Obj.js's before setting the state: ", this.state.currentObject);
+    //     this.setState(
+    //         {
+    //             currentIndex: this.props.id,
+    //             currentObject: this.props.details
+    //         }
+    //     );
+    //     console.log("Obj.js's after setting the state: ", this.state.currentObject);
+    // }
 
     onClose = () => {
         this.setState(
             {
-            showModal: false
+                showModal: false
             }
         );
     }
@@ -21,7 +32,7 @@ class Object extends React.Component {
     onOpen = () => {
         this.setState(
             {
-            showModal: true
+                showModal: true
             }
         );
     }
@@ -39,7 +50,7 @@ class Object extends React.Component {
             "y_coordinate": 0,
             "image_x": this.state.currentObject.image_x,
             "image_y": this.state.currentObject.image_y,
-          });
+        });
 
         this.props.handleUpdateObject(this.state.currentIndex, raw);
         this.onClose();
@@ -60,20 +71,23 @@ class Object extends React.Component {
         
         this.setState(
             {
-            currentObject
+                currentObject
             }
         );
 
     }
   
     render() {
-
+        this.settingTheState();
         const { object_id, short_name, image_x, image_y, location_id } = this.state.currentObject;
+        console.log("Obj.js's this.props.details", this.props.details);
+        console.log("Obj.js's  this.state.currentObject", this.state.currentObject);
+        console.log("Obj.js's  this.state.currentIndex", this.state.currentIndex);
 
         return (
             <div>
                 <ul className="object-list">
-                    <li>{short_name} (id: {object_id})</li>
+                    <li>{this.props.details.short_name} (id: {this.props.details.object_id})</li>
                     <li>
                         <Button
                             variant="primary"

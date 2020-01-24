@@ -17,6 +17,7 @@ class App extends React.Component {
     admin: JSON.parse(localStorage.getItem('admin')) || [],
     nav: 'Dashboard',
     locations: {},
+    uploadImage: {},
   }
 
   componentDidMount() {
@@ -32,16 +33,39 @@ class App extends React.Component {
     }).then(response => {
         return response.json();
     }).then(result => {
+        //const locations = (result.body.data).filter(loc => loc.active === true);
         this.setState(
             {
+                //locations
                 locations: result.body.data
             }
         );
     });
 
+    //TODO: USER_ID is hardcoded as jason campbell's account
+    this.getSubUsers(headers, 10);
+
 }
 
-  onLogin = (user) => {
+getSubUsers = (headers, user_id) => {
+    //https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/user/sub/1
+    fetch(config.api.invokeUrl + '/user/sub/' + user_id, {
+        method: "GET",
+        headers,
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+
+        this.setState(
+            {
+                //locations
+                locations: result.body.data
+            }
+        );
+    });
+}
+
+onLogin = (user) => {
 
     this.setState(
       {
@@ -60,17 +84,17 @@ class App extends React.Component {
 
   }
 
-  onNavSelection = (nav) => {
+onNavSelection = (nav) => {
 
     this.setState (
-      {
-        nav
-      }
+        {
+            nav
+        }
     );
 
-  }
+}
 
-  handleCreateLocation = (newLocation, parent_location_id) => {
+handleCreateLocation = (newLocation, parent_location_id) => {
     
       console.log("handleCreateLocation: ", newLocation);
       
@@ -176,16 +200,57 @@ class App extends React.Component {
   }
 
   handleDeleteLocation = (location_id) => {
-      // delete location
-      console.log("App.js's handleDeleteLocation: (fake) deleting location ", location_id);
+
+      console.log("App.js's handleDeleteLocation: deleting location ", location_id);
+      let headers = config.api.headers;
+      const url = config.api.invokeUrl + '/location/delete/' + location_id;
+
+      fetch(url, {
+          method: "GET",
+          headers,
+      }).then(response => {
+          return response.json();
+      }).then(result => {
+
+          const locations = this.state.locations.filter(loc => loc.location_id !== location_id);
+
+          this.setState(
+              {
+                  locations
+              }
+          );
+      });
   }
 
-  render() {
+  handleImportImage = (body) => {
 
+    console.log("App.js's handleImportImage (uploadImage): ", body);
+    const headers = config.api.headers;
+
+    fetch(config.api.invokeUrl + '/location/image', {
+        method: "POST",
+        headers,
+        body,
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+        console.log("upload succesful! result: ", result);
+        // const locations = this.state.locations;
+        // locations.map(loc => {
+        //     if (loc.location_id === location_id) {
+        //         loc.canvas_image = '';
+        //     }
+        // });
+    });
+
+}
+
+  render() {
+    console.log("App.js's render...this.state.uploadImage: ", this.state.uploadImage);
     Auth.currentSession()
     .then(data => {
       // this.setState(data);
-      console.log(data);
+      // console.log(data);
       // var s = {
       //     admin: {
       //         username: data.accessToken.payload.username,
@@ -201,7 +266,6 @@ class App extends React.Component {
     })
     .catch(err => console.log(err));
 
-    //console.log("this.state.admin.length: ", this.state.admin.length);
     if (!this.state.admin || this.state.admin.length === 0) {
       return <Login onLogin={this.onLogin} />;
     } else {
@@ -219,9 +283,11 @@ class App extends React.Component {
           <Main 
               page={this.state.nav} 
               locations={this.state.locations} 
+              subUsers={this.state.subUsers}
               handleCreateLocation={this.handleCreateLocation}
               handleUpdateLocation={this.handleUpdateLocation}
               handleDeleteLocation={this.handleDeleteLocation}
+              handleImportImage={this.handleImportImage}
           />
           <Footer />
         </div>

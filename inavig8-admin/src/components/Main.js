@@ -18,6 +18,10 @@ class Main extends React.Component {
         this.props.handleDeleteLocation(location_id);
     }
 
+    handleImportImage = (uploadImage) => {
+        this.props.handleImportImage(uploadImage);
+    }
+
     render() {
 
         if (this.props.page === 'Locations') {
@@ -27,6 +31,7 @@ class Main extends React.Component {
                     handleCreateLocation={this.handleCreateLocation}
                     handleUpdateLocation={this.handleUpdateLocation}
                     handleDeleteLocation={this.handleDeleteLocation}
+                    handleImportImage={this.handleImportImage}
                 />
             );
         } else if (this.props.page === 'Users') {

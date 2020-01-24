@@ -69,6 +69,11 @@ class Locations extends React.Component {
         this.props.handleDeleteLocation(location_id);
     }
 
+    handleImportImage = (uploadImage) => {
+        this.props.handleImportImage(uploadImage);
+    }
+
+
     render() {
 
         let $imagePreview = null;
@@ -108,6 +113,7 @@ class Locations extends React.Component {
                                 handleCreateLocation={this.handleCreateLocation}
                                 handleUpdateLocation={this.handleUpdateLocation}
                                 handleDeleteLocation={this.handleDeleteLocation}
+                                handleImportImage={this.handleImportImage}
                             />
                         ))}
                     </div>
@@ -141,13 +147,13 @@ class Locations extends React.Component {
                             <li>{this.props.locations[this.state.index].description}</li>
                         }
                     </ul>
-                    <ul className="location-detail">
+                    {/* <ul className="location-detail">
                         <li>Location Type:</li>
                         {
                             this.state.showImage &&
                             <li>{this.props.locations[this.state.index].location_type.short_name}</li>
                         }
-                    </ul>
+                    </ul> */}
                 </section>
             </main>
 

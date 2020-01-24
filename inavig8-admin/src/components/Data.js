@@ -4,12 +4,9 @@ import Obj from './Obj'
 
 
 class Data extends React.Component {
-  
-  constructor() {
-    super()
-    this.state = {
-      isActive: false
-    }
+
+  state = {
+    isActive: false,
   }
 
   handleUpdateObject = (curObj, index, raw) => {
@@ -35,18 +32,17 @@ class Data extends React.Component {
     });
   };
 
-  handleCurrentIndex = (index) => {
-    this.setState({
-      currentIndex: index
-    });
-  };
+  // handleCurrentIndex = (index) => {
+  //   this.setState({
+  //     currentIndex: index
+  //   });
+  // };
 
   render() {
 
-    var data = this.props.objects;
+    //var data = this.props.objects;
     var location = this.props.location;
     // console.log("data component: ", data);
-    
 
     if (this.state.isActive) {
       return (
@@ -55,20 +51,20 @@ class Data extends React.Component {
             <button type="button" className="btn btn-secondary" onClick={this.handleHide}>hide data</button>  
           </div>   
              
-          {Object.keys(data).map(key => (
+          {Object.keys(this.props.objects).map(key => (
               <Obj
                   key={key}
                   id={key}
-                  details={data[key]}
-                  currentIndex={this.state.currentIndex}
-                  currentObject={this.state.currentObject}
+                  details={this.props.objects[key]}
+                  // currentIndex={this.state.currentIndex}
+                  // currentObject={this.state.currentObject}
                   handleCurrentIndex={this.handleCurrentIndex}
                   location_id={location.location_id}
                   handleDeleteObject={this.handleDeleteObject}
                   handleUpdateObject={this.handleUpdateObject}
               />
           ))}         
-                
+                {console.log("objects in object keys: ", this.state)}
         </div>
       )    
     } else {      

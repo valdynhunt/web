@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import Import from './Import'
 import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image } from 'react-bootstrap/'
 import './LocationList.css';
 
@@ -10,6 +11,9 @@ class Location extends React.Component {
         showUpdateModal: false,
         currentLocation: null,
         disabled: false,
+        updateLocationDropdown: null,
+        image: null,
+        uploadImagePreview: null,
     }
 
     checkForChildren = (parent_id) => {
@@ -91,6 +95,32 @@ class Location extends React.Component {
         this.props.handleDeleteLocation(location_id);
     }
 
+    handleImportImage = (uploadImage) => {
+        this.props.handleImportImage(uploadImage);
+    }
+
+    handleImagePreview = (imagePath) => {
+        console.log("handleImagePreview: ", this.state.uploadImagePreview);
+        let read = new FileReader();
+        read.onloadend = () => {
+            this.setState(
+                {
+                    uploadImagePreview: imagePath,
+                }
+            );
+        }
+    }
+
+
+    onSelect = (e) => {
+        console.log("e: ", e);
+        this.setState(
+            {
+                updateLocationDropdown: null,
+            }
+        );
+    }
+
     onCreate = () => {
         let currentLocation = {
             "latitude": 0.0,
@@ -146,12 +176,12 @@ class Location extends React.Component {
         const { location_id, long_name, short_name, description, canvas_image } = this.props.details;
         
         this.checkForChildren(location_id);
-
+        
         let $imagePreview = null;
         if (canvas_image) {
             $imagePreview = (<Image src={canvas_image} alt={long_name} title={long_name} thumbnail />);
         } else {
-            $imagePreview = (<p>No image to preview</p>);
+            $imagePreview = (<p>No image Uploaded</p>);
         }
         
         return (
@@ -254,6 +284,20 @@ class Location extends React.Component {
                             </InputGroup.Append>
                         </InputGroup>
                     </label>
+                    <label htmlFor="location_type_id">
+                        <InputGroup className="mb-3">
+                            <DropdownButton
+                                as={InputGroup.Prepend}
+                                variant="outline-secondary"
+                                title="Location Type"
+                                id="input-group-dropdown-1"
+                            >
+                                <Dropdown.Item>Building</Dropdown.Item>
+                                <Dropdown.Item>Room</Dropdown.Item>
+                                <Dropdown.Item>Hallway</Dropdown.Item>
+                            </DropdownButton>
+                        </InputGroup>
+                    </label>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.onClose}>Close</Button>
@@ -312,6 +356,25 @@ class Location extends React.Component {
                             />
                         </InputGroup>
                     </label>
+                    <label htmlFor="location_type_id">
+                        <InputGroup className="mb-3">
+                            <DropdownButton
+                                as={InputGroup.Prepend}
+                                variant="outline-secondary"
+                                title="Location Type"
+                                id="input-group-dropdown-1"
+                            >
+                                <Dropdown.Item>Building</Dropdown.Item>
+                                <Dropdown.Item>Room</Dropdown.Item>
+                                <Dropdown.Item>Hallway</Dropdown.Item>
+                            </DropdownButton>
+                            <FormControl 
+                                aria-describedby="basic-addon1"
+                                //defaultValue={this.props.details.location_type.short_name}
+                                defaultValue="test"
+                            />
+                        </InputGroup>
+                    </label>
                     {/* <label htmlFor="location_type_short_name">
                         <InputGroup className="mb-3 wl-100">
                             <InputGroup.Prepend>
@@ -329,25 +392,15 @@ class Location extends React.Component {
                         </InputGroup>
                     </label> */}
                     <label htmlFor="canvas_image">
-                        <InputGroup className="mb-3 wl-100">
-                            <InputGroup.Prepend>
-                            <InputGroup.Text id="basic-addon1">Import Image</InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl
-                                placeholder="feature coming soon!"
-                                aria-label="canvas_image"
-                                aria-describedby="basic-addon1"
-                                name="canvas_image"
-                                defaultValue={canvas_image}
-                                readOnly="readonly"
-                            />
-                            <InputGroup.Append>
-                                <Button variant="outline-secondary">import</Button>
-                            </InputGroup.Append>
-                        </InputGroup>
+                        <Import 
+                            details={this.props.details}
+                            onImport={this.onImport}
+                            handleImportImage={this.handleImportImage}
+                            handleImagePreview={this.handleImagePreview}
+                        />
                     </label>
                     <div className="imagePreview">
-                        {$imagePreview}
+                        { $imagePreview }
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

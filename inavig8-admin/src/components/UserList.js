@@ -9,14 +9,14 @@ class UserList extends React.Component {
 
     render() {
 
-        //const user = this.props.details;
+        const { email } = this.props.subUser;
         
         return (
             <li
                 className=""
                 onMouseOver={this.onMouseHover}
             >              
-                    test{/* {user.first_name + " " + last_name}  */}
+                    { email } 
             </li>
         );
     };

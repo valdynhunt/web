@@ -1,6 +1,6 @@
-import React from 'react';
-//import UserList from './UserList'
-import './Users.css';
+import React from 'react'
+import UserList from './UserList'
+import './Users.css'
 
 class Users extends React.Component {
 
@@ -31,7 +31,18 @@ class Users extends React.Component {
                 <section className="users-list-area">
                     <h4>Users List</h4>
                     <ul className="users-list">
-                        <li>...users</li>
+                        {Object.keys(this.props.subUsers).map(key => (
+                            <UserList
+                                key={key}
+                                id={key}
+                                details={this.props.subUsers[key]} 
+                                hover={this.state.isHover}
+                                handleHover={this.handleHover}
+                                handleCreateUser={this.handleCreateUser}
+                                handleUpdateUser={this.handleUpdateUser}
+                                handleDeleteUser={this.handleDeleteUser}
+                            />
+                        ))}
                     </ul>
                 </section>
                 <section className="user-details">

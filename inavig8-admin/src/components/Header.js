@@ -56,7 +56,7 @@ class Header extends React.Component {
                                     <InputGroup.Text id="basic-addon1">First Name</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder="enter first name"
+                                        //placeholder="enter first name"
                                         aria-label="first_name"
                                         aria-describedby="basic-addon1"
                                         name="first_name"
@@ -71,10 +71,10 @@ class Header extends React.Component {
                                     <InputGroup.Text id="basic-addon1">Last Name</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder="enter last name"
+                                        //placeholder="enter last name"
                                         aria-label="last_name"
                                         aria-describedby="basic-addon1"
-                                        name="long_name"
+                                        name="last_name"
                                         defaultValue={last_name}
                                         onChange={this.onChange}
                                     />
@@ -86,12 +86,13 @@ class Header extends React.Component {
                                     <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder="enter email"
+                                        //placeholder="enter email"
                                         aria-label="email"
                                         aria-describedby="basic-addon1"
                                         name="email"
                                         defaultValue={email}
                                         onChange={this.onChange}
+                                        bsPrefix="input-field-size"
                                     />
                                 </InputGroup>
                             </label>
@@ -101,13 +102,12 @@ class Header extends React.Component {
                                     <InputGroup.Text id="basic-addon1">Role</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <FormControl
-                                        placeholder="enter role"
+                                        //placeholder="enter role"
                                         aria-label="role"
                                         aria-describedby="basic-addon1"
                                         name="role"
                                         defaultValue={role}
                                         onChange={this.onChange}
-
                                     />
                                 </InputGroup>
                             </label>
