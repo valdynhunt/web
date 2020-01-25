@@ -15,7 +15,6 @@ section.location-list ul:hover {
 section.location-list ul li {
     padding: 0.4em 0.4em 0.4em 0.8em;
     font-size: 1.25em;
-    /* margin-bottom: 0.4em; */
 }
 
 section.location-list ul li:nth-child(2) {

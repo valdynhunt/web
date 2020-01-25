@@ -35,7 +35,11 @@ class Main extends React.Component {
                 />
             );
         } else if (this.props.page === 'Users') {
-            return <Users />
+            return (
+                <Users 
+                subUsers={this.props.subUsers}      
+                />
+            );
         } else {
             return <Dashboard locations={this.props.locations} />
         }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Import from './Import'
 import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton, Image } from 'react-bootstrap/'
-import './LocationList.css';
+import './LocationList.css'
 
 class Location extends React.Component {
 
@@ -202,7 +202,7 @@ class Location extends React.Component {
                         // TODO: change this to react-boostrap Alerts!!
                         onClick={
                             (e) => { 
-                                if (window.confirm('By deleted this location, you will be deleting any objects associated with this location. Are you sure you want to delete this location (' + long_name + ')?')) this.onDeleteOpen(location_id) 
+                                if (window.confirm('By deleting this location, you will be deleting any objects associated with this location. Are you sure you want to delete this location (' + long_name + ')?')) this.onDeleteOpen(location_id) 
                             }
                         }
                         >

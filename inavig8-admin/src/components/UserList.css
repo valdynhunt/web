@@ -1,0 +1,34 @@
+section.users-list-area ul {
+    list-style: none;
+    
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    gap: 0 0.8em;
+    align-items: center;
+}
+
+section.users-list-area ul:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+section.users-list-area ul li {
+    padding: 0.4em 0.4em 0.4em 0.8em;
+    font-size: 1.25em;
+}
+
+section.users-list-area ul li:nth-child(2) {
+    justify-self: end;
+    font: 1.0em 'Libre Baskerville', serif;
+    font-weight: normal;
+}
+
+section.users-list-area ul li img {
+    width: 25px;
+    height: 25px;
+    place-self: center;
+}
+
+section.users-list-area ul.ul-location-list li:hover {
+    text-shadow: 0px 0px 0px white;
+}

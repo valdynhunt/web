@@ -6,17 +6,17 @@ class Users extends React.Component {
 
     state = {
         isHover: false,
-        showImage: false,
+        showUser: false,
         showDetails: false,
         index: -1,
-        users: [ localStorage.getItem('admin') ],
+        //users: [ localStorage.getItem('admin') ],
     }
 
     handleHover = (index) => {
         this.setState(
             {
                 isHover: true,
-                showImage: true,
+                showUser: true,
                 showDetails: true,
                 index
             }
@@ -30,12 +30,12 @@ class Users extends React.Component {
             <main className="users-container">
                 <section className="users-list-area">
                     <h4>Users List</h4>
-                    <ul className="users-list">
+                    <div>
                         {Object.keys(this.props.subUsers).map(key => (
                             <UserList
                                 key={key}
                                 id={key}
-                                details={this.props.subUsers[key]} 
+                                subUser={this.props.subUsers[key]} 
                                 hover={this.state.isHover}
                                 handleHover={this.handleHover}
                                 handleCreateUser={this.handleCreateUser}
@@ -43,26 +43,41 @@ class Users extends React.Component {
                                 handleDeleteUser={this.handleDeleteUser}
                             />
                         ))}
-                    </ul>
+                    </div>
                 </section>
+
                 <section className="user-details">
                     <h4>User Details</h4>
-                    <label htmlFor="username">
-                        Username:</label>
-                        <input type="text" id="username" name="username" value="Lorem Ipsum" readOnly="readonly" />
-                    <label htmlFor="password">
-                        Password:</label>
-                        <input type="button" className="button" value="reset" />
-                    <label htmlFor="email">
-                        Email:</label>
-                        <input type="text" id="email" name="email" value="loremipsum@dolor.com" readOnly="readonly" />
-                    <label htmlFor="first_name">
-                        First Name:</label>
-                        <input type="text" id="first_name" name="first_name" value="Lorem" readOnly="readonly" />
-                    <label htmlFor="last_name">
-                        Last Name:</label>
-                        <input type="text" id="last_name" name="last_name" value="Ipsum" readOnly="readonly" />
+                    <ul className="user-detail">
+                        <li>First Name:</li>
+                        {
+                            this.state.showUser &&
+                            <li>{this.props.subUsers[this.state.index].first_name}</li>
+                        }
+                    </ul>
+                    <ul className="user-detail">
+                        <li>Last Name:</li>
+                        {
+                            this.state.showUser &&
+                            <li>{this.props.subUsers[this.state.index].last_name}</li>
+                        }
+                    </ul>
+                    <ul className="user-detail">
+                        <li>Email:</li>
+                        {
+                            this.state.showUser &&
+                            <li>{this.props.subUsers[this.state.index].email}</li>
+                        }
+                    </ul>
+                    <ul className="user-detail">
+                        <li>Username:</li>
+                        {
+                            this.state.showUser &&
+                            <li>{this.props.subUsers[this.state.index].username}</li>
+                        }
+                    </ul>
                 </section>
+
             </main>
 
         )
