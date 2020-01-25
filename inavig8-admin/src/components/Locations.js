@@ -118,12 +118,14 @@ class Locations extends React.Component {
                         ))}
                     </div>
                 </section>
+
                 <section className="location-view">
                     <h4>Locations View</h4>
                     {
                         this.state.showImage && $imagePreview
                     }
                 </section>
+                
                 <section className="location-details">
                     <h4>Locations Details</h4>
                     <ul className="location-detail">

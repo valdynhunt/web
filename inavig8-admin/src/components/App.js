@@ -18,6 +18,7 @@ class App extends React.Component {
     nav: 'Dashboard',
     locations: {},
     uploadImage: {},
+    subUsers: {},
   }
 
   componentDidMount() {
@@ -55,11 +56,9 @@ getSubUsers = (headers, user_id) => {
     }).then(response => {
         return response.json();
     }).then(result => {
-
         this.setState(
             {
-                //locations
-                locations: result.body.data
+                subUsers: result.body.data
             }
         );
     });
@@ -246,7 +245,7 @@ handleCreateLocation = (newLocation, parent_location_id) => {
 }
 
   render() {
-    console.log("App.js's render...this.state.uploadImage: ", this.state.uploadImage);
+    
     Auth.currentSession()
     .then(data => {
       // this.setState(data);
