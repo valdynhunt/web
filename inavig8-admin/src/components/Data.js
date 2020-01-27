@@ -62,8 +62,9 @@ class Data extends React.Component {
                   key={key}
                   id={key}
                   details={data[key]}
-                  currentIndex={this.state.currentIndex}
-                  currentObject={this.state.currentObject}
+                  // currentIndex={this.state.currentIndex}
+                  // currentObject={this.state.currentObject}
+                  handleHide={this.handleHide}
                   handleCurrentIndex={this.handleCurrentIndex}
                   location_id={location.location_id}
                   handleDeleteObject={this.handleDeleteObject}

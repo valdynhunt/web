@@ -54,12 +54,12 @@ class Object extends React.Component {
 
         // this.props.handleUpdateObject(this.state.currentIndex, raw);
         this.props.handleUpdateObject(raw);
-
         this.onClose();
 
     }
 
     onDelete = (object_id) => {
+        this.props.handleHide();
         this.props.handleDeleteObject(object_id);
         this.onClose();
     }
