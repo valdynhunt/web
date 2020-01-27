@@ -9,8 +9,14 @@ class Data extends React.Component {
     isActive: false,
   }
 
-  handleUpdateObject = (curObj, index, raw) => {
-    this.props.handleUpdateObject(curObj, index, raw);
+  // handleUpdateObject = (curObj, index, raw) => {
+  //   this.props.handleUpdateObject(curObj, index, raw);
+  //   console.log("updated from Data.js! raw : ", raw);
+
+  // }
+
+  handleUpdateObject = (raw) => {
+    this.props.handleUpdateObject(raw);
     console.log("updated from Data.js! raw : ", raw);
 
   }

@@ -247,8 +247,8 @@ class Graphics extends React.Component {
       "long_name":"a",
       "description":"a",
       "object_type_id": e.target.attrs.object_type_id,
-      "x_coordinate": 1,
-      "y_coordinate": 1,
+      "x_coordinate": 0,
+      "y_coordinate": 0,
       "image_x": im_x,
       "image_y": im_y,
     });
@@ -298,7 +298,7 @@ onUpdate = () => {
         "x_coordinate": 0,
         "y_coordinate": 0,
         "image_x": this.state.currentObjectG.image_x,
-        "image_y": this.state.currentObjectG.image_y,
+        "image_y": this.state.currentObjectG.image_y
       });
       
     // console.log(JSON.parse(raw));
@@ -379,8 +379,8 @@ onAddConnection = (obj) => {
 
 getPrimarySecondary = () => {
 
-  primary = this.props.objects.find(element =>  element.short_name === "primary");
-  secondary = this.props.objects.find(element => element.short_name === "secondary");
+  primary = this.props.objects.find(element =>  element.short_name === "location_primary");
+  secondary = this.props.objects.find(element => element.short_name === "location_secondary");
 
   x_scale = (secondary.x_coordinate - primary.x_coordinate) / (secondary.image_x - primary.image_x);
   y_scale = (secondary.y_coordinate - primary.y_coordinate) / (secondary.image_y - primary.image_y);

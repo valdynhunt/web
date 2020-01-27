@@ -24,8 +24,8 @@ class Design extends Component {
             long_name: "", 
             description: "", 
             object_type: "",
-            x_coordinate: 1,
-            y_coordinate: 1,
+            x_coordinate: 0,
+            y_coordinate: 0,
             image_x: 0,
             image_y: 0
         },
@@ -36,8 +36,8 @@ class Design extends Component {
             long_name: "", 
             description: "", 
             object_type: "",
-            x_coordinate: 1,
-            y_coordinate: 1,
+            x_coordinate: 0,
+            y_coordinate: 0,
             image_x: 0,
             image_y: 0
         },
@@ -131,10 +131,18 @@ class Design extends Component {
     
                     // check if scale set
                     if((foundPrimary != null) && (foundSecondary != null)) {
-                        scaleIsSet = (foundPrimary.x_coordinate === 0) && (foundPrimary.y_coordinate === 0);
+                        console.log("hi");
+                        let x_sec = foundSecondary.x_coordinate;
+                        let y_sec = foundSecondary.y_coordinate;
+                        // scaleIsSet = (foundPrimary.x_coordinate == 0) && (foundPrimary.y_coordinate == 0);
+
+                        console.log("x_sec: ", x_sec);
+                        console.log("y_sec: ", y_sec);
+                        scaleIsSet = x_sec != 0 && y_sec != 0;
+                        console.log("scale set inside? ", scaleIsSet);
                     }
     
-                    console.log("scale set? ", scaleIsSet);
+                    console.log("scale set outside? ", scaleIsSet);
     
                     // if primary and secondary and grid not set, then show modal to input
                     if (!foundPrimary || !foundSecondary || !scaleIsSet) {
@@ -238,12 +246,12 @@ class Design extends Component {
         "long_name":this.state.primaryObject.long_name,
         "description":this.state.primaryObject.description,
         "object_type_id": this.state.primaryObject.object_type_id,
-        "x_coordinate": 1,
-        "y_coordinate": 1,
+        "x_coordinate": 0,
+        "y_coordinate": 0,
         "latitude": this.state.primaryObject.latitude_pri,
         "longitude": this.state.primaryObject.longitude_pri,
         "image_x": this.state.primaryObject.image_x,
-        "image_y": this.state.primaryObject.image_y,
+        "image_y": this.state.primaryObject.image_y
       });
       
     console.log(JSON.parse(raw));
@@ -265,8 +273,8 @@ class Design extends Component {
         "long_name":this.state.secondaryObject.long_name,
         "description":this.state.secondaryObject.description,
         "object_type_id": this.state.secondaryObject.object_type_id,
-        "x_coordinate": 1,
-        "y_coordinate": 1,
+        "x_coordinate": 0,
+        "y_coordinate": 0,
         "latitude": this.state.secondaryObject.latitude_sec,
         "longitude": this.state.secondaryObject.longitude_sec,
         "image_x": this.state.secondaryObject.image_x,
@@ -274,8 +282,8 @@ class Design extends Component {
       });
 
 
-    this.handleUpdateObject(raw);
-    this.handleSetScale();
+    this.handleUpdatePriSecObject(raw);
+    // this.handleSetScale();
     this.onClose();
 }
 
@@ -356,10 +364,48 @@ class Design extends Component {
         });
     }
 
+    handleUpdatePriSecObject = (raw) => {
+
+        console.log("handleUpdatePriSecObject in Design.js = ", raw);
+        
+        this.setState(
+            prevState => (
+                { 
+                    objects: prevState.objects.filter(object => object.object_id !== JSON.parse(raw).object_id) 
+                }
+            )
+        );
+
+        // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+		// JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+        let headers = config.api.headers;
+
+        const url3 = config.api.invokeUrl + '/object/update';
+        fetch(url3, {
+            method: "POST",
+            headers,
+            body: raw,
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+console.log("result: ", result);
+            this.setState(
+                {
+                    objects: [...this.state.objects, { ...result.body.data[0] }]
+                }
+            );
+            this.handleSetScale();
+
+            console.log("after setState - Design.js result: ", this.state.objects);
+
+        });
+    }
+
     handleUpdateObject = (raw) => {
 
-        console.log("handleUpdateObject in Design.js = ", raw);
-        
+        console.log("handleUpdateObject in Design.js = ", JSON.parse(raw));
+
         this.setState(
             prevState => (
                 { 

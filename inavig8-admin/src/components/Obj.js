@@ -49,10 +49,12 @@ class Object extends React.Component {
             "x_coordinate": 0,
             "y_coordinate": 0,
             "image_x": this.state.currentObject.image_x,
-            "image_y": this.state.currentObject.image_y,
+            "image_y": this.state.currentObject.image_y
         });
 
-        this.props.handleUpdateObject(this.state.currentIndex, raw);
+        // this.props.handleUpdateObject(this.state.currentIndex, raw);
+        this.props.handleUpdateObject(raw);
+
         this.onClose();
 
     }
