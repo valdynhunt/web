@@ -1,21 +1,22 @@
 import React from 'react'
-
+import { Navbar } from 'react-bootstrap/'
 
 
 class Footer extends React.Component {
 
-  constructor() {
-    super()
-    this.state = {}
-  }
+    render() {
 
-  render() {
-    return (
-      <div className="footer">
-        <p>Footer component is here!</p>
-      </div>
-    )
-  }
+        return (
+
+          <Navbar bg="dark" variant="dark">
+              <Navbar.Brand href="#home">
+                  iNavig8
+              </Navbar.Brand>
+          </Navbar>
+        
+        )
+    
+    }
   
 }
   
