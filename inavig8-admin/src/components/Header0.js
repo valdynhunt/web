@@ -1,41 +1,42 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
-import { Navbar, Form, FormControl, Button } from 'react-bootstrap';
-
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 
 
 class Header extends React.Component {
-  
-  constructor() {
-    super()
-    this.state = {}
-  }
 
-  render() {
+    render() {
 
+      const admin = JSON.parse(localStorage.getItem('admin'));
 
-    
-    return (
-      <div className="header">
-        <Navbar bg="light" variant="light" >
+        return (
+            <div className="header">
+              <Navbar bg="light" variant="light" >
 
-          <Navbar.Brand href="/">
-            <img
-              alt=""
-              src="/logo.png" 
-              width="50"
-              height="40"
-              className="d-inline-block align-middle"
-            />{' '}
-            iNavig8
-          </Navbar.Brand>
-
-          <Form inline>
+                  <Navbar.Brand href="/">
+                      <img
+                          alt="iNavig8 Logo"
+                          src="/logo.png" 
+                          width="50"
+                          height="40"
+                          className="d-inline-block align-middle"
+                      />{' '}
+                      iNavig8
+                  </Navbar.Brand>
+                  <Nav className="mr-auto">
+                     <Nav.Link href="/">back to Dashboard</Nav.Link>
+                  </Nav>
+          {/* <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
-          </Form>
+          </Form> */}
+                  <Navbar.Toggle />
+                  <Navbar.Collapse className="justify-content-end">
+                      <Navbar.Text>
+                          signed in as: { (admin) ? admin.username : '' }
+                      </Navbar.Text>
+                  </Navbar.Collapse>
 
-        </Navbar>
+              </Navbar>
       </div>
     )
   }

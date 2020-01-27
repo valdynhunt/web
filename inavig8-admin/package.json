@@ -10,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.7",
     "aws-amplify": "^1.2.4",
     "bootstrap": "^4.4.0",
+    "gh-pages": "^2.2.0",
     "jquery": "^1.9.1",
     "konva": "^4.0.18",
     "react": "^16.10.1",
