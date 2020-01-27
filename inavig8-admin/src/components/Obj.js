@@ -53,6 +53,7 @@ class Object extends React.Component {
         });
 
         // this.props.handleUpdateObject(this.state.currentIndex, raw);
+        this.props.handleHide();
         this.props.handleUpdateObject(raw);
         this.onClose();
 
