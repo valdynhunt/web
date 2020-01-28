@@ -43,6 +43,7 @@ header div.header-upper div.username-area {
 header div.header-upper div.username-area h6 {
     color: var(--tertiary-color);
     padding-right: 0.4em;
+    margin-bottom: 0;
 }
 
 header div.header-upper img {
