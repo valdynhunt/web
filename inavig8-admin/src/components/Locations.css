@@ -18,6 +18,10 @@ main.locations-container h4 {
     text-align: center;
 }
 
+section.location-view, section.location-details {
+    border: 2px solid var(--accent1-color);
+}
+
 
 /* Location List */
 main.locations-container section.location-list {
