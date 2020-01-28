@@ -138,7 +138,7 @@ class Design extends Component {
 
                         console.log("x_sec: ", x_sec);
                         console.log("y_sec: ", y_sec);
-                        scaleIsSet = x_sec != 0 && y_sec != 0;
+                        scaleIsSet = x_sec !== 0 && y_sec !== 0;
                         console.log("scale set inside? ", scaleIsSet);
                     }
     
