@@ -133,29 +133,45 @@ let y_scale;
 
 class Graphics extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     connections: [],
+  //     currentObjectG: {
+  //       object_id: 0,
+  //       location_id: 0, 
+  //       short_name: "", 
+  //       long_name: "", 
+  //       description: "", 
+  //       object_type: "",
+  //       x_coordinate: 0,
+  //       y_coordinate: 0,
+  //       image_x: 0,
+  //       image_y: 0
+  //     }
+
+  //   }
+
+    // this.handleDragImageStart = this.handleDragImageStart.bind(this)
+    // this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
+    // this.handleMouseMove = this.handleMouseMove.bind(this)
+    // this.handleMouseOut= this.handleMouseOut.bind(this)
+  // }
+
+  state = {
       connections: [],
       currentObjectG: {
-        object_id: 0,
-        location_id: 0, 
-        short_name: "", 
-        long_name: "", 
-        description: "", 
-        object_type: "",
-        x_coordinate: 0,
-        y_coordinate: 0,
-        image_x: 0,
-        image_y: 0
+          object_id: 0,
+          location_id: 0, 
+          short_name: "", 
+          long_name: "", 
+          description: "", 
+          object_type: "",
+          x_coordinate: 0,
+          y_coordinate: 0,
+          image_x: 0,
+          image_y: 0
       }
-
-    }
-
-    this.handleDragImageStart = this.handleDragImageStart.bind(this)
-    this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
-    this.handleMouseMove = this.handleMouseMove.bind(this)
-    this.handleMouseOut= this.handleMouseOut.bind(this)
   }
 
   componentDidMount() {

@@ -15,15 +15,18 @@ import URLImage from './URLImage'
 
 class LocationObjects extends React.Component {
 
-	constructor() {
-		super()
-		this.state = {
-			location: [],
-			objects: []
-		}
-	}	
+	// constructor() {
+	// 	super()
+	// 	this.state = {
+	// 		location: [],
+	// 		objects: []
+	// 	}
+	// }	
 	// location_id={this.props.match.params.location_id}
-
+	state = {
+		location: [],
+		objects: []
+	}
 
 	componentDidMount() {
 

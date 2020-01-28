@@ -1,5 +1,5 @@
-import React from 'react';
-import './Nav.css';
+import React from 'react'
+import './Nav.css'
 
 class Nav extends React.Component {
 
@@ -19,6 +19,15 @@ class Nav extends React.Component {
         e.preventDefault();
 
         const selection = 'Users';
+        this.props.onNavSelection(selection);
+
+    }
+
+    onOptions = (e) => {
+
+        e.preventDefault();
+
+        const selection = 'Options';
         this.props.onNavSelection(selection);
 
     }
@@ -56,6 +65,13 @@ class Nav extends React.Component {
                         <img src="./img/icons/users-icon.png" alt="Users" title="Users" />
                         <h6>Users</h6>
                         <input type="hidden" name="nav" value="Users" ref={this.navButtonRef} />
+                    </div>
+                </a>
+                <a href="/#" onClick={this.onOptions}>
+                    <div id="highlight-users" className={`nav-area ${this.props.highlight === 'Options' ? 'highlight' : 'no-highlight'}`}>
+                        <img src="./img/icons/gear-icon.png" alt="Options" title="Options" />
+                        <h6>Options</h6>
+                        <input type="hidden" name="nav" value="Options" ref={this.navButtonRef} />
                     </div>
                 </a>
             </nav>
