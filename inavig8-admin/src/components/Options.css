@@ -1,0 +1,47 @@
+main.options-container {
+    padding: 1.0em;
+    background: #FFFFFF;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8em;
+}
+
+main.options-container section {
+    border: 2px solid var(--accent1-color);
+}
+
+main.options-container section h4 {
+    background: #CCCCCC;
+    color: var(--accent1-color);
+    border-bottom: 2px solid var(--accent1-color);
+    margin-bottom: 0.6em;
+    text-align: center;
+} 
+
+main.options-container section p,
+main.options-container section ul li {
+    padding: 0 1em;
+    line-height: 1.5;
+    font-size: 1.25em;
+}
+
+main.options-container section div.btn-area {
+    padding: 1em;
+}
+
+main.options-container section.load-area {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+}
+
+main.options-container section.backup-area {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+main.options-container section.recovery.area {
+    grid-row: 2;
+    grid-column: 2;
+}

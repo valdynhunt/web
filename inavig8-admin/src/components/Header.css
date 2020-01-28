@@ -52,7 +52,7 @@ header div.header-upper img {
 
 header div.header-lower {
     grid-row: 2;
-    grid-column: 2;
+    grid-column: 1 / span 2;
 }
 
 header div.header-lower input[type=button] {

@@ -1,8 +1,9 @@
-import React from 'react';
-import './Main.css';
-import Dashboard from './Dashboard';
-import Locations from './Locations';
-import Users from './Users';
+import React from 'react'
+import './Main.css'
+import Dashboard from './Dashboard'
+import Locations from './Locations'
+import Users from './Users'
+import Options from './Options'
 
 class Main extends React.Component {
 
@@ -39,6 +40,10 @@ class Main extends React.Component {
                 <Users 
                 subUsers={this.props.subUsers}      
                 />
+            );
+        } else if (this.props.page === 'Options') {
+            return (
+                <Options/>
             );
         } else {
             return <Dashboard locations={this.props.locations} />
