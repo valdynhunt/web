@@ -14,11 +14,9 @@ function RenderConnections(props) {
             points={[key.v1.x, key.v1.y, key.v2.x, key.v2.y]}
             tension={0.5}
             stroke="red"
-            x={250}
-            y={250}
-        //   x={key.image_x}
-        //   y={key.image_y}
-          handleClick={props.handleClick}
+            x={4}
+            y={4}
+            alpha={0.75}
         />
 
     )))

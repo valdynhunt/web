@@ -181,7 +181,7 @@ class Graphics extends React.Component {
   }
 
   handleMouseMove = e => { 
-    console.log("handleMouseMove (mouse move): ", e);
+    // console.log("handleMouseMove (mouse move): ", e);
     stage = e.target.getStage();
     mousePos = stage.getPointerPosition();
 
@@ -194,7 +194,7 @@ class Graphics extends React.Component {
         y: mousePos.y
       })
 
-    console.log("mouse move - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name);
+    // console.log("mouse move - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name);
   };
 
 
@@ -498,6 +498,8 @@ scaleConnections2Canvas = () => {
 
     console.log("v1 object_id: ", key.v1.object_id),
     console.log("v2 object_id: ", key.v2.object_id),
+    console.log("primary.image_x: ", primary.image_x),
+    console.log("primary.image_x: ", primary.image_y),
     console.log("before"),
     console.log("edge v1: " + key.v1.x + " " + key.v1.y),
     console.log("edge v2: " + key.v2.x + " " + key.v2.y),
@@ -830,6 +832,12 @@ scaleConnections2Canvas = () => {
                 onMouseOut={this.handleMouseOut}
               />
 
+              <RenderConnections
+                connections={this.state.connections}
+                handleClick={this.handleClick}
+                // getPrimarySecondary={this.getPrimarySecondary}
+              />
+
               <RenderGeneric
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
@@ -1001,12 +1009,6 @@ scaleConnections2Canvas = () => {
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
                 handleClick={this.handleClick}
-              />
-
-              <RenderConnections
-                connections={this.state.connections}
-                handleClick={this.handleClick}
-                // getPrimarySecondary={this.getPrimarySecondary}
               />
 
           </Layer>
