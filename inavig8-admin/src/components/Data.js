@@ -9,12 +9,6 @@ class Data extends React.Component {
     isActive: false,
   }
 
-  // handleUpdateObject = (curObj, index, raw) => {
-  //   this.props.handleUpdateObject(curObj, index, raw);
-  //   console.log("updated from Data.js! raw : ", raw);
-
-  // }
-
   handleUpdateObject = (raw) => {
     this.props.handleUpdateObject(raw);
     console.log("updated from Data.js! raw : ", raw);
@@ -38,17 +32,11 @@ class Data extends React.Component {
     });
   };
 
-  // handleCurrentIndex = (index) => {
-  //   this.setState({
-  //     currentIndex: index
-  //   });
-  // };
 
   render() {
 
     var data = this.props.objects;
     var location = this.props.location;
-    // console.log("data component: ", data);
 
     if (this.state.isActive) {
       return (
@@ -62,8 +50,6 @@ class Data extends React.Component {
                   key={key}
                   id={key}
                   details={data[key]}
-                  // currentIndex={this.state.currentIndex}
-                  // currentObject={this.state.currentObject}
                   handleHide={this.handleHide}
                   handleCurrentIndex={this.handleCurrentIndex}
                   location_id={location.location_id}
@@ -84,7 +70,6 @@ class Data extends React.Component {
       )    
     }  
   }
-  
 }
   
 export default Data

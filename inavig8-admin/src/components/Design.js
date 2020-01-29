@@ -134,7 +134,6 @@ class Design extends Component {
                         console.log("hi");
                         let x_sec = foundSecondary.x_coordinate;
                         let y_sec = foundSecondary.y_coordinate;
-                        // scaleIsSet = (foundPrimary.x_coordinate == 0) && (foundPrimary.y_coordinate == 0);
 
                         console.log("x_sec: ", x_sec);
                         console.log("y_sec: ", y_sec);
