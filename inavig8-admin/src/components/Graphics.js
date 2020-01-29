@@ -188,7 +188,7 @@ class Graphics extends React.Component {
     stage = e.target.getStage();
     mousePos = stage.getPointerPosition();
 
-    this.setState(
+    mousePos.x > BACKGROUND_OFFSET && this.setState(
       {
         visible: true,
         object_id: e.target.attrs.object_id,
