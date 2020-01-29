@@ -387,9 +387,7 @@ onDeleteConnection = (obj_id) => {
     // we have both connections - call API
     var params = {
       "source_object_id": this.state.delete_connection_begin,
-      "source_location_id":this.state.currentObjectG.location_id, 
       "dest_object_id": obj_id,
-      "dest_location_id":this.state.currentObjectG.location_id
     };
     
     this.deleteConnection(params);
@@ -403,8 +401,7 @@ deleteConnection = (params) => {
     // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
     // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
-    // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
-    
+    // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/remove-undirected?source_object_id=54&dest_object_id=56
     let query = Object.keys(params)
                  .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
                  .join('&');
@@ -412,7 +409,7 @@ deleteConnection = (params) => {
     //     /edge/set-undirected    
     let headers = config.api.headers;
     console.log("params: ", params);
-    const url3 = config.api.invokeUrl + '/edge/delete-undirected?' + query;
+    const url3 = config.api.invokeUrl + '/edge/remove-undirected?' + query;
     fetch(url3, {
         method: "GET",
         headers
@@ -421,10 +418,12 @@ deleteConnection = (params) => {
     }).then(result => {
         console.log("result: ", result);
         this.setState(
-            {
-                // objects: [...this.state.objects, { ...result.body.data[0] }]
-            }
+          {
+            add_connection_begin: 0,
+            delete_connection_begin: 0
+          }
         );
+        this.onShowConnections();
 
     });
   
@@ -449,6 +448,7 @@ onAddConnection = (obj_id) => {
     };
 
     this.addConnection(params);
+    
 
     }
   console.log("adding connection to obj: ", obj_id);
@@ -476,10 +476,12 @@ addConnection = (params) => {
     }).then(result => {
         console.log("result: ", result);
         this.setState(
-            {
-                // objects: [...this.state.objects, { ...result.body.data[0] }]
-            }
+          {
+            add_connection_begin: 0,
+            delete_connection_begin: 0
+          }
         );
+        this.onShowConnections();
 
     });
 
