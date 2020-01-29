@@ -11,7 +11,7 @@ class Tooltip extends React.Component {
                 fontFamily={"Calibri"}
                 fontSize={14}
                 lineHeight={1.2}
-                padding={10}
+                padding={5}
                 textFill={"white"}
                 alpha={0.75}
                 fill={"green"}

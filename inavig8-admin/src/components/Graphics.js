@@ -10,6 +10,7 @@ import config from '../config.json';
 import './Graphics.css';
 
 import RenderConnections from './render/RenderConnections';
+import RenderShortestPath from './render/RenderShortestPath';
 import RenderGeneric from './render/RenderGeneric';
 import RenderPath from './render/RenderPath';
 import RenderDoor from './render/RenderDoor';
@@ -77,8 +78,8 @@ const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
 const TOOLBAR_WIDTH = 120;
 const TOOLBAR_HEIGHT = 650;
-const TOOLBAR_X = 10;
-const TOOLBAR_Y = 30;
+const TOOLBAR_X = 0;
+const TOOLBAR_Y = 20;
 const CIRC_RADIUS = 7;
 // const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
@@ -87,8 +88,8 @@ const BACKGROUND_OFFSET = 150;
 const GENERIC_OFFSET = 5;
 const PATH_OFFSET = 9;
 
-const X = [25, 60, 95]; 
-const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
+const X = [15, 50, 85]; 
+const Y = [40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640];
 
 let origX = 0;
 let origY = 0;
@@ -141,7 +142,9 @@ class Graphics extends React.Component {
       y: 0,
       add_connection_begin: 0,
       delete_connection_begin: 0,
+      shortest_path_begin: 0,
       connections: [],
+      shortest_path: [],
       currentObjectG: {
           object_id: 0,
           location_id: 0, 
@@ -185,7 +188,7 @@ class Graphics extends React.Component {
     stage = e.target.getStage();
     mousePos = stage.getPointerPosition();
 
-    this.setState(
+    mousePos.x > BACKGROUND_OFFSET && this.setState(
       {
         visible: true,
         object_id: e.target.attrs.object_id,
@@ -482,6 +485,61 @@ addConnection = (params) => {
 
 }
 
+onShortestPath = (obj_id) => {
+  // if first is empty add to first, else add to second
+  if (this.state.shortest_path_begin == 0) {
+    this.setState(
+      {
+        shortest_path_begin: obj_id
+      }
+    );
+  } else {
+  // we have both connections - call API
+  var params = {
+    "source_object_id": this.state.shortest_path_begin,
+    "source_location_id":this.state.currentObjectG.location_id, 
+    "dest_object_id": obj_id,
+    "dest_location_id":this.state.currentObjectG.location_id
+  };
+
+  this.shortestPath(params);
+
+  }
+}
+
+
+shortestPath = (params) => {
+  // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+  // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+  // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
+  
+  let query = Object.keys(params)
+               .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+               .join('&');
+
+  //     /edge/set-undirected    
+  let headers = config.api.headers;
+  console.log("params: ", params);
+  const url3 = config.api.invokeUrl + '/path/shortest-source-dest?' + query;
+  fetch(url3, {
+      method: "GET",
+      headers
+  }).then(response => {
+      return response.json();
+  }).then(result => {
+      console.log("result: ", result);
+      this.getPrimarySecondary();
+      this.setState(
+        {
+            shortest_path: result.body.data
+        }
+      );
+        this.scaleShortestPath2Canvas();
+
+  });
+
+}
 getPrimarySecondary = () => {
 
   primary = this.props.objects.find(element =>  element.short_name === "location_primary");
@@ -520,6 +578,38 @@ scaleConnections2Canvas = () => {
   );
 
   console.log("after conversion: ", this.state.connections);
+
+}
+
+scaleShortestPath2Canvas = () => {
+
+  let tempShortestPath = this.state.shortest_path;
+  tempShortestPath.map((key) => (
+
+    console.log("v1 object_id: ", key.v1.object_id),
+    console.log("v2 object_id: ", key.v2.object_id),
+    console.log("primary.image_x: ", primary.image_x),
+    console.log("primary.image_x: ", primary.image_y),
+    console.log("before"),
+    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+    console.log("edge v2: " + key.v2.x + " " + key.v2.y),
+    console.log("after"),
+    key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
+    key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
+    key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
+    key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
+    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+    console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+
+  ))
+
+  this.setState(
+    {
+        shortest_path: tempShortestPath
+    }
+  );
+
+  console.log("after conversion - shortest_path: ", this.state.shortest_path);
 
 }
 
@@ -834,7 +924,11 @@ scaleConnections2Canvas = () => {
 
               <RenderConnections
                 connections={this.state.connections}
-                handleClick={this.handleClick}
+                // getPrimarySecondary={this.getPrimarySecondary}
+              />
+
+              <RenderShortestPath
+                shortest_path={this.state.shortest_path}
                 // getPrimarySecondary={this.getPrimarySecondary}
               />
 
@@ -1142,6 +1236,10 @@ scaleConnections2Canvas = () => {
                 <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete - Begin</Dropdown.Item>
                 <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete - End</Dropdown.Item>
                 <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item> 
+              </DropdownButton>
+              <DropdownButton variant="info" id="dropdown-basic-button" title="Shortest Path">
+                <Dropdown.Item href="#" onClick={() => this.onShortestPath(this.state.currentObjectG.object_id)}>Path - Begin</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onShortestPath(this.state.currentObjectG.object_id)}>Path - End</Dropdown.Item>
               </DropdownButton>
 
           </Modal.Body>
