@@ -159,6 +159,11 @@ class Graphics extends React.Component {
   // }
 
   state = {
+      visible: false,
+      object_id: 0,
+      short_name: "",
+      x: 0,
+      y: 0,
       connections: [],
       currentObjectG: {
           object_id: 0,
@@ -203,6 +208,20 @@ class Graphics extends React.Component {
     stage = e.target.getStage();
     mousePos = stage.getPointerPosition();
 
+    this.setState(
+      {
+        visible: true,
+        object_id: e.target.attrs.object_id,
+        short_name: e.target.attrs.short_name,
+        x: mousePos.x,
+        y: mousePos.y
+      })
+
+    // this.setState(
+    //   {
+    //     object_id: e.target.attrs.object_id
+    //   })
+
     // tooltip.position({
     //   x: mousePos.x + 5,
     //   y: mousePos.y + 5
@@ -221,6 +240,14 @@ class Graphics extends React.Component {
 
 
   handleMouseOut = e => { 
+    this.setState(
+      {
+        visible: false,
+        object_id: 0,
+        short_name: "",
+        x: mousePos.x,
+        y: mousePos.y
+      })
     // tooltip.hide();
     e.target.getStage().draw();
     console.log("mouse out - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name)
@@ -922,7 +949,13 @@ scaleConnections2Canvas = () => {
 
           </Layer>
           <Layer>
-            <Tooltip                 
+            <Tooltip 
+              visible={this.state.visible}  
+              object_id={this.state.object_id} 
+              short_name={this.state.short_name}
+              x={this.state.x}
+              y={this.state.y}  
+              background_offset={BACKGROUND_OFFSET}         
               />
           </Layer>
         </Stage>
