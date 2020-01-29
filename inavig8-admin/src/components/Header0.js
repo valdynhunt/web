@@ -6,16 +6,17 @@ class Header extends React.Component {
 
     render() {
 
-      const admin = JSON.parse(localStorage.getItem('admin'));
+        const admin = JSON.parse(localStorage.getItem('admin'));
 
         return (
-            <div className="header">
-              <Navbar bg="light" variant="light" >
 
+            <div className="header0">
+
+              <Navbar bg="primary" variant="dark" >
                   <Navbar.Brand href="/">
                       <img
                           alt="iNavig8 Logo"
-                          src="/logo.png" 
+                          src="/img/iNavig8_Logo-bootstrap.png" 
                           width="50"
                           height="40"
                           className="d-inline-block align-middle"
@@ -35,11 +36,11 @@ class Header extends React.Component {
                           signed in as: { (admin) ? admin.username : '' }
                       </Navbar.Text>
                   </Navbar.Collapse>
+                </Navbar>
 
-              </Navbar>
-      </div>
-    )
-  }
+            </div>
+        )
+    }
 }
   
 
