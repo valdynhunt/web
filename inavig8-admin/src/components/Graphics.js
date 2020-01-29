@@ -133,37 +133,14 @@ let y_scale;
 
 class Graphics extends React.Component {
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     connections: [],
-  //     currentObjectG: {
-  //       object_id: 0,
-  //       location_id: 0, 
-  //       short_name: "", 
-  //       long_name: "", 
-  //       description: "", 
-  //       object_type: "",
-  //       x_coordinate: 0,
-  //       y_coordinate: 0,
-  //       image_x: 0,
-  //       image_y: 0
-  //     }
-
-  //   }
-
-    // this.handleDragImageStart = this.handleDragImageStart.bind(this)
-    // this.handleDragImageEnd = this.handleDragImageEnd.bind(this)
-    // this.handleMouseMove = this.handleMouseMove.bind(this)
-    // this.handleMouseOut= this.handleMouseOut.bind(this)
-  // }
-
   state = {
       visible: false,
       object_id: 0,
       short_name: "",
       x: 0,
       y: 0,
+      add_connection_begin: 0,
+      delete_connection_begin: 0,
       connections: [],
       currentObjectG: {
           object_id: 0,
@@ -217,24 +194,6 @@ class Graphics extends React.Component {
         y: mousePos.y
       })
 
-    // this.setState(
-    //   {
-    //     object_id: e.target.attrs.object_id
-    //   })
-
-    // tooltip.position({
-    //   x: mousePos.x + 5,
-    //   y: mousePos.y + 5
-    // });
-
-    // tooltip.text(e.target.attrs.text);
-    // tooltip.show();
-
-
-    // console.log("get stage ", e.target.getStage);
-    // e.target.getStage().batchdraw();
-    // console.log("tiptext: ", tooltip.text);
-    // tooltipLayer.batchDraw();
     console.log("mouse move - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name);
   };
 
@@ -248,7 +207,7 @@ class Graphics extends React.Component {
         x: mousePos.x,
         y: mousePos.y
       })
-    // tooltip.hide();
+
     e.target.getStage().draw();
     console.log("mouse out - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name)
 
@@ -412,12 +371,115 @@ onShowConnections = (e) => {
   });
 }
 
-onDeleteConnection = (obj) => {
-  console.log("deleting connection from obj: ", obj);
+onDeleteConnection = (obj_id) => {
+  // if first is empty add to first, else add to second
+  if (this.state.delete_connection_begin == 0) {
+    this.setState(
+      {
+        add_connection_begin: 0,
+        delete_connection_begin: obj_id
+      }
+    );
+  } else {
+    // we have both connections - call API
+    var params = {
+      "source_object_id": this.state.delete_connection_begin,
+      "source_location_id":this.state.currentObjectG.location_id, 
+      "dest_object_id": obj_id,
+      "dest_location_id":this.state.currentObjectG.location_id
+    };
+    
+    this.deleteConnection(params);
+
+  }
+
+  console.log("deleting connection from obj: ", obj_id);
 }
 
-onAddConnection = (obj) => {
-  console.log("adding connection to obj: ", obj);
+deleteConnection = (params) => {
+    // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+    // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+    // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
+    
+    let query = Object.keys(params)
+                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+                 .join('&');
+
+    //     /edge/set-undirected    
+    let headers = config.api.headers;
+    console.log("params: ", params);
+    const url3 = config.api.invokeUrl + '/edge/delete-undirected?' + query;
+    fetch(url3, {
+        method: "GET",
+        headers
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+        console.log("result: ", result);
+        this.setState(
+            {
+                // objects: [...this.state.objects, { ...result.body.data[0] }]
+            }
+        );
+
+    });
+  
+}
+
+onAddConnection = (obj_id) => {
+    // if first is empty add to first, else add to second
+    if (this.state.add_connection_begin == 0) {
+      this.setState(
+        {
+          add_connection_begin: obj_id,
+          delete_connection_begin: 0
+        }
+      );
+    } else {
+    // we have both connections - call API
+    var params = {
+      "source_object_id": this.state.add_connection_begin,
+      "source_location_id":this.state.currentObjectG.location_id, 
+      "dest_object_id": obj_id,
+      "dest_location_id":this.state.currentObjectG.location_id
+    };
+
+    this.addConnection(params);
+
+    }
+  console.log("adding connection to obj: ", obj_id);
+}
+
+addConnection = (params) => {
+    // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+    // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+    // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
+    
+    let query = Object.keys(params)
+                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+                 .join('&');
+
+    //     /edge/set-undirected    
+    let headers = config.api.headers;
+    console.log("params: ", params);
+    const url3 = config.api.invokeUrl + '/edge/set-undirected?' + query;
+    fetch(url3, {
+        method: "GET",
+        headers
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+        console.log("result: ", result);
+        this.setState(
+            {
+                // objects: [...this.state.objects, { ...result.body.data[0] }]
+            }
+        );
+
+    });
+
 }
 
 getPrimarySecondary = () => {
@@ -1073,9 +1135,11 @@ scaleConnections2Canvas = () => {
               <hr />
               <Button variant="danger" onClick={() => this.onDelete(this.state.currentObjectG.object_id)}>Delete</Button>
               <DropdownButton variant="info" id="dropdown-basic-button" title="Connections">
-                <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add connection</Dropdown.Item>
-                <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete connection</Dropdown.Item>
-                <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add - Begin</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onAddConnection(this.state.currentObjectG.object_id)}>Add - End</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete - Begin</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onDeleteConnection(this.state.currentObjectG.object_id)}>Delete - End</Dropdown.Item>
+                <Dropdown.Item href="#" onClick={() => this.onShowConnections()}>Show all connections</Dropdown.Item> 
               </DropdownButton>
 
           </Modal.Body>
