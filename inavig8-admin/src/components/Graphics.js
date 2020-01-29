@@ -77,8 +77,8 @@ const STAGE_WIDTH = window.innerWidth;
 const STAGE_HEIGHT = window.innerHeight;
 const TOOLBAR_WIDTH = 120;
 const TOOLBAR_HEIGHT = 650;
-const TOOLBAR_X = 10;
-const TOOLBAR_Y = 30;
+const TOOLBAR_X = 0;
+const TOOLBAR_Y = 20;
 const CIRC_RADIUS = 7;
 // const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
@@ -87,8 +87,8 @@ const BACKGROUND_OFFSET = 150;
 const GENERIC_OFFSET = 5;
 const PATH_OFFSET = 9;
 
-const X = [25, 60, 95]; 
-const Y = [50, 90, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650];
+const X = [15, 50, 85]; 
+const Y = [40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640];
 
 let origX = 0;
 let origY = 0;
