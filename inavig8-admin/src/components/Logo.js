@@ -9,7 +9,7 @@ class Logo extends React.Component {
 
             <section className="logo-area">
                 <h2>iNavig8</h2>
-                <img src="./img/iNavig8-logo.png" alt="iNavig8 Logo" title="iNavig8 Logo" />
+                <img src="./img/iNavig8_Logo.png" alt="iNavig8 Logo" title="iNavig8 Logo" />
             </section>
 
         );
