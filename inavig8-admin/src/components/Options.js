@@ -6,8 +6,6 @@ class Options extends React.Component {
 
     render(){
 
-        const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit aperiam iusto aspernatur animi recusandae explicabo! Nihil cumque doloribus quos ullam soluta optio. Adipisci illum corporis ab, inventore eligendi doloremque esse?"
-
         return(
             <main className="options-container">
 
