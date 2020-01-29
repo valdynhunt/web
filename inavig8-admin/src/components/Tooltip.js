@@ -5,12 +5,7 @@ import { Label, Text } from 'react-konva';
 class Tooltip extends React.Component {
     render() {
         return (
-            <Label
-                x={180} 
-                y={180} 
-                // onMouseMove={props.onMouseMove}
-                // onMouseOut={props.onMouseOut}
-            >
+            <Label>
             <Text  
                 text={this.props.object_id + " " + this.props.short_name}
                 fontFamily={"Calibri"}
@@ -21,8 +16,8 @@ class Tooltip extends React.Component {
                 alpha={0.75}
                 fill={"green"}
                 visible={this.props.visible}
-                x={this.props.x - this.props.background_offset - 20} 
-                y={this.props.y - this.props.background_offset - 20} 
+                x={this.props.x - this.props.background_offset + 35} 
+                y={this.props.y - 30} 
             />
             </ Label>
         )    
