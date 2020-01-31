@@ -44,7 +44,7 @@ class Import extends React.Component {
 
         //TODO: ImagePreview: needs to show on LocationList.js
         //this.props.handleImagePreview(this.state.imagePreviewURL);
-
+        
     }
 
     onSubmit = () => {
@@ -52,9 +52,13 @@ class Import extends React.Component {
         if (this.state.uploadImage) {
             //console.log("import.js: uploadImage: ", this.state.uploadImage);
             this.props.handleImportImage(this.state.uploadImage);
+
+            //fetch and post the image to S3
+
         } else {
             //TODO: disable upload button until an image is loaded?
             //do something...alert?
+            alert("Image Failed To Upload. Try Again.");
         }
         
     }
