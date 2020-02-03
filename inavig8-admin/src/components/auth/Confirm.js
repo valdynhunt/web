@@ -13,8 +13,8 @@ class Confirm extends Component {
                     <section className="login-box1">
                         <h2>register with iNavig8</h2>
                         <img id="lg-login-icon" src="./img/icons/Login-Icon.png" alt="Login Icon" title="Login Icon"/>
-                        Check your email 
-                        <a href = "/">homepage</a>
+                        Check your email. <br />
+                        <a href = "/">login</a>
                     </section>
 
                     <section className="title-box1">
