@@ -4,6 +4,7 @@ import Login from './auth/Login';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
 import Register from './auth/Register';
+import Confirm from './auth/Confirm';
 import Design from './Design'
 import LocationObjects from './LocationObjects'
 import App from './App';
@@ -21,6 +22,7 @@ const Router = () => (
             <Route path="/design" component={Design} />
             <Route path="/location-objects/:location_id" component={LocationObjects} />
             <Route path="/export" component={Export} />
+            <Route path="/confirm" component={Confirm} />
             <Route component={Login} />
         </Switch>
     </BrowserRouter>

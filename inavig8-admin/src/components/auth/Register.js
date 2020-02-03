@@ -78,7 +78,7 @@ class Register extends Component {//
           name: "first last"
         }
       });
-      this.props.history.push("/");
+      this.props.history.push("/confirm");
       console.log(signUpResponse);
     } catch (error) {
       let err = null;
@@ -154,7 +154,7 @@ class Register extends Component {//
                                 />
                             </div>
                             <p><a href="/login">I know my login</a></p>
-                            <input type="submit" className="button" value="sign in" />
+                            <input type="submit" className="button" value="register" />
                         </form>
                     </section>
 

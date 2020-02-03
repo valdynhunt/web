@@ -25,7 +25,9 @@ class App extends React.Component {
 
     // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
     //     JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
-
+    var user = localStorage.getItem('CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el.LastAuthUser');
+    config.api.headers.Authorization = localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + user + ".idToken");
+      
     let headers = config.api.headers;
     
     fetch(config.api.invokeUrl + '/locations', {
@@ -78,7 +80,10 @@ onLogin = (user) => {
         },
       }
       ,() => {
-      localStorage.setItem('admin', JSON.stringify(this.state.admin))
+      localStorage.setItem('admin', JSON.stringify(this.state.admin));
+      var user = localStorage.getItem('CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el.LastAuthUser');
+      config.api.headers.Authorization = localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + user + ".idToken");
+    
     });
 
   }
