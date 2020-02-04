@@ -5,7 +5,7 @@ class Footer extends React.Component {
 
 	logout() {
 		
-	localStorage.removeItem('admin');
+	localStorage.clear();
 	 window.location.reload();
 
 	}
