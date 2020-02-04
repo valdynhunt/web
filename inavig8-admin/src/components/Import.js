@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, InputGroup } from 'react-bootstrap/'
+import { Button, InputGroup, Dropdown} from 'react-bootstrap/'
 import './Import.css'
 
 class Import extends React.Component {
@@ -42,21 +42,25 @@ class Import extends React.Component {
 
         read.readAsDataURL(image);
 
+        //alert("This will cause the location objects to be deleted");
+        
         //TODO: ImagePreview: needs to show on LocationList.js
         //this.props.handleImagePreview(this.state.imagePreviewURL);
-
+        
     }
 
     onSubmit = () => {
-
         if (this.state.uploadImage) {
             //console.log("import.js: uploadImage: ", this.state.uploadImage);
             this.props.handleImportImage(this.state.uploadImage);
+            
+            //warning(deleting all objects)
+
         } else {
             //TODO: disable upload button until an image is loaded?
             //do something...alert?
+            alert("Image Failed To Upload. Try Again.");
         }
-        
     }
     
     render() {
@@ -66,14 +70,24 @@ class Import extends React.Component {
                 <InputGroup className="mb-3 wl-100">
                     <input className="btnImport btnImport-secondary" type="file" accept="image/*" onChange={this.onImport}/>
                     <InputGroup.Append>
-                        <Button 
-                            variant="outline-secondary" 
-                            type="submit"
-                            onClick={this.onSubmit}
-                            disabled={ (this.state.uploadImage) ? false : true }
-                        >
-                            upload
-                        </Button>
+                    <Dropdown>
+                            <Dropdown.Toggle variant="success">
+                                Upload
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item disabled={true}>By clicking upload, you will delete all current objects in this location</Dropdown.Item> 
+                                <Dropdown.Item href="#/action-1">
+                                    <Button 
+                                        variant="outline-secondary" 
+                                        type="submit"
+                                        onClick={this.onSubmit}
+                                        disabled={ (this.state.uploadImage) ? false : true }
+                                    >
+                                        upload
+                                    </Button>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </InputGroup.Append>
                 </InputGroup>
             </div>
@@ -82,62 +96,3 @@ class Import extends React.Component {
 }
 
 export default Import;
-
-
-// class Import extends React.Component {
-//     constructor(property){
-//         super(property);
-
-//         this.state = {
-//             file: '',
-//             imagePreviewURL: ''
-//         }
-
-//         this.onImport = this.onImport.bind(this);
-//     }
-//     onImport(e){
-//         e.preventDefault();
-
-//         let read = new FileReader();
-//         let file = e.target.files[0];
-//         console.log("file: ", file);
-//         read.onloadend = () => {
-//             this.setState({
-//                 file: file,
-//                 imagePreviewURL: read.result
-//             });
-//         }
-
-//         console.log("read: ", read);
-
-//         let location_image_data = read.readAsDataURL(file);//Returns the complete data of blob as a Data URL, essentially a Base64-encoded string of the file data.
-//         console.log("location_image_data: ", location_image_data);
-//         let body = {
-//             location_image_name: file.name,
-//             location_image_data  
-//        }
-
-//         // fetch(config.api.invokeUrl + '/location/image', {
-//         //     method: "POST",
-//         //     body,
-            
-//         // }).then(response => {
-//         //     return response.json();
-//         // });
-
-//     }
-    
-// // base 64 binary
-//     render() {
-
-//         return (
-//             <div className="ImportBTN">
-//                 <input name="btn" type="file" onChange={this.onImport}></input>
-//                 <br></br>
-//                 <img id="img" src={this.state.imagePreviewURL} alt=""></img> 
-//             </div>
-//         );
-//     };
-// }
-
-// export default Import;
