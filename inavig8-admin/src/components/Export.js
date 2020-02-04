@@ -3,6 +3,10 @@ import Button from 'react-bootstrap/Button';
 import config from '../config.json';
 
 class Export extends React.Component{
+    //This class is used for testing export features before being
+    //implemented in the Options class. It will be deleted when Export
+    //is completed
+
     onExport = () => {
         this.getLocation();
         this.getObject();
@@ -14,6 +18,7 @@ class Export extends React.Component{
             method: "GET",
             headers,
         }).then(response => {
+            
             return response.json();
         }).then(result => {
             
@@ -36,15 +41,24 @@ class Export extends React.Component{
                     canvas_image: loc[i].canvas_image,
                 });
             }
-            console.log("location contents: ", obj.contents);
+            //console.log("location contents: ", obj.contents);
 
-            var json = JSON.stringify(obj);
+            var jsonLoc = JSON.stringify(obj);
 
-            var file = new File([json], "JSONLocations.json", {
+            var file = new File([jsonLoc], "JSONLocations.json", {
                 type: 'text/plain',
             });
 
             //console.log(file);
+
+            let converter = require('json-2-csv');
+            
+            let json2csvCallback = function (err, csv) {
+                if (err) throw err;
+                //console.log("Loc CSV: ", csv);
+            };
+            
+            converter.json2csv(obj, json2csvCallback);
         });
     }
     getObject(){
@@ -71,21 +85,36 @@ class Export extends React.Component{
                     long_name: locs[i].long_name,
                 });
             }
-            console.log("object contents: ", objs.contents);
+            //console.log("object contents: ", objs.contents);
 
-            var json = JSON.stringify(objs);
+            var jsonObj = JSON.stringify(objs);
 
-            var file = new File([json], "JSONObjects.json", {
+            var file = new File([jsonObj], "JSONObjects.json", {
                 type: 'text/plain',
             });
 
             //console.log(file);
+
+            let converter = require('json-2-csv');
+            
+            let json2csvCallback = function (err, csv) {
+                if (err) throw err;
+                //console.log("Obj CSV: ", csv);
+            };
+            
+            converter.json2csv(objs, json2csvCallback);
         });
     }
 
     render() { 
         return (
-            <Button onClick={this.onExport}> Export </Button>
+            <div>
+                {/* <Button onClick={this.getLocation}> Location </Button>
+                <br /> */}
+                {/* <Button onClick={this.getObject}> Object </Button>
+                <br /> */}
+                <Button onClick={this.onExport}> Export </Button>
+            </div>
         )
     }
 }

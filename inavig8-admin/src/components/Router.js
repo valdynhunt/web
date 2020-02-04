@@ -20,7 +20,7 @@ const Router = () => (
             <Route path="/design/:location_id" component={Design} />
             <Route path="/design" component={Design} />
             <Route path="/location-objects/:location_id" component={LocationObjects} />
-            {/* <Route path="/export" component={Export} /> */}
+            <Route path="/export" component={Export} />
             <Route component={Login} />
         </Switch>
     </BrowserRouter>

@@ -49,6 +49,15 @@ class Options extends React.Component {
             });
 
             //console.log(file);
+
+            let converter = require('json-2-csv');
+            
+            let json2csvCallback = function (err, csv) {
+                if (err) throw err;
+                //console.log("Loc CSV: ", csv);
+            };
+            
+            converter.json2csv(obj, json2csvCallback);
         });
     }
     getObject(){
@@ -84,6 +93,15 @@ class Options extends React.Component {
             });
 
             //console.log(file);
+
+            let converter = require('json-2-csv');
+            
+            let json2csvCallback = function (err, csv) {
+                if (err) throw err;
+                //console.log("Obj CSV: ", csv);
+            };
+            
+            converter.json2csv(objs, json2csvCallback);
         });
     }
 
