@@ -17,8 +17,7 @@ const Undo = (props) => {
             y={props.y} 
             object_id={props.object_id}
             scaleX={0.04} 
-            scaleY={0.04} 
-            draggable              
+            scaleY={0.04}             
             onDragStart={props.handleDragImageStart}
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
