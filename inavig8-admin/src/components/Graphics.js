@@ -74,8 +74,7 @@ import Minus from './toolbar/Minus';
 import HandPaper from './toolbar/HandPaper';
 import DrawPolygon from './toolbar/DrawPolygon';
 import Tooltip from './Tooltip';
-const STAGE_WIDTH = window.innerWidth;
-const STAGE_HEIGHT = window.innerHeight;
+
 const TOOLBAR_WIDTH = 120;
 const TOOLBAR_HEIGHT = 650;
 const TOOLBAR_X = 0;
@@ -91,6 +90,10 @@ const PATH_OFFSET = 9;
 const X = [15, 50, 85]; 
 const Y = [40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640];
 
+
+let stage_width = window.innerWidth;
+let stage_height = window.innerHeight;
+
 let origX = 0;
 let origY = 0;
 
@@ -103,34 +106,17 @@ let secondary;
 let x_scale;
 let y_scale;
 
-// var tooltipLayer = new Konva.Layer();
-// var tooltip = new Konva.Text({
-//   text: 'hi',
-//   fontFamily: 'Calibri',
-//   fontSize: 18,
-//   padding: 5,
-//   textFill: 'white',
-//   fill: 'black',
-//   alpha: 0.75,
-//   // visible: false
-//   visible: true
-// })
+// if (!lastDist) {
+//   lastDist = dist;
+// }
 
-// stage = e.target.getStage();
-// tooltipLayer.add(tooltip);
-// stage.add(tooltipLayer);
+// var scale = (stage.scaleX() * dist) / lastDist;
 
-// let newText = (t, pointerPosition) => ({
+// stage.scaleX(scale);
+// stage.scaleY(scale);
+// stage.batchDraw();
+// lastDist = dist;
 
-//   x: pointerPosition.x - t.textWidth / 2,
-//   y: pointerPosition.y - t.textHeight / 2,
-//   fontFamily: t.attrs.fontFamily,
-//   fontSize: t.attrs.fontSize,
-//   text: t.attrs.text,
-//   fill: t.attrs.fill
-//   // name: increment name + 1?
-//   // key: target.ref + 1
-// });
 
 class Graphics extends React.Component {
 
@@ -138,6 +124,7 @@ class Graphics extends React.Component {
       visible: false,
       object_id: 0,
       short_name: "",
+      stage_scale: 1,
       x: 0,
       y: 0,
       add_connection_begin: 0,
@@ -161,6 +148,38 @@ class Graphics extends React.Component {
 
   componentDidMount() {
     console.log("graphics mount");    
+  }
+
+  onZoomIn = e => {
+    console.log("zoom in.");
+
+    var newScale = this.state.stage_scale + 0.05;
+    console.log("zoom in - newScale right before setState: ", newScale);
+    console.log(5);
+    this.setState(
+      prevState => (
+          { 
+              stage_scale: newScale
+          }
+      )
+    );
+    e.target.getStage().draw();
+  }
+
+  onZoomOut = e => {
+    console.log("zoom out.");
+    
+    var newScale = this.state.stage_scale - 0.05;
+    console.log("zoom out - newScale right before setState: ", newScale);
+    this.setState(
+      prevState => (
+          { 
+              stage_scale: newScale
+          }
+      )
+    );
+    e.target.getStage().draw();
+
   }
 
 
@@ -457,7 +476,8 @@ onAddConnection = (obj_id) => {
 addConnection = (params) => {
     // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
     // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
-
+    // use config.api.invokeUrlAuth for the url
+    
     // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
     
     let query = Object.keys(params)
@@ -627,11 +647,22 @@ scaleShortestPath2Canvas = () => {
     return (
       <div className="graphics">
         
-        <Stage width={STAGE_WIDTH} height={STAGE_HEIGHT} >
+        <Stage 
+          width={stage_width} 
+          height={stage_height} 
+          scaleX={this.state.stage_scale}
+          scaleY={this.state.stage_scale}
+          draggable
+        >
           <Layer name="background">
 
               {this.props.location.map((key) => (
-                  <MapBackground key={key.location_id} img={key.canvas_image} background_offset={BACKGROUND_OFFSET}/>
+                  <MapBackground 
+                    key={key.location_id} 
+                    img={key.canvas_image} 
+                    scaleX={this.state.stage_scale}
+                    scaleY={this.state.stage_scale}
+                    background_offset={BACKGROUND_OFFSET}/>
               ))}
 
           </Layer>
@@ -910,13 +941,15 @@ scaleShortestPath2Canvas = () => {
               />   
 
               <Plus x={X[0]} y={Y[15]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
+                handleClick = {this.onZoomIn}
+                // onMouseMove={this.handleMouseMove}
+                // onMouseOut={this.handleMouseOut}
               />
 
               <Minus x={X[1]} y={Y[15] + 6}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
+                handleClick = {this.onZoomOut}
+                // onMouseMove={this.handleMouseMove}
+                // onMouseOut={this.handleMouseOut}
               />
 
               <HandPaper x={X[2]} y={Y[15]}

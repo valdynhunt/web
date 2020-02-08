@@ -9,9 +9,7 @@ const MINUS_SRC = BASE_URL.concat(NAME);
 
 const Minus = (props) => {
     const [image] = useImage(MINUS_SRC);
-    const handleMinusClick = (e) => {
-      console.log('zoom out ', e.target);
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Minus = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handleMinusClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 

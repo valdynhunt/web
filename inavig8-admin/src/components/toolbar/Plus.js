@@ -9,9 +9,7 @@ const PLUS_SRC = BASE_URL.concat(NAME);
 
 const Plus = (props) => {
     const [image] = useImage(PLUS_SRC);
-    const handlePlusClick = (e) => {
-      console.log('zoom in ', e.target);
-    }
+
     return <Image 
             x={props.x} 
             y={props.y} 
@@ -23,7 +21,7 @@ const Plus = (props) => {
             onDragEnd={props.handleDragImageEnd}
             onMouseMove={props.onMouseMove}
             onMouseOut={props.onMouseOut}
-            onClick={handlePlusClick}
+            onClick={props.handleClick}
           image={image} />;
   };
 
