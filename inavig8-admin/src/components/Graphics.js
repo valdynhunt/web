@@ -650,8 +650,10 @@ scaleShortestPath2Canvas = () => {
         <Stage 
           width={stage_width} 
           height={stage_height} 
-          scaleX={this.state.stage_scale}
-          scaleY={this.state.stage_scale}
+          // scaleX={this.state.stage_scale}
+          // scaleY={this.state.stage_scale}
+          scaleX={1}
+          scaleY={1}
           draggable
         >
           <Layer name="background">
@@ -660,8 +662,7 @@ scaleShortestPath2Canvas = () => {
                   <MapBackground 
                     key={key.location_id} 
                     img={key.canvas_image} 
-                    scaleX={this.state.stage_scale}
-                    scaleY={this.state.stage_scale}
+                    stage_scale={this.state.stage_scale}
                     background_offset={BACKGROUND_OFFSET}/>
               ))}
 
@@ -669,10 +670,22 @@ scaleShortestPath2Canvas = () => {
           <Layer name="main">
           {/* <ModalSetGrid objects ={this.props.objects} />  */}
               <Rect
-                x={TOOLBAR_X}
-                y={TOOLBAR_Y}
-                width={TOOLBAR_WIDTH}
-                height={TOOLBAR_HEIGHT}
+                // x={TOOLBAR_X}
+                // y={TOOLBAR_Y}
+                // width={TOOLBAR_WIDTH}
+                // height={TOOLBAR_HEIGHT}  
+// const TOOLBAR_WIDTH = 120;
+// const TOOLBAR_HEIGHT = 650;
+// const TOOLBAR_X = 0;
+// const TOOLBAR_Y = 20;  
+// let stage_width = window.innerWidth;
+// let stage_height = window.innerHeight;         
+                x={0}
+                y={0}
+                // width={window.innerWidth/10}
+                // height={window.innerHeight*5/6}
+                width={120}
+                height={680}
                 fill="white"
                 stroke="lightgrey"
               />
