@@ -74,8 +74,7 @@ import Minus from './toolbar/Minus';
 import HandPaper from './toolbar/HandPaper';
 import DrawPolygon from './toolbar/DrawPolygon';
 import Tooltip from './Tooltip';
-const STAGE_WIDTH = window.innerWidth;
-const STAGE_HEIGHT = window.innerHeight;
+
 const TOOLBAR_WIDTH = 120;
 const TOOLBAR_HEIGHT = 650;
 const TOOLBAR_X = 0;
@@ -91,6 +90,10 @@ const PATH_OFFSET = 9;
 const X = [15, 50, 85]; 
 const Y = [40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640];
 
+
+let stage_width = window.innerWidth;
+let stage_height = window.innerHeight;
+
 let origX = 0;
 let origY = 0;
 
@@ -103,34 +106,17 @@ let secondary;
 let x_scale;
 let y_scale;
 
-// var tooltipLayer = new Konva.Layer();
-// var tooltip = new Konva.Text({
-//   text: 'hi',
-//   fontFamily: 'Calibri',
-//   fontSize: 18,
-//   padding: 5,
-//   textFill: 'white',
-//   fill: 'black',
-//   alpha: 0.75,
-//   // visible: false
-//   visible: true
-// })
+// if (!lastDist) {
+//   lastDist = dist;
+// }
 
-// stage = e.target.getStage();
-// tooltipLayer.add(tooltip);
-// stage.add(tooltipLayer);
+// var scale = (stage.scaleX() * dist) / lastDist;
 
-// let newText = (t, pointerPosition) => ({
+// stage.scaleX(scale);
+// stage.scaleY(scale);
+// stage.batchDraw();
+// lastDist = dist;
 
-//   x: pointerPosition.x - t.textWidth / 2,
-//   y: pointerPosition.y - t.textHeight / 2,
-//   fontFamily: t.attrs.fontFamily,
-//   fontSize: t.attrs.fontSize,
-//   text: t.attrs.text,
-//   fill: t.attrs.fill
-//   // name: increment name + 1?
-//   // key: target.ref + 1
-// });
 
 class Graphics extends React.Component {
 
@@ -138,6 +124,7 @@ class Graphics extends React.Component {
       visible: false,
       object_id: 0,
       short_name: "",
+      stage_scale: 1,
       x: 0,
       y: 0,
       add_connection_begin: 0,
@@ -161,6 +148,38 @@ class Graphics extends React.Component {
 
   componentDidMount() {
     console.log("graphics mount");    
+  }
+
+  onZoomIn = e => {
+    console.log("zoom in.");
+
+    var newScale = this.state.stage_scale + 0.05;
+    console.log("zoom in - newScale right before setState: ", newScale);
+    console.log(5);
+    this.setState(
+      prevState => (
+          { 
+              stage_scale: newScale
+          }
+      )
+    );
+    e.target.getStage().draw();
+  }
+
+  onZoomOut = e => {
+    console.log("zoom out.");
+    
+    var newScale = this.state.stage_scale - 0.05;
+    console.log("zoom out - newScale right before setState: ", newScale);
+    this.setState(
+      prevState => (
+          { 
+              stage_scale: newScale
+          }
+      )
+    );
+    e.target.getStage().draw();
+
   }
 
 
@@ -457,7 +476,8 @@ onAddConnection = (obj_id) => {
 addConnection = (params) => {
     // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
     // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
-
+    // use config.api.invokeUrlAuth for the url
+    
     // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
     
     let query = Object.keys(params)
@@ -627,303 +647,37 @@ scaleShortestPath2Canvas = () => {
     return (
       <div className="graphics">
         
-        <Stage width={STAGE_WIDTH} height={STAGE_HEIGHT} >
-          <Layer name="background">
+        <Stage 
+          width={stage_width} 
+          height={stage_height} 
+          // scaleX={this.state.stage_scale}
+          // scaleY={this.state.stage_scale}
+          scaleX={1}
+          scaleY={1}
+        >
+          <Layer 
+          name="background"
+          draggable   >
 
-              {this.props.location.map((key) => (
-                  <MapBackground key={key.location_id} img={key.canvas_image} background_offset={BACKGROUND_OFFSET}/>
-              ))}
+
 
           </Layer>
-          <Layer name="main">
-          {/* <ModalSetGrid objects ={this.props.objects} />  */}
-              <Rect
-                x={TOOLBAR_X}
-                y={TOOLBAR_Y}
-                width={TOOLBAR_WIDTH}
-                height={TOOLBAR_HEIGHT}
-                fill="white"
-                stroke="lightgrey"
-              />
 
-              <CircleRedSm x={X[0] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
-              <CircleRedSm 
-                x={X[0] + CIRC_RADIUS} 
-                y={Y[0] + CIRC_RADIUS} 
-                name="CircRdSm"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
 
-              <CircleGreySm x={X[1] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
-              <CircleGreySm
-                x={X[1] + CIRC_RADIUS} 
-                y={Y[0] + CIRC_RADIUS} 
-                name="CircGrySm"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
+          <Layer 
+            name="main"
+            scaleX={this.state.stage_scale}
+            scaleY={this.state.stage_scale}
+            draggable
+          >
 
-              <CircleGreenSm x={X[2] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
-              <CircleGreenSm 
-                x={X[2] + CIRC_RADIUS} 
-                y={Y[0] + CIRC_RADIUS} 
-                name="CircGrnSm"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <CircleRedLg x={X[0] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
-              <CircleRedLg 
-                x={X[0] + CIRC_RADIUS} 
-                y={Y[1] + CIRC_RADIUS} 
-                name="CircRdLg"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <CircleGreyLg x={X[1] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
-              <CircleGreyLg
-                x={X[1] + CIRC_RADIUS} 
-                y={Y[1] + CIRC_RADIUS} 
-                name="CircGryLg"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <CircleGreenLg x={X[2] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
-              <CircleGreenLg 
-                x={X[2] + CIRC_RADIUS} 
-                y={Y[1] + CIRC_RADIUS} 
-                name="CircGrnLg"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <SquareRed x={X[0]} y={Y[2]} />
-              <SquareRed
-                x={X[0]}
-                y={Y[2]}
-                name="Rect2"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <SquareGrey x={X[1]} y={Y[2]} />
-              <SquareGrey
-                x={X[1]}
-                y={Y[2]}
-                name="Rect2"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <SquareGreen x={X[2]} y={Y[2]} />
-              <SquareGreen
-                x={X[2]}
-                y={Y[2]}
-                name="Rect2"
-                handleDragStart={this.handleDragImageStart}
-                handleDragEnd={this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Restroom x={X[0]} y={Y[3]} />
-              <Restroom x={X[0]} y={Y[3]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} />
-              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} />
-              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Coffee x={X[0]} y={Y[4]} />
-              <Coffee x={X[0]} y={Y[4]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Utensils x={X[1]} y={Y[4]} />
-              <Utensils x={X[1]} y={Y[4]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <DoorOpen x={X[0]} y={Y[5]} />
-              <DoorOpen x={X[0]} y={Y[5]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-              
-              <DoorClosed x={X[1]} y={Y[5]} />
-              <DoorClosed x={X[1]} y={Y[5]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-            
-              <Stairs x={X[0]} y={Y[6]} />
-              <Stairs x={X[0]} y={Y[6]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-              
-              <Elevator x={X[1]} y={Y[6]} />
-              <Elevator x={X[1]} y={Y[6]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Heartbeat x={X[0]} y={Y[7]} />
-              <Heartbeat x={X[0]} y={Y[7]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-              
-              <Recycle x={X[0]} y={Y[8]} />
-              <Recycle x={X[0]} y={Y[8]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <FireExtinguisher x={X[0]} y={Y[9]} />
-              <FireExtinguisher x={X[0]} y={Y[9]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-             
-              <MapMarker x={X[0]} y={Y[10]} />
-              <MapMarker x={X[0]} y={Y[10]} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-              
-              <ImageRegular x={X[0]} y={Y[11]}/>
-              <ImageRegular x={X[0]} y={Y[11]}
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-             
-              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} />
-              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} />
-              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />      
-              
-              <Pencil x={X[0]} y={Y[13]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <DrawPolygon x={X[1]} y={Y[13]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Primary x={X[2] + PATH_OFFSET} y={Y[13] + PATH_OFFSET} />
-              <Primary x={X[2] + PATH_OFFSET} y={Y[13] + PATH_OFFSET} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />   
-
-              <Redo x={X[0]} y={Y[14]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Undo x={X[1]} y={Y[14]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} />
-              <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} 
-                handleDragImageStart = {this.handleDragImageStart} 
-                handleDragImageEnd = {this.handleDragImageEnd}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />   
-
-              <Plus x={X[0]} y={Y[15]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <Minus x={X[1]} y={Y[15] + 6}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
-              <HandPaper x={X[2]} y={Y[15]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
-              />
-
+              {this.props.location.map((key) => (
+                  <MapBackground 
+                    key={key.location_id} 
+                    img={key.canvas_image} 
+                    stage_scale={this.state.stage_scale}
+                    background_offset={BACKGROUND_OFFSET}/>
+              ))}
               <RenderConnections
                 connections={this.state.connections}
                 // getPrimarySecondary={this.getPrimarySecondary}
@@ -1118,6 +872,305 @@ scaleShortestPath2Canvas = () => {
               background_offset={BACKGROUND_OFFSET}         
               />
           </Layer>
+
+          <Layer 
+            name="toolbar"
+            scaleX={1}
+            scaleY={1}
+          >
+
+              <Rect      
+                x={0}
+                y={0}
+                width={120}
+                height={680}
+                fill="white"
+                stroke="lightgrey"
+              />
+
+
+              <CircleRedSm x={X[0] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
+              <CircleRedSm 
+                x={X[0] + CIRC_RADIUS} 
+                y={Y[0] + CIRC_RADIUS} 
+                name="CircRdSm"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleGreySm x={X[1] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
+              <CircleGreySm
+                x={X[1] + CIRC_RADIUS} 
+                y={Y[0] + CIRC_RADIUS} 
+                name="CircGrySm"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleGreenSm x={X[2] + CIRC_RADIUS} y={Y[0] + CIRC_RADIUS} />
+              <CircleGreenSm 
+                x={X[2] + CIRC_RADIUS} 
+                y={Y[0] + CIRC_RADIUS} 
+                name="CircGrnSm"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleRedLg x={X[0] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
+              <CircleRedLg 
+                x={X[0] + CIRC_RADIUS} 
+                y={Y[1] + CIRC_RADIUS} 
+                name="CircRdLg"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleGreyLg x={X[1] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
+              <CircleGreyLg
+                x={X[1] + CIRC_RADIUS} 
+                y={Y[1] + CIRC_RADIUS} 
+                name="CircGryLg"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <CircleGreenLg x={X[2] + CIRC_RADIUS} y={Y[1] + CIRC_RADIUS} />
+              <CircleGreenLg 
+                x={X[2] + CIRC_RADIUS} 
+                y={Y[1] + CIRC_RADIUS} 
+                name="CircGrnLg"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <SquareRed x={X[0]} y={Y[2]} />
+              <SquareRed
+                x={X[0]}
+                y={Y[2]}
+                name="Rect2"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <SquareGrey x={X[1]} y={Y[2]} />
+              <SquareGrey
+                x={X[1]}
+                y={Y[2]}
+                name="Rect2"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <SquareGreen x={X[2]} y={Y[2]} />
+              <SquareGreen
+                x={X[2]}
+                y={Y[2]}
+                name="Rect2"
+                handleDragStart={this.handleDragImageStart}
+                handleDragEnd={this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Restroom x={X[0]} y={Y[3]} />
+              <Restroom x={X[0]} y={Y[3]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} />
+              <Male x={X[1] + CIRC_RADIUS} y={Y[3]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} />
+              <Female x={X[2] + CIRC_RADIUS} y={Y[3]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Coffee x={X[0]} y={Y[4]} />
+              <Coffee x={X[0]} y={Y[4]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Utensils x={X[1]} y={Y[4]} />
+              <Utensils x={X[1]} y={Y[4]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <DoorOpen x={X[0]} y={Y[5]} />
+              <DoorOpen x={X[0]} y={Y[5]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <DoorClosed x={X[1]} y={Y[5]} />
+              <DoorClosed x={X[1]} y={Y[5]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Stairs x={X[0]} y={Y[6]} />
+              <Stairs x={X[0]} y={Y[6]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <Elevator x={X[1]} y={Y[6]} />
+              <Elevator x={X[1]} y={Y[6]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Heartbeat x={X[0]} y={Y[7]} />
+              <Heartbeat x={X[0]} y={Y[7]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Recycle x={X[0]} y={Y[8]} />
+              <Recycle x={X[0]} y={Y[8]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <FireExtinguisher x={X[0]} y={Y[9]} />
+              <FireExtinguisher x={X[0]} y={Y[9]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+             
+              <MapMarker x={X[0]} y={Y[10]} />
+              <MapMarker x={X[0]} y={Y[10]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+              
+              <ImageRegular x={X[0]} y={Y[11]}/>
+              <ImageRegular x={X[0]} y={Y[11]}
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} />
+              <Generic x={X[0] + GENERIC_OFFSET} y={Y[12] + GENERIC_OFFSET} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} />
+              <Path x={X[1] + PATH_OFFSET} y={Y[12] + PATH_OFFSET} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />      
+              
+              <Pencil x={X[0]} y={Y[13]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <DrawPolygon x={X[1]} y={Y[13]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Primary x={X[2] + PATH_OFFSET} y={Y[13] + PATH_OFFSET} />
+              <Primary x={X[2] + PATH_OFFSET} y={Y[13] + PATH_OFFSET} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />   
+
+              <Redo x={X[0]} y={Y[14]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Undo x={X[1]} y={Y[14]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+              <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} />
+              <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />   
+
+              <Plus x={X[0]} y={Y[15]}
+                handleClick = {this.onZoomIn}
+                // onMouseMove={this.handleMouseMove}
+                // onMouseOut={this.handleMouseOut}
+              />
+
+              <Minus x={X[1]} y={Y[15] + 6}
+                handleClick = {this.onZoomOut}
+                // onMouseMove={this.handleMouseMove}
+                // onMouseOut={this.handleMouseOut}
+              />
+
+              <HandPaper x={X[2]} y={Y[15]}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />
+
+          </Layer>
+          
         </Stage>
 
         <Modal show={this.props.showModalG} onHide={this.onClose}>
