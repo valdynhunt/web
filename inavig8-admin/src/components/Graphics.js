@@ -395,7 +395,7 @@ onShowConnections = (e) => {
 
 onDeleteConnection = (obj_id) => {
   // if first is empty add to first, else add to second
-  if (this.state.delete_connection_begin == 0) {
+  if (this.state.delete_connection_begin === 0) {
     this.setState(
       {
         add_connection_begin: 0,
@@ -450,7 +450,7 @@ deleteConnection = (params) => {
 
 onAddConnection = (obj_id) => {
     // if first is empty add to first, else add to second
-    if (this.state.add_connection_begin == 0) {
+    if (this.state.add_connection_begin === 0) {
       this.setState(
         {
           add_connection_begin: obj_id,
@@ -509,7 +509,7 @@ addConnection = (params) => {
 
 onShortestPath = (obj_id) => {
   // if first is empty add to first, else add to second
-  if (this.state.shortest_path_begin == 0) {
+  if (this.state.shortest_path_begin === 0) {
     this.setState(
       {
         shortest_path_begin: obj_id

@@ -1,0 +1,26 @@
+div.export-area div.btn-area {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+div.export-area div.fileDownload {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+div.export-area div.fileDownload a {
+    margin-top: 0.2em;
+    border: 2px solid #328CC1;
+    border-radius: 5px;
+    padding: 0.6em 0.6em;
+}
+
+div.export-area div.fileDownload a:hover {
+    background-color: #328CC1;
+    color: white;
+    font-weight: none;
+}

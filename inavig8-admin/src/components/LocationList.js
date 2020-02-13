@@ -216,7 +216,7 @@ class Location extends React.Component {
                 </li>
 
                 {/* Add Location Modal */}
-                <Modal show={this.state.showAddModal} onHide={this.onClose}>
+                <Modal variant="danger" show={this.state.showAddModal} onHide={this.onClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>new location for<br/><b>{long_name}</b></Modal.Title>
                 </Modal.Header>
