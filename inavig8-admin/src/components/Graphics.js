@@ -1,13 +1,10 @@
-import React from 'react';
-//import { Component } from 'react';
+import React from 'react'
 import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap/'
-import Konva from 'konva';
-import { Stage, Layer, Rect } from 'react-konva';
-//import { Text } from 'react-konva';
+import Konva from 'konva'
+import { Stage, Layer, Rect } from 'react-konva'
 import MapBackground from './MapBackground'
-import config from '../config.json';
-//import ModalSetGrid from './ModalSetGrid';
-import './Graphics.css';
+import config from '../config.json'
+import './Graphics.css'
 
 import RenderConnections from './render/RenderConnections';
 import RenderShortestPath from './render/RenderShortestPath';
@@ -75,10 +72,10 @@ import HandPaper from './toolbar/HandPaper';
 import DrawPolygon from './toolbar/DrawPolygon';
 import Tooltip from './Tooltip';
 
-const TOOLBAR_WIDTH = 120;
-const TOOLBAR_HEIGHT = 650;
-const TOOLBAR_X = 0;
-const TOOLBAR_Y = 20;
+// const TOOLBAR_WIDTH = 120;
+// const TOOLBAR_HEIGHT = 650;
+// const TOOLBAR_X = 0;
+// const TOOLBAR_Y = 20;
 const CIRC_RADIUS = 7;
 // const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
