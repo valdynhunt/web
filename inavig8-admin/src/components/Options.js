@@ -1,7 +1,6 @@
 import React from 'react'
 import Export from './Export'
 import './Options.css'
-import { Button } from 'react-bootstrap'
 
 class Options extends React.Component {
 

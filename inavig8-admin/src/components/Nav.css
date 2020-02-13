@@ -3,7 +3,7 @@ nav {
     grid-column: 1;
 
     display: grid;
-    grid-template-rows: repeat(4, minmax(40px, 75px)) auto;
+    grid-template-rows: repeat(4, minmax(2.5em, 6.25em)) auto;
     gap: 0;
     justify-items: stretch;
     align-items: center;
