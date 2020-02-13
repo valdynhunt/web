@@ -6,7 +6,7 @@
     "aws-amplify": "^1.2.4",
     "bootstrap": "^4.4.0",
     "gh-pages": "^2.2.0",
-    "jquery": "^1.9.1",
+    "jquery": "^3.4.0",
     "json-2-csv": "^3.5.9",
     "konva": "^4.0.18",
     "react": "^16.10.1",
