@@ -129,7 +129,7 @@ class Export extends React.Component {
     }
 
     toJson = () => {
-        const backup = JSON.stringify(this.state.backup.locations);
+        const backup = JSON.stringify(this.state.backup);
 
         var file = new File(
             [backup], this.state.filename, {
@@ -143,7 +143,7 @@ class Export extends React.Component {
     // toCsv = () => {
 
     //     var backup = [];
-    //     backup.push(JSON.stringify(this.state.backup.locations));
+    //     backup.push(JSON.stringify(this.state.backup));
 
     //     let converter = require('json-2-csv');
     //     let options = {
