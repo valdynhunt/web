@@ -29,6 +29,9 @@ main.options-container section ul li {
 
 main.options-container section div.btn-area {
     padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 main.options-container section.load-area {
