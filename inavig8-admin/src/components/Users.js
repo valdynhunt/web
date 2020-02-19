@@ -25,6 +25,36 @@ class Users extends React.Component {
 
     render() {
 
+        let $userDetails = null;
+        if (this.state.showUser) {
+            $userDetails = (
+                <div>
+                    <ul className="user-detail">
+                        <li>First Name:</li>
+                        <li>{this.props.subUsers[this.state.index].first_name}</li>
+                    </ul>
+                    <ul className="user-detail">
+                        <li>Last Name:</li>
+                        <li>{this.props.subUsers[this.state.index].last_name}</li>
+                    </ul>
+                    <ul className="user-detail">
+                        <li>Email:</li>
+                        <li>{this.props.subUsers[this.state.index].email}</li>
+                    </ul>
+                    <ul className="user-detail">
+                        <li>Username:</li>
+                        <li>{this.props.subUsers[this.state.index].username}</li>
+                    </ul>
+                </div>
+            );
+        } else {
+            $userDetails = (
+                <div>
+                    <p className="center">hover over the User for details</p>
+                </div>
+            );
+        }
+
         return (
 
             <main className="users-container">
@@ -48,34 +78,9 @@ class Users extends React.Component {
 
                 <section className="user-details">
                     <h4>User Details</h4>
-                    <ul className="user-detail">
-                        <li>First Name:</li>
-                        {
-                            this.state.showUser &&
-                            <li>{this.props.subUsers[this.state.index].first_name}</li>
-                        }
-                    </ul>
-                    <ul className="user-detail">
-                        <li>Last Name:</li>
-                        {
-                            this.state.showUser &&
-                            <li>{this.props.subUsers[this.state.index].last_name}</li>
-                        }
-                    </ul>
-                    <ul className="user-detail">
-                        <li>Email:</li>
-                        {
-                            this.state.showUser &&
-                            <li>{this.props.subUsers[this.state.index].email}</li>
-                        }
-                    </ul>
-                    <ul className="user-detail">
-                        <li>Username:</li>
-                        {
-                            this.state.showUser &&
-                            <li>{this.props.subUsers[this.state.index].username}</li>
-                        }
-                    </ul>
+                    {
+                        $userDetails
+                    }
                 </section>
 
             </main>

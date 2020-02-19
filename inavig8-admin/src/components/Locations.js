@@ -77,11 +77,11 @@ class Locations extends React.Component {
     render() {
 
         let $imagePreview = null;
+        let $locationDetails = null;
 
         if (
             this.state.index > -1 && 
-            typeof(this.props.locations[this.state.index]) !== "undefined" && 
-            this.props.locations[this.state.index].canvas_image !== "" && 
+            typeof(this.props.locations[this.state.index]) !== "undefined" &&  
             this.props.locations[this.state.index].canvas_image !== null
         ) {
             $imagePreview = (
@@ -92,7 +92,40 @@ class Locations extends React.Component {
                 />
             );
         } else {
-            $imagePreview = (<p>No image to preview</p>);
+            $imagePreview = (
+                <p className="center">No image to preview</p>
+            );
+        }
+        
+        if (this.state.showImage) {
+            $locationDetails = (
+                <section className="location-details">
+                    <h4>Locations Details</h4>
+                    <ul className="location-detail">
+                        <li>Name:</li>
+                        <li>{this.props.locations[this.state.index].long_name}</li>
+                    </ul>
+                    <ul className="location-detail">
+                        <li>Nickname:</li>
+                        <li>{this.props.locations[this.state.index].short_name}</li>
+                    </ul>
+                    <ul className="location-detail">
+                        <li>Description:</li>
+                        <li>{this.props.locations[this.state.index].description}</li>
+                    </ul>
+                    {/* <ul className="location-detail">
+                        <li>Location Type:</li>
+                        <li>{this.props.locations[this.state.index].location_type.short_name}</li>
+                    </ul> */}
+                </section>
+            );
+        } else {
+            $locationDetails = (
+                <section className="location-details">
+                    <h4>Locations Details</h4>
+                    <p className="center">hover over the Locations to view details</p>
+                </section>
+            );
         }
 
         return (
@@ -122,41 +155,12 @@ class Locations extends React.Component {
                 <section className="location-view">
                     <h4>Locations View</h4>
                     {
-                        this.state.showImage && $imagePreview
+                        $imagePreview
                     }
                 </section>
-                
-                <section className="location-details">
-                    <h4>Locations Details</h4>
-                    <ul className="location-detail">
-                        <li>Name:</li>
-                        {
-                            this.state.showImage &&
-                            <li>{this.props.locations[this.state.index].long_name}</li>
-                        }
-                    </ul>
-                    <ul className="location-detail">
-                        <li>Nickname:</li>
-                        {
-                            this.state.showImage &&
-                            <li>{this.props.locations[this.state.index].short_name}</li>
-                        }
-                    </ul>
-                    <ul className="location-detail">
-                        <li>Description:</li>
-                        {
-                            this.state.showImage &&
-                            <li>{this.props.locations[this.state.index].description}</li>
-                        }
-                    </ul>
-                    {/* <ul className="location-detail">
-                        <li>Location Type:</li>
-                        {
-                            this.state.showImage &&
-                            <li>{this.props.locations[this.state.index].location_type.short_name}</li>
-                        }
-                    </ul> */}
-                </section>
+                {
+                    $locationDetails
+                }
             </main>
 
         )
