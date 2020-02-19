@@ -550,7 +550,8 @@ class Graphics extends React.Component {
       "source_object_id": this.state.shortest_path_begin,
       "source_location_id":this.state.currentObjectG.location_id, 
       "dest_object_id": obj_id,
-      "dest_location_id":this.state.currentObjectG.location_id
+      "dest_location_id":this.state.currentObjectG.location_id,
+      "accessible": this.state.accessible
     };
 
     this.shortestPath(params);
