@@ -1,11 +1,11 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
 //import { Form, FormControl, Button } from 'react-bootstrap'
 
 class Header extends React.Component {
 
     render() {
-
+        // props.handleAccessible(true), props.handleAccessible(false)
         const admin = JSON.parse(localStorage.getItem('admin'));
 
         return (
@@ -30,12 +30,21 @@ class Header extends React.Component {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
           </Form> */}
-                  <Navbar.Toggle />
+
                   <Navbar.Collapse className="justify-content-end">
+                      <ButtonToolbar className="accessible">
+                        <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+                            <ToggleButton value={1} onClick={this.props.handleAccessibleOn}>Elevators</ToggleButton>
+                            <ToggleButton value={2} onClick={this.props.handleAccessibleOff}>Stairs</ToggleButton>
+                        </ToggleButtonGroup>
+                      </ButtonToolbar>
+
                       <Navbar.Text>
                           signed in as: { (admin) ? admin.username : '' }
                       </Navbar.Text>
                   </Navbar.Collapse>
+
+
                 </Navbar>
 
             </div>
