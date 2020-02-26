@@ -12,12 +12,16 @@ class Export extends React.Component {
         exportURL: null,
         filename: null,
         objects: [],
-        locations: [],
-        backup: {
-            locations: [],
-            objects: [],
-            addresses: [],
-        },
+    }
+
+    componentDidMount() {
+        this.getAllObjectsPromise().then(([objects]) => {
+            this.setState(
+                {
+                    objects,
+                }
+            );   
+        });
     }
 
     onExport = (e) => {
@@ -27,146 +31,91 @@ class Export extends React.Component {
                 exportType: "." + e.currentTarget.value,
                 filename: createTimeStamp() + "_backup." + e.currentTarget.value,
             }, () => {
-                this.getLocationsArray().then(([locations]) => {
-                    this.getObjectsArray(locations).then(([objects]) => {
-                        this.setState(
-                            {
-                                backup: {
-                                    locations,
-                                    objects,
+
+                    if (this.state.exportType === ".json") {
+                        this.getJson(this.state.objects).then(([file]) => {
+                            this.setState(
+                                {
+                                    export: true,
+                                    exportURL: window.URL.createObjectURL(file)
                                 }
-                            }, ()  => {
+                            );
+                        });
+                    }
 
-                                if (this.state.exportType === ".csv") {
-                                    
-                                    this.getCsv().then(([csvUrl]) => {
-
-                                        var file = new File(
-                                            [this.state.backup], this.state.filename, {
-                                                type: 'application/' + (this.state.exportType).substring(1),
-                                            }
-                                        );
-
-                                        var url = window.URL.createObjectURL(file);
-
-                                        this.setState(
-                                            {
-                                                export: true,
-                                                exportURL: url,
-                                            }
-                                        );
-                                        
-                                    });
-
-                                } else {
-
-                                    this.getJson().then(([jsonUrl]) => {
-                                        this.setState(
-                                            {
-                                                export: true,
-                                                exportURL: jsonUrl,
-                                            }
-                                        );
-                                    });
-
-                                }
-                                                                                 
-                            }
-                        );
-                    });
-                });
             }
         );
 
     }
 
-    getLocationsArray() {
-        return Promise.resolve([this.getLocations()]);
+    getAllObjectsPromise(locations) {
+        return Promise.resolve([this.getAllObjects()]);
     }
 
-    getObjectsArray(locations) {
-        return Promise.resolve([this.getObjects(locations)]);
+    getAllObjects() {
+  
+        const locations = JSON.parse(localStorage.getItem('locations'));
+        const objects = [];
+
+        locations.forEach(location => {
+
+            this.getObjectsFromLocation(location.location_id).then(objs => {    
+                console.log("getAllObjects - objs: ", objs);
+                objects.push(objs);
+            });
+
+        }, () => {
+            console.log(objects);
+        });
+
+        return objects;
+    }
+
+    getObjectsFromLocationPromise(location_id) {
+        return Promise.resolve([this.getObjectsFromLocation(location_id)]);
+    }
+
+    getObjectsFromLocation(location_id) {
+
+        return fetch(config.api.invokeUrl + '/objects/location/' + location_id, {
+            method: "GET",
+            headers: config.api.headers,
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            return result.body.data;
+        });
+
     }
 
     getJson() {
         return Promise.resolve([this.toJson()]);
     }
 
-    getCsv(jsonUrl) {
-        return Promise.resolve([this.toCsv(jsonUrl)]);
-    }
+    // getCsv(jsonUrl) {
+    //     return Promise.resolve([this.toCsv(jsonUrl)]);
+    // }
 
-    getLocations = () => {
-        const admin = JSON.parse(localStorage.getItem('admin'));
+    toJson = (objects) => {
 
-        (admin.locations).forEach(loc => {
-            delete loc.modifiedOn;
-            delete loc.createdBy;
-            delete loc.modifiedBy;
-            delete loc.createdOn;
-        });
-
-        return admin.locations;
-    }
-
-    getObjects = (locations) => {
-        const headers = config.api.headers;
-        var objects = [];
-
-        locations.forEach(loc => {
-            fetch(config.api.invokeUrl + '/objects/location/' + loc.location_id, {
-                method: "GET",
-                headers,
-            }).then(response => {
-                return response.json();
-            }).then(result => {
-                objects.push(result.body.data);
-            });
-        });
-
-        return objects;
-
-    }
-
-    toJson = () => {
-        const backup = JSON.stringify(this.state.backup);
+        const backup = {
+            subUsers: JSON.parse(localStorage.getItem('subUsers')),
+            locations: JSON.parse(localStorage.getItem('locations')),
+            // objects: this.state.objects,
+            objects: JSON.parse(localStorage.getItem('objects')),
+        };
 
         var file = new File(
-            [backup], this.state.filename, {
+            [JSON.stringify(backup)], this.state.filename, {
                 type: 'application/' + (this.state.exportType).substring(1),
             }
         );
 
-        return window.URL.createObjectURL(file);
+        return file;
+
     }
 
     // toCsv = () => {
-
-    //     var backup = [];
-    //     backup.push(JSON.stringify(this.state.backup));
-
-    //     let converter = require('json-2-csv');
-    //     let options = {
-    //         delimiter : {
-    //             wrap  : '"',    
-    //             field : ',',    
-    //             eol   : '\n'    
-    //         },
-    //         prependHeader    : true,
-    //         sortHeader       : false,
-    //         excelBOM         : true,
-    //         trimHeaderValues : true,
-    //         trimFieldValues  : true,
-    //         keys             : [ 'address_id', 'description', 'active', 'short_name', 'location_id', 'long_name', 'canvas_image', 'location_type_id' ],
-    //     };
-
-    //     let json2csvCallback = function (err, csv) {
-    //         if (err) throw err;
-    //         console.log(csv);
-    //         return csv;
-    //     }
-
-    //     converter.json2csv(backup, json2csvCallback, options);
 
     // }
 
@@ -179,6 +128,7 @@ class Export extends React.Component {
             }
         );
     }
+    
 
     render() {
 
@@ -195,8 +145,14 @@ class Export extends React.Component {
         } else {
             $link = (
                 <div className="btn-area">
-                    <Button onClick={this.onExport} variant="outline-primary" name="exportType" value="json">JSON format</Button>
-                    {/* <Button onClick={this.onExport} variant="outline-primary" name="exportType" value="csv">CSV format</Button> */}
+                    <Button 
+                        onClick={this.onExport} 
+                        variant="outline-primary" 
+                        name="exportType" 
+                        value="json"
+                    >
+                        JSON format
+                    </Button>
                 </div>
             );
         }

@@ -28,7 +28,8 @@ class Header extends React.Component {
 
     render() {
 
-        const { username, email, first_name, last_name, role } = this.props.profile;
+        // const { username, email, first_name, last_name, role } = this.props.profile;
+        const { username, email, first_name, last_name, role } = JSON.parse(localStorage.getItem('admin'));
         const months = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
