@@ -9,7 +9,6 @@ class Users extends React.Component {
         showUser: false,
         showDetails: false,
         index: -1,
-        //users: [ localStorage.getItem('admin') ],
     }
 
     handleHover = (index) => {
@@ -25,25 +24,28 @@ class Users extends React.Component {
 
     render() {
 
+        const subUsers = JSON.parse(localStorage.getItem('subUsers'));
+
         let $userDetails = null;
-        if (this.state.showUser) {
+        // if (this.state.showUser) {
+        if (this.state.index > -1) {
             $userDetails = (
                 <div>
                     <ul className="user-detail">
                         <li>First Name:</li>
-                        <li>{this.props.subUsers[this.state.index].first_name}</li>
+                        <li>{ subUsers[this.state.index].first_name }</li>
                     </ul>
                     <ul className="user-detail">
                         <li>Last Name:</li>
-                        <li>{this.props.subUsers[this.state.index].last_name}</li>
+                        <li>{ subUsers[this.state.index].last_name }</li>
                     </ul>
                     <ul className="user-detail">
                         <li>Email:</li>
-                        <li>{this.props.subUsers[this.state.index].email}</li>
+                        <li>{ subUsers[this.state.index].email }</li>
                     </ul>
                     <ul className="user-detail">
                         <li>Username:</li>
-                        <li>{this.props.subUsers[this.state.index].username}</li>
+                        <li>{ subUsers[this.state.index].username }</li>
                     </ul>
                 </div>
             );
@@ -61,11 +63,11 @@ class Users extends React.Component {
                 <section className="users-list-area">
                     <h4>Users List</h4>
                     <div>
-                        {Object.keys(this.props.subUsers).map(key => (
+                        {Object.keys(subUsers).map(key => (
                             <UserList
                                 key={key}
                                 id={key}
-                                subUser={this.props.subUsers[key]} 
+                                subUser={subUsers[key]}
                                 hover={this.state.isHover}
                                 handleHover={this.handleHover}
                                 handleCreateUser={this.handleCreateUser}

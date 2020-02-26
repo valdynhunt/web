@@ -76,19 +76,20 @@ class Locations extends React.Component {
 
     render() {
 
+        const locations = JSON.parse(localStorage.getItem('locations'));
         let $imagePreview = null;
         let $locationDetails = null;
 
         if (
             this.state.index > -1 && 
-            typeof(this.props.locations[this.state.index]) !== "undefined" &&  
-            this.props.locations[this.state.index].canvas_image !== null
+            typeof(locations[this.state.index]) !== "undefined" &&  
+            locations[this.state.index].canvas_image !== null
         ) {
             $imagePreview = (
                 <img 
-                    src={this.props.locations[this.state.index].canvas_image} 
-                    alt={this.props.locations[this.state.index].long_name} 
-                    title={this.props.locations[this.state.index].long_name}
+                    src={locations[this.state.index].canvas_image} 
+                    alt={locations[this.state.index].long_name} 
+                    title={locations[this.state.index].long_name}
                 />
             );
         } else {
@@ -103,19 +104,19 @@ class Locations extends React.Component {
                     <h4>Locations Details</h4>
                     <ul className="location-detail">
                         <li>Name:</li>
-                        <li>{this.props.locations[this.state.index].long_name}</li>
+                        <li>{locations[this.state.index].long_name}</li>
                     </ul>
                     <ul className="location-detail">
                         <li>Nickname:</li>
-                        <li>{this.props.locations[this.state.index].short_name}</li>
+                        <li>{locations[this.state.index].short_name}</li>
                     </ul>
                     <ul className="location-detail">
                         <li>Description:</li>
-                        <li>{this.props.locations[this.state.index].description}</li>
+                        <li>{locations[this.state.index].description}</li>
                     </ul>
                     {/* <ul className="location-detail">
                         <li>Location Type:</li>
-                        <li>{this.props.locations[this.state.index].location_type.short_name}</li>
+                        <li>{locations[this.state.index].location_type.short_name}</li>
                     </ul> */}
                 </section>
             );
@@ -136,11 +137,11 @@ class Locations extends React.Component {
                         Locations 
                     </h4>
                     <div>
-                        {Object.keys(this.props.locations).map(key => (
+                        {Object.keys(locations).map(key => (
                             <LocationList
                                 key={key}
                                 id={key}
-                                details={this.props.locations[key]} 
+                                details={locations[key]} 
                                 hover={this.state.isHover}
                                 handleHover={this.handleHover}
                                 handleCreateLocation={this.handleCreateLocation}

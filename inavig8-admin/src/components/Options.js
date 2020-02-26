@@ -31,7 +31,7 @@ class Options extends React.Component {
                     </ul>
                     <p>What format will my backup be in?</p>
                     <ul>
-                        <li>JSON (Java-Script Object Notation) or</li>
+                        <li>JSON (Java-Script Object Notation)</li>
                         {/* <li>CSV (command delimited)</li> */}
                     </ul>
                     <Export />
