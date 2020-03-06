@@ -5,7 +5,7 @@ import './Register.css';
 import Auth from '@aws-amplify/auth';
 import Amplify from '@aws-amplify/core';
 
-import aws_config from '../../config.json';
+// import aws_config from '../../config.json';
 Amplify.configure({
     Auth: {
 
@@ -28,7 +28,7 @@ Amplify.configure({
 });
 
 // You can get the current config object
-const currentConfig = Auth.configure();
+// const currentConfig = Auth.configure();
 
 class Register extends Component {//
   state = {
