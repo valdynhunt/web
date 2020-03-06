@@ -418,7 +418,7 @@ class Graphics extends React.Component {
 
   onDeleteConnection = (obj_id) => {
     // if first is empty add to first, else add to second
-    if (this.state.delete_connection_begin == 0) {
+    if (this.state.delete_connection_begin === 0) {
       this.setState(
         {
           add_connection_begin: 0,
@@ -474,7 +474,7 @@ class Graphics extends React.Component {
 
   onAddConnection = (obj_id) => {
       // if first is empty add to first, else add to second
-      if (this.state.add_connection_begin == 0) {
+      if (this.state.add_connection_begin === 0) {
         this.setState(
           {
             add_connection_begin: obj_id,
@@ -605,24 +605,30 @@ class Graphics extends React.Component {
   scaleConnections2Canvas = () => {
 
     let tempConnections = this.state.connections;
-    tempConnections.map((key) => (
-
-      console.log("v1 object_id: ", key.v1.object_id),
-      console.log("v2 object_id: ", key.v2.object_id),
-      console.log("primary.image_x: ", primary.image_x),
-      console.log("primary.image_x: ", primary.image_y),
-      console.log("before"),
-      console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-      console.log("edge v2: " + key.v2.x + " " + key.v2.y),
-      console.log("after"),
-      key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
-      key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
-      key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
-      key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
-      console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-      console.log("edge v2: " + key.v2.x + " " + key.v2.y)
-
-    ))
+    tempConnections.map((key) => {
+    // tempConnections.map((key) => (
+      // console.log("v1 object_id: ", key.v1.object_id),
+      // console.log("v2 object_id: ", key.v2.object_id),
+      // console.log("primary.image_x: ", primary.image_x),
+      // console.log("primary.image_x: ", primary.image_y),
+      // console.log("before"),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y),
+      // console.log("after"),
+      // key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
+      // key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
+      // key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
+      // key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+      this.consoleLogScalingBefore(key);
+      key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x);
+      key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y);
+      key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x);
+      key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y);
+      return this.consoleLogScalingAfter(key);
+    // ));
+    });
 
     this.setState(
       {
@@ -630,32 +636,37 @@ class Graphics extends React.Component {
       }
     );
 
-    console.log("after conversion: ", this.state.connections);
+    console.log("after conversion - connection: ", this.state.connections);
 
   }
-
 
   scaleShortestPath2Canvas = () => {
 
     let tempShortestPath = this.state.shortest_path;
-    tempShortestPath.map((key) => (
-
-      console.log("v1 object_id: ", key.v1.object_id),
-      console.log("v2 object_id: ", key.v2.object_id),
-      console.log("primary.image_x: ", primary.image_x),
-      console.log("primary.image_x: ", primary.image_y),
-      console.log("before"),
-      console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-      console.log("edge v2: " + key.v2.x + " " + key.v2.y),
-      console.log("after"),
-      key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
-      key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
-      key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
-      key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
-      console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-      console.log("edge v2: " + key.v2.x + " " + key.v2.y)
-
-    ))
+    tempShortestPath.map((key) => {
+    // tempShortestPath.map((key) => (
+      // console.log("v1 object_id: ", key.v1.object_id),
+      // console.log("v2 object_id: ", key.v2.object_id),
+      // console.log("primary.image_x: ", primary.image_x),
+      // console.log("primary.image_x: ", primary.image_y),
+      // console.log("before"),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y),
+      // console.log("after"),
+      // key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
+      // key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
+      // key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
+      // key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+      this.consoleLogScalingBefore(key);
+      key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x);
+      key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y);
+      key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x);
+      key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y);
+      return this.consoleLogScalingAfter(key);
+    // ));
+    });
 
     this.setState(
       {
@@ -666,6 +677,24 @@ class Graphics extends React.Component {
     console.log("after conversion - shortest_path: ", this.state.shortest_path);
 
   }
+
+  consoleLogScalingBefore = (key) => {
+      console.log("v1 object_id: ", key.v1.object_id);
+      console.log("v2 object_id: ", key.v2.object_id);
+      console.log("primary.image_x: ", primary.image_x);
+      console.log("primary.image_x: ", primary.image_y);
+      console.log("before");
+      console.log("edge v1: " + key.v1.x + " " + key.v1.y);
+      console.log("edge v2: " + key.v2.x + " " + key.v2.y);
+  }
+
+  consoleLogScalingAfter = (key) => {
+    console.log("after");
+    console.log("edge v1: " + key.v1.x + " " + key.v1.y);
+    console.log("edge v2: " + key.v2.x + " " + key.v2.y);
+  }
+
+
 
 
   render() {

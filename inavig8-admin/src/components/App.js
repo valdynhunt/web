@@ -108,7 +108,7 @@ class App extends React.Component {
             this.sanitizeLocations(admin.locations);
 
             this.getSubUsersArray(admin.user_id).then( () => {
-                console.log("finished localStorage");
+                console.log("localStorage updated");
             });
     
         });
@@ -206,7 +206,9 @@ class App extends React.Component {
         }).catch(console.error);
         // }).then(result => {
 
-            const locations = this.state.locations.map(loc => {
+            // const locations = this.state.locations.map(loc => {
+            const locations = JSON.parse(this.localStorage.getItem('locations'));
+            locations.forEach(loc => {
                 if (loc.location_id === currentLocation.location_id) {
                     loc.short_name = currentLocation.short_name;
                     loc.long_name = currentLocation.long_name;
