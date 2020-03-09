@@ -282,7 +282,7 @@ class Design extends Component {
     console.log("long_name: ", JSON.parse(raw).long_name);
     console.log("description: ", JSON.parse(raw).description);
 
-    const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
+    //const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
     // const index = this.props.objects.findIndex(isCurrentObjectId)
     // console.log("index: ", index);
 

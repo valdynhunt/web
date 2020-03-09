@@ -175,8 +175,8 @@ class App extends React.Component {
 
     handleUpdateLocation = (currentLocation) => {
 
-        let headers = config.api.headers;
-        let body = JSON.stringify(currentLocation);
+        const headers = config.api.headers;
+        const body = JSON.stringify(currentLocation);
         const url = config.api.invokeUrl + '/location/update';
 
         fetch(url, {
@@ -206,10 +206,11 @@ class App extends React.Component {
         }).catch(console.error);
         // }).then(result => {
 
-            // const locations = this.state.locations.map(loc => {
-            const locations = JSON.parse(this.localStorage.getItem('locations'));
+            const locations = JSON.parse(localStorage.getItem('locations'));
             locations.forEach(loc => {
+                console.log("loc: ", loc);
                 if (loc.location_id === currentLocation.location_id) {
+                    console.log("match!");
                     loc.short_name = currentLocation.short_name;
                     loc.long_name = currentLocation.long_name;
                     loc.description = currentLocation.description;
@@ -218,25 +219,7 @@ class App extends React.Component {
             });
 
             localStorage.setItem('locations', JSON.stringify(locations));
-            return locations;
-
-
-            // this.setState(state => {
-            //     const locations = this.state.locations.map(loc => {
-            //         if (loc.location_id === currentLocation.location_id) {
-            //             loc.short_name = currentLocation.short_name;
-            //             loc.long_name = currentLocation.long_name;
-            //             loc.description = currentLocation.description;
-            //             // loc.canvas_image = currentLocation.canvas_image;
-            //             return loc;
-            //         } else {
-            //             return loc;
-            //         }
-            //     });
-
-            //     return locations;
-            // });
-      // });  
+            return locations; 
 
     }
 
@@ -256,13 +239,6 @@ class App extends React.Component {
             const locations = ((JSON.parse).localStorage.getItem('locations')).filter(loc => loc.location_id !== location_id);
             localStorage.setItem('locations', JSON.stringify(locations));
 
-            // const locations = this.state.locations.filter(loc => loc.location_id !== location_id);
-
-            // this.setState(
-            //     {
-            //         locations
-            //     }
-            // );
         });
     }
 
@@ -279,12 +255,6 @@ class App extends React.Component {
             return response.json();
         }).then(result => {
             console.log("upload succesful! result: ", result);
-            // const locations = this.state.locations;
-            // locations.map(loc => {
-            //     if (loc.location_id === location_id) {
-            //         loc.canvas_image = '';
-            //     }
-            // });
         });
 
     }

@@ -6,12 +6,12 @@ function RenderConnections(props) {
     // this.props.getPrimarySecondary();   
   return (
   
-    props.connections.map((key) => (
+    props.connections.map((connection) => (
         // from v1 to v2
         // need to convert relative to image_x and image_y!!!
         <Line
-            key={key}
-            points={[key.v1.x, key.v1.y, key.v2.x, key.v2.y]}
+            key={connection.v1.x + "." + connection.v1.y + "." + connection.v2.x + "." + connection.v2.y}
+            points={[connection.v1.x, connection.v1.y, connection.v2.x, connection.v2.y]}
             tension={0.5}
             stroke="red"
             x={4}
