@@ -3,23 +3,29 @@ import { Line } from 'react-konva';
 
 
 function RenderShortestPath(props) {
-    // this.props.getPrimarySecondary();   
-  return (
-  
-    props.shortest_path.map((key) => (
-        // from v1 to v2
-        // need to convert relative to image_x and image_y!!!
-        <Line
-            key={key}
-            points={[key.v1.x, key.v1.y, key.v2.x, key.v2.y]}
-            tension={0.5}
-            stroke="blue"
-            x={4}
-            y={4}
-            alpha={0.75}
-        />
+    // this.props.getPrimarySecondary(); 
+    if (props.shortest_path.length > 0) {
+        console.log("rendering shortest path...", props); 
+        return (
+          
+          props.shortest_path.map((connection) => (
+              // from v1 to v2
+              // need to convert relative to image_x and image_y!!!
+              <Line
+                  key={connection.v1.x + "." + connection.v1.y + "." + connection.v2.x + "." + connection.v2.y}
+                  points={[connection.v1.x, connection.v1.y, connection.v2.x, connection.v2.y]}
+                  tension={0.5}
+                  stroke="blue"
+                  x={4}
+                  y={4}
+                  alpha={0.75}
+              />
+      
+          )))
+    } else {
+        return null;
+    }
 
-    )))
 
 
 }

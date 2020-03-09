@@ -535,7 +535,8 @@ class Graphics extends React.Component {
 
   onShortestPath = (obj_id) => {
     // if first is empty add to first, else add to second
-    if (this.state.add_connection_begin === 0) {
+    
+    if (this.state.shortest_path_begin === 0) {
       this.setState(
         {
           shortest_path_begin: obj_id
@@ -543,15 +544,16 @@ class Graphics extends React.Component {
       );
     } else {
     // we have both connections - call API
-    var params = {
-      "source_object_id": this.state.shortest_path_begin,
-      "source_location_id":this.state.currentObjectG.location_id, 
-      "dest_object_id": obj_id,
-      "dest_location_id":this.state.currentObjectG.location_id,
-      "accessible": this.state.accessible
-    };
 
-    this.shortestPath(params);
+      var params = {
+        "source_object_id": this.state.shortest_path_begin,
+        "source_location_id":this.state.currentObjectG.location_id, 
+        "dest_object_id": obj_id,
+        "dest_location_id":this.state.currentObjectG.location_id,
+        "accessible": this.state.accessible
+      };
+      
+      this.shortestPath(params);
 
     }
   }
