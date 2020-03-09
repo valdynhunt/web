@@ -28,6 +28,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   color: var(--primary-color);
+  text-shadow: 1px  1px 1px solid black,
+              -1px  1px 1px solid black,
+              -1px -1px 1px solid black,
+               1px -1px 1px solid black;
 }
 
 h1 {

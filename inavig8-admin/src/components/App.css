@@ -13,3 +13,10 @@ div.container-loggIn {
   grid-template-columns: 1fr 7fr;
   gap: 0;
 }
+
+
+/* Misc */
+p.center {
+  margin: 1em 0;
+  text-align: center;
+}

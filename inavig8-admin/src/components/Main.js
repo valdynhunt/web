@@ -1,9 +1,9 @@
 import React from 'react'
-import './Main.css'
 import Dashboard from './Dashboard'
 import Locations from './Locations'
 import Users from './Users'
 import Options from './Options'
+import './Main.css'
 
 class Main extends React.Component {
 
@@ -38,7 +38,7 @@ class Main extends React.Component {
         } else if (this.props.page === 'Users') {
             return (
                 <Users 
-                subUsers={this.props.subUsers}      
+                    subUsers={this.props.subUsers}      
                 />
             );
         } else if (this.props.page === 'Options') {

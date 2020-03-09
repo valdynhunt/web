@@ -1,13 +1,10 @@
-import React from 'react';
-//import { Component } from 'react';
+import React from 'react'
 import { Modal, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap/'
-import Konva from 'konva';
-import { Stage, Layer, Rect } from 'react-konva';
-//import { Text } from 'react-konva';
+import Konva from 'konva'
+import { Stage, Layer, Rect } from 'react-konva'
 import MapBackground from './MapBackground'
-import config from '../config.json';
-//import ModalSetGrid from './ModalSetGrid';
-import './Graphics.css';
+import config from '../config.json'
+import './Graphics.css'
 
 import RenderConnections from './render/RenderConnections';
 import RenderShortestPath from './render/RenderShortestPath';
@@ -75,10 +72,10 @@ import HandPaper from './toolbar/HandPaper';
 import DrawPolygon from './toolbar/DrawPolygon';
 import Tooltip from './Tooltip';
 
-const TOOLBAR_WIDTH = 120;
-const TOOLBAR_HEIGHT = 650;
-const TOOLBAR_X = 0;
-const TOOLBAR_Y = 20;
+// const TOOLBAR_WIDTH = 120;
+// const TOOLBAR_HEIGHT = 650;
+// const TOOLBAR_X = 0;
+// const TOOLBAR_Y = 20;
 const CIRC_RADIUS = 7;
 // const CIRC_RADIUS_SM = 3;
 const SHADOW_OFFSET = 4;
@@ -86,6 +83,8 @@ const SHADOW_OFFSET = 4;
 const BACKGROUND_OFFSET = 150;
 const GENERIC_OFFSET = 5;
 const PATH_OFFSET = 9;
+const ZOOM_INCREMENT = 0.05;
+const ROTATION_INCREMENT = 45;
 
 const X = [15, 50, 85]; 
 const Y = [40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600, 640];
@@ -125,6 +124,7 @@ class Graphics extends React.Component {
       object_id: 0,
       short_name: "",
       stage_scale: 1,
+      current_rotation: 0,
       x: 0,
       y: 0,
       add_connection_begin: 0,
@@ -146,16 +146,15 @@ class Graphics extends React.Component {
       }
   }
 
+
   componentDidMount() {
     console.log("graphics mount");    
   }
 
-  onZoomIn = e => {
-    console.log("zoom in.");
 
-    var newScale = this.state.stage_scale + 0.05;
-    console.log("zoom in - newScale right before setState: ", newScale);
-    console.log(5);
+  onZoomIn = e => {
+    var newScale = this.state.stage_scale + ZOOM_INCREMENT;
+    console.log("zoom in - newScale: ", newScale);
     this.setState(
       prevState => (
           { 
@@ -165,12 +164,11 @@ class Graphics extends React.Component {
     );
     e.target.getStage().draw();
   }
+
 
   onZoomOut = e => {
-    console.log("zoom out.");
-    
-    var newScale = this.state.stage_scale - 0.05;
-    console.log("zoom out - newScale right before setState: ", newScale);
+    var newScale = this.state.stage_scale - ZOOM_INCREMENT;
+    console.log("zoom out - newScale: ", newScale);
     this.setState(
       prevState => (
           { 
@@ -179,10 +177,33 @@ class Graphics extends React.Component {
       )
     );
     e.target.getStage().draw();
-
   }
 
+  onRotateCCW = e => {
+    var newRotation = this.state.current_rotation - ROTATION_INCREMENT;
+    console.log("rotate ccw - newRotation: ", newRotation);
+    this.setState(
+      prevState => (
+          { 
+              current_rotation: newRotation
+          }
+      )
+    );
+    e.target.getStage().draw();
+  }
 
+  onRotateCW = e => {
+    var newRotation = this.state.current_rotation + ROTATION_INCREMENT;
+    console.log("rotate cw - newRotation: ", newRotation);
+    this.setState(
+      prevState => (
+          { 
+              current_rotation: newRotation
+          }
+      )
+    );
+    e.target.getStage().draw();
+  }
 
   
   handleClick = e => {
@@ -202,6 +223,7 @@ class Graphics extends React.Component {
     this.props.handleShowModalG(true);
   }
 
+
   handleMouseMove = e => { 
     // console.log("handleMouseMove (mouse move): ", e);
     stage = e.target.getStage();
@@ -215,7 +237,6 @@ class Graphics extends React.Component {
         x: mousePos.x,
         y: mousePos.y
       })
-
     // console.log("mouse move - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name);
   };
 
@@ -232,7 +253,6 @@ class Graphics extends React.Component {
 
     e.target.getStage().draw();
     console.log("mouse out - object id: ", e.target.attrs.object_id, " ", e.target.attrs.short_name)
-
   };
 
 
@@ -277,7 +297,6 @@ class Graphics extends React.Component {
       "image_y": im_y,
     });
 
-    // console.log("props: ", this.props);
     this.props.handleNewObject(raw);
 
     // put draggable back to original location
@@ -294,7 +313,6 @@ class Graphics extends React.Component {
     });
 
     e.target.getStage().draw();
-
   }; // end handleDragImageEnd//
 
 
@@ -305,189 +323,254 @@ class Graphics extends React.Component {
   }
 
 
-onOpen = () => {
-    console.log("opening modal show - ", this.props.showModalG);
-    this.props.handleShowModalG(true);
-}
-
-onUpdate = () => {
-    console.log("Graphics.js onUpdate - description: ", this.state.currentObjectG.description)
-    var raw = JSON.stringify({
-        "object_id": this.state.currentObjectG.object_id,
-        "location_id":this.state.currentObjectG.location_id, 
-        "short_name":this.state.currentObjectG.short_name,
-        "long_name":this.state.currentObjectG.long_name,
-        "description":this.state.currentObjectG.description,
-        "object_type_id": this.state.currentObjectG.object_type_id,
-        "x_coordinate": 0,
-        "y_coordinate": 0,
-        "image_x": this.state.currentObjectG.image_x,
-        "image_y": this.state.currentObjectG.image_y
-      });
-      
-    // console.log(JSON.parse(raw));
-    // console.log("object_id: ", JSON.parse(raw).object_id);
-    // console.log("long_name: ", JSON.parse(raw).long_name);
-    // console.log("description: ", JSON.parse(raw).description);
-
-    // const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
-    // const index = this.props.objects.findIndex(isCurrentObjectId)
-    // console.log("index: ", index);
-      
-    // console.log("valdyn says Graphics.js onUpdate index is: ", index);
-    this.props.handleUpdateObject(raw);
-    // console.log("updated from Obj.js! raw : ", raw);
-    this.onClose();
-}
-
-onDelete = (object_id) => {
-    this.props.handleDeleteObject(object_id);
-    console.log("deleted from Graphics.js! id: ", object_id);
-    this.onClose();
-}
-
-onChange = (e) => {
-  console.log("currentTarget: ", e.currentTarget.name);
-  console.log("currentValue: ", e.currentTarget.value);
-
-  const currentObjectG = {
-      ...this.state.currentObjectG, 
-      [e.currentTarget.name]: e.currentTarget.value
+  onOpen = () => {
+      console.log("opening modal show - ", this.props.showModalG);
+      this.props.handleShowModalG(true);
   }
-  console.log("onChange currentObjectG before setState: ", currentObjectG);
 
-  this.setState(
-      {
-      currentObjectG
-      }
-  );
-  console.log("Graphics.js onChange object: ", currentObjectG);
-  console.log("Graphics.js onChange object from state: ", this.state.currentObjectG);
 
-}
+  onUpdate = () => {
+      console.log("Graphics.js onUpdate - description: ", this.state.currentObjectG.description)
+      var raw = JSON.stringify({
+          "object_id": this.state.currentObjectG.object_id,
+          "location_id":this.state.currentObjectG.location_id, 
+          "short_name":this.state.currentObjectG.short_name,
+          "long_name":this.state.currentObjectG.long_name,
+          "description":this.state.currentObjectG.description,
+          "object_type_id": this.state.currentObjectG.object_type_id,
+          "x_coordinate": 0,
+          "y_coordinate": 0,
+          "image_x": this.state.currentObjectG.image_x,
+          "image_y": this.state.currentObjectG.image_y
+        });
+        
+      // console.log(JSON.parse(raw));
+      // console.log("object_id: ", JSON.parse(raw).object_id);
+      // console.log("long_name: ", JSON.parse(raw).long_name);
+      // console.log("description: ", JSON.parse(raw).description);
 
-onShowConnections = (e) => {
-  console.log("showing connections in Graphics.js, location id " + this.props.location_id);
+      // const isCurrentObjectId = object => object.object_id === JSON.parse(raw).object_id;
+      // const index = this.props.objects.findIndex(isCurrentObjectId)
+      // console.log("index: ", index);
+        
+      // console.log("valdyn says Graphics.js onUpdate index is: ", index);
+      this.props.handleUpdateObject(raw);
+      // console.log("updated from Obj.js! raw : ", raw);
+      this.onClose();
+  }
 
-  // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
-  let headers = config.api.headers;
+  onDelete = (object_id) => {
+      this.props.handleDeleteObject(object_id);
+      console.log("deleted from Graphics.js! id: ", object_id);
+      this.onClose();
+  }
 
-  const url0 = config.api.invokeUrl + '/edges/location/' + this.props.location_id;
 
-  fetch(url0, {
-    method: "GET",
-    headers
-  }).then(response => {
-    return response.json();
-  }).then(result => {
+  onChange = (e) => {
+    console.log("currentTarget: ", e.currentTarget.name);
+    console.log("currentValue: ", e.currentTarget.value);
 
-    this.getPrimarySecondary();
+    const currentObjectG = {
+        ...this.state.currentObjectG, 
+        [e.currentTarget.name]: e.currentTarget.value
+    }
+    console.log("onChange currentObjectG before setState: ", currentObjectG);
+
     this.setState(
-      {
-          connections: result.body.data
-      }
+        {
+        currentObjectG
+        }
     );
-      this.scaleConnections2Canvas();
-      console.log("list of connections: ", this.state.connections);
-  });
-}
-
-onDeleteConnection = (obj_id) => {
-  // if first is empty add to first, else add to second
-  if (this.state.delete_connection_begin === 0) {
-    this.setState(
-      {
-        add_connection_begin: 0,
-        delete_connection_begin: obj_id
-      }
-    );
-  } else {
-    // we have both connections - call API
-    var params = {
-      "source_object_id": this.state.delete_connection_begin,
-      "dest_object_id": obj_id,
-    };
-    
-    this.deleteConnection(params);
+    console.log("Graphics.js onChange object: ", currentObjectG);
+    console.log("Graphics.js onChange object from state: ", this.state.currentObjectG);
 
   }
 
-  console.log("deleting connection from obj: ", obj_id);
-}
 
-deleteConnection = (params) => {
-    // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-    // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+  onShowConnections = (e) => {
+    console.log("showing connections in Graphics.js, location id " + this.props.location_id);
 
-    // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/remove-undirected?source_object_id=54&dest_object_id=56
-    let query = Object.keys(params)
-                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-                 .join('&');
+    // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
 
-    //     /edge/set-undirected    
     let headers = config.api.headers;
-    console.log("params: ", params);
-    const url3 = config.api.invokeUrl + '/edge/remove-undirected?' + query;
-    fetch(url3, {
-        method: "GET",
-        headers
+
+    const url0 = config.api.invokeUrl + '/edges/location/' + this.props.location_id;
+
+    fetch(url0, {
+      method: "GET",
+      headers
     }).then(response => {
-        return response.json();
+      return response.json();
     }).then(result => {
-        console.log("result: ", result);
+
+      this.getPrimarySecondary();
+      this.setState(
+        {
+            connections: result.body.data
+        }
+      );
+        this.scaleConnections2Canvas();
+        console.log("list of connections: ", this.state.connections);
+    });
+  }
+
+
+  onDeleteConnection = (obj_id) => {
+    // if first is empty add to first, else add to second
+    if (this.state.delete_connection_begin === 0) {
+      this.setState(
+        {
+          add_connection_begin: 0,
+          delete_connection_begin: obj_id
+        }
+      );
+    } else {
+      // we have both connections - call API
+      var params = {
+        "source_object_id": this.state.delete_connection_begin,
+        "dest_object_id": obj_id,
+      };
+      
+      this.deleteConnection(params);
+
+    }
+
+    console.log("deleting connection from obj: ", obj_id);
+  }
+
+  deleteConnection = (params) => {
+      // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+      // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+
+      // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/remove-undirected?source_object_id=54&dest_object_id=56
+      let query = Object.keys(params)
+                  .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+                  .join('&');
+
+      //     /edge/set-undirected    
+      let headers = config.api.headers;
+      console.log("params: ", params);
+      const url3 = config.api.invokeUrl + '/edge/remove-undirected?' + query;
+      fetch(url3, {
+          method: "GET",
+          headers
+      }).then(response => {
+          return response.json();
+      }).then(result => {
+          console.log("result: ", result);
+          this.setState(
+            {
+              add_connection_begin: 0,
+              delete_connection_begin: 0
+            }
+          );
+          this.onShowConnections();
+
+      });
+    
+  }
+
+
+  onAddConnection = (obj_id) => {
+      // if first is empty add to first, else add to second
+      if (this.state.add_connection_begin === 0) {
         this.setState(
           {
-            add_connection_begin: 0,
+            add_connection_begin: obj_id,
             delete_connection_begin: 0
           }
         );
-        this.onShowConnections();
+      } else {
+      // we have both connections - call API
+      var params = {
+        "source_object_id": this.state.add_connection_begin,
+        "source_location_id":this.state.currentObjectG.location_id, 
+        "dest_object_id": obj_id,
+        "dest_location_id":this.state.currentObjectG.location_id
+      };
 
-    });
-  
-}
+      this.addConnection(params);
+      
 
-onAddConnection = (obj_id) => {
+      }
+    console.log("adding connection to obj: ", obj_id);
+  }
+
+
+  addConnection = (params) => {
+      // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
+      // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+      // use config.api.invokeUrlAuth for the url
+      
+      // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
+      
+      let query = Object.keys(params)
+                  .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+                  .join('&');
+
+      //     /edge/set-undirected    
+      let headers = config.api.headers;
+      console.log("params: ", params);
+      const url3 = config.api.invokeUrl + '/edge/set-undirected?' + query;
+      fetch(url3, {
+          method: "GET",
+          headers
+      }).then(response => {
+          return response.json();
+      }).then(result => {
+          console.log("result: ", result);
+          this.setState(
+            {
+              add_connection_begin: 0,
+              delete_connection_begin: 0
+            }
+          );
+          this.onShowConnections();
+
+      });
+
+  }
+
+
+  onShortestPath = (obj_id) => {
     // if first is empty add to first, else add to second
     if (this.state.add_connection_begin === 0) {
       this.setState(
         {
-          add_connection_begin: obj_id,
-          delete_connection_begin: 0
+          shortest_path_begin: obj_id
         }
       );
     } else {
     // we have both connections - call API
     var params = {
-      "source_object_id": this.state.add_connection_begin,
+      "source_object_id": this.state.shortest_path_begin,
       "source_location_id":this.state.currentObjectG.location_id, 
       "dest_object_id": obj_id,
-      "dest_location_id":this.state.currentObjectG.location_id
+      "dest_location_id":this.state.currentObjectG.location_id,
+      "accessible": this.state.accessible
     };
 
-    this.addConnection(params);
-    
+    this.shortestPath(params);
 
     }
-  console.log("adding connection to obj: ", obj_id);
-}
+  }
 
-addConnection = (params) => {
+
+  shortestPath = (params) => {
     // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
     // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
-    // use config.api.invokeUrlAuth for the url
-    
+
     // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
     
     let query = Object.keys(params)
-                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-                 .join('&');
+                .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+                .join('&');
 
     //     /edge/set-undirected    
     let headers = config.api.headers;
     console.log("params: ", params);
-    const url3 = config.api.invokeUrl + '/edge/set-undirected?' + query;
+    const url3 = config.api.invokeUrl + '/path/shortest-source-dest?' + query;
     fetch(url3, {
         method: "GET",
         headers
@@ -495,145 +578,123 @@ addConnection = (params) => {
         return response.json();
     }).then(result => {
         console.log("result: ", result);
+        this.getPrimarySecondary();
         this.setState(
           {
-            add_connection_begin: 0,
-            delete_connection_begin: 0
+              shortest_path: result.body.data
           }
         );
-        this.onShowConnections();
+          this.scaleShortestPath2Canvas();
 
     });
 
-}
+  }
 
-onShortestPath = (obj_id) => {
-  // if first is empty add to first, else add to second
-  if (this.state.shortest_path_begin === 0) {
-    this.setState(
-      {
-        shortest_path_begin: obj_id
-      }
-    );
-  } else {
-  // we have both connections - call API
-  var params = {
-    "source_object_id": this.state.shortest_path_begin,
-    "source_location_id":this.state.currentObjectG.location_id, 
-    "dest_object_id": obj_id,
-    "dest_location_id":this.state.currentObjectG.location_id
-  };
 
-  this.shortestPath(params);
+  getPrimarySecondary = () => {
+
+    primary = this.props.objects.find(element =>  element.short_name === "location_primary");
+    secondary = this.props.objects.find(element => element.short_name === "location_secondary");
+
+    x_scale = (secondary.x_coordinate - primary.x_coordinate) / (secondary.image_x - primary.image_x);
+    y_scale = (secondary.y_coordinate - primary.y_coordinate) / (secondary.image_y - primary.image_y);
 
   }
-}
 
 
-shortestPath = (params) => {
-  // let accessToken = localStorage.getItem("admin") != null ? localStorage.getItem("CognitoIdentityServiceProvider.7qismhftk1ehili7a4qp9cc5el." + 
-  // JSON.parse(localStorage.getItem("admin")).username + ".idToken") : "";
+  scaleConnections2Canvas = () => {
 
-  // https://{{api_id}}.execute-api.{{region}}.amazonaws.com/{{path}}/edge/set-undirected?source_object_id=48&source_location_id=1&dest_object_id=23&dest_location_id=1
-  
-  let query = Object.keys(params)
-               .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-               .join('&');
+    let tempConnections = this.state.connections;
+    tempConnections.map((key) => {
+    // tempConnections.map((key) => (
+      // console.log("v1 object_id: ", key.v1.object_id),
+      // console.log("v2 object_id: ", key.v2.object_id),
+      // console.log("primary.image_x: ", primary.image_x),
+      // console.log("primary.image_x: ", primary.image_y),
+      // console.log("before"),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y),
+      // console.log("after"),
+      // key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
+      // key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
+      // key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
+      // key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+      this.consoleLogScalingBefore(key);
+      key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x);
+      key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y);
+      key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x);
+      key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y);
+      return this.consoleLogScalingAfter(key);
+    // ));
+    });
 
-  //     /edge/set-undirected    
-  let headers = config.api.headers;
-  console.log("params: ", params);
-  const url3 = config.api.invokeUrl + '/path/shortest-source-dest?' + query;
-  fetch(url3, {
-      method: "GET",
-      headers
-  }).then(response => {
-      return response.json();
-  }).then(result => {
-      console.log("result: ", result);
-      this.getPrimarySecondary();
-      this.setState(
-        {
-            shortest_path: result.body.data
-        }
-      );
-        this.scaleShortestPath2Canvas();
+    this.setState(
+      {
+          connections: tempConnections
+      }
+    );
 
-  });
+    console.log("after conversion - connection: ", this.state.connections);
 
-}
-getPrimarySecondary = () => {
+  }
 
-  primary = this.props.objects.find(element =>  element.short_name === "location_primary");
-  secondary = this.props.objects.find(element => element.short_name === "location_secondary");
+  scaleShortestPath2Canvas = () => {
 
-  x_scale = (secondary.x_coordinate - primary.x_coordinate) / (secondary.image_x - primary.image_x);
-  y_scale = (secondary.y_coordinate - primary.y_coordinate) / (secondary.image_y - primary.image_y);
+    let tempShortestPath = this.state.shortest_path;
+    tempShortestPath.map((key) => {
+    // tempShortestPath.map((key) => (
+      // console.log("v1 object_id: ", key.v1.object_id),
+      // console.log("v2 object_id: ", key.v2.object_id),
+      // console.log("primary.image_x: ", primary.image_x),
+      // console.log("primary.image_x: ", primary.image_y),
+      // console.log("before"),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y),
+      // console.log("after"),
+      // key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
+      // key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
+      // key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
+      // key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
+      // console.log("edge v1: " + key.v1.x + " " + key.v1.y),
+      // console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+      this.consoleLogScalingBefore(key);
+      key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x);
+      key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y);
+      key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x);
+      key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y);
+      return this.consoleLogScalingAfter(key);
+    // ));
+    });
 
-}
-scaleConnections2Canvas = () => {
+    this.setState(
+      {
+          shortest_path: tempShortestPath
+      }
+    );
 
-  let tempConnections = this.state.connections;
-  tempConnections.map((key) => (
+    console.log("after conversion - shortest_path: ", this.state.shortest_path);
 
-    console.log("v1 object_id: ", key.v1.object_id),
-    console.log("v2 object_id: ", key.v2.object_id),
-    console.log("primary.image_x: ", primary.image_x),
-    console.log("primary.image_x: ", primary.image_y),
-    console.log("before"),
-    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-    console.log("edge v2: " + key.v2.x + " " + key.v2.y),
-    console.log("after"),
-    key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
-    key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
-    key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
-    key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
-    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-    console.log("edge v2: " + key.v2.x + " " + key.v2.y)
+  }
 
-  ))
+  consoleLogScalingBefore = (key) => {
+      console.log("v1 object_id: ", key.v1.object_id);
+      console.log("v2 object_id: ", key.v2.object_id);
+      console.log("primary.image_x: ", primary.image_x);
+      console.log("primary.image_x: ", primary.image_y);
+      console.log("before");
+      console.log("edge v1: " + key.v1.x + " " + key.v1.y);
+      console.log("edge v2: " + key.v2.x + " " + key.v2.y);
+  }
 
-  this.setState(
-    {
-        connections: tempConnections
-    }
-  );
+  consoleLogScalingAfter = (key) => {
+    console.log("after");
+    console.log("edge v1: " + key.v1.x + " " + key.v1.y);
+    console.log("edge v2: " + key.v2.x + " " + key.v2.y);
+  }
 
-  console.log("after conversion: ", this.state.connections);
 
-}
-
-scaleShortestPath2Canvas = () => {
-
-  let tempShortestPath = this.state.shortest_path;
-  tempShortestPath.map((key) => (
-
-    console.log("v1 object_id: ", key.v1.object_id),
-    console.log("v2 object_id: ", key.v2.object_id),
-    console.log("primary.image_x: ", primary.image_x),
-    console.log("primary.image_x: ", primary.image_y),
-    console.log("before"),
-    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-    console.log("edge v2: " + key.v2.x + " " + key.v2.y),
-    console.log("after"),
-    key.v1.x = Math.round(key.v1.x * (1/x_scale) + primary.image_x),
-    key.v1.y = Math.round(key.v1.y * (1/y_scale) + primary.image_y),
-    key.v2.x = Math.round(key.v2.x * (1/x_scale) + primary.image_x),
-    key.v2.y = Math.round(key.v2.y * (1/y_scale) + primary.image_y),
-    console.log("edge v1: " + key.v1.x + " " + key.v1.y),
-    console.log("edge v2: " + key.v2.x + " " + key.v2.y)
-
-  ))
-
-  this.setState(
-    {
-        shortest_path: tempShortestPath
-    }
-  );
-
-  console.log("after conversion - shortest_path: ", this.state.shortest_path);
-
-}
 
 
   render() {
@@ -642,50 +703,37 @@ scaleShortestPath2Canvas = () => {
     // console.log("jason says current objectG in Graphics.js: ", this.state.currentObjectG);
     // console.log("valdyn says current object_id in Graphics.js: ", this.state.currentObjectG.object_id);
 
-    
-
     return (
       <div className="graphics">
         
         <Stage 
           width={stage_width} 
           height={stage_height} 
-          // scaleX={this.state.stage_scale}
-          // scaleY={this.state.stage_scale}
           scaleX={1}
-          scaleY={1}
-        >
-          <Layer 
-          name="background"
-          draggable   >
-
-
-
-          </Layer>
-
+          scaleY={1}>
 
           <Layer 
             name="main"
             scaleX={this.state.stage_scale}
             scaleY={this.state.stage_scale}
-            draggable
-          >
+            // rotate={this.state.current_rotation}
+            draggable>
 
               {this.props.location.map((key) => (
                   <MapBackground 
                     key={key.location_id} 
                     img={key.canvas_image} 
                     stage_scale={this.state.stage_scale}
-                    background_offset={BACKGROUND_OFFSET}/>
+                    background_offset={BACKGROUND_OFFSET}
+                    />
               ))}
+
               <RenderConnections
                 connections={this.state.connections}
-                // getPrimarySecondary={this.getPrimarySecondary}
               />
 
               <RenderShortestPath
                 shortest_path={this.state.shortest_path}
-                // getPrimarySecondary={this.getPrimarySecondary}
               />
 
               <RenderGeneric
@@ -694,12 +742,14 @@ scaleShortestPath2Canvas = () => {
                 onMouseOut={this.handleMouseOut} 
                 handleClick={this.handleClick}
               />
+
               <RenderPath 
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut} 
                 handleClick={this.handleClick}
               />
+      
               <RenderDoor
                 objects={this.props.objects}
                 onMouseMove={this.handleMouseMove}
@@ -863,6 +913,7 @@ scaleShortestPath2Canvas = () => {
 
           </Layer>
           <Layer>
+
             <Tooltip 
               visible={this.state.visible}  
               object_id={this.state.object_id} 
@@ -870,14 +921,14 @@ scaleShortestPath2Canvas = () => {
               x={this.state.x}
               y={this.state.y}  
               background_offset={BACKGROUND_OFFSET}         
-              />
+            />
+
           </Layer>
 
           <Layer 
             name="toolbar"
             scaleX={1}
-            scaleY={1}
-          >
+            scaleY={1}>
 
               <Rect      
                 x={0}
@@ -1135,13 +1186,11 @@ scaleShortestPath2Canvas = () => {
               />   
 
               <Redo x={X[0]} y={Y[14]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
+                handleClick = {this.onRotateCCW}
               />
 
               <Undo x={X[1]} y={Y[14]}
-                onMouseMove={this.handleMouseMove}
-                onMouseOut={this.handleMouseOut}
+                handleClick = {this.onRotateCW}
               />
 
               <Secondary x={X[2] + PATH_OFFSET} y={Y[14] + PATH_OFFSET} />
@@ -1154,14 +1203,10 @@ scaleShortestPath2Canvas = () => {
 
               <Plus x={X[0]} y={Y[15]}
                 handleClick = {this.onZoomIn}
-                // onMouseMove={this.handleMouseMove}
-                // onMouseOut={this.handleMouseOut}
               />
 
               <Minus x={X[1]} y={Y[15] + 6}
                 handleClick = {this.onZoomOut}
-                // onMouseMove={this.handleMouseMove}
-                // onMouseOut={this.handleMouseOut}
               />
 
               <HandPaper x={X[2]} y={Y[15]}
@@ -1170,7 +1215,7 @@ scaleShortestPath2Canvas = () => {
               />
 
           </Layer>
-          
+
         </Stage>
 
         <Modal show={this.props.showModalG} onHide={this.onClose}>

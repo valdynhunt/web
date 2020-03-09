@@ -17,6 +17,7 @@ class Design extends Component {
         showModalG: false,
         showModalStart: false,
         showModalSetScale: false,
+        accessible: false,
         primaryObject: {
             object_id: 0,
             location_id: 0, 
@@ -168,6 +169,26 @@ class Design extends Component {
         // }
         
     }
+
+    handleAccessible = (status) => {
+        console.log("accessible status in Graphics.js............................: ", status);
+        this.setState(
+            {
+                accessible: status
+            }
+        );
+        console.log("accessible: ", this.state.accessible);
+    
+      }
+
+      handleAccessibleOff = () => {
+        this.handleAccessible(false);
+    }
+
+    handleAccessibleOn = () => {
+        this.handleAccessible(true);
+    }
+
 
     handleShowModalStart = (status) => {
         console.log("status in Graphics.js............................: ", status);
@@ -478,7 +499,12 @@ console.log("result: ", result);
                 <Container fluid="true" className="main">
                     <Row>
                         <Col sm={12}>
-                            <Header className="header" />
+                            <Header 
+                              className="header" 
+                              handleAccessibleOn={this.handleAccessibleOn}
+                              handleAccessibleOff={this.handleAccessibleOff}
+                            />
+
                         </Col>
                     </Row>
                     <Row>
