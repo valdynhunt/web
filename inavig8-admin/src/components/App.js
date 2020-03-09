@@ -102,6 +102,7 @@ class App extends React.Component {
         }).then(result => {
 
             const users = result.body.data;
+            console.log(users);
             const admin = (users.filter(usr => usr.username === user.username))[0];
 
             this.sanitizeAdmin(admin);
@@ -111,6 +112,7 @@ class App extends React.Component {
                 console.log("localStorage updated");
             });
     
+            window.location.reload(true);
         });
 
     }
