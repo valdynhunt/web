@@ -102,7 +102,7 @@ class App extends React.Component {
         }).then(result => {
 
             const users = result.body.data;
-            const admin = (users.filter(usr => usr.username === user.username))[0];
+            const admin = (users.filter(usr => usr.username === user.username || usr.useremail === user.useremail))[0];
 
             this.sanitizeAdmin(admin);
             this.sanitizeLocations(admin.locations);
