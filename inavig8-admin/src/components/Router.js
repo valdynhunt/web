@@ -8,7 +8,7 @@ import Confirm from './auth/Confirm';
 import Design from './Design'
 import LocationObjects from './LocationObjects'
 import App from './App';
-import Export from './Export';
+// import Export from './Export';
 
 const Router = () => (
 
@@ -21,7 +21,6 @@ const Router = () => (
             <Route path="/design/:location_id" component={Design} />
             <Route path="/design" component={Design} />
             <Route path="/location-objects/:location_id" component={LocationObjects} />
-            <Route path="/export" component={Export} />
             <Route path="/confirm" component={Confirm} />
             <Route component={Login} />
         </Switch>
