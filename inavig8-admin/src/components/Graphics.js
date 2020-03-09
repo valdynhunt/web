@@ -13,6 +13,7 @@ import RenderPath from './render/RenderPath';
 import RenderDoor from './render/RenderDoor';
 import RenderElevator from './render/RenderElevator';
 import RenderStairs from './render/RenderStairs';
+import RenderBluetooth from './render/RenderBluetooth';
 import RenderCoffee from './render/RenderCoffee';
 import RenderUtensils from './render/RenderUtensils';
 import RenderRestroom from './render/RenderRestroom';
@@ -58,7 +59,7 @@ import Recycle from './toolbar/Recycle';
 import FireExtinguisher from './toolbar/FireExtinguisher';
 import MapMarker from './toolbar/MapMarker';
 import ImageRegular from './toolbar/ImageRegular';
-
+import Bluetooth from './toolbar/Bluetooth';
 import Generic from './toolbar/Generic';
 import Path from './toolbar/Path';
 import Pencil from './toolbar/Pencil';
@@ -772,6 +773,13 @@ class Graphics extends React.Component {
                 onMouseOut={this.handleMouseOut} 
                 handleClick={this.handleClick}
               />
+
+              <RenderBluetooth
+                objects={this.props.objects}
+                handleClick={this.handleClick}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut} 
+              />
             
               <RenderCoffee
                 objects={this.props.objects}
@@ -1167,7 +1175,15 @@ class Graphics extends React.Component {
                 handleDragImageEnd = {this.handleDragImageEnd}
                 onMouseMove={this.handleMouseMove}
                 onMouseOut={this.handleMouseOut}
-              />      
+              /> 
+
+              <Bluetooth x={X[2]} y={Y[12]} />
+              <Bluetooth x={X[2]} y={Y[12]} 
+                handleDragImageStart = {this.handleDragImageStart} 
+                handleDragImageEnd = {this.handleDragImageEnd}
+                onMouseMove={this.handleMouseMove}
+                onMouseOut={this.handleMouseOut}
+              />     
               
               <Pencil x={X[0]} y={Y[13]}
                 onMouseMove={this.handleMouseMove}
